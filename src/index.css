@@ -13,6 +13,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --light-bg: #fff;
+  --dark-bg: #0B1416;
+  --post-bg-light: #FDFAF7;
+  --post-bg-dark: #171109;
+  --active-page-kight: #F2F4F5;
+  --active-page-dark: #1A282D;
+
 }
 
 
