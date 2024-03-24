@@ -20,14 +20,23 @@
   --post-bg-dark: #171109;
   --active-page-kight: #F2F4F5;
   --active-page-dark: #1A282D;
-
+  --grey: #CCCCCC;
 }
 
+input{
+  border: none;
+  outline: none;
+}
+
+button{
+  border: none;
+}
 
 body {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  padding: 0 15px;
 }
 
 

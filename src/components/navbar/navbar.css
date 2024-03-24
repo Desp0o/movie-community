@@ -1,0 +1,47 @@
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100% - 30px);
+    height: 58px;
+
+    border-bottom: 1px solid var(--grey);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+.nav_search{
+    position: relative;
+}
+
+.nav_search_icon{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav_search_input{
+    width: 550px;
+    height: 40px;
+    border-radius: 30px;
+
+    background-color: #EAEDF0;
+    box-sizing: border-box;
+    padding-left: 32px;
+}
+
+.nav_login_btn{
+    width: 66px;
+    height: 40px;
+
+    background-color: tan;
+    border-radius: 30px;
+    cursor: pointer;
+}
