@@ -16,6 +16,18 @@
   overflow: hidden;
 }
 
+.logo_burger_menu{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.burger_menu{
+  display: none;
+}
+
+
 .nav_search {
   width: 550px;
   position: absolute;
@@ -113,6 +125,10 @@
     left: unset;
     top: unset;
     transform: unset;
+  }
+
+  .burger_menu{
+    display: flex;
   }
 }
 

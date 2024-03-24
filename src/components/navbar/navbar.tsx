@@ -3,13 +3,16 @@ import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
 import { bellPasiveIcon } from "../../assets/svg/bell";
 import { addIcon } from "../../assets/svg/addIcon";
+import { burgerMenu } from "../../assets/svg/burgerMenu";
 
 const Navbar = () => {
   const { user } = useUserHook();
 
   return (
     <nav className="navbar">
-      <div className="logo">
+
+      <div className="logo_burger_menu">
+        <div className="burger_menu">{burgerMenu}</div>
         <p>LOGO</p>
       </div>
 
