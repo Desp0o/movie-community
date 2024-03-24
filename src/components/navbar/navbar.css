@@ -132,10 +132,39 @@
   top: 59px;
 }
 
-.user_dash_item{
+.user_dash_item {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.toggler {
+  position: relative;
+  width: 58px;
+  height: 30px;
+
+  background-color: #eaedf0;
+  border-radius: 30px;
+
+  -webkit-box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.toggler_thub {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: all .4s ease;
+}
+
+.toggler_thub.active{
+  left: calc(98% - 30px);
+  transition: all .4s ease;
 }
 
 @media (max-width: 1200px) {
