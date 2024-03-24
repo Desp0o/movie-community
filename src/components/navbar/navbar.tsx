@@ -1,5 +1,5 @@
 import "./navbar.css";
-import { searchIcon } from "../../assets/svg/searchIcon";
+import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
 import { bellPasiveIcon } from "../../assets/svg/bell";
 import { addIcon } from "../../assets/svg/addIcon";
@@ -25,11 +25,15 @@ const Navbar = () => {
       <div className="nav_profile">
         {user.name ? (
           <div className="nav_profile_items">
+            {window.innerWidth < 601 ? <div className="responsive_search">{searchIconResposnive}</div>
+            :<></>
+            }
 
             <div className="nav_create_post">
                 {addIcon}
                 <p>Create</p>
             </div>
+
 
             <div className="nav_profile_item_parent">{bellPasiveIcon}</div>
 

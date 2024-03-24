@@ -98,6 +98,12 @@
   background-color: #eaedf0;
 }
 
+.responsive_search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 1200px) {
   .nav_search {
     width: 100%;
@@ -108,4 +114,11 @@
     top: unset;
     transform: unset;
   }
+}
+
+
+@media (max-width:600px) {
+    .nav_search{
+        display: none;
+    }
 }
