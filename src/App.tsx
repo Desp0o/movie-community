@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom"
 import Feed from "./Feed"
 import Navbar from "./components/navbar/navbar"
 
-function App() {
 
+function App() {
   return (
     <>
       <Navbar />
