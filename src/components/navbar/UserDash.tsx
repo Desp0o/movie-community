@@ -1,24 +1,22 @@
-import { useState } from "react"
 import { logOutIcon } from "../../assets/svg/logOut"
 import { moonIcon } from "../../assets/svg/moonIcon"
 import UserDashItem from "./UserDashItem"
 import { useDispatch } from "react-redux"
 import { setDarkBG } from "../../Redux/DarkModeSlicer"
+import { useDarkModeHook } from "../../hooks/useDarkModeHook"
 
 const UserDash = () => {
-    const [isDarkMode, setDarkMode] = useState(false)
-
+    const { isDark } = useDarkModeHook()
     const dispatch = useDispatch()
 
     const toggleHandler = () => {
-        setDarkMode(!isDarkMode)
-        dispatch(setDarkBG(!isDarkMode))
+        dispatch(setDarkBG(!isDark))
     }
 
     const toggler = () => {
-        return <div className="toggler" onClick={toggleHandler}>
-            <div className={isDarkMode ? "toggler_thub active" : "toggler_thub"}/>
-        </div>
+        return  <div className="toggler" onClick={toggleHandler}>
+                    <div className={isDark ? "toggler_thub active" : "toggler_thub"}/>
+                </div>
     }
 
   return (
