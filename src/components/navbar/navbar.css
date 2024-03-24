@@ -149,6 +149,8 @@
   -webkit-box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
   box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
 }
 
 .toggler_thub {
