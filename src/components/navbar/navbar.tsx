@@ -5,13 +5,15 @@ import { bellPasiveIcon } from "../../assets/svg/bell";
 import { addIcon } from "../../assets/svg/addIcon";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 
 const Navbar = () => {
   const { user } = useUserHook();
+  const { isDark } = useDarkModeHook()
 
   return (
     <>
-      <nav className="navbar">
+      <nav className={isDark ? "navbar dark" : "navbar"}>
         <div className="logo_burger_menu">
           <div className="burger_menu">{burgerMenu}</div>
           <p>LOGO</p>
@@ -21,7 +23,7 @@ const Navbar = () => {
           <div className="nav_search_icon">{searchIcon}</div>
           <input
             type="text"
-            className="nav_search_input"
+            className={isDark ? "nav_search_input dark" : "nav_search_input"}
             placeholder="search..."
           />
         </div>
@@ -35,14 +37,14 @@ const Navbar = () => {
                 <></>
               )}
 
-              <div className="nav_create_post">
+              <div className={isDark ? "nav_create_post dark" : "nav_create_post"}>
                 {addIcon}
                 <p>Create</p>
               </div>
 
-              <div className="nav_profile_item_parent">{bellPasiveIcon}</div>
+              <div className={isDark ? "nav_profile_item_parent dark" : "nav_profile_item_parent"}>{bellPasiveIcon}</div>
 
-              <div className="nav_profile_item_parent">
+              <div className={isDark ? "nav_profile_item_parent dark" : "nav_profile_item_parent"}>
                 <img
                   src={user.avatar}
                   alt="user avatr"

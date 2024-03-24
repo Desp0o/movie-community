@@ -8,12 +8,17 @@
   height: 58px;
 
   border-bottom: 1px solid var(--grey);
+  background-color: var(--light-bg);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   overflow: hidden;
+}
+
+.navbar.dark {
+  background-color: var(--dark-bg);
 }
 
 .logo_burger_menu {
@@ -25,6 +30,7 @@
 
 .burger_menu {
   display: none;
+  cursor: pointer;
 }
 
 .nav_search {
@@ -50,6 +56,12 @@
   background-color: #eaedf0;
   box-sizing: border-box;
   padding-left: 32px;
+  transition: all .3s ease;
+}
+
+.nav_search_input.dark {
+  background-color: var(--active-page-dark);
+  transition: all .3s ease;
 }
 
 .nav_login_btn {
@@ -93,6 +105,10 @@
   transition: all 0.2s ease;
 }
 
+.nav_profile_item_parent.dark:hover{
+  background-color: var(--active-page-dark);
+}
+
 .nav_create_post {
   padding: 8px 10px;
   border-radius: 30px;
@@ -107,6 +123,11 @@
 .nav_create_post:hover {
   transition: all 0.2s ease;
   background-color: #eaedf0;
+}
+
+.nav_create_post.dark:hover {
+  transition: all 0.2s ease;
+  background-color: var(--active-page-dark);
 }
 
 .responsive_search {
@@ -151,6 +172,10 @@
   box-shadow: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.15);
 
   cursor: pointer;
+}
+
+.toggler.active{
+  background-color: #0045AC;
 }
 
 .toggler_thub {

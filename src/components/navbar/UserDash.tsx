@@ -14,7 +14,7 @@ const UserDash = () => {
     }
 
     const toggler = () => {
-        return  <div className="toggler" onClick={toggleHandler}>
+        return  <div className={isDark ? "toggler active" : "toggler"} onClick={toggleHandler}>
                     <div className={isDark ? "toggler_thub active" : "toggler_thub"}/>
                 </div>
     }
