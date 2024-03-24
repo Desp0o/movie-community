@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 
 interface UserDashItemProps {
   icon: ReactNode;
@@ -7,8 +8,9 @@ interface UserDashItemProps {
 }
 
 const UserDashItem: React.FC<UserDashItemProps> = ({ icon, text, toggler }) => {
+  const { isDark } = useDarkModeHook()
   return (
-    <div className="user_dash_item">
+    <div className={isDark ? "user_dash_item dark" : "user_dash_item"}>
       {icon}
       <p>{text}</p>
 
