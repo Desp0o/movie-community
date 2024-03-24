@@ -1,20 +1,22 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from "react";
 
 interface UserDashItemProps {
-    icon: ReactNode;
-    text: string;
-    toggler?: () => JSX.Element | null;
+  icon: ReactNode;
+  text: string;
+  toggler?: () => JSX.Element | null;
 }
 
-const UserDashItem:React.FC<UserDashItemProps> = ({icon, text, toggler}) => {
+const UserDashItem: React.FC<UserDashItemProps> = ({ icon, text, toggler }) => {
   return (
     <div className="user_dash_item">
-        {icon}
-        <p>{text}</p>
+      {icon}
+      <p>{text}</p>
 
-{toggler && toggler()}
+      <div className="toggler_parent">
+        {toggler && toggler()}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserDashItem
+export default UserDashItem;

@@ -151,12 +151,23 @@
   position: absolute;
   right: 15px;
   top: 59px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .user_dash_item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+}
+
+.toggler_parent{
+  position: absolute;
+  right: 0;
 }
 
 .toggler {
