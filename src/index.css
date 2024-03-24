@@ -36,14 +36,17 @@ body {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  padding: 0 15px;
+  background-color: unset;
 }
 
 .app{
+  padding: 0 15px;
   width: 100%;
+  min-height: 100vh;
   background-color: var(--light-bg);
 }
 
 .darkMode{
   background-color: var(--dark-bg);
+  color: #fff;
 }
