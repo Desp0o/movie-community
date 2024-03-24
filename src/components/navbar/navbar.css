@@ -17,7 +17,10 @@
 }
 
 .nav_search{
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .nav_search_icon{
@@ -44,4 +47,52 @@
     background-color: tan;
     border-radius: 30px;
     cursor: pointer;
+}
+
+.nav_profile_items{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav_user_avatar{
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav_profile_item_parent{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav_profile_item_parent:hover{
+    background-color: #EAEDF0;
+    transition: all 0.2s ease;
+}
+
+.nav_create_post{
+    padding: 8px 10px;
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.nav_create_post:hover{
+    transition: all 0.2s ease;
+    background-color: #EAEDF0;
 }

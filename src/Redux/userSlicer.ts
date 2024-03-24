@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import avatar from "../assets/avatar.webp"
+
 const userSlicer = createSlice({
     name: 'userSlicer',
     initialState:{
         user: {
-            name: '',
-            avatar: ''
+            name: '1',
+            avatar: avatar
         }
     },
     reducers:{
