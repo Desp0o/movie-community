@@ -20,5 +20,5 @@ export const useGoogleLogIn = () => {
         }
       };
       
-    return googleLogIn
+    return {googleLogIn}
 }
