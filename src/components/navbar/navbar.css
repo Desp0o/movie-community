@@ -100,13 +100,15 @@
   transition: all 0.2s ease;
 }
 
-.nav_profile_item_parent:hover {
-  background-color: var(--hover-light);
-  transition: all 0.2s ease;
-}
-
-.nav_profile_item_parent.dark:hover{
-  background-color: var(--active-page-dark);
+@media (hover: hover) {
+  .nav_profile_item_parent:hover {
+    background-color: var(--hover-light);
+    transition: all 0.2s ease;
+  }
+  
+  .nav_profile_item_parent.dark:hover{
+    background-color: var(--active-page-dark);
+  }
 }
 
 .nav_create_post {
@@ -120,14 +122,16 @@
   cursor: pointer;
 }
 
-.nav_create_post:hover {
-  transition: all 0.2s ease;
-  background-color: var(--hover-light);
-}
-
-.nav_create_post.dark:hover {
-  transition: all 0.2s ease;
-  background-color: var(--active-page-dark);
+@media (hover: hover) {
+  .nav_create_post:hover {
+    transition: all 0.2s ease;
+    background-color: var(--hover-light);
+  }
+  
+  .nav_create_post.dark:hover {
+    transition: all 0.2s ease;
+    background-color: var(--active-page-dark);
+  }
 }
 
 .responsive_search {
@@ -164,12 +168,14 @@
   cursor: pointer;
 }
 
-.user_dash_item:hover{
-  background-color: var(--hover-light);
-}
-
-.user_dash_item.dark:hover{
-  background-color: var(--active-page-dark);
+@media (hover: hover) {
+  .user_dash_item:hover{
+    background-color: var(--hover-light);
+  }
+  
+  .user_dash_item.dark:hover{
+    background-color: var(--active-page-dark);
+  }
 }
 
 .toggler_parent{
