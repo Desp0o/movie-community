@@ -7,6 +7,7 @@ import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { useEffect, useRef, useState } from "react";
+import Login from "../login/Login";
 
 const Navbar = () => {
   const { user } = useUserHook();
@@ -111,6 +112,10 @@ const Navbar = () => {
         style={{ display: `${isDashVisible ? "flex" : "none"}` }}
       >
         <UserDash />
+      </div>
+
+      <div className="login_modal_container">
+        <Login />
       </div>
     </>
   );

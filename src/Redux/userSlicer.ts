@@ -6,7 +6,7 @@ const userSlicer = createSlice({
     name: 'userSlicer',
     initialState:{
         user: {
-            name: '1',
+            name: '',
             avatar: avatar
         }
     },
