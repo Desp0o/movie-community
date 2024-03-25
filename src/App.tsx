@@ -10,9 +10,7 @@ function App() {
   const {isDark} = useDarkModeHook()
 
   useEffect(()=>{
-    console.log(localStorage.getItem('darkMode'));
-    Boolean(localStorage.getItem('darkMode'))
-    
+    Boolean(localStorage.getItem('darkMode'))    
   },[])
 
 
