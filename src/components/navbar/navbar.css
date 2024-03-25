@@ -232,4 +232,8 @@
   .nav_search {
     display: none;
   }
+
+  .nav_create_post p{
+    display: none;
+  }
 }
