@@ -6,10 +6,41 @@ import { addIcon } from "../../assets/svg/addIcon";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const { user } = useUserHook();
-  const { isDark } = useDarkModeHook()
+  const { isDark } = useDarkModeHook();
+  const [isDashVisible, setDashVisible] = useState(false);
+
+  const avatarRef = useRef<HTMLDivElement>(null);
+  const userDashRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (
+        avatarRef.current &&
+        event.target instanceof Node &&
+        avatarRef.current.contains(event.target)
+      ) {
+        setDashVisible(!isDashVisible)        
+      } else if (
+        userDashRef.current &&
+        event.target instanceof Node &&
+        userDashRef.current.contains(event.target)
+      ) {
+        setDashVisible(true);
+      } else {
+        setDashVisible(false);
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [isDashVisible]);
 
   return (
     <>
@@ -37,14 +68,31 @@ const Navbar = () => {
                 <></>
               )}
 
-              <div className={isDark ? "nav_create_post dark" : "nav_create_post"}>
+              <div
+                className={isDark ? "nav_create_post dark" : "nav_create_post"}
+              >
                 {addIcon}
                 <p>Create</p>
               </div>
 
-              <div className={isDark ? "nav_profile_item_parent dark" : "nav_profile_item_parent"}>{bellPasiveIcon}</div>
+              <div
+                className={
+                  isDark
+                    ? "nav_profile_item_parent dark"
+                    : "nav_profile_item_parent"
+                }
+              >
+                {bellPasiveIcon}
+              </div>
 
-              <div className={isDark ? "nav_profile_item_parent dark" : "nav_profile_item_parent"}>
+              <div
+                ref={avatarRef}
+                className={
+                  isDark
+                    ? "nav_profile_item_parent dark"
+                    : "nav_profile_item_parent"
+                }
+              >
                 <img
                   src={user.avatar}
                   alt="user avatr"
@@ -58,7 +106,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <UserDash />
+      <div
+        ref={userDashRef}
+        style={{ display: `${isDashVisible ? "flex" : "none"}` }}
+      >
+        <UserDash />
+      </div>
     </>
   );
 };
