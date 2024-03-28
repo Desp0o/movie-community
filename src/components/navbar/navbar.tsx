@@ -11,11 +11,13 @@ import Login from "../login/Login";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
+import { useLoginModal } from "../../hooks/useLoginModal";
 
 const Navbar = () => {
   const { user } = useUserHook();
   const { isDark } = useDarkModeHook();
   const { userDashState } = useUserDashHook()
+  const { isModalVisible, handleVisibility } = useLoginModal()
   const dispatch = useDispatch()
 
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -107,7 +109,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <button className="nav_login_btn">Log In</button>
+            <button className="nav_login_btn" onClick={handleVisibility}>Log In</button>
           )}
         </div>
       </nav>
@@ -119,9 +121,13 @@ const Navbar = () => {
         <UserDash />
       </div>
 
-      <div className="login_modal_container">
+      {
+        isModalVisible ? <div className="login_modal_container">
         <Login />
       </div>
+      :
+      <></>
+      }
     </>
   );
 };
