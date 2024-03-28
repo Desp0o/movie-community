@@ -56,12 +56,12 @@
   background-color: #eaedf0;
   box-sizing: border-box;
   padding-left: 32px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav_search_input.dark {
   background-color: var(--active-page-dark);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav_login_btn {
@@ -75,7 +75,7 @@
   cursor: pointer;
 }
 
-.nav_profile{
+.nav_profile {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -113,8 +113,8 @@
     background-color: var(--hover-light);
     transition: all 0.2s ease;
   }
-  
-  .nav_profile_item_parent.dark:hover{
+
+  .nav_profile_item_parent.dark:hover {
     background-color: var(--active-page-dark);
   }
 }
@@ -135,7 +135,7 @@
     transition: all 0.2s ease;
     background-color: var(--hover-light);
   }
-  
+
   .nav_create_post.dark:hover {
     transition: all 0.2s ease;
     background-color: var(--active-page-dark);
@@ -157,14 +157,20 @@
   box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, 0.15);
 
   border-radius: 10px;
+  background-color: var(--light-bg);
 
   position: absolute;
+  z-index: 11;
   right: 15px;
   top: 59px;
 
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.user_dash.dark {
+  background-color: var(--active-page-dark);
 }
 
 .user_dash_item {
@@ -177,16 +183,16 @@
 }
 
 @media (hover: hover) {
-  .user_dash_item:hover{
+  .user_dash_item:hover {
     background-color: var(--hover-light);
   }
-  
-  .user_dash_item.dark:hover{
+
+  .user_dash_item.dark:hover {
     background-color: var(--active-page-dark);
   }
 }
 
-.toggler_parent{
+.toggler_parent {
   position: absolute;
   right: 20px;
 }
@@ -206,8 +212,8 @@
   cursor: pointer;
 }
 
-.toggler.active{
-  background-color: #0045AC;
+.toggler.active {
+  background-color: #0045ac;
 }
 
 .toggler_thub {
@@ -218,12 +224,12 @@
   width: 30px;
   border-radius: 50%;
   background-color: #fff;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
-.toggler_thub.active{
+.toggler_thub.active {
   left: calc(98% - 30px);
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
 @media (max-width: 1200px) {
@@ -242,14 +248,58 @@
   }
 }
 
-
-
 @media (max-width: 600px) {
   .nav_search {
     display: none;
   }
 
-  .nav_create_post p{
+  .nav_create_post p {
     display: none;
+  }
+
+  .user_dash {
+    top: auto;
+    bottom: inherit;
+    right: inherit;
+    width: inherit;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    -webkit-box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  .user_dash.dark {
+    top: auto;
+    bottom: inherit;
+    right: inherit;
+    width: inherit;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    -webkit-box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  .user_dash_res {
+    position: fixed;
+    z-index: 6;
+    right: 0;
+    width: 100%;
+    left: 0 !;
+    display: flex !important;
+    bottom: -135px;
+    transition: all 0.4s ease;
+  }
+
+  .user_dash_res.active {
+    left: 0 !important;
+    right: 0;
+    width: 100%;
+    display: flex;
+    bottom: -1px;
+    transition: all 0.4s ease;
   }
 }

@@ -31,7 +31,7 @@ const UserDash = () => {
   }
 
   return (
-    <div className="user_dash">
+    <div className={isDark ? "user_dash dark" : "user_dash"}>
         <UserDashItem icon={profileIcon} text="Profile" closer={modalCloser}/>
         <UserDashItem icon={moonIcon} text="Dark Mode" toggler={toggler} />
         <UserDashItem icon={logOutIcon} text="Log Out" funName={handleLogout} closer={modalCloser}/>

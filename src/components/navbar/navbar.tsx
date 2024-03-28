@@ -121,6 +121,7 @@ const Navbar = () => {
       <div
         ref={userDashRef}
         style={{ display: `${userDashState ? "flex" : "none"}` }}
+        className={userDashState ? "user_dash_res active" : "user_dash_res"}
       >
         <UserDash />
       </div>
