@@ -4,7 +4,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 528px;
-  max-width: 100%;
+  max-width: 90%;
 
   padding: 30px 30px;
 
@@ -36,6 +36,13 @@
   font-weight: 700;
 }
 
+.google_login{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
 .google_login_btn {
   width: 370px;
   max-width: 90%;
@@ -50,4 +57,11 @@
   gap: 20px;
 
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .google_login_btn {
+    width: 100%;
+  }
+
 }
