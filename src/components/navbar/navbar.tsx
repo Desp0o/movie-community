@@ -6,13 +6,17 @@ import { addIcon } from "../../assets/svg/addIcon";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Login from "../login/Login";
+import { useUserDashHook } from "../../hooks/useUserDashHook";
+import { useDispatch } from "react-redux";
+import { setDashVisible } from "../../Redux/userDahsSlicer";
 
 const Navbar = () => {
   const { user } = useUserHook();
   const { isDark } = useDarkModeHook();
-  const [isDashVisible, setDashVisible] = useState(false);
+  const { userDashState } = useUserDashHook()
+  const dispatch = useDispatch()
 
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
@@ -24,15 +28,16 @@ const Navbar = () => {
         event.target instanceof Node &&
         avatarRef.current.contains(event.target)
       ) {
-        setDashVisible(!isDashVisible)        
+        dispatch(setDashVisible(!userDashState))
       } else if (
         userDashRef.current &&
         event.target instanceof Node &&
         userDashRef.current.contains(event.target)
       ) {
-        setDashVisible(true);
+        dispatch(setDashVisible(true))
+        
       } else {
-        setDashVisible(false);
+        dispatch(setDashVisible(false))
       }
     };
 
@@ -41,7 +46,7 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [isDashVisible]);
+  }, [userDashState, dispatch]);
 
   return (
     <>
@@ -109,7 +114,7 @@ const Navbar = () => {
 
       <div
         ref={userDashRef}
-        style={{ display: `${isDashVisible ? "flex" : "none"}` }}
+        style={{ display: `${userDashState ? "flex" : "none"}` }}
       >
         <UserDash />
       </div>
