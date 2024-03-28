@@ -85,4 +85,17 @@
     width: 100%;
   }
 
+  .log_modal_block1 p:nth-child(1) {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .log_modal_block1 p:nth-child(2) {
+    font-size: 12px;
+  }
+
+  .x_icon_login_modal{
+    top: 20px;
+  }
+
 }

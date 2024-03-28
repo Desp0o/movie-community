@@ -5,7 +5,7 @@
   transform: translateX(-50%);
 
   width: calc(100% - 30px);
-  height: 58px;
+  height: 48px;
 
   border-top: 1px solid var(--grey);
   background-color: var(--light-bg);
@@ -18,5 +18,5 @@
 }
 
 .bottom_nav.dark{
-    background-color: var(--dark-bg);
+  background-color: var(--dark-bg);
 }

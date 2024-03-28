@@ -9,10 +9,12 @@ import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
 import BottomNavigation from "./components/bottomNav/BottomNavigation"
+import { useUserHook } from "./hooks/useUserHook"
 
 
 function App() {
   const {isDark} = useDarkModeHook()
+  const {user} = useUserHook()
   const [isLoading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
@@ -45,7 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Feed />} />
       </Routes>
-      {window.innerWidth < 601 ? <BottomNavigation /> : <></>}
+      {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
     </div>
   )
 }
