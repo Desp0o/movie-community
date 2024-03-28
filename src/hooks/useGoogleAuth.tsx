@@ -2,6 +2,7 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { app } from "../components/firebase/firebaseConfig";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/userSlicer';
+import { setModalVisible } from '../Redux/loginModalSlicer';
 
 
 export const useGoogleLogIn = () => {
@@ -19,7 +20,7 @@ export const useGoogleLogIn = () => {
           const signIn = await signInWithPopup(auth, provider);
           console.log(signIn.user);
           disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL}))
-
+          disptach(setModalVisible(false))
           return signIn;
         } catch (error) {
           console.error(error);
