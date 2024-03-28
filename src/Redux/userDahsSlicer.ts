@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const userDahsSlicer = createSlice({
     name: 'userDahsSlicer',
     initialState:{
-        setDashVisible: false
+        isDashVisible: false
     },
     reducers:{
         setDashVisible(state, action){
-            state.setDashVisible = action.payload
+            state.isDashVisible = action.payload
         }
     }
 })
