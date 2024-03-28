@@ -1,12 +1,12 @@
 .login_modal {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 528px;
   max-width: 90%;
 
-  padding: 30px 30px;
+  padding: 50px 30px 30px 30px;
 
   display: flex;
   align-items: center;
@@ -57,6 +57,27 @@
   gap: 20px;
 
   cursor: pointer;
+}
+
+.x_icon_login_modal{
+  position: absolute;
+  right: 30px;
+  top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px;
+  border-radius: 50%;
+
+  background-color: var(--hover-light);
+
+  cursor: pointer;
+}
+
+.x_icon_login_modal.dark{
+  background-color: var(--dark-bg)
 }
 
 @media (max-width: 600px) {
