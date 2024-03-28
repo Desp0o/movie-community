@@ -5,13 +5,15 @@ interface UserDashItemProps {
   icon: ReactNode;
   text: string;
   toggler?: () => JSX.Element | null;
-  funName?: () => void
+  funName?: () => void;
+  closer?: () => void;
 }
 
-const UserDashItem: React.FC<UserDashItemProps> = ({ icon, text, toggler, funName }) => {
+const UserDashItem: React.FC<UserDashItemProps> = ({ icon, text, toggler, funName, closer }) => {
   const { isDark } = useDarkModeHook()
+
   return (
-    <div className={isDark ? "user_dash_item dark" : "user_dash_item"} onClick={funName}>
+    <div className={isDark ? "user_dash_item dark" : "user_dash_item"} onClick={() => { closer && closer(); funName && funName(); }}>
       {icon}
       <p>{text}</p>
 
