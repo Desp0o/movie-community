@@ -1,5 +1,5 @@
 import "./navbar.css";
-import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
+import { searchIcon } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
 import { bellPasiveIcon } from "../../assets/svg/bell";
 import { addIcon } from "../../assets/svg/addIcon";
