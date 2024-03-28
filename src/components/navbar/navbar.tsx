@@ -70,14 +70,8 @@ const Navbar = () => {
         <div className="nav_profile">
           {user.name ? (
             <div className="nav_profile_items">
-              {window.innerWidth < 601 ? (
-                <div className="responsive_search">{searchIconResposnive}</div>
-              ) : (
-                <></>
-              )}
-
               <div
-                className={isDark ? "nav_create_post dark" : "nav_create_post"}
+                className={isDark ? "nav_create_post dark responsive_hidden" : "nav_create_post responsive_hidden"}
               >
                 {addIcon}
                 <p>Create</p>
@@ -86,8 +80,8 @@ const Navbar = () => {
               <div
                 className={
                   isDark
-                    ? "nav_profile_item_parent dark"
-                    : "nav_profile_item_parent"
+                    ? "nav_profile_item_parent dark responsive_hidden"
+                    : "nav_profile_item_parent responsive_hidden"
                 }
               >
                 {bellPasiveIcon}

@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
+import BottomNavigation from "./components/bottomNav/BottomNavigation"
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Feed />} />
       </Routes>
+      {window.innerWidth < 601 ? <BottomNavigation /> : <></>}
     </div>
   )
 }
