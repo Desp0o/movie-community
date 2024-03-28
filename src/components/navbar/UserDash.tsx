@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux"
 import { setDarkBG } from "../../Redux/DarkModeSlicer"
 import { useDarkModeHook } from "../../hooks/useDarkModeHook"
 import { profileIcon } from "../../assets/svg/profileIcon"
+import { useLogOut } from "../../hooks/useLogOut"
 
 const UserDash = () => {
     const { isDark } = useDarkModeHook()
+    const { handleLogout } = useLogOut()
     const dispatch = useDispatch()
 
     const toggleHandler = () => {
@@ -24,7 +26,7 @@ const UserDash = () => {
     <div className="user_dash">
         <UserDashItem icon={profileIcon} text="Profile"/>
         <UserDashItem icon={moonIcon} text="Dark Mode" toggler={toggler}/>
-        <UserDashItem icon={logOutIcon} text="Log Out"/>
+        <UserDashItem icon={logOutIcon} text="Log Out" funName={handleLogout}/>
     </div>
   )
 }
