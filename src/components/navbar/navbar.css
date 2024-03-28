@@ -68,7 +68,9 @@
   width: 66px;
   height: 40px;
 
-  background-color: tan;
+  color: #fff;
+  font-weight: 700;
+  background-color: var(--reddit);
   border-radius: 30px;
   cursor: pointer;
 }
