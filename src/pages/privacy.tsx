@@ -1,8 +1,11 @@
-import React from 'react'
+import PageLayout from "../components/pageLayout/PageLayout"
 
 const Privacy = () => {
   return (
-    <div>Privacy</div>
+    <PageLayout>
+<div>Privacy</div>
+    </PageLayout>
+    
   )
 }
 

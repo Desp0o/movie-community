@@ -1,4 +1,8 @@
 .left_nav{
+    position: fixed;
+    left: 0;
+    top: 0;
+    
     width: 270px;
     height: 100vh;
 

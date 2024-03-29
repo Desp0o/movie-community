@@ -12,7 +12,7 @@ const LeftNavigation = () => {
         </LeftNavSections>
 
         <LeftNavSections>
-            <LeftNavItem title="Privacy Policy" icon={privacyIcon} path="/"/>
+            <LeftNavItem title="Privacy Policy" icon={privacyIcon} path="/pages/privacy"/>
         </LeftNavSections>
         
     </div>
