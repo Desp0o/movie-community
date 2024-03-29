@@ -5,6 +5,9 @@
     border-right: 1px solid var(--grey);
 
     padding-top: 72px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
 }
 
 .left_nav_item{
@@ -20,7 +23,6 @@
 
     cursor: pointer;
 
-    margin: 0 auto;
     transition: all .4s ease;
 }
 
@@ -40,4 +42,9 @@
     .left_nav_item.dark:hover{
         background-color: var(--active-page-dark)
     }
+}
+
+.left_nav_section{
+    border-bottom: 1px solid var(--grey);
+    padding-bottom: 14px;
 }
