@@ -7,7 +7,7 @@ const LeftNavigation = () => {
   return (
     <div className="left_nav">
         <LeftNavSections>
-            <LeftNavItem title="Home" icon={homeIocn}/>
+            <LeftNavItem title="Home" icon={homeIocn} path="/"/>
         </LeftNavSections>
         
     </div>
