@@ -10,6 +10,7 @@ import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
 import BottomNavigation from "./components/bottomNav/BottomNavigation"
 import { useUserHook } from "./hooks/useUserHook"
+import LeftNavigation from "./components/leftNavigation/LeftNavigation"
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
   return (
     <div className={isDark ? "app darkMode" : "app"}>
       <Navbar />
+      <LeftNavigation />
       <Routes>
         <Route path="/" element={<Feed />} />
       </Routes>
