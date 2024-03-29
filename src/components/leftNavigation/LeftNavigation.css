@@ -3,4 +3,41 @@
     height: 100vh;
 
     border-right: 1px solid var(--grey);
+
+    padding-top: 72px;
+}
+
+.left_nav_item{
+    width: 220px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    cursor: pointer;
+
+    margin: 0 auto;
+    transition: all .4s ease;
+}
+
+.left_nav_item.active{
+    background-color: var(--hover-light);
+}
+
+.left_nav_item.active.dark{
+    background-color: var(--active-page-dark);
+}
+
+@media (hover: hover) {
+    .left_nav_item:hover{
+        background-color: var(--hover-light);
+    }
+
+    .left_nav_item.dark:hover{
+        background-color: var(--active-page-dark)
+    }
 }
