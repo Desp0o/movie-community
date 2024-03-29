@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import BottomNavigation from "./components/bottomNav/BottomNavigation"
 import { useUserHook } from "./hooks/useUserHook"
 import LeftNavigation from "./components/leftNavigation/LeftNavigation"
+import Privacy from "./pages/privacy"
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
       <LeftNavigation />
       <Routes>
         <Route path="/" element={<Feed />} />
+        <Route path="/pages/privacy" element={<Privacy />} />
       </Routes>
       {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
     </div>
