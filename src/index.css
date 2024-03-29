@@ -25,6 +25,11 @@
   --reddit: #D93A00;
 }
 
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
 input{
   border: none;
   outline: none;
