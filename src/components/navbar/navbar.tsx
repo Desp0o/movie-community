@@ -12,6 +12,7 @@ import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
+import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
 
 const Navbar = () => {
   const { user } = useUserHook();
@@ -52,6 +53,7 @@ const Navbar = () => {
 
   const handleBurgerMenuEvent = () => {
     setOpen(!isOpen)    
+    dispatch(setLeftMenuState(!isOpen))
   }
 
   return (
