@@ -6,7 +6,7 @@ import { addIcon } from "../../assets/svg/addIcon";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Login from "../login/Login";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ const Navbar = () => {
   const { isDark } = useDarkModeHook();
   const { userDashState } = useUserDashHook();
   const { isModalVisible, handleVisibility } = useLoginModal();
+  const [isOpen, setOpen] = useState(false)
   const dispatch = useDispatch();
 
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -49,11 +50,15 @@ const Navbar = () => {
     };
   }, [userDashState, dispatch]);
 
+  const handleBurgerMenuEvent = () => {
+    setOpen(!isOpen)    
+  }
+
   return (
     <>
       <nav className={isDark ? "navbar dark" : "navbar"}>
         <div className="logo_burger_menu">
-          <div className="burger_menu">{burgerMenu}</div>
+          <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
           <p>LOGO</p>
         </div>
 
