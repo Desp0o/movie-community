@@ -3,3 +3,11 @@
     padding-top: 78px;
     padding-left: 290px;
 }
+
+@media (max-width:1200px) {
+    .page_layout{
+        width: 100%;
+        padding-top: 78px;
+        padding-left: 40px;
+    }
+}

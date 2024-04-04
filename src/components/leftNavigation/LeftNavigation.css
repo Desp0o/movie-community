@@ -52,3 +52,15 @@
 .left_nav_section{
     padding-bottom: 14px;
 }
+
+
+@media (max-width:1200px) {
+    .left_nav{
+        left: -270px;
+        transition: all 0.4s ease;
+    }
+
+    .left_nav.active{
+        left: 0;
+    }
+}
