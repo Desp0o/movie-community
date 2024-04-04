@@ -4,6 +4,7 @@ import { privacyIcon } from "../../assets/svg/privacyIcon"
 import LeftNavItem from "./LeftNavItem"
 import LeftNavSections from "./LeftNavSections"
 import "./LeftNavigation.css"
+import { useDarkModeHook } from "../../hooks/useDarkModeHook"
 
 interface RootState {
   leftMenuStore:{
@@ -14,9 +15,10 @@ interface RootState {
 const LeftNavigation = () => {
 
   const isOpen = useSelector((state: RootState) => state.leftMenuStore.isLeftMenuOpen)
+  const { isDark } = useDarkModeHook()
 
   return (
-    <div className={isOpen ? 'left_nav active' : 'left_nav'}>
+<div className={isOpen ? (isDark ? 'left_nav active dark' : 'left_nav active') : (isDark ? 'left_nav dark' : 'left_nav')}>
         <LeftNavSections>
             <LeftNavItem title="Home" icon={homeIocn} path="/"/>
         </LeftNavSections>
