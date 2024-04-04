@@ -19,10 +19,11 @@
     height: 40px;
 
     border-radius: 10px;
+    padding-left: 20px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 14px;
 
     cursor: pointer;
@@ -49,6 +50,5 @@
 }
 
 .left_nav_section{
-    border-bottom: 1px solid var(--grey);
     padding-bottom: 14px;
 }

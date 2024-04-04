@@ -14,7 +14,7 @@ const LeftNavItem: React.FC<leftNavItemProps> = ({ icon, title, path }) => {
   return (
     <Link to={path}>
       <div className={isDark ? "left_nav_item dark" : "left_nav_item"}>
-        <span className="left_nav_item_icon">{icon}</span>
+        <div className="left_nav_item_icon">{icon}</div>
         <p>{title}</p>
       </div>
     </Link>
