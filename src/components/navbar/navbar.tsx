@@ -9,10 +9,16 @@ import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { useEffect, useRef, useState } from "react";
 import Login from "../login/Login";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
+
+interface RootState {
+  leftMenuStore:{
+    isLeftMenuOpen: boolean
+  }
+}
 
 const Navbar = () => {
   const { user } = useUserHook();
@@ -21,6 +27,7 @@ const Navbar = () => {
   const { isModalVisible, handleVisibility } = useLoginModal();
   const [isOpen, setOpen] = useState(false)
   const dispatch = useDispatch();
+  const isLeftMenuOpen = useSelector((state: RootState) => state.leftMenuStore.isLeftMenuOpen)
 
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
@@ -53,7 +60,12 @@ const Navbar = () => {
 
   const handleBurgerMenuEvent = () => {
     setOpen(!isOpen)    
-    dispatch(setLeftMenuState(!isOpen))
+
+    if(isLeftMenuOpen === true){
+      dispatch(setLeftMenuState(false))
+    }else if(isLeftMenuOpen === false){
+      dispatch(setLeftMenuState(true))
+    }
   }
 
   return (
