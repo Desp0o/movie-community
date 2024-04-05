@@ -63,9 +63,7 @@
 @media (max-width:1200px) {
     .left_nav{
         left: -270px;
-    }
-
-    .left_nav.dark{
+        transition: left 0.2s linear;
     }
 
     .left_nav.active{
