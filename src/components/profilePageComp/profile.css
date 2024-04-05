@@ -1,0 +1,38 @@
+.profile_page_avatar_block{
+    display: flex;
+    gap: 15px;
+
+    align-items: center;
+}
+
+.profile_page_avatar_parent{
+    position: relative;
+    background-color: var(--hover-light);
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+}
+
+.profile_page_avatar_parent.dark{
+    position: relative;
+    background-color: var(--active-page-dark);
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+}
+
+.profile_page_avatar{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+
+.profile_page_name{
+    font-size: 24px;
+    font-weight: 600;
+}
