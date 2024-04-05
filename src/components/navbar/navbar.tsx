@@ -123,6 +123,8 @@ const Navbar = () => {
             </button>
           )}
         </div>
+
+        <div className="bottom_border" />
       </nav>
 
       <div
