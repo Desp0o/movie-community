@@ -36,3 +36,20 @@
     font-size: 24px;
     font-weight: 600;
 }
+
+.ProfileOverView{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.ProfileOverView_item{
+    padding: 10px 20px;
+    background-color: var(--hover-light);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.ProfileOverView_item.dark{
+    background-color: var(--active-page-dark);
+}

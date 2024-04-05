@@ -1,3 +1,4 @@
+import { useDarkModeHook } from "../../hooks/useDarkModeHook"
 
 const array = [
     {id: 0, name: 'Posts'},
@@ -9,12 +10,15 @@ const array = [
 
 
 const ProfileOverView = () => {
+
+    const { isDark } = useDarkModeHook()
+
   return (
-    <div>
+    <div className="ProfileOverView">
         {
             array.map((item)=>{
                 return(
-                    <div key={item.id} className="">
+                    <div key={item.id} className={isDark ? "ProfileOverView_item dark" : "ProfileOverView_item"}>
                         {item.name}
                     </div>
                 )
