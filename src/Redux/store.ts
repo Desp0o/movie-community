@@ -4,6 +4,7 @@ import DarkModeSlicer from "./DarkModeSlicer";
 import userDahsSlicer from "./userDahsSlicer";
 import loginModalSlicer from "./loginModalSlicer";
 import leftMenuSlicer from "./leftMenuSlicer";
+import spinnerSlicer from "./spinnerSlicer";
 
 const store = configureStore({
     reducer:{
@@ -11,7 +12,8 @@ const store = configureStore({
         darkModeStore: DarkModeSlicer,
         userDashStore: userDahsSlicer,
         loginModalStore: loginModalSlicer,
-        leftMenuStore: leftMenuSlicer
+        leftMenuStore: leftMenuSlicer,
+        spinnerSote: spinnerSlicer
     }
 })
 
