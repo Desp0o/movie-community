@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Outlet, Route, Routes } from "react-router-dom"
 import Feed from "./Feed"
 import Navbar from "./components/navbar/navbar"
 import { useDarkModeHook } from "./hooks/useDarkModeHook"
@@ -49,7 +49,8 @@ function App() {
       <Navbar />
       <LeftNavigation />
       <Routes>
-        <Route path="/" element={<Feed />} />
+        <Route path="/" element={<Outlet />} />
+        <Route index element={<Feed />} />
         <Route path="/pages/privacy" element={<Privacy />} />
         <Route path="/pages/Profile" element={<Profile />} />
       </Routes>
