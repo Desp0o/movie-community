@@ -1,7 +1,14 @@
+import PageLayout from "./components/pageLayout/PageLayout"
+import SinglePostComp from "./components/singlePostComp/SinglePostComp"
 
 const Feed = () => {
   return (
-    <div></div>
+    <>
+      <PageLayout>
+
+      <SinglePostComp />
+      </PageLayout>
+    </>
   )
 }
 
