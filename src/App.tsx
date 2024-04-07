@@ -41,6 +41,13 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
 
+  useEffect(()=>{
+    isDark ?
+            document.documentElement.style.backgroundColor = '#0B1416'
+           :
+            document.documentElement.style.backgroundColor = '#fff'
+  },[isDark])
+
   if(isLoading){
     return <SplashScreen />
   }
