@@ -95,6 +95,18 @@
     object-position: center;
 }
 
+.single_post_comments{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.likeDislikeComment_container{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
 .like_dislike{
     display: flex;
     align-items: center;
