@@ -95,7 +95,24 @@
     object-position: center;
 }
 
+.like_dislike{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
+.up_vote,
+.down_vote{
+    transition: all 0.3s ease;
+}
+
+.up_vote:hover{
+    fill: green;
+}
+
+.down_vote:hover{
+    fill: red;
+}
 
 @media (max-width:768px) {
     .single_post_comp{

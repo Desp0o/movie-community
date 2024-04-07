@@ -4,6 +4,7 @@ import Author from "./Author";
 import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+import LikeDislikeComment from "./LikeDislikeComment";
 
 interface SinglePostProps {
   authorName: string;
@@ -26,6 +27,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         <Author avatar={authorAvatar} name={authorName} />
         <PostTitle title={postTitle} />
         {image ? <PostImage image={image} /> : <></>}
+        <LikeDislikeComment />
       </div>
     </div>
   );
