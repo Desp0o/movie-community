@@ -16,11 +16,10 @@ import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
 import SplashScreen from "./components/splashScreen/SplashScreen"
 
-
 function App() {
   const {isDark} = useDarkModeHook()
   const {user} = useUserHook()
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(()=>{
