@@ -13,6 +13,7 @@ import { useUserHook } from "./hooks/useUserHook"
 import LeftNavigation from "./components/leftNavigation/LeftNavigation"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
+import RequireAuth from "./components/RequireAuth/RequireAuth"
 
 
 function App() {
@@ -51,8 +52,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Outlet />} />
         <Route index element={<Feed />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/pages/Profile" element={<Profile />} />
+        </Route>
         <Route path="/pages/privacy" element={<Privacy />} />
-        <Route path="/pages/Profile" element={<Profile />} />
       </Routes>
       {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
     </div>
