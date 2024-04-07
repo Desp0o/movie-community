@@ -14,7 +14,7 @@ const Author:React.FC<AuthorProps> = ({avatar, name}) => {
             <p>{name}</p>
        </div>
 
-       <span className='span_dot'></span>
+       <span className='span_dot' style={{backgroundColor: 'currentColor'}}></span>
 
        <p>date</p>
     </div>
