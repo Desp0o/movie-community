@@ -14,6 +14,7 @@ import LeftNavigation from "./components/leftNavigation/LeftNavigation"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
+import SplashScreen from "./components/splashScreen/SplashScreen"
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
   }, [dispatch]);
 
   if(isLoading){
-    return <div className="">LOADINNNG</div>
+    return <SplashScreen />
   }
 
   return (
@@ -52,10 +53,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Outlet />} />
         <Route index element={<Feed />} />
+        <Route path="/pages/privacy" element={<Privacy />} />
+
         <Route element={<RequireAuth />}>
           <Route path="/pages/Profile" element={<Profile />} />
         </Route>
-        <Route path="/pages/privacy" element={<Privacy />} />
+
       </Routes>
       {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
     </div>
