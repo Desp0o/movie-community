@@ -3,7 +3,6 @@ import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import avatar from "./assets/Avatar.webp";
 import userav from "./assets/images.jpeg";
 import poster from "./assets/poster.jpeg";
-import quiz from "./assets/images.jpeg";
 import "./Feed.css";
 import SingleQuizComponent from "./components/singleQuizComponent/SingleQuizComponent";
 

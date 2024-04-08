@@ -1,4 +1,3 @@
-import React from 'react'
 import "./singleQuizComp.css"
 import QuizSingleAnswer from './QuizSingleAnswer'
 

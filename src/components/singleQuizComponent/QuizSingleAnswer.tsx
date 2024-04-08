@@ -1,4 +1,3 @@
-import React from 'react'
 import "./singleQuizComp.css"
 import { useDarkModeHook } from '../../hooks/useDarkModeHook'
 import { useUserHook } from '../../hooks/useUserHook'
