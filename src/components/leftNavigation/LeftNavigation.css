@@ -2,7 +2,8 @@
     position: fixed;
     left: 0;
     top: 0;
-    
+    z-index: 108;
+
     width: 270px;
     height: 100vh;
 
@@ -52,8 +53,10 @@
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 107;
 
-    background-color: #7F7F7F;
+    background-color: #000;
+    opacity: 0.8;
 
     display: none;
 }

@@ -1,6 +1,6 @@
 .navbar {
   position: fixed;
-  z-index: 7;
+  z-index: 110;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -173,7 +173,7 @@
   background-color: var(--light-bg);
 
   position: fixed;
-  z-index: 11;
+  z-index: 111;
   right: 15px;
   top: 59px;
 
@@ -298,7 +298,7 @@
 
   .user_dash_res {
     position: fixed;
-    z-index: 6;
+    z-index: 109;
     right: 0;
     width: 100%;
     left: 0 !;
