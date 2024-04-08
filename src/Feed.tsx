@@ -9,6 +9,7 @@ import SingleQuizComponent from "./components/singleQuizComponent/SingleQuizComp
 
 const arr = [
   {
+    id: 0,
     type: 0,
     title: "this is first post",
     name: "tornike despotashvili",
@@ -16,13 +17,14 @@ const arr = [
     image: poster
   },
   {
+    id: 1,
     type:0,
     title: "second post",
     name: "koka kvirikashvili",
     avatar: userav,
   },
   {
-    
+      id:2,
       type: 1,
       title: "this is first post",
       name: "tornike despotashvili",
@@ -39,6 +41,7 @@ const Feed = () => {
           return (
             post.type === 0 ? 
             <SinglePostComp
+              postID={post.id}
               authorName={post.name}
               authorAvatar={post.avatar}
               postTitle={post.title}
@@ -46,6 +49,7 @@ const Feed = () => {
             />
             :
             <SingleQuizComponent
+              postID={post.id}
               authorName={post.name}
               authorAvatar={post.avatar}
               postTitle={post.title}

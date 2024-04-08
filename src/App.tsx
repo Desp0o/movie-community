@@ -15,6 +15,7 @@ import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
 import SplashScreen from "./components/splashScreen/SplashScreen"
+import Post from "./pages/Post"
 
 function App() {
   const {isDark} = useDarkModeHook()
@@ -60,6 +61,7 @@ function App() {
         <Route path="/" element={<Outlet />} />
         <Route index element={<Feed />} />
         <Route path="/pages/privacy" element={<Privacy />} />
+        <Route path="/pages/Post/:id" element={<Post />} />
 
         <Route element={<RequireAuth />}>
           <Route path="/pages/Profile" element={<Profile />} />
