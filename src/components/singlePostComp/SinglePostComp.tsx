@@ -7,6 +7,7 @@ import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
 import { Link } from "react-router-dom";
+import SeeMore from "./SeeMore";
 
 interface SinglePostProps {
   authorName: string;
@@ -33,7 +34,10 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <PostTitle title={postTitle} />
           {image ? <PostImage image={image} /> : <></>}
           <LikeDislikeComment />
+        
+          <SeeMore postID={postID} />
         </div>
+
       </div>
     </Link>
   );
