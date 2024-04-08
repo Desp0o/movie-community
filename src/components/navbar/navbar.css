@@ -172,7 +172,7 @@
   border-radius: 10px;
   background-color: var(--light-bg);
 
-  position: absolute;
+  position: fixed;
   z-index: 11;
   right: 15px;
   top: 59px;
