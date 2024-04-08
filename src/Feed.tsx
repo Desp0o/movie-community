@@ -8,16 +8,26 @@ import SingleQuizComponent from "./components/singleQuizComponent/SingleQuizComp
 
 const arr = [
   {
+    type: 0,
     title: "this is first post",
     name: "tornike despotashvili",
     avatar: avatar,
     image: poster
   },
   {
+    type:0,
     title: "second post",
     name: "koka kvirikashvili",
     avatar: userav,
   },
+  {
+    
+      type: 1,
+      title: "this is first post",
+      name: "tornike despotashvili",
+      avatar: avatar,
+      image: poster
+  }
 ];
 
 const Feed = () => {
@@ -26,7 +36,15 @@ const Feed = () => {
       <div className="feed">
         {arr.map((post) => {
           return (
+            post.type === 0 ? 
             <SinglePostComp
+              authorName={post.name}
+              authorAvatar={post.avatar}
+              postTitle={post.title}
+              image={post.image}
+            />
+            :
+            <SingleQuizComponent
               authorName={post.name}
               authorAvatar={post.avatar}
               postTitle={post.title}
@@ -36,7 +54,6 @@ const Feed = () => {
         })}
       </div>
 
-      <SingleQuizComponent />
     </PageLayout>
   );
 };
