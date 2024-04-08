@@ -4,6 +4,7 @@ import PostImage from "../singlePostComp/postImage";
 import LikeDislikeComment from "../singlePostComp/LikeDislikeComment";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import PostTitle from "../singlePostComp/PostTitle";
+import "./singleQuizComp.css"
 
 interface SingleQuizComponentProps {
     authorAvatar: string;
@@ -22,6 +23,7 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
         <PostTitle title={postTitle} />
         {image ? <PostImage image={image} /> : <></>}
         <LikeDislikeComment />
+
         </div>
     </div>    
   );
