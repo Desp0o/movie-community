@@ -8,19 +8,17 @@
 
 .QuizAnswers{
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    grid-gap: 10px; /* Gap between grid items */
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 10px; 
 }
 
 .QuizSingleAnswer{
     padding: 10px 15px;
-    /* background-color: #cfd3d6; */
     border: 2px solid #cfd3d6;
     border-radius: 10px;
+    font-size: 14px;
 
     transition: background-color 0.3s ease ;
-
-    max-width: 200px;
 
     display: flex;
     align-items: center;
@@ -36,3 +34,11 @@
 }
 
 .QuizSingleAnswer p {text-align: center;}
+
+@media (max-width:1000px) {
+    .QuizAnswers{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        grid-gap: 10px; 
+    }
+}
