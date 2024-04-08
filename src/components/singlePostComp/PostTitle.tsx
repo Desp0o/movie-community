@@ -1,4 +1,5 @@
 import React from 'react'
+import "./singlePostComp.css"
 
 interface PostTitleProps {
     title: string;

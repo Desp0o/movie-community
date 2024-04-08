@@ -1,4 +1,5 @@
 import React from 'react'
+import "./singlePostComp.css"
 
 interface AuthorProps {
     avatar: string;
@@ -16,7 +17,7 @@ const Author:React.FC<AuthorProps> = ({avatar, name}) => {
 
        <span className='span_dot' style={{backgroundColor: 'currentColor'}}></span>
 
-       <p>date</p>
+       <p>თარიღი</p>
     </div>
   )
 }

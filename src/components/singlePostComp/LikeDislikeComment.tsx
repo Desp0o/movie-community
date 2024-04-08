@@ -1,6 +1,7 @@
 import { arrowDislike } from "../../assets/svg/arrowDislike"
 import { arrowLike } from "../../assets/svg/arrowLike"
 import { commentsIcon } from "../../assets/svg/commentsIcon"
+import "./singlePostComp.css"
 
 const LikeDislikeComment = () => {
   return (

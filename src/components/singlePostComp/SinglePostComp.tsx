@@ -5,6 +5,7 @@ import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
+import "./singlePostComp.css"
 
 interface SinglePostProps {
   authorName: string;
