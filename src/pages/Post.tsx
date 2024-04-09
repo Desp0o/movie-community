@@ -6,13 +6,24 @@ import Author from "../components/singlePostComp/Author";
 import PostTitle from "../components/singlePostComp/PostTitle";
 import PostImage from "../components/singlePostComp/postImage";
 import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
-import "../components/singlePostPage/singlePostPage.css"
+import "../components/singlePostPage/singlePostPage.css";
 import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
+import { useState } from "react";
+import { xIcon } from "../assets/svg/Xicon";
 
 const Post = () => {
+  const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const postId = id ? parseInt(id) : null;
   const post = feedData.find((post) => post.id === postId);
+
+  const openFullScreen = () => {
+    setFullScreenImage(true);
+  };
+
+  const closeFullScreen = () => {
+    setFullScreenImage(false);
+  };
 
   if (!post) {
     return (
@@ -38,7 +49,20 @@ const Post = () => {
           </div>
 
           <div className="single_post_image">
-            {post.image ? <PostImage image={post.image} /> : <></>}
+            {isFullScreenImage ? (
+              <div className="full_screen_img">
+                <span className="close_full_screen_image" onClick={closeFullScreen}>{xIcon}</span>
+                <img src={post.image} className="full_screen_cover" alt="full screen cover"/>
+                <img src={post.image} className="full_screen_photo" alt="full screen photo"/>
+              </div>
+            ) : (
+              <></>
+            )}
+            {post.image ? (
+              <PostImage image={post.image} funName={openFullScreen} />
+            ) : (
+              <></>
+            )}
           </div>
 
           {post.type === 1 ? (
