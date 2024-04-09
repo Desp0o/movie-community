@@ -86,7 +86,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(10%) blur(2px);
+    filter: brightness(30%) blur(4px);
     border-radius: 10px;
 }
 .single_post_img{

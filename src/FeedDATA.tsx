@@ -1,6 +1,7 @@
 import avatar from "./assets/Avatar.webp";
 import userav from "./assets/images.jpeg";
-import poster from "./assets/poster.jpeg";
+// import poster from "./assets/poster.jpeg";
+import furiosa from"./assets/furiosa.jpeg";
 
 export const feedData = [
     {
@@ -9,7 +10,7 @@ export const feedData = [
       title: "this is first post",
       name: "tornike despotashvili",
       avatar: avatar,
-      image: poster
+      image: furiosa
     },
     {
       id: 1,
