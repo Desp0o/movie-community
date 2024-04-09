@@ -89,3 +89,25 @@
     
     cursor: pointer;
 }
+
+.add_comment{
+    width: 100%;
+
+    border: 1px solid var(--grey);
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.comment_textarea{
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    border-radius: 20px;
+    background-color: inherit;
+    color: currentColor;
+
+    padding: 15px 15px 15px 15px;
+    outline: none;
+    resize: none;
+}
