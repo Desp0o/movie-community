@@ -6,7 +6,6 @@ import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import PostTitle from "../singlePostComp/PostTitle";
 import "./singleQuizComp.css"
 import QuizAnswers from "./QuizAnswers";
-import { Link } from "react-router-dom";
 import SeeMore from "../singlePostComp/SeeMore";
 
 interface SingleQuizComponentProps {

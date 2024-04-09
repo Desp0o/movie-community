@@ -6,7 +6,6 @@ import PostImage from "./postImage";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
-import { Link } from "react-router-dom";
 import SeeMore from "./SeeMore";
 
 interface SinglePostProps {
