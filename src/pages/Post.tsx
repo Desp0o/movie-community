@@ -7,6 +7,7 @@ import PostTitle from "../components/singlePostComp/PostTitle";
 import PostImage from "../components/singlePostComp/postImage";
 import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css"
+import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
 
 const Post = () => {
   const { id } = useParams();
@@ -47,6 +48,8 @@ const Post = () => {
           ) : (
             <></>
           )}
+
+          <LikeDislikeComment />
         </div>
       </PageLayout>
     </div>

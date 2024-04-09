@@ -103,6 +103,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 }
 
 .likeDislikeComment_container{
@@ -120,6 +121,7 @@
 .up_vote,
 .down_vote{
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .up_vote:hover{
@@ -128,6 +130,15 @@
 
 .down_vote:hover{
     fill: red;
+}
+
+.comment_icon{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.comment_icon:hover{
+    fill: blue;
 }
 
 .see_more_post{
