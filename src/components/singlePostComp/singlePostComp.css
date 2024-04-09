@@ -60,6 +60,10 @@
     word-wrap: break-word; 
 }
 
+.post_title::first-letter{
+    text-transform: capitalize;
+}
+
 .single_post_image_container{
     position: relative;
     width: 100%;
