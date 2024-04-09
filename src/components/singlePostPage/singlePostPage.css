@@ -16,3 +16,9 @@
 .go_back.dark{
     background-color: var(--active-page-dark);
 }
+
+.goBack_authorInfo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -1,40 +1,55 @@
-import { useParams } from 'react-router-dom';
-import PageLayout from '../components/pageLayout/PageLayout';
-import { feedData } from '../FeedDATA';
-import SinglePostComp from '../components/singlePostComp/SinglePostComp';
-import { useNavigate } from 'react-router-dom';
-import SinglePostPage from '../components/singlePostPage/SinglePostPage';
-
+import { useParams } from "react-router-dom";
+import PageLayout from "../components/pageLayout/PageLayout";
+import { feedData } from "../FeedDATA";
+import GoBack from "../components/singlePostPage/GoBack";
+import Author from "../components/singlePostComp/Author";
+import PostTitle from "../components/singlePostComp/PostTitle";
+import PostImage from "../components/singlePostComp/postImage";
+import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 
 const Post = () => {
-    const { id } = useParams();
-    const postId = id ? parseInt(id) : null;
-    const post = feedData.find(post => post.id === postId);
+  const { id } = useParams();
+  const postId = id ? parseInt(id) : null;
+  const post = feedData.find((post) => post.id === postId);
 
-    const naviagate = useNavigate()
-
-    const goBack = () => {
-      naviagate(-1)
-    }
-
-    if (!post) {
-      return (
-          <div>
-              <PageLayout>
-                  <p>Post not found!</p>
-              </PageLayout>
-          </div>
-      );
+  if (!post) {
+    return (
+      <div>
+        <PageLayout>
+          <p>Post not found!</p>
+        </PageLayout>
+      </div>
+    );
   }
 
-    return (
-        <div>
-            <PageLayout>
-                <SinglePostPage />
-                <button onClick={goBack}>go Back</button>
-            </PageLayout>
+  return (
+    <div>
+      <PageLayout>
+        <div className="single_post_page">
+          <div className="goBack_authorInfo">
+            <GoBack />
+            <Author avatar={post.avatar} name={post.name} />
+          </div>
+
+          <div className="single_page_title">
+            <PostTitle title={post.title} />
+          </div>
+
+          <div className="single_post_image">
+            {post.image ? <PostImage image={post.image} /> : <></>}
+          </div>
+
+          {post.type === 1 ? (
+            <div className="answers_container">
+              <QuizAnswers />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-    );
+      </PageLayout>
+    </div>
+  );
 };
 
 export default Post;
