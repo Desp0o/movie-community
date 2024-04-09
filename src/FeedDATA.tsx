@@ -7,7 +7,7 @@ export const feedData = [
     {
       id: 0,
       type: 0,
-      title: "this is first post",
+      title: "this is regular post with photo",
       name: "tornike despotashvili",
       avatar: avatar,
       image: furiosa
@@ -15,14 +15,14 @@ export const feedData = [
     {
       id: 1,
       type:0,
-      title: "second post",
+      title: "just post without image",
       name: "koka kvirikashvili",
       avatar: userav,
     },
     {
         id:2,
         type: 1,
-        title: "this is first post",
+        title: "this is Quiz post",
         name: "tornike despotashvili",
         avatar: avatar,
         image: avatar
