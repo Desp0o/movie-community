@@ -3,6 +3,7 @@ import PageLayout from '../components/pageLayout/PageLayout';
 import { feedData } from '../FeedDATA';
 import SinglePostComp from '../components/singlePostComp/SinglePostComp';
 import { useNavigate } from 'react-router-dom';
+import SinglePostPage from '../components/singlePostPage/SinglePostPage';
 
 
 const Post = () => {
@@ -29,13 +30,7 @@ const Post = () => {
     return (
         <div>
             <PageLayout>
-                <SinglePostComp
-                    postID={post.id}
-                    authorName={post.name}
-                    authorAvatar={post.avatar}
-                    postTitle={post.title}
-                    image={post.image}
-                />
+                <SinglePostPage />
                 <button onClick={goBack}>go Back</button>
             </PageLayout>
         </div>

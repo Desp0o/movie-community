@@ -1,0 +1,18 @@
+.go_back{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    background-color: var(--hover-light);
+}
+
+.go_back.dark{
+    background-color: var(--active-page-dark);
+}
