@@ -7,7 +7,7 @@ interface SeeMoreProps {
 
 const SeeMore:React.FC<SeeMoreProps> = ({postID}) => {
   return (
-    <Link to={`/pages/Post/${postID}`}>
+    <Link to={`/pages/Post/${postID}`} className='see_more_post'>
         <p>See More</p>
     </Link>
   )

@@ -27,7 +27,6 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
   const { isDark } = useDarkModeHook()
   return (
-    <Link to={`/pages/Post/${postID}`}>
       <div className="post_borders">
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} />
@@ -37,9 +36,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         
           <SeeMore postID={postID} />
         </div>
-
       </div>
-    </Link>
   );
 };
 

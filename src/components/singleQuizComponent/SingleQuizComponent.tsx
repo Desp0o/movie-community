@@ -7,6 +7,7 @@ import PostTitle from "../singlePostComp/PostTitle";
 import "./singleQuizComp.css"
 import QuizAnswers from "./QuizAnswers";
 import { Link } from "react-router-dom";
+import SeeMore from "../singlePostComp/SeeMore";
 
 interface SingleQuizComponentProps {
     authorAvatar: string;
@@ -20,7 +21,6 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
   const { isDark } = useDarkModeHook();
 
   return (
-    <Link to={`/pages/Post/${postID}`}>
       <div className="post_borders">
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
         <Author avatar={authorAvatar} name={authorName} />
@@ -31,9 +31,9 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
         <div className="answers_container">
             <QuizAnswers />
         </div>
+        <SeeMore postID={postID}/>
         </div>
-      </div>    
-    </Link>
+      </div>
   );
 };
 
