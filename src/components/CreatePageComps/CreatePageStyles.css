@@ -6,6 +6,31 @@
     justify-content: center;
 }
 
+.upload_image{
+    position: relative;
+    padding: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--grey);
+}
+
+.upload_image input{
+    cursor: pointer;
+}
+
+.upload_image p{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 900;
+}
+
 .input_style_createPage{
     width: 100%;
     background-color: inherit;
@@ -33,7 +58,7 @@
     align-items: center;
     justify-content: center;
 
-    background-color: var(--reddit);
+    border: 1px solid var(--grey);
 
     cursor: pointer;
 }

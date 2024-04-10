@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./CreatePageStyles.css";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
@@ -10,6 +10,8 @@ import SendPostBTN from "./SendPostBTN";
 Quill.register("modules/blotFormatter", BlotFormatter);
 
 const AddPost = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [postValue, setPostValue] = useState({
     image: "",
     title: "",
@@ -24,15 +26,14 @@ const AddPost = () => {
     setPostValue({ ...postValue, body: value });
   };
 
-  useEffect(()=>{
-    console.log(postValue);
-    
-  },[postValue])
+  const handleButtonClick = () => {
+    fileInputRef.current && fileInputRef.current.click();
+  };
 
-  // const handleFileChange = (event: any) => {
-  //   // Handle file change here
-  //   // For example, you can access the file using event.target.files[0]
-  // };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log('Selected file:', file);
+  };
 
   const modules = {
     blotFormatter: {},
@@ -85,9 +86,17 @@ const AddPost = () => {
     "float",
   ];
 
+
+
   return (
     <div className="add_post">
-      <input type="file" />
+
+      <div className="upload_image" onClick={handleButtonClick}>
+        <p>ატვირთე სურათი</p>
+      </div>
+
+      <input ref={fileInputRef} type="file" onChange={handleFileChange} style={{display:'none'}}/>
+      
       <input
         type="text"
         className="input_style_createPage"
