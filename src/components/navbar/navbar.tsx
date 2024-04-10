@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
+import { Link } from "react-router-dom";
 
 interface RootState {
   leftMenuStore:{
@@ -93,16 +94,18 @@ const Navbar = () => {
           )}
           {user.name ? (
             <div className="nav_profile_items">
-              <div
-                className={
-                  isDark
-                    ? "nav_create_post dark responsive_hidden"
-                    : "nav_create_post responsive_hidden"
-                }
-              >
-                {addIcon}
-                <p>Create</p>
-              </div>
+              <Link to='/pages/Create'>
+                <div
+                  className={
+                    isDark
+                      ? "nav_create_post dark responsive_hidden"
+                      : "nav_create_post responsive_hidden"
+                  }
+                >
+                  {addIcon}
+                  <p>Create</p>
+                </div>
+              </Link>
 
               <div
                 className={
