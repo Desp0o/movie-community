@@ -20,10 +20,12 @@ const Post = () => {
 
   const openFullScreen = () => {
     setFullScreenImage(true);
+    document.body.style.overflow ='hidden'
   };
 
   const closeFullScreen = () => {
     setFullScreenImage(false);
+    document.body.style.overflow ='auto'
   };
 
   if (!post) {
