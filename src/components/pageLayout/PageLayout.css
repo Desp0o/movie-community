@@ -1,5 +1,7 @@
 .page_layout{
     width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
     padding-top: 78px;
     padding-left: 290px;
     padding-right: 350px;

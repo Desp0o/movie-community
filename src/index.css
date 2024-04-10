@@ -25,6 +25,17 @@
   --reddit: #D93A00;
 }
 
+
+::-webkit-scrollbar {
+  width: 6px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--reddit);
+  height: 20px;
+  border-radius: 10px;
+}
+
 a{
   color: inherit;
   text-decoration: none;
@@ -63,5 +74,3 @@ body {
     display: none;
   }
 }
-
-  

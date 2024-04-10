@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { addIcon } from "../../assets/svg/addIcon";
 import { bellPasiveIcon } from "../../assets/svg/bell";
 import { searchIconResposnive } from "../../assets/svg/searchIcon";
@@ -14,10 +15,12 @@ const BottomNavigation = () => {
         <></>
       )}
 
-      <div className={isDark ? "nav_create_post dark" : "nav_create_post"}>
-        {addIcon}
-        <p>Create</p>
-      </div>
+      <Link to='/pages/Create'>
+        <div className={isDark ? "nav_create_post dark" : "nav_create_post"}>
+          {addIcon}
+          <p>Create</p>
+        </div>
+      </Link>
 
       <div
         className={

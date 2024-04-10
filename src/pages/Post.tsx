@@ -11,6 +11,7 @@ import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment"
 import { useState } from "react";
 import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/singlePostPage/AddComment";
+import CommentsSection from "../components/singlePostPage/CommentsSection";
 
 const Post = () => {
   const [isFullScreenImage, setFullScreenImage] = useState(false);
@@ -20,10 +21,12 @@ const Post = () => {
 
   const openFullScreen = () => {
     setFullScreenImage(true);
+    document.body.style.overflow ='hidden'
   };
 
   const closeFullScreen = () => {
     setFullScreenImage(false);
+    document.body.style.overflow ='auto'
   };
 
   if (!post) {
@@ -77,6 +80,8 @@ const Post = () => {
           <LikeDislikeComment />
 
           <AddComment />
+
+          <CommentsSection />
         </div>
       </PageLayout>
     </div>
