@@ -8,7 +8,7 @@ const AddComment = () => {
   const { user } = useUserHook()
   const disptach = useDispatch()
 
-  const handleChange = (event: { target: { value: SetStateAction<string>; style: { height: string; }; scrollHeight: any; }; }) => {
+  const handleChange = (event: { target: { value: SetStateAction<string>; style: { height: string; }; scrollHeight: number; }; }) => {
     setText(event.target.value);
     event.target.style.height = 'auto';
     event.target.style.height = `${event.target.scrollHeight}px`;

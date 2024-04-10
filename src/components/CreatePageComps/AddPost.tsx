@@ -22,7 +22,7 @@ const AddPost = () => {
     setPostValue({ ...postValue, title: event.target.value });
   };
 
-  const handlePostBody = (value: any) => {
+  const handlePostBody = (value: string) => {
     setPostValue({ ...postValue, body: value });
   };
 
