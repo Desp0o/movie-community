@@ -23,13 +23,15 @@ const AddComment = () => {
   }
 
   return (
-    <div>
+    <div className='comment_container'>
         <textarea
         className="comment_textarea"
         value={text}
         onChange={handleChange}
         placeholder="Write your comment here..."
         />
+
+        <button className='comment_ntm'>add comment</button>
     </div>
   );
 };

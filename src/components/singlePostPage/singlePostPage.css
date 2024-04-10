@@ -90,13 +90,10 @@
     cursor: pointer;
 }
 
-.add_comment{
-    width: 100%;
-
+.comment_container{
+    position: relative;
     border: 1px solid var(--grey);
     border-radius: 20px;
-
-    overflow: hidden;
 }
 
 .comment_textarea{
@@ -107,7 +104,22 @@
     background-color: inherit;
     color: currentColor;
 
-    padding: 15px 15px 15px 15px;
+    padding: 15px 15px 30px 15px;
     outline: none;
     resize: none;
+    border: none;
+}
+
+.comment_ntm{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    background-color: var(--reddit);
+    border-radius: 20px;
+    padding: 5px 7px;
+    font-size: 10px;
+    color: currentColor;
+
+    cursor: pointer;
 }
