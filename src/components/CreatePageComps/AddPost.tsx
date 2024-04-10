@@ -92,7 +92,7 @@ const AddPost = () => {
     <div className="add_post">
 
       <div className="upload_image" onClick={handleButtonClick}>
-        <p>ატვირთე სურათი</p>
+        <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
       </div>
 
       <input ref={fileInputRef} type="file" onChange={handleFileChange} style={{display:'none'}}/>

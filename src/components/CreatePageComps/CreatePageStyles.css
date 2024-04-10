@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid var(--grey);
+    color: currentColor;
 }
 
 .upload_image input{
@@ -29,6 +30,7 @@
     transform: translate(-50%, -50%);
     font-size: 11px;
     font-weight: 900;
+    color: currentColor;
 }
 
 .input_style_createPage{
