@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "./CreatePageStyles.css";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
