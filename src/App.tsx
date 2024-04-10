@@ -3,7 +3,7 @@ import Feed from "./Feed"
 import Navbar from "./components/navbar/navbar"
 import { useDarkModeHook } from "./hooks/useDarkModeHook"
 import "./index.css"
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
@@ -28,7 +28,7 @@ function App() {
     Boolean(localStorage.getItem('darkMode'))    
   },[])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setLoading(true)
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
