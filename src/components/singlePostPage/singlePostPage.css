@@ -48,7 +48,7 @@
     top: 0;
     z-index: 111;
 
-    background-color: teal;
+    background-color: black;
 }
 
 .full_screen_cover{
@@ -98,11 +98,10 @@
 
 .comment_textarea{
     width: 100%;
-    height: auto;
-    min-height: 100px;
     border-radius: 20px;
     background-color: inherit;
     color: currentColor;
+    font-size: 14px;
 
     padding: 15px 15px 30px 15px;
     outline: none;
@@ -122,4 +121,38 @@
     color: currentColor;
 
     cursor: pointer;
+}
+
+.smile_icon{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+
+    cursor: pointer;
+}
+
+.emoji_backdrop{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 110;
+    width: 100vw;
+    height: 100vh;
+}
+
+.EmojiPickerReact{
+    position: absolute !important;
+    z-index: 110;
+    left: 0;
+    bottom: 10px;
+} 
+
+@media (max-width:769px) {
+    .EmojiPickerReact{
+        position: fixed !important;
+        z-index: 110;
+        left: 0;
+        bottom: 10px;
+        width: 100% !important;
+    } 
 }

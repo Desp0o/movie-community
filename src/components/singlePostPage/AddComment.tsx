@@ -31,7 +31,7 @@ const AddComment = () => {
         placeholder="Write your comment here..."
         />
 
-        <button className='comment_ntm'>add comment</button>
+    <button className='comment_ntm'>add comment</button>
     </div>
   );
 };
