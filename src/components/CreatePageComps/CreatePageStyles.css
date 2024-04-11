@@ -48,6 +48,8 @@
     padding: 10px 15px;
     border: 1px solid var(--grey);
     outline: none;
+    background-color: inherit;
+    color: currentColor;
 }
 
 .send_post_btn{
