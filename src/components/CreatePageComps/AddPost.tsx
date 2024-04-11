@@ -1,18 +1,16 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
-
-
-
 
 const AddPost = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  
-  
-
-  const [postValue, setPostValue] = useState({
-    image: "",
+  const [postValue, setPostValue] = useState<{
+    image: File | undefined;
+    title: string;
+    body: string;
+  }>({
+    image: undefined,
     title: "",
     body: "",
   });
@@ -21,9 +19,9 @@ const AddPost = () => {
     setPostValue({ ...postValue, title: event.target.value });
   };
 
-  // const handlePostBody = (value: string) => {
-  //   setPostValue({ ...postValue, body: value });
-  // };
+  const handlePostBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPostValue({ ...postValue, body: event.target.value });
+  };
 
   const handleButtonClick = () => {
     fileInputRef.current && fileInputRef.current.click();
@@ -31,12 +29,14 @@ const AddPost = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log('Selected file:', file);
+    setPostValue({ ...postValue, image: file });
   };
 
 
-
-
+  useEffect(()=>{
+    console.log(postValue);
+    
+  },[postValue])
 
   return (
     <div className="add_post">
@@ -53,8 +53,8 @@ const AddPost = () => {
         placeholder="სათაური"
         onChange={handlePostTitle}
       />
-      <div className="quill_container">
-      </div>
+      
+      <textarea className="post_body" onChange={handlePostBody}/>
 
       <SendPostBTN />
     </div>
