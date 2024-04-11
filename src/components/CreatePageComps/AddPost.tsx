@@ -5,12 +5,8 @@ import SendPostBTN from "./SendPostBTN";
 const AddPost = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [postValue, setPostValue] = useState<{
-    image: File | undefined;
-    title: string;
-    body: string;
-  }>({
-    image: undefined,
+  const [postValue, setPostValue] = useState({
+    image: [] as File[],
     title: "",
     body: "",
   });
@@ -28,8 +24,11 @@ const AddPost = () => {
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setPostValue({ ...postValue, image: file });
+    const files = event.target.files;
+    if (files) {
+      const fileList = Array.from(files); // Convert FileList to an array
+      setPostValue({ ...postValue, image: fileList });
+    }
   };
 
 
@@ -45,7 +44,7 @@ const AddPost = () => {
         <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
       </div>
 
-      <input ref={fileInputRef} type="file" onChange={handleFileChange} style={{display:'none'}}/>
+      <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
       
       <input
         type="text"
