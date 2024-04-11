@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
+import { SendPostFunction } from "./SendPostFunction";
 
 const AddPost = () => {
+  const {sendPost} = SendPostFunction()
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [postValue, setPostValue] = useState({
@@ -37,6 +39,10 @@ const AddPost = () => {
     
   },[postValue])
 
+  const test = () => {
+    sendPost(postValue)
+  }
+
   return (
     <div className="add_post">
 
@@ -55,7 +61,8 @@ const AddPost = () => {
       
       <textarea className="post_body" onChange={handlePostBody}/>
 
-      <SendPostBTN />
+
+      <SendPostBTN funName={test}/>
     </div>
   );
 };

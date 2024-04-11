@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface SendPostBTNProps {
-    funName?: () => void
+    funName?: ()=>void | undefined
 }
 
 const SendPostBTN:React.FC<SendPostBTNProps> = ({funName}) => {
