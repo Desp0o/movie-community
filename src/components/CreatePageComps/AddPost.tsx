@@ -1,16 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
-import { SendPostFunction } from "./SendPostFunction";
+import axios from "axios";
 
 const AddPost = () => {
-  const {sendPost} = SendPostFunction()
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [postValue, setPostValue] = useState({
-    image: [] as File[],
+    img: [] as File[],
     title: "",
-    body: "",
+    text: "",
   });
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
@@ -18,7 +17,7 @@ const AddPost = () => {
   };
 
   const handlePostBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPostValue({ ...postValue, body: event.target.value });
+    setPostValue({ ...postValue, text: event.target.value });
   };
 
   const handleButtonClick = () => {
@@ -29,15 +28,25 @@ const AddPost = () => {
     const files = event.target.files;
     if (files) {
       const fileList = Array.from(files); // Convert FileList to an array
-      setPostValue({ ...postValue, image: fileList });
+      setPostValue({ ...postValue, img: fileList });
     }
   };
 
+  const sendPost = async (formData: any) => {     
+    console.log(formData);
+       
+      try {
+          const res = await axios.post('https://api.pinky.ge/api/posting' , formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
 
-  useEffect(()=>{
-    console.log(postValue);
-    
-  },[postValue])
+          console.log(res);
+      } catch (error) {
+          console.log(error);
+      }
+  }
 
   const test = () => {
     sendPost(postValue)
