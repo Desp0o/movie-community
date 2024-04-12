@@ -1,6 +1,7 @@
 import { useState } from "react"
 import LoginModalBtn from "./LoginModalBtn"
 import axios from "axios"
+import "./login.css"
 
 const RegisterForm = () => {
     const [response, setResponse] = useState('')
@@ -41,7 +42,7 @@ const RegisterForm = () => {
     }
 
   return (
-    <div>
+    <>
         <p className="register_title">Register</p>
         <form className="reg_form" onSubmit={regUser}> 
             <input placeholder="Name" name='name' value={regInputs.name} type="text" className="reg_form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })}/>
@@ -53,7 +54,7 @@ const RegisterForm = () => {
         </form>
         {response ? <p className="reg_fomr_res_status_okey">{response}</p> : <></>}
         {isPwdEqual ? <p className="password_do_not_match">Password do not match</p> : <></>}
-    </div>
+    </>
   )
 }
 

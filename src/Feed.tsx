@@ -3,34 +3,47 @@ import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
 import SingleQuizComponent from "./components/singleQuizComponent/SingleQuizComponent";
 import { feedData } from "./FeedDATA";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import LoginForm from "./components/login/LoginForm";
 
+interface dataProps {
+  id: number;
+  title: string;
+}
 
 const Feed = () => {
+  const [data, setData] = useState([]) 
+
+  const getAllPosts = async () => {
+    try {
+      const response = await axios.get('https://api.pinky.ge/api/index');
+      
+      console.log(response.data); 
+      setData(response.data) //აქ ვინახავ შენგან მოცემულ ინფორმაციას
+      
+    } catch (error) {
+      console.error(error); // Handle errors appropriately
+    }
+  }
+
+  useEffect(()=> {
+    getAllPosts()
+  },[])
+
   return (
     <PageLayout>
       <div className="feed">
-        {feedData.map((post) => {
-          return (
-            post.type === 0 ? 
-            <SinglePostComp
-              postID={post.id}
-              authorName={post.name}
-              authorAvatar={post.avatar}
-              postTitle={post.title}
-              image={post.image}
-            />
-            :
-            <SingleQuizComponent
-              postID={post.id}
-              authorName={post.name}
-              authorAvatar={post.avatar}
-              postTitle={post.title}
-              image={post.image}
-            />
-          );
+        {data.map((post: dataProps)=>{
+          return(
+            <div key={post.id}>
+              <SinglePostComp authorName={""} authorAvatar={""} postTitle={post.title} postID={0} />
+            </div>
+          )
         })}
       </div>
 
+        <LoginForm />
     </PageLayout>
   );
 };
