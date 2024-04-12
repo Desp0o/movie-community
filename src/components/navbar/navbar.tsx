@@ -14,6 +14,8 @@ import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
 import { Link } from "react-router-dom";
+import noAvatar from "../../assets/noAvatar.jpeg"
+
 
 interface RootState {
   leftMenuStore:{
@@ -126,7 +128,7 @@ const Navbar = () => {
                 }
               >
                 <img
-                  src={user.avatar}
+                  src={user.avatar ? user.avatar : noAvatar}
                   alt="user avatr"
                   className="nav_user_avatar"
                 />

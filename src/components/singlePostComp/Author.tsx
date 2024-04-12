@@ -1,5 +1,6 @@
 import React from 'react'
 import "./singlePostComp.css"
+import noAvatar from "../../assets/noAvatar.jpeg"
 
 interface AuthorProps {
     avatar: string;
@@ -11,7 +12,7 @@ const Author:React.FC<AuthorProps> = ({avatar, name}) => {
   return (
     <div className='author'>
        <div className='author_credentials'>
-            <img src={avatar} alt='author avatar' className='author_avatar' />
+            <img src={avatar ? avatar : noAvatar} alt='author avatar' className='author_avatar' />
             <p>{name}</p>
        </div>
 
