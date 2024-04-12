@@ -154,3 +154,10 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.reg_fomr_res_status_okey{
+  font-size: 14px;
+  text-align: center;
+  color: green;
+  margin-top: 10px;
+}

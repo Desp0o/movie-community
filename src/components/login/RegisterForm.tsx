@@ -3,6 +3,7 @@ import LoginModalBtn from "./LoginModalBtn"
 import axios from "axios"
 
 const RegisterForm = () => {
+    const [response, setResponse] = useState('')
     const [regInputs, setRegInputs] = useState({
         name: '',
         email: '',
@@ -12,13 +13,14 @@ const RegisterForm = () => {
     const regUser = async () => {
 
         try {
-            const response = await axios.post('https://api.pinky.ge/api/register',regInputs,{
+            const res = await axios.post('https://api.pinky.ge/api/register',regInputs,{
                 headers:{
                     'Content-Type': 'application/json'
                 }
             })
 
-            console.log(response.data);
+            console.log(res.data);
+            setResponse(res.data.message)
             
         } catch (error) {
             console.log(error);
@@ -36,6 +38,7 @@ const RegisterForm = () => {
 
             <LoginModalBtn funName={regUser} title="Register"/>
         </form>
+        {response ? <p className="reg_fomr_res_status_okey">{response}</p> : <></>}
     </div>
   )
 }
