@@ -32,24 +32,22 @@ const AddPost = () => {
     }
   };
 
-  const sendPost = async (formData: any) => {     
-    console.log(formData);
-       
+  const sendPost = async () => {            
       try {
-          const res = await axios.post('https://api.pinky.ge/api/posting' , formData, {
+          const res = await axios.post('https://api.pinky.ge/api/posting' , postValue, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           })
 
-          console.log(res);
+          console.log(res.data);
       } catch (error) {
           console.log(error);
       }
   }
 
-  const test = () => {
-    sendPost(postValue)
+  const CreatePost = () => {
+    sendPost()
   }
 
   return (
@@ -71,7 +69,7 @@ const AddPost = () => {
       <textarea className="post_body" onChange={handlePostBody}/>
 
 
-      <SendPostBTN funName={test}/>
+      <SendPostBTN funName={CreatePost}/>
     </div>
   );
 };
