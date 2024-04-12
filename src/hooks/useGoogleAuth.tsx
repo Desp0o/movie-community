@@ -21,6 +21,7 @@ export const useGoogleLogIn = () => {
           const signIn = await signInWithPopup(auth, provider);
           disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: signIn.user.uid}))
           disptach(setModalVisible(false))
+          localStorage.setItem('userName', JSON.stringify(signIn.user.displayName))
           
           const avatarFromGoogle = signIn.user.photoURL
           const formatedAvatar = avatarFromGoogle?.substring(0, avatarFromGoogle.length - 4)

@@ -35,6 +35,7 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(setUser({name: user.displayName, avatar: user.photoURL, userID: user.uid}))
+        localStorage.setItem('userName', JSON.stringify(user.displayName))
         setLoading(false)
       }else {
         setLoading(false)
@@ -72,6 +73,7 @@ function App() {
     if(token){
       checkMe()
     }
+
   },[])
 
   useEffect(()=>{

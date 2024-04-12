@@ -13,6 +13,8 @@ export const useLogOut = () => {
     try {
       dispatch(setUser({name: '', avatar: ''}))
       localStorage.removeItem('token')
+      localStorage.removeItem('userName')
+      localStorage.removeItem('token_death')
     } catch (error) {
       console.error("Logout Error:", error);
     }
