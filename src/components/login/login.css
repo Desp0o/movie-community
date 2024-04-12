@@ -114,3 +114,43 @@
   }
 
 }
+
+
+/* //login */
+
+.register_title{
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.reg_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.reg_form_inputs{
+  background-color: inherit;
+  color: currentColor;
+  border: 1px solid var(--grey);
+  width: 370px;
+  max-width: 90%;
+  height: 40px;
+  padding-left: 15px;
+  border-radius: 30px;
+}
+
+.login_modal_reusable_btn{
+  width: 370px;
+  max-width: 90%;
+  height: 40px;
+  border-radius: 30px;
+  background-color: var(--reddit);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}

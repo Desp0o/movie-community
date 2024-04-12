@@ -27,8 +27,6 @@ const Login = () => {
     <>
       <div className="login_backdrop" onClick={modalCloser} />
       <div className={isDark ? "login_modal dark" : "login_modal"}>
-        {!regForm ? (
-          <>
             <div
               className={
                 isDark ? "x_icon_login_modal dark" : "x_icon_login_modal"
@@ -37,6 +35,8 @@ const Login = () => {
             >
               {xIcon}
             </div>
+        {!regForm ? (
+          <>
             <div className="log_modal_block1">
               <p>Log In</p>
               <p>
