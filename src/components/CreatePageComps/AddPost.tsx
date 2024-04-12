@@ -8,8 +8,13 @@ const AddPost = () => {
   const { user } = useUserHook()
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [postValue, setPostValue] = useState({
-    img: [] as File[],
+  const [postValue, setPostValue] = useState<{
+    image: File | undefined;
+    title: string;
+    text: string;
+    user_id: string;
+  }>({
+    image: undefined,
     title: "",
     text: "",
     user_id: user.userID
@@ -33,11 +38,8 @@ const AddPost = () => {
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const fileList = Array.from(files); // Convert FileList to an array
-      setPostValue({ ...postValue, img: fileList });
-    }
+    const file = event.target.files?.[0];
+    setPostValue({ ...postValue, image: file });
   };
 
   const sendPost = async () => {            
