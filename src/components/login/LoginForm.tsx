@@ -1,9 +1,12 @@
 import { useState } from "react"
 import LoginModalBtn from "./LoginModalBtn"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { setModalVisible } from "../../Redux/loginModalSlicer"
+import { setUser } from "../../Redux/userSlicer"
 
 const LoginForm = () => {
-
+  const dispatch = useDispatch()
   const [loginInputs, setLoginInputs] = useState({
     email: '',
     password: ''
@@ -17,7 +20,8 @@ const LoginForm = () => {
           'Content-Type': 'application/json'
         }
       })
-
+      dispatch(setModalVisible(false))
+      dispatch(setUser({name: response.data.users.email, avatar: response.data.users.avatar, userID: response.data.users.id}))
       console.log(response.data);
     } catch (error) {
       console.log(error);

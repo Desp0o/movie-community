@@ -3,6 +3,9 @@ import LoginModalBtn from "./LoginModalBtn"
 import axios from "axios"
 import "./login.css"
 
+const loginPath = import.meta.env.VITE_LOGIN;
+const regPath = import.meta.env.VITE_REGISTER;
+
 const RegisterForm = () => {
     const [response, setResponse] = useState('')
     const [isPwdEqual, setPwdEqual] = useState(false)
@@ -18,7 +21,7 @@ const RegisterForm = () => {
         if(rePassword === regInputs.password && regInputs.password.length !== 0){
             setPwdEqual(false)
             try {
-                const res = await axios.post('https://api.pinky.ge/api/register',regInputs,{
+                const res = await axios.post(regPath,regInputs,{
                     headers:{
                         'Content-Type': 'application/json'
                     }
@@ -26,6 +29,14 @@ const RegisterForm = () => {
     
                 console.log(res.data);
                 setResponse(res.data.message)
+
+                if(res.data.message === 'User registered successfully'){
+                    await axios.post(loginPath, { email: regInputs.email, password: regInputs.password },{
+                        headers:{
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                }
                 
             } catch (error) {
                 console.log(error);
