@@ -7,7 +7,7 @@ import { setUser } from "../../Redux/userSlicer";
 import { useDispatch } from "react-redux";
 
 const loginPath = import.meta.env.VITE_LOGIN;
-const regPath = import.meta.env.VITE_REGISTER;
+// const regPath = import.meta.env.VITE_REGISTER;
 
 const RegisterForm = () => {
     const dispatch = useDispatch()
