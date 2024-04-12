@@ -1,8 +1,6 @@
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
-import SingleQuizComponent from "./components/singleQuizComponent/SingleQuizComponent";
-import { feedData } from "./FeedDATA";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import LoginForm from "./components/login/LoginForm";
