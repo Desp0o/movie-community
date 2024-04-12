@@ -45,10 +45,10 @@ const RegisterForm = () => {
     <>
         <p className="register_title">Register</p>
         <form className="reg_form" onSubmit={regUser}> 
-            <input placeholder="Name" name='name' value={regInputs.name} type="text" className="reg_form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })}/>
-            <input placeholder="Email" name="email" value={regInputs.email} type="text" className="reg_form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, email: e.target.value })}/>
-            <input placeholder="Password" name="password" value={regInputs.Password} type="password" className="reg_form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, Password: e.target.value })}/>
-            <input placeholder="Repeat Password" name="re_password" value={regInputs.rePassword} type="password" className="reg_form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, rePassword: e.target.value })}/>
+            <input placeholder="Name" name='name' value={regInputs.name} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })}/>
+            <input placeholder="Email" name="email" value={regInputs.email} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, email: e.target.value })}/>
+            <input placeholder="Password" name="password" value={regInputs.Password} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, Password: e.target.value })}/>
+            <input placeholder="Repeat Password" name="re_password" value={regInputs.rePassword} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, rePassword: e.target.value })}/>
 
             <LoginModalBtn funName={regUser} title="Register"/>
         </form>

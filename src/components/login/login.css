@@ -117,14 +117,16 @@
 
 /* //login */
 
-.register_title{
+.register_title,
+.login_title{
   text-align: center;
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 15px;
 }
 
-.reg_form{
+.reg_form,
+.login_form{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -132,7 +134,7 @@
   gap: 15px;
 }
 
-.reg_form_inputs{
+.form_inputs{
   background-color: inherit;
   color: currentColor;
   border: 1px solid var(--grey);

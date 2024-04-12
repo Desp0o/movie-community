@@ -8,31 +8,43 @@ import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { emailIcon } from "../../assets/svg/emailIcon";
 import { useState } from "react";
 import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { googleLogIn } = useGoogleLogIn();
   const { isDark } = useDarkModeHook();
   const [regForm, setRegForm] = useState(false);
+  const [loginForm, setLoginForm] = useState(false);
 
   const modalCloser = () => {
     dispatch(setModalVisible(false));
   };
 
   const register = () => {
-    setRegForm(true)
+    setRegForm(true);
+    setLoginForm(false);
+  };
+
+  const login = () => {
+    setRegForm(false);
+    setLoginForm(true);
   };
 
   return (
     <>
       <div className="login_backdrop" onClick={modalCloser} />
       <div className={isDark ? "login_modal dark" : "login_modal"}>
-        
-            <div className={isDark ? "x_icon_login_modal dark" : "x_icon_login_modal"} onClick={modalCloser}>
-              {xIcon}
-            </div>
-            
-        {!regForm ? (
+        <div
+          className={isDark ? "x_icon_login_modal dark" : "x_icon_login_modal"}
+          onClick={modalCloser}
+        >
+          {xIcon}
+        </div>
+
+        {loginForm ? (
+          <LoginForm />
+        ) : !regForm ? (
           <>
             <div className="log_modal_block1">
               <p>Log In</p>
@@ -48,7 +60,7 @@ const Login = () => {
                 <p>Log With Google</p>
               </div>
 
-              <div className="login_btn">
+              <div className="login_btn" onClick={login}>
                 <>
                   {emailIcon}
                   <p>Log With Email</p>
@@ -58,7 +70,10 @@ const Login = () => {
 
             <p style={{ marginTop: "30px" }}>
               dont't have acc,{" "}
-              <span onClick={register} style={{ color: "var(--reddit)", cursor: "pointer" }}>
+              <span
+                onClick={register}
+                style={{ color: "var(--reddit)", cursor: "pointer" }}
+              >
                 Register
               </span>
             </p>
