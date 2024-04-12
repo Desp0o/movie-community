@@ -51,8 +51,8 @@ const AddPost = () => {
           })
 
           console.log(res.data);
-      } catch (error) {
-          console.log(error);
+      } catch (error: any) {
+          console.log(error.response.data);
       }
   }
 
