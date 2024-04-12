@@ -5,6 +5,7 @@ interface RootState {
     user: {
         name: string;
         avatar: string
+        userID: string
     }
   };
 }

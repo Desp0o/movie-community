@@ -1,16 +1,24 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
 import axios from "axios";
+import { useUserHook } from "../../hooks/useUserHook";
 
 const AddPost = () => {
+  const { user } = useUserHook()
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [postValue, setPostValue] = useState({
     img: [] as File[],
     title: "",
     text: "",
+    user_id: user.userID
   });
+
+  useEffect(()=>{
+    console.log(postValue);
+    
+  },[postValue])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });
