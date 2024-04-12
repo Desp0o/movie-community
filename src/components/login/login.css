@@ -161,3 +161,10 @@
   color: green;
   margin-top: 10px;
 }
+
+.password_do_not_match{
+  font-size: 14px;
+  text-align: center;
+  color: var(--reddit);
+  margin-top: 15px;
+}
