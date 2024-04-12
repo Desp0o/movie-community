@@ -42,7 +42,7 @@ const AddPost = () => {
     setPostValue({ ...postValue, img: file });
   };
 
-  const sendPost = async () => {            
+  const sendPost = async () => {                
       try {
           const res = await axios.post('https://api.pinky.ge/api/posting' , postValue, {
             headers: {
