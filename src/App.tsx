@@ -18,6 +18,9 @@ import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
 import Create from "./pages/Create"
 import axios from "axios"
+import { QueryClient, QueryClientProvider } from "react-query"
+
+const queryClient = new QueryClient()
 
 function App() {
   const {isDark} = useDarkModeHook()
@@ -88,23 +91,25 @@ function App() {
   }
 
   return (
-    <div className={isDark ? "app darkMode" : "app"}>
-      <Navbar />
-      <LeftNavigation />
-      <Routes>
-        <Route path="/" element={<Outlet />} />
-        <Route index element={<Feed />} />
-        <Route path="/pages/privacy" element={<Privacy />} />
-        <Route path="/pages/Post/:id" element={<Post />} />
+    <QueryClientProvider client={queryClient}>
+      <div className={isDark ? "app darkMode" : "app"}>
+        <Navbar />
+        <LeftNavigation />
+        <Routes>
+          <Route path="/" element={<Outlet />} />
+          <Route index element={<Feed />} />
+          <Route path="/pages/privacy" element={<Privacy />} />
+          <Route path="/pages/Post/:id" element={<Post />} />
 
-        <Route element={<RequireAuth />}>
-          <Route path="/pages/Profile" element={<Profile />} />
-          <Route path="/pages/Create" element={<Create />} />
-        </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/pages/Profile" element={<Profile />} />
+            <Route path="/pages/Create" element={<Create />} />
+          </Route>
 
-      </Routes>
-      {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
-    </div>
+        </Routes>
+        {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
+      </div>
+    </QueryClientProvider>
   )
 }
 

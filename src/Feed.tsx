@@ -34,9 +34,12 @@ const Feed = () => {
     getAllPosts()
   },[])
 
+  if(isLoading){
+    return <Fetching />
+  }
+
   return (
     <PageLayout>
-      {isLoading ? <Fetching /> : <></>}
       <div className="feed">
         {data.map((post: dataProps)=>{
           return(
