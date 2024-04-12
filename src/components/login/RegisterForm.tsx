@@ -25,7 +25,7 @@ const RegisterForm = () => {
         if(rePassword === regInputs.password && regInputs.password.length !== 0){
             setPwdEqual(false)
             try {
-                const res = await axios.post(regPath,regInputs,{
+                const res = await axios.post('https://api.pinky.ge/api/register',regInputs,{
                     headers:{
                         'Content-Type': 'application/json'
                     }
