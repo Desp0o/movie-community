@@ -4,16 +4,18 @@ import axios from "axios"
 import { useDispatch } from "react-redux"
 import { setModalVisible } from "../../Redux/loginModalSlicer"
 import { setUser } from "../../Redux/userSlicer"
+import Fetching from "../fetchingComponent/Fetching"
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const [isLoading, setLoading] = useState(false)
   const [loginInputs, setLoginInputs] = useState({
     email: '',
     password: ''
   })
 
   const LogInFunction = async () => {
-    
+    setLoading(true)
     try {
       const response = await axios.post(import.meta.env.VITE_LOGIN, loginInputs, {
         headers:{
@@ -30,11 +32,14 @@ const LoginForm = () => {
     } catch (error) {
       console.log(error);
       
+    }finally{
+      setLoading(false)
     }
   }
 
   return (
     <>
+      {isLoading ? <Fetching /> : <></>}
       <p className="login_title">login</p>
       <form className="login_form">
         <input value={loginInputs.email} name="email" type="text" placeholder="Email" className="form_inputs" onChange={(e)=> setLoginInputs({...loginInputs, email: e.target.value})} autoComplete="email"/>
