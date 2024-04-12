@@ -15,11 +15,13 @@ const LoginForm = () => {
   const LogInFunction = async () => {
     
     try {
-      const response = await axios.post('https://api.pinky.ge/api/login', loginInputs, {
+      const response = await axios.post(import.meta.env.VITE_LOGIN, loginInputs, {
         headers:{
           'Content-Type': 'application/json'
         }
       })
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('token_death', response.data.token_death)
       dispatch(setModalVisible(false))
       dispatch(setUser({name: response.data.users.email, avatar: response.data.users.avatar, userID: response.data.users.id}))
       console.log(response.data);
