@@ -4,6 +4,8 @@ import SendPostBTN from "./SendPostBTN";
 import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
 
+const token = localStorage.getItem('token')
+
 const AddPost = () => {
   const { user } = useUserHook()
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -12,7 +14,7 @@ const AddPost = () => {
     img: File | undefined;
     title: string;
     text: string;
-    user_id: string;
+    user_id: number | string;
   }>({
     img: undefined,
     title: "",
@@ -20,10 +22,7 @@ const AddPost = () => {
     user_id: user.userID,
   });
 
-  useEffect(()=>{
-    console.log(postValue);
-    
-  },[postValue])
+  
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });
@@ -46,6 +45,7 @@ const AddPost = () => {
       try {
           const res = await axios.post('https://api.pinky.ge/api/posting' , postValue, {
             headers: {
+              Authorization: `Bearer ${token}`,
               'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
             }
           })

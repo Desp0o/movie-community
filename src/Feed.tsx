@@ -1,3 +1,4 @@
+import Fetching from "./components/fetchingComponent/Fetching";
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
@@ -12,8 +13,10 @@ interface dataProps {
 
 const Feed = () => {
   const [data, setData] = useState([]) 
+  const [isLoading, setLoading] = useState(false)
 
   const getAllPosts = async () => {
+    setLoading(true)
     try {
       const response = await axios.get('https://api.pinky.ge/api/index');
       
@@ -22,6 +25,8 @@ const Feed = () => {
       
     } catch (error) {
       console.error(error); // Handle errors appropriately
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -31,6 +36,7 @@ const Feed = () => {
 
   return (
     <PageLayout>
+      {isLoading ? <Fetching /> : <></>}
       <div className="feed">
         {data.map((post: dataProps)=>{
           return(
