@@ -24,7 +24,6 @@ const LoginForm = () => {
       localStorage.setItem('token_death', response.data.token_death)
       dispatch(setModalVisible(false))
       dispatch(setUser({name: response.data.users.email, avatar: response.data.users.avatar, userID: response.data.users.id}))
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       

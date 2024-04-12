@@ -2,11 +2,15 @@ import { useState } from "react"
 import LoginModalBtn from "./LoginModalBtn"
 import axios from "axios"
 import "./login.css"
+import { setModalVisible } from "../../Redux/loginModalSlicer";
+import { setUser } from "../../Redux/userSlicer";
+import { useDispatch } from "react-redux";
 
 const loginPath = import.meta.env.VITE_LOGIN;
 const regPath = import.meta.env.VITE_REGISTER;
 
 const RegisterForm = () => {
+    const dispatch = useDispatch()
     const [response, setResponse] = useState('')
     const [isPwdEqual, setPwdEqual] = useState(false)
     const [regInputs, setRegInputs] = useState({
@@ -31,11 +35,16 @@ const RegisterForm = () => {
                 setResponse(res.data.message)
 
                 if(res.data.message === 'User registered successfully'){
-                    await axios.post(loginPath, { email: regInputs.email, password: regInputs.password },{
+                    const res = await axios.post(loginPath, { email: regInputs.email, password: regInputs.password },{
                         headers:{
                             'Content-Type': 'application/json'
                         }
                     });
+
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('token_death', res.data.token_death)
+                    dispatch(setModalVisible(false))
+                    dispatch(setUser({name: res.data.users.email, avatar: res.data.users.avatar, userID: res.data.users.id}))                    
                 }
                 
             } catch (error) {
