@@ -7,7 +7,7 @@ import { setUser } from "../../Redux/userSlicer";
 import { useDispatch } from "react-redux";
 
 const loginPath = import.meta.env.VITE_LOGIN;
-// const regPath = import.meta.env.VITE_REGISTER;
+const regPath = import.meta.env.VITE_REGISTER;
 
 const RegisterForm = () => {
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const RegisterForm = () => {
         if(rePassword === regInputs.password && regInputs.password.length !== 0){
             setPwdEqual(false)
             try {
-                const res = await axios.post('https://api.pinky.ge/api/register',regInputs,{
+                const res = await axios.post(regPath,regInputs,{
                     headers:{
                         'Content-Type': 'application/json'
                     }
