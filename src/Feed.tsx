@@ -3,7 +3,6 @@ import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import LoginForm from "./components/login/LoginForm";
 
 interface dataProps {
   id: number;
@@ -41,7 +40,6 @@ const Feed = () => {
         })}
       </div>
 
-        <LoginForm />
     </PageLayout>
   );
 };

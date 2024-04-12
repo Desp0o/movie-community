@@ -9,13 +9,13 @@ const RegisterForm = () => {
     const [regInputs, setRegInputs] = useState({
         name: '',
         email: '',
-        Password: '',
-        rePassword: ''
+        password: '',
     })
+    const [rePassword, setRePassword] = useState('')
 
     const regUser = async () => {
 
-        if(regInputs.rePassword === regInputs.Password && regInputs.Password.length !== 0){
+        if(rePassword === regInputs.password && regInputs.password.length !== 0){
             setPwdEqual(false)
             try {
                 const res = await axios.post('https://api.pinky.ge/api/register',regInputs,{
@@ -33,7 +33,7 @@ const RegisterForm = () => {
             }
         }
 
-        if(regInputs.rePassword !== regInputs.Password){
+        if(rePassword !== regInputs.password){
             console.log('pass do not match');
             setPwdEqual(true)
             return
@@ -47,8 +47,8 @@ const RegisterForm = () => {
         <form className="reg_form" onSubmit={regUser}> 
             <input placeholder="Name" name='name' value={regInputs.name} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })}/>
             <input placeholder="Email" name="email" value={regInputs.email} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, email: e.target.value })}/>
-            <input placeholder="Password" name="password" value={regInputs.Password} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, Password: e.target.value })}/>
-            <input placeholder="Repeat Password" name="re_password" value={regInputs.rePassword} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, rePassword: e.target.value })}/>
+            <input placeholder="Password" name="password" value={regInputs.password} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, password: e.target.value })}/>
+            <input placeholder="Repeat Password" name="re_password" value={rePassword} type="password" className="form_inputs" onChange={(e)=>setRePassword(e.target.value)}/>
 
             <LoginModalBtn funName={regUser} title="Register"/>
         </form>
