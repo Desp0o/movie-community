@@ -17,6 +17,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth"
 import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
 import Create from "./pages/Create"
+import axios from "axios"
 
 function App() {
   const {isDark} = useDarkModeHook()
@@ -42,6 +43,36 @@ function App() {
 
     return () => unsubscribe();
   }, [dispatch]);
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    setLoading(true)
+
+    const checkMe = async () => {
+      try {
+        const response = await axios.get("https://api.pinky.ge/api/me", {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'application/json'
+              }
+          });
+
+          console.log(response);
+          
+      } catch (error) {
+        console.log(error);
+        
+      }
+      finally{
+        setLoading(false)
+
+      }
+    }
+
+    if(token){
+      checkMe()
+    }
+  },[])
 
   useEffect(()=>{
     isDark ?

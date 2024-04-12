@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 interface dataProps {
   id: number;
   title: string;
+  img: string;
 }
 
 const Feed = () => {
@@ -34,7 +35,7 @@ const Feed = () => {
         {data.map((post: dataProps)=>{
           return(
             <div key={post.id}>
-              <SinglePostComp authorName={""} authorAvatar={""} postTitle={post.title} postID={0} />
+              <SinglePostComp authorName={""} authorAvatar={""} postTitle={post.title} postID={0} image={post.img}/>
             </div>
           )
         })}
