@@ -32,6 +32,8 @@ export const useGoogleLogIn = () => {
             email: signIn.user.email,
           }
 
+            console.log("test");
+            
            const res = await axios.post('https://api.pinky.ge/api/register', formData, {
             headers:{
               'Content-Type': 'application/json'

@@ -29,8 +29,8 @@ const LoginForm = () => {
     <>
       <p className="login_title">login</p>
       <form className="login_form">
-        <input value={loginInputs.email} name="email" type="text" placeholder="Email" className="form_inputs" onChange={(e)=> setLoginInputs({...loginInputs, email: e.target.value})}/>
-        <input value={loginInputs.password} name="password" type="password" placeholder="Password" className="form_inputs"  onChange={(e)=> setLoginInputs({...loginInputs, password: e.target.value})} />
+        <input value={loginInputs.email} name="email" type="text" placeholder="Email" className="form_inputs" onChange={(e)=> setLoginInputs({...loginInputs, email: e.target.value})} autoComplete="email"/>
+        <input value={loginInputs.password} name="password" type="password" placeholder="Password" className="form_inputs"  onChange={(e)=> setLoginInputs({...loginInputs, password: e.target.value})} autoComplete="current-password"/>
 
         <LoginModalBtn title={"Log in"} funName={LogInFunction} />
       </form>

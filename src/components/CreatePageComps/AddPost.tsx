@@ -9,15 +9,17 @@ const AddPost = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [postValue, setPostValue] = useState<{
-    image: File | undefined;
+    img: File | undefined;
     title: string;
     text: string;
     user_id: string;
+    type: number;
   }>({
-    image: undefined,
+    img: undefined,
     title: "",
     text: "",
-    user_id: user.userID
+    user_id: user.userID,
+    type: 1
   });
 
   useEffect(()=>{
@@ -39,14 +41,14 @@ const AddPost = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    setPostValue({ ...postValue, image: file });
+    setPostValue({ ...postValue, img: file });
   };
 
   const sendPost = async () => {            
       try {
           const res = await axios.post('https://api.pinky.ge/api/posting' , postValue, {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
             }
           })
 
