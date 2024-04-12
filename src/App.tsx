@@ -33,7 +33,7 @@ function App() {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser({name: user.displayName, avatar: user.photoURL}))
+        dispatch(setUser({name: user.displayName, avatar: user.photoURL, userID: user.uid}))
         setLoading(false)
       }else {
         setLoading(false)

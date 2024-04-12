@@ -18,7 +18,7 @@ export const useGoogleLogIn = () => {
     
         try {
           const signIn = await signInWithPopup(auth, provider);
-          disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL}))
+          disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: signIn.user.uid}))
           disptach(setModalVisible(false))
           return signIn;
         } catch (error) {

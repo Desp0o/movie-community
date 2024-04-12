@@ -5,6 +5,7 @@ const userSlicer = createSlice({
     initialState:{
         user: {
             name: '',
+            userID: '',
             avatar: ''
         }
     },
@@ -12,6 +13,7 @@ const userSlicer = createSlice({
         setUser(state, action){
             state.user.name = action.payload.name;
             state.user.avatar = action.payload.avatar;
+            state.user.userID = action.payload.userID;
         }
     }
 })
