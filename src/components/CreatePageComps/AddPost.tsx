@@ -13,13 +13,11 @@ const AddPost = () => {
     title: string;
     text: string;
     user_id: string;
-    type: number;
   }>({
     img: undefined,
     title: "",
     text: "",
     user_id: user.userID,
-    type: 1
   });
 
   useEffect(()=>{

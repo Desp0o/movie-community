@@ -1,48 +1,38 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import PageLayout from "../components/pageLayout/PageLayout";
-import { feedData } from "../FeedDATA";
-import GoBack from "../components/singlePostPage/GoBack";
-import Author from "../components/singlePostComp/Author";
-import PostTitle from "../components/singlePostComp/PostTitle";
-import PostImage from "../components/singlePostComp/postImage";
-import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
+// import GoBack from "../components/singlePostPage/GoBack";
+// import Author from "../components/singlePostComp/Author";
+// import PostTitle from "../components/singlePostComp/PostTitle";
+// import PostImage from "../components/singlePostComp/postImage";
+// import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css";
-import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
-import { useState } from "react";
-import { xIcon } from "../assets/svg/Xicon";
-import AddComment from "../components/singlePostPage/AddComment";
-import CommentsSection from "../components/singlePostPage/CommentsSection";
+// import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
+// import { useState } from "react";
+// import { xIcon } from "../assets/svg/Xicon";
+// import AddComment from "../components/singlePostPage/AddComment";
+// import CommentsSection from "../components/singlePostPage/CommentsSection";
 
 const Post = () => {
-  const [isFullScreenImage, setFullScreenImage] = useState(false);
-  const { id } = useParams();
-  const postId = id ? parseInt(id) : null;
-  const post = feedData.find((post) => post.id === postId);
+  // const [isFullScreenImage, setFullScreenImage] = useState(false);
+  // const { id } = useParams();
+  // const postId = id ? parseInt(id) : null;
 
-  const openFullScreen = () => {
-    setFullScreenImage(true);
-    document.body.style.overflow ='hidden'
-  };
+  // const openFullScreen = () => {
+  //   setFullScreenImage(true);
+  //   document.body.style.overflow ='hidden'
+  // };
 
-  const closeFullScreen = () => {
-    setFullScreenImage(false);
-    document.body.style.overflow ='auto'
-  };
+  // const closeFullScreen = () => {
+  //   setFullScreenImage(false);
+  //   document.body.style.overflow ='auto'
+  // };
 
-  if (!post) {
-    return (
-      <div>
-        <PageLayout>
-          <p>Post not found!</p>
-        </PageLayout>
-      </div>
-    );
-  }
+
 
   return (
     <div>
       <PageLayout>
-        <div className="single_post_page">
+        {/* <div className="single_post_page">
           <div className="goBack_authorInfo">
             <GoBack />
             <Author avatar={post.avatar} name={post.name} />
@@ -82,7 +72,9 @@ const Post = () => {
           <AddComment />
 
           <CommentsSection />
-        </div>
+        </div> */}
+
+        <p>asd</p>
       </PageLayout>
     </div>
   );
