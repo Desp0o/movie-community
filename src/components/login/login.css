@@ -50,14 +50,16 @@
   font-weight: 700;
 }
 
-.google_login{
+.login_button{
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 
-.google_login_btn {
+.login_btn {
   width: 370px;
   max-width: 90%;
   height: 40px;
@@ -69,7 +71,6 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-
   cursor: pointer;
 }
 
