@@ -33,7 +33,7 @@ export const useGoogleLogIn = () => {
             email: signIn.user.email,
           }
             
-           const res = await axios.post('https://api.pinky.ge/api/register', formData, {
+           const res = await axios.post(import.meta.env.VITE_REGISTER, formData, {
             headers:{
               'Content-Type': 'application/json'
             }

@@ -50,11 +50,14 @@ function App() {
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
+    
     setLoading(true)
 
     const checkMe = async () => {
+      console.log(token);
+      
       try {
-        const response = await axios.get("https://api.pinky.ge/api/me", {
+        const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
               headers: {
                   Authorization: `Bearer ${token}`,
                   'Content-Type': 'application/json'
@@ -62,6 +65,7 @@ function App() {
           });
 
           console.log(response);
+          console.log('ეგააააა')
           
       } catch (error) {
         console.log(error);

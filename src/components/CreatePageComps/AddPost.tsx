@@ -43,7 +43,7 @@ const AddPost = () => {
 
   const sendPost = async () => {                
       try {
-          const res = await axios.post('https://api.pinky.ge/api/posting' , postValue, {
+          const res = await axios.post(import.meta.env.VITE_POSTING , postValue, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
