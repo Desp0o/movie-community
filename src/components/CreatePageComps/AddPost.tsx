@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
 import axios from "axios";
