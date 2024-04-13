@@ -19,12 +19,13 @@ const RegisterForm = () => {
         name: '',
         email: '',
         password: '',
+        password_confirmation: ''
     })
-    const [rePassword, setRePassword] = useState('')
+    // const [rePassword, setRePassword] = useState('')
 
     const regUser = async () => {
 
-        if(rePassword === regInputs.password && regInputs.password.length !== 0){
+        if(regInputs.password_confirmation === regInputs.password && regInputs.password.length !== 0){
             setLoading(true)
             setPwdEqual(false)
             try {
@@ -59,7 +60,7 @@ const RegisterForm = () => {
             }
         }
 
-        if(rePassword !== regInputs.password){
+        if(regInputs.password_confirmation !== regInputs.password){
             console.log('pass do not match');
             setPwdEqual(true)
             return
@@ -75,7 +76,7 @@ const RegisterForm = () => {
             <input placeholder="Name" name='name' value={regInputs.name} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })} autoComplete="name"/>
             <input placeholder="Email" name="email" value={regInputs.email} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, email: e.target.value })} autoComplete="email"/>
             <input placeholder="Password" name="password" value={regInputs.password} type="password" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, password: e.target.value })} autoComplete="password"/>
-            <input placeholder="Repeat Password" name="re_password" value={rePassword} type="password" className="form_inputs" onChange={(e)=>setRePassword(e.target.value)} autoComplete="password"/>
+            <input placeholder="Repeat Password" name="re_password" value={regInputs.password_confirmation} type="password" className="form_inputs" onChange={(e)=>setRegInputs({...regInputs, password_confirmation: e.target.value})} autoComplete="password"/>
 
             <LoginModalBtn funName={regUser} title="Register"/>
         </form>

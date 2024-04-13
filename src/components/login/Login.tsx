@@ -48,7 +48,18 @@ const Login = () => {
         </div>
 
         {loginForm ? (
-          <LoginForm />
+          <>
+            <LoginForm />
+            <p style={{ marginTop: "30px" }}>
+              dont't have acc,{" "}
+              <span
+                onClick={register}
+                style={{ color: "var(--reddit)", cursor: "pointer" }}
+              >
+                Register
+              </span>
+            </p>
+          </>
         ) : !regForm ? (
           <>
             <div className="log_modal_block1">

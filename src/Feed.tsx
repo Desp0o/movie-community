@@ -23,10 +23,6 @@ const Feed = () => {
       } catch (error) {
         console.log(error);
       }
-    },
-    {
-      cacheTime: 300000,
-      staleTime: 200000,
     }
   )
 

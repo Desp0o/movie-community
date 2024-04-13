@@ -67,7 +67,7 @@ const AddPost = () => {
         <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
       </div>
 
-      <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
+      <input ref={fileInputRef} multiple type="file" accept="image/*" onChange={handleFileChange} style={{display:'none'}}/>
       
       <input
         type="text"
