@@ -50,11 +50,9 @@ function App() {
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
-    
     setLoading(true)
 
     const checkMe = async () => {
-      console.log(token);
       
       try {
         const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
@@ -64,8 +62,9 @@ function App() {
               }
           });
 
-          console.log(response);
-          console.log('ეგააააა')
+          localStorage.setItem('userName', response.data.name)
+          dispatch(dispatch(setUser({name: response.data.name, userID: response.data.id}))
+        )
           
       } catch (error) {
         console.log(error);
@@ -73,7 +72,6 @@ function App() {
       }
       finally{
         setLoading(false)
-
       }
     }
 
