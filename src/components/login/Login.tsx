@@ -31,6 +31,11 @@ const Login = () => {
     setLoginForm(true);
   };
 
+  const closeLoginRegWindows = () => {
+    setRegForm(false);
+    setLoginForm(false);
+  }
+
   return (
     <>
       <div className="login_backdrop" onClick={modalCloser} />
@@ -79,7 +84,10 @@ const Login = () => {
             </p>
           </>
         ) : (
+          <>
           <RegisterForm />
+          <p style={{marginTop:"15px"}}>do you have acc ? <span style={{color:"var(--reddit)", cursor:"pointer"}} onClick={closeLoginRegWindows}>Log in</span></p>
+          </>
         )}
       </div>
     </>
