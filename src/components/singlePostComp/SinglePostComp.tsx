@@ -14,6 +14,8 @@ interface SinglePostProps {
   postTitle: string;
   image?: string;
   postID: number;
+  likes: number;
+  dislikes: number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -21,7 +23,9 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   authorAvatar,
   postTitle,
   image,
-  postID
+  postID,
+  likes,
+  dislikes
 }) => {
 
   const { isDark } = useDarkModeHook()
@@ -31,7 +35,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Author avatar={authorAvatar} name={authorName} />
           <PostTitle title={postTitle} />
           {image ? <PostImage image={image} /> : <></>}
-          <LikeDislikeComment />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} />
         
           <SeeMore postID={postID} />
         </div>
