@@ -25,7 +25,7 @@ const BottomNavigation = () => {
 
       <Link to='/pages/Create'>
         <div className={isDark ? "nav_create_post dark" : "nav_create_post"}>
-          <span onClick={openPostAddModal}>{addIcon}</span>
+          <span style={{display:"flex", alignItems:"center", justifyContent:"center"}} onClick={openPostAddModal}>{addIcon}</span>
           <p>Create</p>
         </div>
       </Link>

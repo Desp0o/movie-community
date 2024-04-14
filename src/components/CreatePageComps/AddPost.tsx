@@ -8,6 +8,7 @@ import { xIcon } from "../../assets/svg/Xicon";
 import { useResPostModal } from "../../hooks/useResPostModal";
 import { useDispatch } from "react-redux";
 import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
+import { pictureIcon } from "../../assets/svg/pictureIcon";
 
 const token = localStorage.getItem('token')
 
@@ -18,6 +19,7 @@ const AddPost = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch()
 
+  const [uploadedImage, setUploadedImage] = useState<string>('')
   const [postValue, setPostValue] = useState<{
     img: File | undefined;
     title: string;
@@ -46,6 +48,11 @@ const AddPost = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    if (file) {
+      setUploadedImage(URL.createObjectURL(file));
+    }
+    console.log(file);
+    
     setPostValue({ ...postValue, img: file });
   };
 
@@ -107,7 +114,24 @@ const AddPost = () => {
         className="input_style_createPage"
         placeholder="სათაური"
         onChange={handlePostTitle}
-      />
+        />
+
+        <textarea className="post_body" onChange={handlePostBody} placeholder="Description (optional)"/>
+        <input ref={fileInputRef} multiple type="file" accept="image/*" onChange={handleFileChange} style={{display:'none'}}/>
+
+        <div className="media_upload">
+          <span onClick={handleButtonClick}>{pictureIcon}</span>
+
+        <span style={{position:"relative"}}>
+          {
+            uploadedImage 
+            ?
+            <img src={uploadedImage} style={{width:"40px", height:"40px", objectFit:"contain"}}/>
+            :
+            <></>
+          }
+        </span>
+        </div>
       </div>
     </div>
   );
