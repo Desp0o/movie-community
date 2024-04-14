@@ -48,8 +48,15 @@ const AddPost = () => {
     if (file) {
       setUploadedImage(URL.createObjectURL(file));
     }
-    console.log(file);
+
+    if(file?.type.includes('image')){
+      console.log('it is image');
+    }
     
+    if(file?.type.includes('video')){
+      console.log('it is video');
+    }
+
     setPostValue({ ...postValue, img: file });
   };
 

@@ -25,7 +25,7 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
         <Author avatar={authorAvatar} name={authorName} />
         <PostTitle title={postTitle} />
         {image ? <PostImage image={image} /> : <></>}
-        <LikeDislikeComment />
+        <LikeDislikeComment likes={0} dislikes={0} />
         
         <div className="answers_container">
             <QuizAnswers />
