@@ -160,5 +160,6 @@
     .post_body{
         border: none;
         height: 100%;
+        font-size: 18px;
     }
 }

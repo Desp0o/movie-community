@@ -87,7 +87,7 @@ const AddPost = () => {
         <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
       </div>
 
-      <input ref={fileInputRef} multiple type="file" accept="image/*" onChange={handleFileChange} style={{display:'none'}}/>
+      <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
       
       <input
         type="text"
@@ -117,7 +117,7 @@ const AddPost = () => {
         />
 
         <textarea className="post_body" onChange={handlePostBody} placeholder="Description (optional)"/>
-        <input ref={fileInputRef} multiple type="file" accept="image/*" onChange={handleFileChange} style={{display:'none'}}/>
+        <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
 
         <div className="media_upload">
           <span onClick={handleButtonClick}>{pictureIcon}</span>
