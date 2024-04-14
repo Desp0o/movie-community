@@ -3,11 +3,14 @@ import "./CreatePageStyles.css";
 import SendPostBTN from "./SendPostBTN";
 import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+import { xIcon } from "../../assets/svg/Xicon";
 
 const token = localStorage.getItem('token')
 
 const AddPost = () => {
   const { user } = useUserHook()
+  const { isDark } = useDarkModeHook()
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [postValue, setPostValue] = useState<{
@@ -61,8 +64,9 @@ const AddPost = () => {
   }
 
   return (
+   window.innerWidth > 769 
+    ?
     <div className="add_post">
-
       <div className="upload_image" onClick={handleButtonClick}>
         <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
       </div>
@@ -77,9 +81,25 @@ const AddPost = () => {
       />
       
       <textarea className="post_body" onChange={handlePostBody}/>
-
-
       <SendPostBTN funName={CreatePost}/>
+    </div>
+    :
+    <div className="responsive_add_post active">
+      <div className={isDark ? "res_post_add_inner dark" : "res_post_add_inner"}>
+        <div className="close_add">
+          {xIcon}
+          <div className="res_add_btn">
+            <p>add</p>
+          </div>
+        </div>
+
+        <input
+        type="text"
+        className="input_style_createPage"
+        placeholder="სათაური"
+        onChange={handlePostTitle}
+      />
+      </div>
     </div>
   );
 };
