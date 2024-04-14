@@ -100,7 +100,7 @@ const AddPost = () => {
     </>
     :
     <>
-    isLoading ? <Fetching /> : <></>
+    {isLoading ? <Fetching /> : <></>}
     <AddPostResponsive 
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 
