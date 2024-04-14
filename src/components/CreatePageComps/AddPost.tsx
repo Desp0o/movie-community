@@ -104,7 +104,7 @@ const AddPost = () => {
       <div className={isDark ? "res_post_add_inner dark" : "res_post_add_inner"}>
         <div className="close_add">
           <span style={{cursor:"pointer"}} onClick={closeResPostModal}>{xIcon}</span>
-          <div className="res_add_btn">
+          <div className="res_add_btn" onClick={sendPost}>
             <p>add</p>
           </div>
         </div>
