@@ -1,23 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreatePageStyles.css";
-import SendPostBTN from "./SendPostBTN";
 import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
-import { xIcon } from "../../assets/svg/Xicon";
-import { useResPostModal } from "../../hooks/useResPostModal";
-import { useDispatch } from "react-redux";
-import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
-import { pictureIcon } from "../../assets/svg/pictureIcon";
+import AddPostResponsive from "./addPostResponsive";
+import AddPostDesktop from "./addPostDesktop";
 
 const token = localStorage.getItem('token')
 
 const AddPost = () => {
   const { user } = useUserHook()
-  const { isDark } = useDarkModeHook()
-  const { resPostModal } = useResPostModal()
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch()
 
   const [uploadedImage, setUploadedImage] = useState<string>('')
   const [postValue, setPostValue] = useState<{
@@ -32,7 +24,10 @@ const AddPost = () => {
     user_id: user.userID,
   });
 
-  
+  useEffect(()=>{
+    console.log(postValue);
+    
+  },[postValue])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });
@@ -75,65 +70,28 @@ const AddPost = () => {
     sendPost()
   }
 
-  const closeResPostModal = () => {
-    dispatch(setResponsivePostAddState(false))
-  }
-
   return (
    window.innerWidth > 601
     ?
-    <div className="add_post">
-      <div className="upload_image" onClick={handleButtonClick}>
-        <p style={{color:"currentcolor"}}>ატვირთე სურათი</p>
-      </div>
-
-      <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
-      
-      <input
-        type="text"
-        className="input_style_createPage"
-        placeholder="სათაური"
-        onChange={handlePostTitle}
-      />
-      
-      <textarea className="post_body" onChange={handlePostBody}/>
-      <SendPostBTN funName={CreatePost}/>
-    </div>
+    <AddPostDesktop 
+      handlePostTitleProp={handlePostTitle}
+      handlePostBodyProp={handlePostBody}
+      handleFileChangeProp={handleFileChange}
+      fileInputRefProp={fileInputRef}
+      handleButtonClickProp={handleButtonClick}
+      uploadedImageProp={uploadedImage} 
+      CreatePostProp={CreatePost}
+    />
     :
-    <div className={resPostModal ? "responsive_add_post active" : "responsive_add_post"}>
-      <div className={isDark ? "res_post_add_inner dark" : "res_post_add_inner"}>
-        <div className="close_add">
-          <span style={{cursor:"pointer"}} onClick={closeResPostModal}>{xIcon}</span>
-          <div className="res_add_btn" onClick={sendPost}>
-            <p>add</p>
-          </div>
-        </div>
-
-        <input
-        type="text"
-        className="input_style_createPage"
-        placeholder="სათაური"
-        onChange={handlePostTitle}
-        />
-
-        <textarea className="post_body" onChange={handlePostBody} placeholder="Description (optional)"/>
-        <input ref={fileInputRef} multiple type="file" onChange={handleFileChange} style={{display:'none'}}/>
-
-        <div className="media_upload">
-          <span onClick={handleButtonClick}>{pictureIcon}</span>
-
-        <span style={{position:"relative"}}>
-          {
-            uploadedImage 
-            ?
-            <img src={uploadedImage} style={{width:"40px", height:"40px", objectFit:"contain"}}/>
-            :
-            <></>
-          }
-        </span>
-        </div>
-      </div>
-    </div>
+    <AddPostResponsive 
+      sendPostProp={sendPost} 
+      handlePostTitleProp={handlePostTitle} 
+      handlePostBodyProp={handlePostBody} 
+      handleFileChangeProp={handleFileChange} 
+      fileInputRefProp={fileInputRef} 
+      handleButtonClickProp={handleButtonClick} 
+      uploadedImageProp={uploadedImage} 
+    />
   );
 };
 
