@@ -4,11 +4,13 @@ import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
 import AddPostResponsive from "./addPostResponsive";
 import AddPostDesktop from "./addPostDesktop";
+import Fetching from "../fetchingComponent/Fetching";
 
 const token = localStorage.getItem('token')
 
 const AddPost = () => {
   const { user } = useUserHook()
+  const [isLoading, setLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [uploadedImage, setUploadedImage] = useState<string>('')
@@ -51,7 +53,8 @@ const AddPost = () => {
     setPostValue({ ...postValue, img: file });
   };
 
-  const sendPost = async () => {                
+  const sendPost = async () => {   
+    setLoading(true)             
       try {
           const res = await axios.post(import.meta.env.VITE_POSTING , postValue, {
             headers: {
@@ -63,6 +66,8 @@ const AddPost = () => {
           console.log(res.data);
       } catch (error: any) {
           console.log(error.response.data);
+      }finally{
+        setLoading(false)
       }
   }
 
@@ -71,8 +76,11 @@ const AddPost = () => {
   }
 
   return (
+  
    window.innerWidth > 601
     ?
+    <>
+    {isLoading ? <Fetching /> : <></>}
     <AddPostDesktop 
       handlePostTitleProp={handlePostTitle}
       handlePostBodyProp={handlePostBody}
@@ -82,7 +90,10 @@ const AddPost = () => {
       uploadedImageProp={uploadedImage} 
       CreatePostProp={CreatePost}
     />
+    </>
     :
+    <>
+    isLoading ? <Fetching /> : <></>
     <AddPostResponsive 
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 
@@ -92,6 +103,7 @@ const AddPost = () => {
       handleButtonClickProp={handleButtonClick} 
       uploadedImageProp={uploadedImage} 
     />
+    </>
   );
 };
 
