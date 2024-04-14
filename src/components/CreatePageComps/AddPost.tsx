@@ -5,13 +5,18 @@ import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { xIcon } from "../../assets/svg/Xicon";
+import { useResPostModal } from "../../hooks/useResPostModal";
+import { useDispatch } from "react-redux";
+import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
 
 const token = localStorage.getItem('token')
 
 const AddPost = () => {
   const { user } = useUserHook()
   const { isDark } = useDarkModeHook()
+  const { resPostModal } = useResPostModal()
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch()
 
   const [postValue, setPostValue] = useState<{
     img: File | undefined;
@@ -63,8 +68,12 @@ const AddPost = () => {
     sendPost()
   }
 
+  const closeResPostModal = () => {
+    dispatch(setResponsivePostAddState(false))
+  }
+
   return (
-   window.innerWidth > 769 
+   window.innerWidth > 601
     ?
     <div className="add_post">
       <div className="upload_image" onClick={handleButtonClick}>
@@ -84,10 +93,10 @@ const AddPost = () => {
       <SendPostBTN funName={CreatePost}/>
     </div>
     :
-    <div className="responsive_add_post active">
+    <div className={resPostModal ? "responsive_add_post active" : "responsive_add_post"}>
       <div className={isDark ? "res_post_add_inner dark" : "res_post_add_inner"}>
         <div className="close_add">
-          {xIcon}
+          <span style={{cursor:"pointer"}} onClick={closeResPostModal}>{xIcon}</span>
           <div className="res_add_btn">
             <p>add</p>
           </div>
