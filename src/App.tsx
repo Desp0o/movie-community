@@ -63,12 +63,19 @@ function App() {
           });
 
           localStorage.setItem('userName', response.data.name)
-          dispatch(dispatch(setUser({name: response.data.name, userID: response.data.id}))
-        )
+          dispatch(
+            setUser({
+              name: response.data.name, 
+              userID: response.data.id, 
+              avatar: response.data.avatar
+            })
+          )
+          console.log(response.data);
           
       } catch (error) {
         console.log(error);
-        
+        localStorage.removeItem('userName')
+        localStorage.removeItem('token')
       }
       finally{
         setLoading(false)
