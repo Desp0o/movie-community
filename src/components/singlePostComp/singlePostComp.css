@@ -160,6 +160,14 @@
     margin: 0 auto;
 }
 
+.delete_btn{
+    padding: 5px 10px;
+    background-color: var(--reddit);
+    border-radius: 20px;
+    width: fit-content;
+    cursor: pointer;
+}
+
 @media (max-width:768px) {
     .single_post_comp{
         width: 100%;

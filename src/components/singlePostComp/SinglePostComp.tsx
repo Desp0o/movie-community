@@ -8,6 +8,7 @@ import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
 import SeeMore from "./SeeMore";
 import PostVideo from "./postVideo";
+import axios from "axios";
 
 interface SinglePostProps {
   authorName: string;
@@ -35,9 +36,29 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   date
 }) => {
 
+
+  const token  = localStorage.getItem('token')
+  const deletePost = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
+        {
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      console.log(response);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   const { isDark } = useDarkModeHook()
   return (
       <div className="post_borders">
+        <p className="delete_btn" onClick={deletePost}>delete</p>
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} date={date} />
           <PostTitle title={postTitle} />
