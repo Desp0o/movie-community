@@ -22,7 +22,7 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
   return (
       <div className="post_borders">
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
-        <Author avatar={authorAvatar} name={authorName} />
+        <Author avatar={authorAvatar} name={authorName} date={""} />
         <PostTitle title={postTitle} />
         {image ? <PostImage image={image} /> : <></>}
         <LikeDislikeComment likes={0} dislikes={0} postID={0} authLike={""} />

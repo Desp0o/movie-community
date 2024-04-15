@@ -15,6 +15,7 @@ interface dataProps {
   dislike: number;
   type: number;
   authLike: string;
+  updated_at: string;
   user:{
     name: string;
     avatar: string;
@@ -63,10 +64,11 @@ const Feed = () => {
                 postID={post.id}
                 image={post.img}
                 likes={post.like}
-                dislikes={post.dislike} 
-                type={post.type}   
-                authLike={post.authLike}             
-              />
+                dislikes={post.dislike}
+                type={post.type}
+                authLike={post.authLike} 
+                date={post.updated_at}              
+                />
             </div>
           )
         })}

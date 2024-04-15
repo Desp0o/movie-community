@@ -19,6 +19,7 @@ interface SinglePostProps {
   dislikes: number;
   type: string | number;
   authLike: string;
+  date: string;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -30,14 +31,15 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   likes,
   dislikes,
   type,
-  authLike
+  authLike,
+  date
 }) => {
 
   const { isDark } = useDarkModeHook()
   return (
       <div className="post_borders">
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
-          <Author avatar={authorAvatar} name={authorName} />
+          <Author avatar={authorAvatar} name={authorName} date={date} />
           <PostTitle title={postTitle} />
           
           {type === "0"
