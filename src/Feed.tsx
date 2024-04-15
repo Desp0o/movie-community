@@ -18,13 +18,19 @@ interface dataProps {
   }
 }
 
+const token = localStorage.getItem('token')
 const Feed = () => {
   const path = import.meta.env.VITE_FEED_POSTS
   const {isLoading, data} = useQuery(
     ['feed-query', path], 
     async () => {
       try {
-        const response = await axios.get(path);
+        const response = await axios.get(path, {
+          headers:{
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
         return response.data; 
       } catch (error) {
         console.log(error);
@@ -42,7 +48,7 @@ const Feed = () => {
   return (
     <PageLayout>
       <div className="feed">
-        {data?.map((post: dataProps)=>{
+        {data?.posts?.map((post: dataProps)=>{
           return(
             <div key={post.id}>
               <SinglePostComp 

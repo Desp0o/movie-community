@@ -4,6 +4,7 @@ import { arrowLike } from "../../assets/svg/arrowLike"
 import { commentsIcon } from "../../assets/svg/commentsIcon"
 import "./singlePostComp.css"
 import axios from "axios";
+import { activeLike } from "../../assets/svg/activeLike";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -14,18 +15,30 @@ interface LikeDislikeCommentProps {
 const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID}) => {
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
+  const [isLikeActive, setLikeActive] = useState(false)
+  const [likeIcon, setLikeIcon] = useState(arrowLike)
+  const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
 
-  const [isLike, setLike] = useState({
+  const [isLike, _setLike] = useState({
     post: postID,
     like: 'like'
   })
-  const [isUnlike, setUnLike] = useState({
+  const [isUnlike, _setUnLike] = useState({
     post: postID,
     like: 'dislike'
   })
 
   const sendLike = async () => {
-    seteVotes(votes + 1)
+    setLikeActive(!isLikeActive)
+    if(!isLikeActive){
+      seteVotes(votes + 1)
+      setLikeIcon(activeLike)
+    }else{
+      seteVotes(votes - 1)
+      setLikeIcon(arrowLike)
+    }
+
+
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
         headers:{
@@ -60,9 +73,9 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   return (
     <div className="likeDislikeComment_container">
         <div className="like_dislike">
-            <span onClick={()=> sendLike()}>{arrowLike}</span>
+            <span onClick={()=> sendLike()}>{likeIcon}</span>
             <p style={{ color: votes > 0 ? "green" : votes === 0 ? 'currentColor' : "red" }}>{votes}</p>
-            <span onClick={sendUnlike}>{arrowDislike}</span>
+            <span onClick={sendUnlike}>{dislikeIcon}</span>
         </div>
 
         <div className="single_post_comments">
