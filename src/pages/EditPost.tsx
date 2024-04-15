@@ -32,7 +32,7 @@ const EditPost = () => {
         setPostValue({
           ...postValue,
           title: response.data[0].title,
-          text: response.data[0].text,
+          text: response.data[0].text === null ? " " : " ",
         });
       } catch (error) {
         console.log(error);
