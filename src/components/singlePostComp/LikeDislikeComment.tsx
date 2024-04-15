@@ -30,6 +30,21 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     like: 'dislike'
   })
 
+  const likeFunction = async () => {
+    try {
+      const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   const sendLike = async () => {
     setLikeActive(!isLikeActive)
     if(!isLikeActive){
@@ -37,14 +52,16 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setLikeIcon(activeLike)
       setDislikeIcon(arrowDislike)
       setDislikeActive(false)
+      likeFunction()
     }else{
       seteVotes(votes - 1)
       setLikeIcon(arrowLike)
     }
+  }
 
-
+  const dislikeFunction = async () => {
     try {
-      const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
+      const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
         headers:{
           Authorization: `Bearer ${token}`
         }
@@ -64,22 +81,10 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
      setDislikeIcon(activeDislike)
      setLikeIcon(arrowLike)
      setLikeActive(false)
+     dislikeFunction()
     }else{
       seteVotes(votes + 1)
       setDislikeIcon(arrowDislike)
-    }
-
-    try {
-      const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(response.data);
-      
-    } catch (error) {
-      console.log(error);
-      
     }
   }
 
