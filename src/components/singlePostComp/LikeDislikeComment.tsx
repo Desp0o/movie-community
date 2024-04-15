@@ -35,6 +35,8 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     if(!isLikeActive){
       seteVotes(votes + 1)
       setLikeIcon(activeLike)
+      setDislikeIcon(arrowDislike)
+      setDislikeActive(false)
     }else{
       seteVotes(votes - 1)
       setLikeIcon(arrowLike)
@@ -60,6 +62,8 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     if(!isDislikeActive){
      seteVotes(votes - 1)
      setDislikeIcon(activeDislike)
+     setLikeIcon(arrowLike)
+     setLikeActive(false)
     }else{
       seteVotes(votes + 1)
       setDislikeIcon(arrowDislike)

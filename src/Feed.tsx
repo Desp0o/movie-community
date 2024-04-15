@@ -4,6 +4,8 @@ import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
 import axios from "axios";
+import { useState } from "react";
+import { useUserHook } from "./hooks/useUserHook";
 
 interface dataProps {
   id: number;
@@ -18,9 +20,11 @@ interface dataProps {
   }
 }
 
-const token = localStorage.getItem('token')
 const Feed = () => {
-  const path = import.meta.env.VITE_FEED_POSTS
+  const token = localStorage.getItem('token')
+  const { user } = useUserHook()
+  const [path,] = useState(user.name ? import.meta.env.VITE_FEED_POSTS : import.meta.env.VITE_GUEST_FEED)
+
   const {isLoading, data} = useQuery(
     ['feed-query', path], 
     async () => {
