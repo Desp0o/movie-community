@@ -66,7 +66,8 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
         config={{
           file: {
             attributes: {
-              controlsList: "nodownload"
+              controlsList: "nodownload",
+              playsInline: true
             }
           }}}
       />
