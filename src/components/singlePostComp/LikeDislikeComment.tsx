@@ -94,8 +94,22 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     }
   }
 
+  const unDislikeFunction = async () => {
+    try {
+      const response = await axios.post(import.meta.env.VITE_UNLIKING, isUnlike, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   const sendUnlike = async () => {
-    setDislikeActive(!isLikeActive)
     if(!isDislikeActive){
      setDislikeActive(true)
      seteVotes(votes - 1)
@@ -107,6 +121,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setDislikeActive(false)
       seteVotes(votes + 1)
       setDislikeIcon(arrowDislike)
+      unDislikeFunction()
     }
   }
 
