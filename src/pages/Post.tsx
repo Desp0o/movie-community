@@ -13,87 +13,119 @@ import AddComment from "../components/singlePostPage/AddComment";
 import CommentsSection from "../components/singlePostPage/CommentsSection";
 import axios from "axios";
 
+interface PostData {
+  title: string;
+  created_at: string;
+  img: string;
+  type: number | string;
+  like: number;
+  dislike: number;
+  id: number;
+  user: {
+    avatar: string;
+    name: string;
+  };
+}
+
 const Post = () => {
+  const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
-  const postId = id ? parseInt(id) : null;
-
-  const [data, setData] = useState({})
+  const [data, setData] = useState<PostData | null>(null);
 
   const openFullScreen = () => {
     setFullScreenImage(true);
-    document.body.style.overflow ='hidden'
+    document.body.style.overflow = "hidden";
   };
 
   const closeFullScreen = () => {
     setFullScreenImage(false);
-    document.body.style.overflow ='auto'
+    document.body.style.overflow = "auto";
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const requestSInglePost = async () => {
       try {
-          const response  = await axios.get(`${import.meta.env.VITE_SINGLE_POST}${id}`)
-          console.log(response);
-          setData(response.data[0])
-      } catch (error) {
-        
-      }
-    }
-    requestSInglePost()
-
-  },[])
+        const response = await axios.get(
+          `${import.meta.env.VITE_SINGLE_POST}${id}`
+        );
+        console.log(response.data[0]);
+        setData(response.data[0]);
+      } catch (error) {}
+    };
+    requestSInglePost();
+  }, []);
 
 
   return (
     <div>
-      <PageLayout>
-        <div className="single_post_page">
-          <div className="goBack_authorInfo">
-            <GoBack />
-            <Author avatar={data.avatar} name={data.name} date={""} />
-          </div>
+      {data ? (
+        <PageLayout>
+          <div className="single_post_page">
+            <div className="goBack_authorInfo">
+              <GoBack />
+              <Author
+                avatar={data?.user?.avatar}
+                name={data?.user?.name}
+                date={data?.created_at}
+              />
+            </div>
 
-          <div className="single_page_title">
-            <PostTitle title={data.title} />
-          </div>
+            <div className="single_page_title">
+              <PostTitle title={data?.title} />
+            </div>
 
-          <div className="single_post_image">
-            {isFullScreenImage ? (
-              <div className="full_screen_img">
-                <span className="close_full_screen_image" onClick={closeFullScreen}>{xIcon}</span>
-                <img src={data.image} className="full_screen_cover" alt="full screen cover"/>
-                <img src={data.image} className="full_screen_photo" alt="full screen photo"/>
+            <div className="single_post_image">
+              {isFullScreenImage ? (
+                <div className="full_screen_img">
+                  <span
+                    className="close_full_screen_image"
+                    onClick={closeFullScreen}
+                  >
+                    {xIcon}
+                  </span>
+                  <img
+                    src={`${imageStoragePath}${data?.img}.webp`}
+                    className="full_screen_cover"
+                    alt="full screen cover"
+                  />
+                  <img
+                    src={`${imageStoragePath}${data?.img}.webp`}
+                    className="full_screen_photo"
+                    alt="full screen photo"
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              {data?.img ? (
+                <PostImage image={data?.img} funName={openFullScreen} />
+              ) : (
+                <></>
+              )}
+            </div>
+
+            {data?.type === 1 ? (
+              <div className="answers_container">
+                <QuizAnswers />
               </div>
             ) : (
               <></>
             )}
-            {data.image ? (
-              <PostImage image={data.image} funName={openFullScreen} />
-            ) : (
-              <></>
-            )}
+            <LikeDislikeComment likes={data.like} dislikes={data.dislike} postID={data.id} authLike={""} />
+
+            <AddComment />
+
+            <CommentsSection />
           </div>
 
-          {data.type === 1 ? (
-            <div className="answers_container">
-              <QuizAnswers />
-            </div>
-          ) : (
-            <></>
-          )}
+          <p>asd</p>
 
-          <LikeDislikeComment likes={data.like} dislikes={data.dislike} postID={0} authLike={"like"} />
-
-          <AddComment />
-
-          <CommentsSection />
-        </div> 
-
-        <p>asd</p>
-
-        {id}
-      </PageLayout>
+          {id}
+        </PageLayout>
+      ) : (
+        <p>post not found</p>
+      )}
     </div>
   );
 };

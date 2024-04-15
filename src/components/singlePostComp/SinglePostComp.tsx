@@ -9,6 +9,8 @@ import "./singlePostComp.css"
 import SeeMore from "./SeeMore";
 import PostVideo from "./postVideo";
 import axios from "axios";
+import { useUserHook } from "../../hooks/useUserHook";
+import { Link } from "react-router-dom";
 
 interface SinglePostProps {
   authorName: string;
@@ -21,6 +23,7 @@ interface SinglePostProps {
   type: string | number;
   authLike: string;
   date: string;
+  postUserId:number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -33,10 +36,11 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   dislikes,
   type,
   authLike,
-  date
+  date,
+  postUserId
 }) => {
 
-
+  const {user} = useUserHook()
   const token  = localStorage.getItem('token')
   const deletePost = async () => {
     try {
@@ -58,7 +62,10 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   const { isDark } = useDarkModeHook()
   return (
       <div className="post_borders">
-        <p className="delete_btn" onClick={deletePost}>delete</p>
+        <Link to={`/pages/EditPost/${postID}`}>
+          <p>edit</p>
+        </Link>
+        {postUserId === Number(user.userID) ? <p className="delete_btn" onClick={deletePost}>delete</p> : <></>}
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} date={date} />
           <PostTitle title={postTitle} />

@@ -19,6 +19,7 @@ import Post from "./pages/Post"
 import Create from "./pages/Create"
 import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
+import EditPost from "./pages/EditPost"
 
 const queryClient = new QueryClient()
 
@@ -113,6 +114,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/pages/Profile" element={<Profile />} />
             <Route path="/pages/Create" element={<Create />} />
+            <Route path="/pages/EditPost/:id" element={<EditPost />} />
           </Route>
 
         </Routes>
