@@ -12,6 +12,7 @@ import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/singlePostPage/AddComment";
 import CommentsSection from "../components/singlePostPage/CommentsSection";
 import axios from "axios";
+import Fetching from "../components/fetchingComponent/Fetching";
 
 interface PostData {
   title: string;
@@ -32,6 +33,7 @@ const Post = () => {
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const [data, setData] = useState<PostData | null>(null);
+  const [isLoading, setLoading] = useState(false)
 
   const openFullScreen = () => {
     setFullScreenImage(true);
@@ -45,17 +47,26 @@ const Post = () => {
 
   useEffect(() => {
     const requestSInglePost = async () => {
+      setLoading(true)
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_SINGLE_POST}${id}`
         );
         console.log(response.data[0]);
         setData(response.data[0]);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }finally{
+        setLoading(false)
+      }
     };
     requestSInglePost();
   }, []);
 
+
+  if(isLoading){
+    return <Fetching />
+  }
 
   return (
     <div>
@@ -118,10 +129,6 @@ const Post = () => {
 
             <CommentsSection />
           </div>
-
-          <p>asd</p>
-
-          {id}
         </PageLayout>
       ) : (
         <p>post not found</p>
