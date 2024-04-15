@@ -69,6 +69,11 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setDislikeIcon(arrowDislike) //set dislike button inherit
       setDislikeActive(false) // make dislike button active
       likeFunction() //send like function
+
+      if(isDislikeActive){
+        unDislikeFunction()
+        seteVotes(votes + 2)
+       }
     }else{
       setLikeActive(false) //set like button inactive 
       seteVotes(votes - 1) 
@@ -116,6 +121,11 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
      setDislikeIcon(activeDislike)
      setLikeIcon(arrowLike)
      setLikeActive(false)
+
+     if(isLikeActive){
+      unlikeFunction()
+      seteVotes(votes - 2)
+     }
      dislikeFunction()
     }else{
       setDislikeActive(false)
