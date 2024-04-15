@@ -11,15 +11,15 @@ interface LikeDislikeCommentProps {
   likes: number;
   dislikes: number;
   postID: number;
-  userLike: string;
+  authLike: string;
 }
 
-const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, userLike}) => {
+const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike}) => {
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
-  const [isLikeActive, setLikeActive] = useState(false)
+  const [isLikeActive, setLikeActive] = useState(authLike === 'like' ? true : false)
   const [isDislikeActive, setDislikeActive] = useState(false)
-  const [likeIcon, setLikeIcon] = useState(userLike === 'yes' ? activeLike : arrowLike)
+  const [likeIcon, setLikeIcon] = useState(authLike === 'like' ? activeLike : arrowLike)
   const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
 
   const [isLike, _setLike] = useState({
@@ -31,7 +31,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     like: 'dislike'
   })
 
-  const likeFunction = async () => {
+  const likeFunction = async () => {    
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
         headers:{
@@ -47,20 +47,23 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendLike = async () => {
-    setLikeActive(!isLikeActive)
     if(!isLikeActive){
-      seteVotes(votes + 1)
-      setLikeIcon(activeLike)
-      setDislikeIcon(arrowDislike)
-      setDislikeActive(false)
-      likeFunction()
+      setLikeActive(true) // set like button active 
+      seteVotes(votes + 1) // add vote 
+      setLikeIcon(activeLike) // make like button green
+      setDislikeIcon(arrowDislike) //set dislike button inherit
+      setDislikeActive(false) // make dislike button active
+      likeFunction() //send like function
     }else{
-      seteVotes(votes - 1)
+      setLikeActive(false) //set like button inactive 
+      seteVotes(votes - 1) 
       setLikeIcon(arrowLike)
     }
   }
 
   const dislikeFunction = async () => {
+    console.log('i disliked post');
+    
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
         headers:{
@@ -78,12 +81,14 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const sendUnlike = async () => {
     setDislikeActive(!isLikeActive)
     if(!isDislikeActive){
+     setDislikeActive(true)
      seteVotes(votes - 1)
      setDislikeIcon(activeDislike)
      setLikeIcon(arrowLike)
      setLikeActive(false)
      dislikeFunction()
     }else{
+      setDislikeActive(false)
       seteVotes(votes + 1)
       setDislikeIcon(arrowDislike)
     }

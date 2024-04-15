@@ -14,7 +14,7 @@ interface dataProps {
   like: number;
   dislike: number;
   type: number;
-  userLike: string;
+  authLike: string;
   user:{
     name: string;
     avatar: string;
@@ -65,7 +65,7 @@ const Feed = () => {
                 likes={post.like}
                 dislikes={post.dislike} 
                 type={post.type}   
-                userLike={post.userLike}             
+                authLike={post.authLike}             
               />
             </div>
           )
