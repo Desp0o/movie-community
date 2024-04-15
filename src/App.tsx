@@ -86,7 +86,7 @@ function App() {
       checkMe()
     }
 
-  },[])
+  },[dispatch])
 
   useEffect(()=>{
     isDark ?
