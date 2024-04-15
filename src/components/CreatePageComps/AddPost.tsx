@@ -19,12 +19,26 @@ const AddPost = () => {
     title: string;
     text: string;
     user_id: number | string;
+    type: number | null;
   }>({
     img: undefined,
     title: "",
     text: "",
     user_id: user.userID,
+    type: null
   });
+
+  useEffect(()=>{
+
+    if(postValue.img?.type.includes('video')){
+      setPostValue({ ...postValue, type: 1 });
+    }
+
+    if(postValue.img?.type.includes('image')){
+      setPostValue({ ...postValue, type: 0 });
+    }
+    
+  },[postValue.img])
 
   useEffect(()=>{
     console.log(postValue);
@@ -47,14 +61,6 @@ const AddPost = () => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedImage(URL.createObjectURL(file));
-    }
-
-    if(file?.type.includes('image')){
-      console.log('it is image');
-    }
-    
-    if(file?.type.includes('video')){
-      console.log('it is video');
     }
 
     setPostValue({ ...postValue, img: file });
