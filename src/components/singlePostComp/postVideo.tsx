@@ -52,7 +52,7 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
   }, [hasPlayed]);
 
   return (
-    <div ref={videoRef} onMouseEnter={showControlers} onMouseLeave={hideControlers}>
+    <div className="video_container" ref={videoRef} onMouseEnter={showControlers} onMouseLeave={hideControlers}>
       <ReactPlayer
         className='react-player'
         url={`${videoStoragePath}${image}`}
@@ -61,7 +61,6 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
         muted={true}
         width='100%'
         height='100%'
-        style={{maxHeight:"400px"}}
         ref={videoRef}
         config={{
           file: {

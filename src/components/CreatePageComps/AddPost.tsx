@@ -38,7 +38,7 @@ const AddPost = () => {
       setPostValue({ ...postValue, type: 0 });
     }
     
-  },[postValue])
+  },[postValue.img])
 
   useEffect(()=>{
     console.log(postValue);
