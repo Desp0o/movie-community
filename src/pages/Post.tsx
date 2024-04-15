@@ -18,6 +18,8 @@ const Post = () => {
   const { id } = useParams();
   const postId = id ? parseInt(id) : null;
 
+  const [data, setData] = useState({})
+
   const openFullScreen = () => {
     setFullScreenImage(true);
     document.body.style.overflow ='hidden'
@@ -33,7 +35,7 @@ const Post = () => {
       try {
           const response  = await axios.get(`${import.meta.env.VITE_SINGLE_POST}${id}`)
           console.log(response);
-          
+          setData(response.data[0])
       } catch (error) {
         
       }
@@ -46,34 +48,34 @@ const Post = () => {
   return (
     <div>
       <PageLayout>
-        {/* <div className="single_post_page">
+        <div className="single_post_page">
           <div className="goBack_authorInfo">
             <GoBack />
-            <Author avatar={post.avatar} name={post.name} date={""} />
+            <Author avatar={data.avatar} name={data.name} date={""} />
           </div>
 
           <div className="single_page_title">
-            <PostTitle title={post.title} />
+            <PostTitle title={data.title} />
           </div>
 
           <div className="single_post_image">
             {isFullScreenImage ? (
               <div className="full_screen_img">
                 <span className="close_full_screen_image" onClick={closeFullScreen}>{xIcon}</span>
-                <img src={post.image} className="full_screen_cover" alt="full screen cover"/>
-                <img src={post.image} className="full_screen_photo" alt="full screen photo"/>
+                <img src={data.image} className="full_screen_cover" alt="full screen cover"/>
+                <img src={data.image} className="full_screen_photo" alt="full screen photo"/>
               </div>
             ) : (
               <></>
             )}
-            {post.image ? (
-              <PostImage image={post.image} funName={openFullScreen} />
+            {data.image ? (
+              <PostImage image={data.image} funName={openFullScreen} />
             ) : (
               <></>
             )}
           </div>
 
-          {post.type === 1 ? (
+          {data.type === 1 ? (
             <div className="answers_container">
               <QuizAnswers />
             </div>
@@ -81,14 +83,14 @@ const Post = () => {
             <></>
           )}
 
-          <LikeDislikeComment likes={0} dislikes={0} postID={0} authLike={""} />
+          <LikeDislikeComment likes={data.like} dislikes={data.dislike} postID={0} authLike={"like"} />
 
           <AddComment />
 
           <CommentsSection />
         </div> 
 
-        <p>asd</p> */}
+        <p>asd</p>
 
         {id}
       </PageLayout>
