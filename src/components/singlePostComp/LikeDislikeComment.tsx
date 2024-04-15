@@ -11,14 +11,15 @@ interface LikeDislikeCommentProps {
   likes: number;
   dislikes: number;
   postID: number;
+  userLike: string;
 }
 
-const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID}) => {
+const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, userLike}) => {
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
   const [isLikeActive, setLikeActive] = useState(false)
   const [isDislikeActive, setDislikeActive] = useState(false)
-  const [likeIcon, setLikeIcon] = useState(arrowLike)
+  const [likeIcon, setLikeIcon] = useState(userLike === 'yes' ? activeLike : arrowLike)
   const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
 
   const [isLike, _setLike] = useState({

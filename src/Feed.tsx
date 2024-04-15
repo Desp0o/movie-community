@@ -14,6 +14,7 @@ interface dataProps {
   like: number;
   dislike: number;
   type: number;
+  userLike: string;
   user:{
     name: string;
     avatar: string;
@@ -23,7 +24,7 @@ interface dataProps {
 const Feed = () => {
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
-  const [path,] = useState(user.name ? import.meta.env.VITE_FEED_POSTS : import.meta.env.VITE_GUEST_FEED)
+  const [path,] = useState(user.name ? "https://api.pinky.ge/api/authFeed" : "https://api.pinky.ge/api/guestFeed")
 
   const {isLoading, data} = useQuery(
     ['feed-query', path], 
@@ -63,7 +64,8 @@ const Feed = () => {
                 image={post.img}
                 likes={post.like}
                 dislikes={post.dislike} 
-                type={post.type}                
+                type={post.type}   
+                userLike={post.userLike}             
               />
             </div>
           )

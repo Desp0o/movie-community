@@ -18,6 +18,7 @@ interface SinglePostProps {
   likes: number;
   dislikes: number;
   type: string | number;
+  userLike: string;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -28,7 +29,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   postID,
   likes,
   dislikes,
-  type
+  type,
+  userLike
 }) => {
 
   const { isDark } = useDarkModeHook()
@@ -48,7 +50,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           
           
           
-          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} userLike={userLike} />
         
           <SeeMore postID={postID} />
         </div>
