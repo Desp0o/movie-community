@@ -5,6 +5,7 @@ import { commentsIcon } from "../../assets/svg/commentsIcon"
 import "./singlePostComp.css"
 import axios from "axios";
 import { activeLike } from "../../assets/svg/activeLike";
+import { activeDislike } from "../../assets/svg/activeDislike";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -16,6 +17,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
   const [isLikeActive, setLikeActive] = useState(false)
+  const [isDislikeActive, setDislikeActive] = useState(false)
   const [likeIcon, setLikeIcon] = useState(arrowLike)
   const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
 
@@ -54,7 +56,15 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendUnlike = async () => {
-    seteVotes(votes - 1)
+    setDislikeActive(!isLikeActive)
+    if(!isDislikeActive){
+     seteVotes(votes - 1)
+     setDislikeIcon(activeDislike)
+    }else{
+      seteVotes(votes + 1)
+      setDislikeIcon(arrowDislike)
+    }
+
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
         headers:{
