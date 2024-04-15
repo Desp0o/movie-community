@@ -48,7 +48,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           
           
           
-          <LikeDislikeComment likes={likes} dislikes={dislikes} />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} />
         
           <SeeMore postID={postID} />
         </div>
