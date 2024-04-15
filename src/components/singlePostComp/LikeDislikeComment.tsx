@@ -18,9 +18,9 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
   const [isLikeActive, setLikeActive] = useState(authLike === 'like' ? true : false)
-  const [isDislikeActive, setDislikeActive] = useState(false)
+  const [isDislikeActive, setDislikeActive] = useState( authLike === 'dislike' ? true : false)
   const [likeIcon, setLikeIcon] = useState(authLike === 'like' ? activeLike : arrowLike)
-  const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
+  const [dislikeIcon, setDislikeIcon] = useState(authLike === 'dislike' ? activeDislike : arrowDislike)
 
   const [isLike, _setLike] = useState({
     post: postID,
