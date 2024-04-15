@@ -7,6 +7,7 @@ import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
 import SeeMore from "./SeeMore";
+import PostVideo from "./postVideo";
 
 interface SinglePostProps {
   authorName: string;
@@ -16,6 +17,7 @@ interface SinglePostProps {
   postID: number;
   likes: number;
   dislikes: number;
+  type: string | number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -25,7 +27,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   image,
   postID,
   likes,
-  dislikes
+  dislikes,
+  type
 }) => {
 
   const { isDark } = useDarkModeHook()
@@ -34,7 +37,17 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} />
           <PostTitle title={postTitle} />
-          {image ? <PostImage image={image} /> : <></>}
+          
+          {type === "0"
+            ? (image ? <PostImage image={image} /> : <></>)
+            : type === "1" ?
+            (image ? <PostVideo image={image} /> : <></>)
+            : <></>
+
+          }
+          
+          
+          
           <LikeDislikeComment likes={likes} dislikes={dislikes} />
         
           <SeeMore postID={postID} />

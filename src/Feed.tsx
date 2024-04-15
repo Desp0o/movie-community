@@ -11,6 +11,7 @@ interface dataProps {
   img: string;
   like: number;
   dislike: number;
+  type: number;
   user:{
     name: string;
     avatar: string;
@@ -49,9 +50,10 @@ const Feed = () => {
                 authorAvatar={post.user.avatar}
                 postTitle={post.title}
                 postID={post.id}
-                image={post.img} 
-                likes={post.like} 
-                dislikes={post.dislike}
+                image={post.img}
+                likes={post.like}
+                dislikes={post.dislike} 
+                type={post.type}                
               />
             </div>
           )
