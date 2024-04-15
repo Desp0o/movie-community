@@ -1,32 +1,46 @@
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PageLayout from "../components/pageLayout/PageLayout";
-// import GoBack from "../components/singlePostPage/GoBack";
-// import Author from "../components/singlePostComp/Author";
-// import PostTitle from "../components/singlePostComp/PostTitle";
-// import PostImage from "../components/singlePostComp/postImage";
-// import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
+import GoBack from "../components/singlePostPage/GoBack";
+import Author from "../components/singlePostComp/Author";
+import PostTitle from "../components/singlePostComp/PostTitle";
+import PostImage from "../components/singlePostComp/postImage";
+import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css";
-// import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
-// import { useState } from "react";
-// import { xIcon } from "../assets/svg/Xicon";
-// import AddComment from "../components/singlePostPage/AddComment";
-// import CommentsSection from "../components/singlePostPage/CommentsSection";
+import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
+import { useEffect, useState } from "react";
+import { xIcon } from "../assets/svg/Xicon";
+import AddComment from "../components/singlePostPage/AddComment";
+import CommentsSection from "../components/singlePostPage/CommentsSection";
+import axios from "axios";
 
 const Post = () => {
-  // const [isFullScreenImage, setFullScreenImage] = useState(false);
-  // const { id } = useParams();
-  // const postId = id ? parseInt(id) : null;
+  const [isFullScreenImage, setFullScreenImage] = useState(false);
+  const { id } = useParams();
+  const postId = id ? parseInt(id) : null;
 
-  // const openFullScreen = () => {
-  //   setFullScreenImage(true);
-  //   document.body.style.overflow ='hidden'
-  // };
+  const openFullScreen = () => {
+    setFullScreenImage(true);
+    document.body.style.overflow ='hidden'
+  };
 
-  // const closeFullScreen = () => {
-  //   setFullScreenImage(false);
-  //   document.body.style.overflow ='auto'
-  // };
+  const closeFullScreen = () => {
+    setFullScreenImage(false);
+    document.body.style.overflow ='auto'
+  };
 
+  useEffect(()=>{
+    const requestSInglePost = async () => {
+      try {
+          const response  = await axios.get(`${import.meta.env.VITE_SINGLE_POST}${id}`)
+          console.log(response);
+          
+      } catch (error) {
+        
+      }
+    }
+    requestSInglePost()
+
+  },[])
 
 
   return (
@@ -35,7 +49,7 @@ const Post = () => {
         {/* <div className="single_post_page">
           <div className="goBack_authorInfo">
             <GoBack />
-            <Author avatar={post.avatar} name={post.name} />
+            <Author avatar={post.avatar} name={post.name} date={""} />
           </div>
 
           <div className="single_page_title">
@@ -67,14 +81,16 @@ const Post = () => {
             <></>
           )}
 
-          <LikeDislikeComment />
+          <LikeDislikeComment likes={0} dislikes={0} postID={0} authLike={""} />
 
           <AddComment />
 
           <CommentsSection />
-        </div> */}
+        </div> 
 
-        <p>asd</p>
+        <p>asd</p> */}
+
+        {id}
       </PageLayout>
     </div>
   );
