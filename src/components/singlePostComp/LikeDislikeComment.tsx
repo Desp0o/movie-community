@@ -31,6 +31,21 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     like: 'dislike'
   })
 
+  const unlikeFunction = async () => {
+    try {
+      const response = await axios.post(import.meta.env.VITE_UNLIKING, isLike, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   const likeFunction = async () => {    
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
@@ -58,6 +73,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setLikeActive(false) //set like button inactive 
       seteVotes(votes - 1) 
       setLikeIcon(arrowLike)
+      unlikeFunction()
     }
   }
 
