@@ -156,6 +156,10 @@
     font-weight: 600;
 }
 
+.video_container{
+    margin: 0 auto;
+}
+
 @media (max-width:768px) {
     .single_post_comp{
         width: 100%;
