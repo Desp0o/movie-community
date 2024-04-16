@@ -7,8 +7,10 @@ import AddPostDesktop from "./addPostDesktop";
 import Fetching from "../fetchingComponent/Fetching";
 import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRefetchHook } from "../../hooks/useRefetchHook";
+import { setRefetch } from "../../Redux/RefetchSlicer";
 
 
 const AddPost = () => {
@@ -18,6 +20,7 @@ const AddPost = () => {
   
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
+  const { requestRefetch } = useRefetchHook()
   const [isLoading, setLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -88,7 +91,7 @@ const AddPost = () => {
               'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
             }
           })
-
+          dispatch(setRefetch(!requestRefetch))
           console.log(res.data);
           notify()
           closeResPostModal()
@@ -109,7 +112,6 @@ const AddPost = () => {
     ?
     <>
     {isLoading ? <Fetching /> : <></>}
-    <ToastContainer/>
     <AddPostDesktop 
       handlePostTitleProp={handlePostTitle}
       handlePostBodyProp={handlePostBody}
@@ -123,7 +125,6 @@ const AddPost = () => {
     :
     <>
     {isLoading ? <Fetching /> : <></>}
-    <ToastContainer/>
     <AddPostResponsive 
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 

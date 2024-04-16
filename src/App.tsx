@@ -21,6 +21,7 @@ import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
 import EditPost from "./pages/EditPost"
 import AddPost from "./components/CreatePageComps/AddPost"
+import { ToastContainer } from "react-toastify"
 
 const queryClient = new QueryClient()
 
@@ -111,6 +112,7 @@ function App() {
         <Navbar />
         <LeftNavigation />
         <AddPost />
+        <ToastContainer/>
         <Routes>
           <Route path="/" element={<Outlet />} />
           <Route index element={<Feed />} />

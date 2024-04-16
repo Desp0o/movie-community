@@ -11,6 +11,12 @@ import PostVideo from "./postVideo";
 import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setRefetch } from "../../Redux/RefetchSlicer";
+import { useRefetchHook } from "../../hooks/useRefetchHook";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface SinglePostProps {
   authorName: string;
@@ -41,7 +47,13 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
+  const {requestRefetch} = useRefetchHook()
   const token  = localStorage.getItem('token')
+  const dispatch = useDispatch()
+
+  const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 4000, theme: "colored" });
+  const notifyError = () => toast.error('Error',{ autoClose: 4000, theme: "colored" });
+
   const deletePost = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
@@ -52,10 +64,11 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         }
       )
       console.log(response);
-      
+      notify()
+      dispatch(setRefetch(!requestRefetch))
     } catch (error) {
       console.log(error);
-      
+      notifyError()
     }
   }
 
@@ -69,7 +82,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
   const { isDark } = useDarkModeHook()
   return (
-      <div className="post_borders">
+    <>
+    <div className="post_borders">
         
         {isUserLogged 
         ? 
@@ -100,6 +114,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <SeeMore postID={postID} />
         </div>
       </div>
+    </>
+    
   );
 };
 

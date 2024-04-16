@@ -6,7 +6,7 @@ import "./Feed.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useUserHook } from "./hooks/useUserHook";
-import { ref } from "firebase/database";
+import { useRefetchHook } from "./hooks/useRefetchHook";
 
 interface dataProps {
   id: number;
@@ -27,6 +27,7 @@ interface dataProps {
 const Feed = () => {
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
+  const { requestRefetch } = useRefetchHook()
   const [path, setPath] = useState("https://api.pinky.ge/api/guestFeed")
 
   useEffect(()=>{
@@ -60,7 +61,9 @@ const Feed = () => {
   
   useEffect(()=>{
     refetch()
-  },[])
+    console.log(requestRefetch);
+    
+  },[requestRefetch])
 
   if(isLoading){
     return <Fetching />
@@ -68,7 +71,6 @@ const Feed = () => {
 
   return (
     <PageLayout>
-      <button onClick={()=>refetch()}>refetch</button>
       <div className="feed">
         {data?.posts?.map((post: dataProps)=>{
           return(
