@@ -38,7 +38,7 @@ const RegisterForm = () => {
                 console.log(res.data);
                 setResponse(res.data.message)
 
-                if(res.data.message === 'User registered successfully'){
+                if(res.data.message === 'User registered by Mail'){
                     const res = await axios.post(loginPath, { email: regInputs.email, password: regInputs.password },{
                         headers:{
                             'Content-Type': 'application/json'
