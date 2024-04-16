@@ -16,12 +16,11 @@ import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
 // import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
-import Create from "./pages/Create"
 import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
-import EditPost from "./pages/EditPost"
 import AddPost from "./components/CreatePageComps/AddPost"
 import { ToastContainer } from "react-toastify"
+import EditPost from "./components/editPostModal/EditPostModal"
 
 const queryClient = new QueryClient()
 
@@ -68,7 +67,6 @@ function App() {
               avatar: response.data.avatar
             })
           )
-          console.log(response.data);
           
       } catch (error) {
         console.log(error);
@@ -104,6 +102,7 @@ function App() {
         <LeftNavigation />
         <AddPost />
         <ToastContainer/>
+        <EditPost />
         <Routes>
           <Route path="/" element={<Outlet />} />
           <Route index element={<Feed />} />
@@ -112,8 +111,6 @@ function App() {
 
           <Route element={<RequireAuth />}>
             <Route path="/pages/Profile" element={<Profile />} />
-            <Route path="/pages/Create" element={<Create />} />
-            <Route path="/pages/EditPost/:id" element={<EditPost />} />
           </Route>
 
         </Routes>

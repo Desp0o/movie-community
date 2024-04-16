@@ -7,6 +7,7 @@ import leftMenuSlicer from "./leftMenuSlicer";
 import spinnerSlicer from "./spinnerSlicer";
 import ResposnivePostAddSlice from "./ResposnivePostAddSlice";
 import RefetchSlicer from "./RefetchSlicer";
+import EditPostSlicer from "./EditPostSlicer";
 
 const store = configureStore({
     reducer:{
@@ -17,7 +18,8 @@ const store = configureStore({
         leftMenuStore: leftMenuSlicer,
         spinnerSote: spinnerSlicer,
         resPostAddStore: ResposnivePostAddSlice,
-        refetchStore: RefetchSlicer
+        refetchStore: RefetchSlicer,
+        editPostStroe: EditPostSlicer
     }
 })
 

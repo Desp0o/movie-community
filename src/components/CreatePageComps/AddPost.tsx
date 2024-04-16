@@ -14,8 +14,8 @@ import { setRefetch } from "../../Redux/RefetchSlicer";
 
 
 const AddPost = () => {
-  const notify = () => toast.success('Post Added Successfully !',{ autoClose: 4000, theme: "colored" });
-  const notifyError = () => toast.error('Error',{ autoClose: 4000, theme: "colored" });
+  const notify = () => toast.success('Post Added Successfully !',{ autoClose: 1000, theme: "colored" });
+  const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
 
   
   const token = localStorage.getItem('token')
@@ -50,11 +50,6 @@ const AddPost = () => {
     }
     
   },[postValue.img])
-
-  // useEffect(()=>{
-  //   console.log(postValue);
-    
-  // },[postValue])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });

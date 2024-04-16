@@ -10,12 +10,12 @@ import SeeMore from "./SeeMore";
 import PostVideo from "./postVideo";
 import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { setEditPostModal } from "../../Redux/EditPostSlicer";
 
 
 interface SinglePostProps {
@@ -51,8 +51,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   const token  = localStorage.getItem('token')
   const dispatch = useDispatch()
 
-  const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 4000, theme: "colored" });
-  const notifyError = () => toast.error('Error',{ autoClose: 4000, theme: "colored" });
+  const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
+  const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
 
   const deletePost = async () => {
     try {
@@ -72,6 +72,10 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }
   }
 
+  const editPost = () => {
+    dispatch(setEditPostModal({value: true, id: postID}))
+  }
+
   useEffect(()=>{
     if(Number(user.userID) === postUserId){
       setUserLoged(true)
@@ -88,9 +92,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         {isUserLogged 
         ? 
         <>
-        <Link to={`/pages/EditPost/${postID}`}> 
-          <p>edit</p>
-        </Link>
+          <p onClick={editPost}>edit</p>
         <p className="delete_btn" onClick={deletePost}>delete</p> 
         </>
         : 
