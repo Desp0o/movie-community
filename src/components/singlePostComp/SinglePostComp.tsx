@@ -16,6 +16,7 @@ import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { setEditPostModal } from "../../Redux/EditPostSlicer";
+import EditPannel from "./EditPannel";
 
 
 interface SinglePostProps {
@@ -91,19 +92,13 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     <>
     <div className="post_borders">
         
-        {isUserLogged 
-        ? 
-        <>
-          <p onClick={editPost}>edit</p>
-        <p className="delete_btn" onClick={deletePost}>delete</p> 
-        </>
-        : 
-        <></>}
-
-        
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
+          <div className="author_pannel_container">
           <Author avatar={authorAvatar} name={authorName} date={date} />
-          <PostTitle title={postTitle} postStatus={postStatus} />
+            {isUserLogged ? <EditPannel editFun={editPost} deleteFun={deletePost}/> : <></>}
+          </div>
+            <PostTitle title={postTitle} postStatus={postStatus} />
+          
           
           {type === "0"
             ? (image ? <PostImage image={image} /> : <></>)

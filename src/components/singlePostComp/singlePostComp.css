@@ -170,6 +170,51 @@
     cursor: pointer;
 }
 
+.post_setting_pannel{
+    padding: 15px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+
+    width: fit-content;
+
+    background-color: var(--grey);
+
+    position: absolute;
+    right: 0;
+    z-index: 110;
+}
+
+.post_setting_pannel.dark{
+    padding: 15px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+
+    width: fit-content;
+
+    background-color: var(--dark-bg);
+}
+
+.author_pannel_container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.pannel_dots{
+    cursor: pointer;
+    margin-top: -10px;
+}
+
 @media (max-width:768px) {
     .single_post_comp{
         width: 100%;
