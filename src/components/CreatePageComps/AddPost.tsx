@@ -7,10 +7,16 @@ import AddPostDesktop from "./addPostDesktop";
 import Fetching from "../fetchingComponent/Fetching";
 import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const token = localStorage.getItem('token')
 
 const AddPost = () => {
+  const notify = () => toast.success('Post Added Successfully !',{ autoClose: 4000, theme: "colored" });
+  const notifyError = () => toast.error('Error',{ autoClose: 4000, theme: "colored" });
+
+  
+  const token = localStorage.getItem('token')
   const { user } = useUserHook()
   const [isLoading, setLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -78,17 +84,18 @@ const AddPost = () => {
       try {
           const res = await axios.post(import.meta.env.VITE_POSTING , postValue, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization:`Bearer ${token}`,
               'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
             }
           })
 
           console.log(res.data);
-      } catch (error: any) {
-          console.log(error.response.data);
-      }finally{
+          notify()
+          closeResPostModal()
+        } catch (error: any) {
+          notifyError()
+        }finally{
         setLoading(false)
-        closeResPostModal()
       }
   }
 
@@ -102,6 +109,7 @@ const AddPost = () => {
     ?
     <>
     {isLoading ? <Fetching /> : <></>}
+    <ToastContainer/>
     <AddPostDesktop 
       handlePostTitleProp={handlePostTitle}
       handlePostBodyProp={handlePostBody}
@@ -115,6 +123,7 @@ const AddPost = () => {
     :
     <>
     {isLoading ? <Fetching /> : <></>}
+    <ToastContainer/>
     <AddPostResponsive 
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 
