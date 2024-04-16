@@ -53,6 +53,14 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setLikeIcon(arrowLike)
     }
 
+    if(user.name !== "" && authLike === undefined){
+      setDislikeActive(false)
+      setDislikeIcon(arrowDislike)
+
+      setLikeActive(false)
+      setLikeIcon(arrowLike)
+    }
+
     if(user.name === "" && authLike === undefined){
       setDislikeActive(false)
       setDislikeIcon(arrowDislike)
