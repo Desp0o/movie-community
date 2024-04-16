@@ -13,8 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
-import { Link } from "react-router-dom";
 import noAvatar from "../../assets/noAvatar.jpeg"
+import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
 
 
 interface RootState {
@@ -34,6 +34,10 @@ const Navbar = () => {
 
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
+
+  const openPostAddModal = () => {
+    dispatch(setResponsivePostAddState(true))
+  }
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -96,8 +100,7 @@ const Navbar = () => {
           )}
           {user.name ? (
             <div className="nav_profile_items">
-              <Link to='/pages/Create'>
-                <div
+                <div onClick={openPostAddModal}
                   className={
                     isDark
                       ? "nav_create_post dark responsive_hidden"
@@ -107,7 +110,6 @@ const Navbar = () => {
                   {addIcon}
                   <p>Create</p>
                 </div>
-              </Link>
 
               <div
                 className={

@@ -5,6 +5,8 @@ import { useUserHook } from "../../hooks/useUserHook";
 import AddPostResponsive from "./addPostResponsive";
 import AddPostDesktop from "./addPostDesktop";
 import Fetching from "../fetchingComponent/Fetching";
+import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
+import { useDispatch } from "react-redux";
 
 const token = localStorage.getItem('token')
 
@@ -66,6 +68,11 @@ const AddPost = () => {
     setPostValue({ ...postValue, img: file });
   };
 
+  const dispatch = useDispatch()
+  const closeResPostModal = () => {
+    dispatch(setResponsivePostAddState(false));
+  };
+
   const sendPost = async () => {   
     setLoading(true)             
       try {
@@ -81,6 +88,7 @@ const AddPost = () => {
           console.log(error.response.data);
       }finally{
         setLoading(false)
+        closeResPostModal()
       }
   }
 

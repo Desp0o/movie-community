@@ -1,5 +1,10 @@
 import React, { RefObject } from "react";
 import SendPostBTN from "./SendPostBTN";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+import { xIcon } from "../../assets/svg/Xicon";
+import { useDispatch } from "react-redux";
+import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
+import { useResPostModal } from "../../hooks/useResPostModal";
 
 interface AddPostDesktopProps {
   CreatePostProp: () => void;
@@ -19,29 +24,43 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
   handlePostTitleProp,
   handlePostBodyProp,
 }) => {
+
+  const { isDark } = useDarkModeHook()
+  const { resPostModal } = useResPostModal();
+  const dispatch = useDispatch();
+
+  const closeResPostModal = () => {
+    dispatch(setResponsivePostAddState(false));
+  };
+
   return (
-    <div className="add_post">
-      <div className="upload_image" onClick={handleButtonClickProp}>
-        <p style={{ color: "currentcolor" }}>ატვირთე სურათი</p>
+    <div className={resPostModal ? "add_post_desktop active" : "add_post_desktop"}>
+      <div className={isDark ? "add_post dark" : "add_post"}>
+        <span style={{ cursor: "pointer"}} onClick={closeResPostModal}>
+              {xIcon}
+            </span>
+        <div className="upload_image" onClick={handleButtonClickProp}>
+          <p style={{ color: "currentcolor" }}>ატვირთე სურათი</p>
+        </div>
+
+        <input
+          ref={fileInputRefProp}
+          multiple
+          type="file"
+          onChange={handleFileChangeProp}
+          style={{ display: "none" }}
+        />
+
+        <input
+          type="text"
+          className="input_style_createPage"
+          placeholder="სათაური"
+          onChange={handlePostTitleProp}
+        />
+
+        <textarea className="post_body" onChange={handlePostBodyProp} />
+        <SendPostBTN funName={CreatePostProp} />
       </div>
-
-      <input
-        ref={fileInputRefProp}
-        multiple
-        type="file"
-        onChange={handleFileChangeProp}
-        style={{ display: "none" }}
-      />
-
-      <input
-        type="text"
-        className="input_style_createPage"
-        placeholder="სათაური"
-        onChange={handlePostTitleProp}
-      />
-
-      <textarea className="post_body" onChange={handlePostBodyProp} />
-      <SendPostBTN funName={CreatePostProp} />
     </div>
   );
 };
