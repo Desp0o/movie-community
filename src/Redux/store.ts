@@ -6,6 +6,7 @@ import loginModalSlicer from "./loginModalSlicer";
 import leftMenuSlicer from "./leftMenuSlicer";
 import spinnerSlicer from "./spinnerSlicer";
 import ResposnivePostAddSlice from "./ResposnivePostAddSlice";
+import RefetchSlicer from "./RefetchSlicer";
 
 const store = configureStore({
     reducer:{
@@ -15,7 +16,8 @@ const store = configureStore({
         loginModalStore: loginModalSlicer,
         leftMenuStore: leftMenuSlicer,
         spinnerSote: spinnerSlicer,
-        resPostAddStore: ResposnivePostAddSlice
+        resPostAddStore: ResposnivePostAddSlice,
+        refetchStore: RefetchSlicer
     }
 })
 

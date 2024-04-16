@@ -6,6 +6,7 @@ import "./Feed.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useUserHook } from "./hooks/useUserHook";
+import { ref } from "firebase/database";
 
 interface dataProps {
   id: number;
@@ -38,7 +39,7 @@ const Feed = () => {
     }    
   },[path, user])
 
-  const {isLoading, data} = useQuery(
+  const {isLoading, data, refetch} = useQuery(
     ['feed-query', path], 
     async () => {
       try {
@@ -57,6 +58,9 @@ const Feed = () => {
 
   // console.log(data);
   
+  useEffect(()=>{
+    refetch()
+  },[])
 
   if(isLoading){
     return <Fetching />
@@ -64,6 +68,7 @@ const Feed = () => {
 
   return (
     <PageLayout>
+      <button onClick={()=>refetch()}>refetch</button>
       <div className="feed">
         {data?.posts?.map((post: dataProps)=>{
           return(
