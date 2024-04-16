@@ -75,13 +75,11 @@ const EditPost = () => {
   }
 
   const getPostForEdit = async () => {
+    setLoading(true)
     try {
         const response = await axios.get(
           `${import.meta.env.VITE_SINGLE_POST}${editPostModal.id}`
         );
-        console.log(response.data);
-        
-
         setPostValue({...postValue, title: response.data[0].title, text:response.data[0].text})
       } catch (error) {
         console.error(error);
