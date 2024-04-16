@@ -92,9 +92,9 @@ const AddPost = () => {
             }
           })
           dispatch(setRefetch(!requestRefetch))
+          closeResPostModal()
           console.log(res.data);
           notify()
-          closeResPostModal()
         } catch (error: any) {
           notifyError()
         }finally{
@@ -111,7 +111,7 @@ const AddPost = () => {
    window.innerWidth > 601
     ?
     <>
-    {isLoading ? <Fetching /> : <></>}
+    {isLoading ? <div className="backdropFilter"><Fetching /></div> : <></>}
     <AddPostDesktop 
       handlePostTitleProp={handlePostTitle}
       handlePostBodyProp={handlePostBody}
@@ -124,7 +124,7 @@ const AddPost = () => {
     </>
     :
     <>
-    {isLoading ? <Fetching /> : <></>}
+    {isLoading ? <div className="backdropFilter"><Fetching /></div> : <></>}
     <AddPostResponsive 
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 
