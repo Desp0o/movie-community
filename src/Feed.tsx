@@ -57,20 +57,16 @@ const Feed = () => {
     }
   )
 
-  // console.log(data);
+  console.log(data);
   
   useEffect(()=>{
-    refetch()
-    console.log(requestRefetch);
-    
+    refetch()        
   },[requestRefetch])
 
-  if(isLoading){
-    return <Fetching />
-  }
 
   return (
     <PageLayout>
+      {isLoading ? <Fetching /> : <></>}
       <div className="feed">
         {data?.posts?.map((post: dataProps)=>{
           return(

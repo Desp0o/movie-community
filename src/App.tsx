@@ -3,7 +3,7 @@ import Feed from "./Feed"
 import Navbar from "./components/navbar/navbar"
 import { useDarkModeHook } from "./hooks/useDarkModeHook"
 import "./index.css"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
@@ -14,7 +14,7 @@ import LeftNavigation from "./components/leftNavigation/LeftNavigation"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
-import SplashScreen from "./components/splashScreen/SplashScreen"
+// import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
 import Create from "./pages/Create"
 import axios from "axios"
@@ -29,7 +29,6 @@ function App() {
   const token = localStorage.getItem('token')
   const {isDark} = useDarkModeHook()
   const {user} = useUserHook()
-  const [isLoading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -78,13 +77,15 @@ function App() {
         localStorage.removeItem('userID')
       }
       finally{
-        setLoading(false)
       }
     }
 
     if(token){
       googleUserCeck()
       checkMe()
+    }
+
+    if(!token){
     }
 
   },[dispatch])
@@ -95,10 +96,6 @@ function App() {
            :
             document.documentElement.style.backgroundColor = '#fff'
   },[isDark])
-
-  if(isLoading){
-    return <SplashScreen />
-  }
 
   return (
     <QueryClientProvider client={queryClient}>

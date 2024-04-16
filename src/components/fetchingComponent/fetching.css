@@ -16,8 +16,7 @@
 .fetching.dark{
     background-color: var(--active-page-dark);
 }
-  
-  
+
   .spinner_fetcher {
     width: 48px;
     height: 48px;

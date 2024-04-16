@@ -18,23 +18,14 @@ interface LikeDislikeCommentProps {
 }
 
 const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike}) => {
+  const { user } = useUserHook()
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
-  const [isLikeActive, setLikeActive] = useState(authLike === 'like' ? true : false)
-  const [isDislikeActive, setDislikeActive] = useState( authLike === 'dislike' ? true : false)
-  const [likeIcon, setLikeIcon] = useState(authLike === 'like' ? activeLike : arrowLike)
-  const [dislikeIcon, setDislikeIcon] = useState(authLike === 'dislike' ? activeDislike : arrowDislike)
-  const { user } = useUserHook()
+  const [isLikeActive, setLikeActive] = useState(false)
+  const [isDislikeActive, setDislikeActive] = useState(false)
+  const [likeIcon, setLikeIcon] = useState(arrowLike)
+  const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
   const dispatch = useDispatch()
-
-  const [isUserLogged, setUserLogged] = useState(false)
-  useEffect(()=>{
-    if(user.name && user.userID){
-      setUserLogged(true)
-    }else{
-      setUserLogged(false)
-    }
-  },[isUserLogged, user, token])
 
   const [isLike, _setLike] = useState({
     post: postID,
@@ -44,6 +35,37 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     post: postID,
     like: 'dislike'
   })
+
+  useEffect(()=>{
+    if(user.name !== "" && authLike === 'like'){
+      setLikeActive(true)
+      setLikeIcon(activeLike)
+
+      setDislikeActive(false)
+      setDislikeIcon(arrowDislike)
+    }
+    
+    if(user.name !== "" && authLike === 'dislike'){
+      setDislikeActive(true)
+      setDislikeIcon(activeDislike)
+
+      setLikeActive(false)
+      setLikeIcon(arrowLike)
+    }
+
+    if(user.name === "" && authLike === undefined){
+      setDislikeActive(false)
+      setDislikeIcon(arrowDislike)
+
+      setLikeActive(false)
+      setLikeIcon(arrowLike)
+    }
+
+  },[user.name, authLike, user.userID])
+
+  useEffect(()=>{
+    
+  },[user.name, authLike, user.userID])
 
   const unlikeFunction = async () => {
     try {
@@ -76,7 +98,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendLike = async () => {
-    if(isUserLogged){
+    if(user.userID){
       if(!isLikeActive){
         setLikeActive(true) // set like button active 
         seteVotes(votes + 1) // add vote 
@@ -133,7 +155,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendUnlike = async () => {
-      if(isUserLogged){
+      if(user.userID){
         if(!isDislikeActive){
           setDislikeActive(true)
           seteVotes(votes - 1)

@@ -75,11 +75,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   useEffect(()=>{
     if(Number(user.userID) === postUserId){
       setUserLoged(true)
-      console.log('ემთხვევა');
-      
     }else{
-      console.log('არ ემტხვევს');
-
       setUserLoged(false)
     }
   },[user, isUserLogged])
@@ -99,6 +95,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         </>
         : 
         <></>}
+
+        
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} date={date} />
           <PostTitle title={postTitle} />
