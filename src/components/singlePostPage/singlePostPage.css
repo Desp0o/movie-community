@@ -30,6 +30,7 @@
 }
 
 .single_page_title{
+    width: fit-content;
     font-size: 1.5rem;
     line-height: 1.75rem;
     font-weight: 600;

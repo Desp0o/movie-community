@@ -57,6 +57,8 @@
 
 .post_title{
     width: 100%;
+    font-size: 20px;
+    font-weight: 600;
     word-wrap: break-word; 
 }
 

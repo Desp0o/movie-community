@@ -30,6 +30,7 @@ interface SinglePostProps {
   authLike: string;
   date: string;
   postUserId:number;
+  postStatus:string | number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -43,7 +44,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   type,
   authLike,
   date,
-  postUserId
+  postUserId,
+  postStatus
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -101,7 +103,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} date={date} />
-          <PostTitle title={postTitle} />
+          <PostTitle title={postTitle} postStatus={postStatus} />
           
           {type === "0"
             ? (image ? <PostImage image={image} /> : <></>)

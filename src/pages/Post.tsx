@@ -22,6 +22,7 @@ interface PostData {
   like: number;
   dislike: number;
   id: number;
+  status: number | string;
   user: {
     avatar: string;
     name: string;
@@ -83,7 +84,7 @@ const Post = () => {
             </div>
 
             <div className="single_page_title">
-              <PostTitle title={data?.title} />
+              <PostTitle title={data?.title} postStatus={data?.status} />
             </div>
 
             <div className="single_post_image">
