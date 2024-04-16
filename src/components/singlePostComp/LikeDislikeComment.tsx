@@ -6,6 +6,9 @@ import "./singlePostComp.css"
 import axios from "axios";
 import { activeLike } from "../../assets/svg/activeLike";
 import { activeDislike } from "../../assets/svg/activeDislike";
+import { useUserHook } from "../../hooks/useUserHook";
+import { useDispatch } from "react-redux";
+import { setModalVisible } from "../../Redux/loginModalSlicer";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -21,6 +24,8 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const [isDislikeActive, setDislikeActive] = useState( authLike === 'dislike' ? true : false)
   const [likeIcon, setLikeIcon] = useState(authLike === 'like' ? activeLike : arrowLike)
   const [dislikeIcon, setDislikeIcon] = useState(authLike === 'dislike' ? activeDislike : arrowDislike)
+  const { user } = useUserHook()
+  const dispatch = useDispatch()
 
   const [isLike, _setLike] = useState({
     post: postID,
@@ -62,23 +67,27 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendLike = async () => {
-    if(!isLikeActive){
-      setLikeActive(true) // set like button active 
-      seteVotes(votes + 1) // add vote 
-      setLikeIcon(activeLike) // make like button green
-      setDislikeIcon(arrowDislike) //set dislike button inherit
-      setDislikeActive(false) // make dislike button active
-      likeFunction() //send like function
-
-      if(isDislikeActive){
-        unDislikeFunction()
-        seteVotes(votes + 2)
-       }
+    if(user.name && user.userID){
+      if(!isLikeActive){
+        setLikeActive(true) // set like button active 
+        seteVotes(votes + 1) // add vote 
+        setLikeIcon(activeLike) // make like button green
+        setDislikeIcon(arrowDislike) //set dislike button inherit
+        setDislikeActive(false) // make dislike button active
+        likeFunction() //send like function
+  
+        if(isDislikeActive){
+          unDislikeFunction()
+          seteVotes(votes + 2)
+         }
+      }else{
+        setLikeActive(false) //set like button inactive 
+        seteVotes(votes - 1) 
+        setLikeIcon(arrowLike)
+        unlikeFunction()
+      }
     }else{
-      setLikeActive(false) //set like button inactive 
-      seteVotes(votes - 1) 
-      setLikeIcon(arrowLike)
-      unlikeFunction()
+      dispatch(setModalVisible(true))
     }
   }
 
@@ -115,31 +124,35 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendUnlike = async () => {
-    if(!isDislikeActive){
-     setDislikeActive(true)
-     seteVotes(votes - 1)
-     setDislikeIcon(activeDislike)
-     setLikeIcon(arrowLike)
-     setLikeActive(false)
-
-     if(isLikeActive){
-      unlikeFunction()
-      seteVotes(votes - 2)
-     }
-     dislikeFunction()
-    }else{
-      setDislikeActive(false)
-      seteVotes(votes + 1)
-      setDislikeIcon(arrowDislike)
-      unDislikeFunction()
-    }
+      if(user.name && user.userID){
+        if(!isDislikeActive){
+          setDislikeActive(true)
+          seteVotes(votes - 1)
+          setDislikeIcon(activeDislike)
+          setLikeIcon(arrowLike)
+          setLikeActive(false)
+     
+          if(isLikeActive){
+           unlikeFunction()
+           seteVotes(votes - 2)
+          }
+          dislikeFunction()
+         }else{
+           setDislikeActive(false)
+           seteVotes(votes + 1)
+           setDislikeIcon(arrowDislike)
+           unDislikeFunction()
+         }
+      }else{
+        dispatch(setModalVisible(true))
+      }
   }
 
 
   return (
     <div className="likeDislikeComment_container">
         <div className="like_dislike">
-            <span onClick={()=> sendLike()}>{likeIcon}</span>
+            <span onClick={sendLike}>{likeIcon}</span>
             <p style={{ color: votes > 0 ? "green" : votes === 0 ? 'currentColor' : "red" }}>{votes}</p>
             <span onClick={sendUnlike}>{dislikeIcon}</span>
         </div>
