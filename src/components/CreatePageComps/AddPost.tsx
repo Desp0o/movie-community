@@ -48,10 +48,10 @@ const AddPost = () => {
     
   },[postValue.img])
 
-  useEffect(()=>{
-    console.log(postValue);
+  // useEffect(()=>{
+  //   console.log(postValue);
     
-  },[postValue])
+  // },[postValue])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });

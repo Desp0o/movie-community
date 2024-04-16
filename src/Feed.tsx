@@ -4,7 +4,7 @@ import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import "./Feed.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserHook } from "./hooks/useUserHook";
 
 interface dataProps {
@@ -26,7 +26,17 @@ interface dataProps {
 const Feed = () => {
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
-  const [path,] = useState(user.name ? "https://api.pinky.ge/api/authFeed" : "https://api.pinky.ge/api/guestFeed")
+  const [path, setPath] = useState("https://api.pinky.ge/api/guestFeed")
+
+  useEffect(()=>{
+    if(user.name && user.userID){
+      if(token){
+        setPath('https://api.pinky.ge/api/authFeed')
+      }
+    }else{
+      setPath('https://api.pinky.ge/api/guestFeed')
+    }    
+  },[path, user])
 
   const {isLoading, data} = useQuery(
     ['feed-query', path], 
