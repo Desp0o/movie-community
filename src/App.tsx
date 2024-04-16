@@ -40,6 +40,7 @@ function App() {
       if (user) {
         dispatch(setUser({name: user.displayName, avatar: user.photoURL, userID: user.uid}))
         localStorage.setItem('userName', JSON.stringify(user.displayName))
+
         setLoading(false)
       }else {
         setLoading(false)
@@ -64,6 +65,8 @@ function App() {
           });
 
           localStorage.setItem('userName', response.data.name)
+          localStorage.setItem('userID', response.data.id)
+
           dispatch(
             setUser({
               name: response.data.name, 
