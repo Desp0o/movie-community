@@ -2,16 +2,25 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDarkModeHook } from '../../hooks/useDarkModeHook'
 import { penIcon } from '../../assets/svg/penIcon'
 import { canIcon } from '../../assets/svg/canIcon'
+import axios from 'axios';
+import { setRefetch } from '../../Redux/RefetchSlicer';
+import { useDispatch } from 'react-redux';
+import { useRefetchHook } from '../../hooks/useRefetchHook';
+import { toast } from 'react-toastify';
+import { setEditPostModal } from '../../Redux/EditPostSlicer';
 
 interface EditPannelPros{
-    editFun: () => void;
-    deleteFun: () => void;
+    postID: string | number
 }
 
-const EditPannel:React.FC<EditPannelPros> = ({editFun, deleteFun}) => {
-
+const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
+    const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
+    const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
+    const token = localStorage.getItem('token')
     const {isDark} = useDarkModeHook()
+    const {requestRefetch} = useRefetchHook()
     const [isActive, setActive] = useState(false)
+    const dispatch = useDispatch()
 
     const handlePannel = () => {
         setActive(!isActive)
@@ -36,6 +45,28 @@ const EditPannel:React.FC<EditPannelPros> = ({editFun, deleteFun}) => {
         };
     }, [isActive]);
 
+    const deletePost = async () => {
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
+            {
+              headers:{
+                Authorization: `Bearer ${token}`
+              }
+            }
+          )
+          console.log(response);
+          notify()
+          dispatch(setRefetch(!requestRefetch))
+        } catch (error) {
+          console.log(error);
+          notifyError()
+        }
+    }
+
+    const editPost = () => {
+        dispatch(setEditPostModal({value: true, id: postID}))
+      }
+
 
   return (
     <div ref={editPanelRef}>
@@ -45,8 +76,8 @@ const EditPannel:React.FC<EditPannelPros> = ({editFun, deleteFun}) => {
             isActive 
             ?
             <div className={isDark ? "post_setting_pannel dark" : "post_setting_pannel"}>
-            <div onClick={()=>editFun()} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{penIcon} Edit</div>
-            <div onClick={()=>deleteFun()} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{canIcon} Delete</div>
+            <div onClick={editPost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{penIcon} Edit</div>
+            <div onClick={deletePost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{canIcon} Delete</div>
             </div>
             :
             <></>
@@ -56,3 +87,4 @@ const EditPannel:React.FC<EditPannelPros> = ({editFun, deleteFun}) => {
 }
 
 export default EditPannel
+

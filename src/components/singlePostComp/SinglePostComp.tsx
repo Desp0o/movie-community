@@ -8,14 +8,8 @@ import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
 import SeeMore from "./SeeMore";
 import PostVideo from "./postVideo";
-import axios from "axios";
 import { useUserHook } from "../../hooks/useUserHook";
-import { useDispatch } from "react-redux";
-import { setRefetch } from "../../Redux/RefetchSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
-import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { setEditPostModal } from "../../Redux/EditPostSlicer";
 import EditPannel from "./EditPannel";
 
 
@@ -50,34 +44,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
-  const {requestRefetch} = useRefetchHook()
-  const token  = localStorage.getItem('token')
-  const dispatch = useDispatch()
 
-  const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
-  const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
-
-  const deletePost = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
-        {
-          headers:{
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      console.log(response);
-      notify()
-      dispatch(setRefetch(!requestRefetch))
-    } catch (error) {
-      console.log(error);
-      notifyError()
-    }
-  }
-
-  const editPost = () => {
-    dispatch(setEditPostModal({value: true, id: postID}))
-  }
 
   useEffect(()=>{
     if(Number(user.userID) === postUserId){
@@ -95,7 +62,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <div className="author_pannel_container">
           <Author avatar={authorAvatar} name={authorName} date={date} />
-            {isUserLogged ? <EditPannel editFun={editPost} deleteFun={deletePost}/> : <></>}
+            {isUserLogged ? <EditPannel postID={postID}/> : <></>}
           </div>
             <PostTitle title={postTitle} postStatus={postStatus} />
           

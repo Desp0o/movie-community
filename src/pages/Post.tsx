@@ -13,6 +13,7 @@ import AddComment from "../components/singlePostPage/AddComment";
 import CommentsSection from "../components/singlePostPage/CommentsSection";
 import axios from "axios";
 import Fetching from "../components/fetchingComponent/Fetching";
+import EditPannel from "../components/singlePostComp/EditPannel";
 
 interface PostData {
   title: string;
