@@ -29,35 +29,26 @@ function App() {
   const token = localStorage.getItem('token')
   const {isDark} = useDarkModeHook()
   const {user} = useUserHook()
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(()=>{
     Boolean(localStorage.getItem('darkMode'))    
   },[])
 
-  useEffect(() => {
-    setLoading(true)
-    const auth = getAuth(app);
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(setUser({name: user.displayName, avatar: user.photoURL}))
-        localStorage.setItem('userName', JSON.stringify(user.displayName))
 
-        setLoading(false)
-      }else {
-        setLoading(false)
-      }
-    });
+  const googleUserCeck = () => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, ()=>{})
+
 
     return () => unsubscribe();
-  }, [dispatch]);
+  }
+
 
   useEffect(()=>{
-    setLoading(true)
 
     const checkMe = async () => {
-      
       try {
         const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
               headers: {
@@ -68,6 +59,8 @@ function App() {
 
           localStorage.setItem('userName', response.data.name)
           localStorage.setItem('userID', response.data.id)
+          localStorage.setItem('avatar', response.data.avatar)
+
 
           dispatch(
             setUser({
@@ -90,6 +83,7 @@ function App() {
     }
 
     if(token){
+      googleUserCeck()
       checkMe()
     }
 
