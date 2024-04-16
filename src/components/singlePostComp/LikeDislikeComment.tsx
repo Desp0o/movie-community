@@ -192,7 +192,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
     <div className="likeDislikeComment_container">
         <div className="like_dislike">
             <span onClick={sendLike}>{likeIcon}</span>
-            <p style={{ color: votes > 0 ? "green" : votes === 0 ? 'currentColor' : "red" }}>{votes}</p>
+            <p style={{width: votes > 99 ? "35px" : "20px",textAlign:"center", color: votes > 0 ? "green" : votes === 0 ? 'currentColor' : "red" }}>{votes}</p>
             <span onClick={sendUnlike}>{dislikeIcon}</span>
         </div>
 
