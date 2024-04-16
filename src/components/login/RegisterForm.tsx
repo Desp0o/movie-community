@@ -45,8 +45,11 @@ const RegisterForm = () => {
                         }
                     });
 
+                    console.log(res);
+                    
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('token_death', res.data.token_death)
+                    localStorage.setItem('userID', res.data.user.id)
                     dispatch(setModalVisible(false))
                     dispatch(setUser({name: res.data.user.email, avatar: res.data.user.avatar, userID: res.data.user.id}))                    
                 }

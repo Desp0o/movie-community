@@ -45,7 +45,7 @@ const Feed = () => {
     }
   )
 
-  console.log(data);
+  // console.log(data);
   
 
   if(isLoading){

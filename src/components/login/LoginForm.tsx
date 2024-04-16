@@ -26,6 +26,7 @@ const LoginForm = () => {
       
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('token_death', response.data.token_death)
+      localStorage.setItem('userID', response.data.user.id)
       dispatch(setModalVisible(false))
       dispatch(setUser({name: response.data.user.name, avatar: response.data.user.avatar, userID: response.data.user.id}))
       localStorage.setItem('userName', response.data.user.name)

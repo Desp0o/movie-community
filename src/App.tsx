@@ -39,7 +39,7 @@ function App() {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser({name: user.displayName, avatar: user.photoURL, userID: user.uid}))
+        dispatch(setUser({name: user.displayName, avatar: user.photoURL}))
         localStorage.setItem('userName', JSON.stringify(user.displayName))
 
         setLoading(false)

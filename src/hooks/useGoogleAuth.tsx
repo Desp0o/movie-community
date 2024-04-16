@@ -39,6 +39,7 @@ export const useGoogleLogIn = () => {
             }
           })
           localStorage.setItem('token',res.data.token)
+          localStorage.setItem('userID', res.data.user_id)
           console.log(res.data);
           
           return signIn;
