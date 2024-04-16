@@ -78,7 +78,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }else{
       setUserLoged(false)
     }
-  },[user])
+  },[user,postUserId, isUserLogged])
 
   const { isDark } = useDarkModeHook()
   return (

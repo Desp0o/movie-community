@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { arrowDislike } from "../../assets/svg/arrowDislike"
 import { arrowLike } from "../../assets/svg/arrowLike"
 import { commentsIcon } from "../../assets/svg/commentsIcon"
@@ -26,6 +26,15 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const [dislikeIcon, setDislikeIcon] = useState(authLike === 'dislike' ? activeDislike : arrowDislike)
   const { user } = useUserHook()
   const dispatch = useDispatch()
+
+  const [isUserLogged, setUserLogged] = useState(false)
+  useEffect(()=>{
+    if(user.name && user.userID){
+      setUserLogged(true)
+    }else{
+      setUserLogged(false)
+    }
+  },[isUserLogged, user, token])
 
   const [isLike, _setLike] = useState({
     post: postID,
@@ -67,7 +76,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendLike = async () => {
-    if(user.name && user.userID){
+    if(isUserLogged){
       if(!isLikeActive){
         setLikeActive(true) // set like button active 
         seteVotes(votes + 1) // add vote 
@@ -124,7 +133,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const sendUnlike = async () => {
-      if(user.name && user.userID){
+      if(isUserLogged){
         if(!isDislikeActive){
           setDislikeActive(true)
           seteVotes(votes - 1)
