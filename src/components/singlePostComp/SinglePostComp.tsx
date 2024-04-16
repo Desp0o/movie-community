@@ -75,10 +75,14 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   useEffect(()=>{
     if(Number(user.userID) === postUserId){
       setUserLoged(true)
+      console.log('ემთხვევა');
+      
     }else{
+      console.log('არ ემტხვევს');
+
       setUserLoged(false)
     }
-  },[user,postUserId, isUserLogged])
+  },[user, isUserLogged])
 
   const { isDark } = useDarkModeHook()
   return (
