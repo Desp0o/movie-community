@@ -8,12 +8,14 @@ import { useDispatch } from 'react-redux';
 import { useRefetchHook } from '../../hooks/useRefetchHook';
 import { toast } from 'react-toastify';
 import { setEditPostModal } from '../../Redux/EditPostSlicer';
+import { useNavigate } from 'react-router-dom';
 
 interface EditPannelPros{
-    postID: string | number
+    postID: string | number;
+    isInnerPage?: boolean;
 }
 
-const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
+const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
     const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
     const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
     const token = localStorage.getItem('token')
@@ -21,11 +23,8 @@ const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
     const {requestRefetch} = useRefetchHook()
     const [isActive, setActive] = useState(false)
     const dispatch = useDispatch()
-
-    const handlePannel = () => {
-        setActive(!isActive)
-    }
-
+    const navigate = useNavigate()
+    
     const editPanelRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         const handleClick = (event: MouseEvent) => {
@@ -45,6 +44,11 @@ const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
         };
     }, [isActive]);
 
+    const handlePannel = () => {
+        setActive(!isActive)
+    }
+
+
     const deletePost = async () => {
         try {
           const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
@@ -54,9 +58,13 @@ const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
               }
             }
           )
+          
           console.log(response);
           notify()
           dispatch(setRefetch(!requestRefetch))
+          if(isInnerPage){
+            navigate('/')
+          }
         } catch (error) {
           console.log(error);
           notifyError()
@@ -76,8 +84,8 @@ const EditPannel:React.FC<EditPannelPros> = ({postID}) => {
             isActive 
             ?
             <div className={isDark ? "post_setting_pannel dark" : "post_setting_pannel"}>
-            <div onClick={editPost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{penIcon} Edit</div>
-            <div onClick={deletePost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px"}}>{canIcon} Delete</div>
+            <div onClick={editPost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px",cursor:"pointer"}}>{penIcon} Edit</div>
+            <div onClick={deletePost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px",cursor:"pointer"}}>{canIcon} Delete</div>
             </div>
             :
             <></>

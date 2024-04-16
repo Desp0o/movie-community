@@ -35,7 +35,7 @@ const Post = () => {
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const [data, setData] = useState<PostData | null>(null);
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
 
   const openFullScreen = () => {
     setFullScreenImage(true);
@@ -49,7 +49,7 @@ const Post = () => {
 
   useEffect(() => {
     const requestSInglePost = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_SINGLE_POST}${id}`
@@ -58,16 +58,15 @@ const Post = () => {
         setData(response.data[0]);
       } catch (error) {
         console.log(error);
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
     requestSInglePost();
   }, []);
 
-
-  if(isLoading){
-    return <Fetching />
+  if (isLoading) {
+    return <Fetching />;
   }
 
   return (
@@ -75,13 +74,16 @@ const Post = () => {
       {data ? (
         <PageLayout>
           <div className="single_post_page">
-            <div className="goBack_authorInfo">
-              <GoBack />
-              <Author
-                avatar={data?.user?.avatar}
-                name={data?.user?.name}
-                date={data?.created_at}
-              />
+            <div className="goBack_authorInfo_container">
+              <div className="goBack_authorInfo">
+                <GoBack />
+                <Author
+                  avatar={data?.user?.avatar}
+                  name={data?.user?.name}
+                  date={data?.created_at}
+                />
+              </div>
+              <EditPannel postID={data?.id} isInnerPage={true}/>
             </div>
 
             <div className="single_page_title">
@@ -125,7 +127,12 @@ const Post = () => {
             ) : (
               <></>
             )}
-            <LikeDislikeComment likes={data.like} dislikes={data.dislike} postID={data.id} authLike={""} />
+            <LikeDislikeComment
+              likes={data.like}
+              dislikes={data.dislike}
+              postID={data.id}
+              authLike={""}
+            />
 
             <AddComment />
 

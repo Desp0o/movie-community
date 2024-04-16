@@ -29,6 +29,15 @@
     gap: 10px;
 }
 
+.goBack_authorInfo_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+}
+
 .single_page_title{
     width: fit-content;
     font-size: 1.5rem;

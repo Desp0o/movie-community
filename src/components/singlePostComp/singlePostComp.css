@@ -213,6 +213,7 @@
 .pannel_dots{
     cursor: pointer;
     margin-top: -10px;
+    user-select: none;
 }
 
 @media (max-width:768px) {
