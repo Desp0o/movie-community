@@ -25,6 +25,7 @@ import AddPost from "./components/CreatePageComps/AddPost"
 const queryClient = new QueryClient()
 
 function App() {
+  const token = localStorage.getItem('token')
   const {isDark} = useDarkModeHook()
   const {user} = useUserHook()
   const [isLoading, setLoading] = useState(true)
@@ -52,7 +53,6 @@ function App() {
   }, [dispatch]);
 
   useEffect(()=>{
-    const token = localStorage.getItem('token')
     setLoading(true)
 
     const checkMe = async () => {
@@ -81,6 +81,7 @@ function App() {
         console.log(error);
         localStorage.removeItem('userName')
         localStorage.removeItem('token')
+        localStorage.removeItem('userID')
       }
       finally{
         setLoading(false)

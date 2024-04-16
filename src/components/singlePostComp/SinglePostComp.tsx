@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./singlePostComp.css";
 import Author from "./Author";
 import PostTitle from "./PostTitle";
@@ -39,7 +39,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   date,
   postUserId
 }) => {
-
+  const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
   const token  = localStorage.getItem('token')
   const deletePost = async () => {
@@ -59,13 +59,28 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }
   }
 
+  useEffect(()=>{
+    if(Number(user.userID) === postUserId){
+      setUserLoged(true)
+    }else{
+      setUserLoged(false)
+    }
+  },[user])
+
   const { isDark } = useDarkModeHook()
   return (
       <div className="post_borders">
-        <Link to={`/pages/EditPost/${postID}`}>
+        
+        {isUserLogged 
+        ? 
+        <>
+        <Link to={`/pages/EditPost/${postID}`}> 
           <p>edit</p>
         </Link>
-        {postUserId === Number(user.userID) ? <p className="delete_btn" onClick={deletePost}>delete</p> : <></>}
+        <p className="delete_btn" onClick={deletePost}>delete</p> 
+        </>
+        : 
+        <></>}
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <Author avatar={authorAvatar} name={authorName} date={date} />
           <PostTitle title={postTitle} />

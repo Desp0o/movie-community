@@ -19,13 +19,12 @@ export const useGoogleLogIn = () => {
     
         try {
           const signIn = await signInWithPopup(auth, provider);
-          disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: signIn.user.uid}))
           disptach(setModalVisible(false))
-          localStorage.setItem('userName', JSON.stringify(signIn.user.displayName))
+          signIn.user.displayName && localStorage.setItem('userName', signIn.user.displayName)
           
           const avatarFromGoogle = signIn.user.photoURL
           const formatedAvatar = avatarFromGoogle?.substring(0, avatarFromGoogle.length - 4)
-          
+
           const formData = {
             name: signIn.user.displayName,
             avatar: formatedAvatar + "250",
@@ -40,7 +39,7 @@ export const useGoogleLogIn = () => {
           })
           localStorage.setItem('token',res.data.token)
           localStorage.setItem('userID', res.data.user_id)
-          console.log(res.data);
+          disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: res.data.user_id}))
           
           return signIn;
         } catch (error) {
