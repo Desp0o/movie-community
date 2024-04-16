@@ -20,6 +20,7 @@ import Create from "./pages/Create"
 import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
 import EditPost from "./pages/EditPost"
+// import AddPost from "./components/CreatePageComps/AddPost"
 
 const queryClient = new QueryClient()
 
@@ -108,6 +109,7 @@ function App() {
       <div className={isDark ? "app darkMode" : "app"}>
         <Navbar />
         <LeftNavigation />
+        {/* <AddPost /> */}
         <Routes>
           <Route path="/" element={<Outlet />} />
           <Route index element={<Feed />} />
