@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { setRefetch } from "../../Redux/RefetchSlicer";
+import { useResPostModal } from "../../hooks/useResPostModal";
 
 
 const AddPost = () => {
@@ -23,6 +24,7 @@ const AddPost = () => {
   const { requestRefetch } = useRefetchHook()
   const [isLoading, setLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { resPostModal } = useResPostModal();
 
   const [uploadedImage, setUploadedImage] = useState<string>('')
   const [postValue, setPostValue] = useState<{
@@ -101,6 +103,23 @@ const AddPost = () => {
   const CreatePost = () => {
     sendPost()
   }
+
+  useEffect(()=>{
+    console.log("resPostModal:", resPostModal);
+  
+    if (resPostModal === true) {
+      console.log("Disabling scrolling");
+      document.body.style.overflow = "hidden";
+    } else {
+      console.log("Enabling scrolling");
+      document.body.style.overflow = "auto";
+    }
+  
+    return () => {
+      // Cleanup function to reset overflow when component unmounts or dependency changes
+      document.body.style.overflow = "auto";
+    };
+  },[resPostModal])
 
   return (
   

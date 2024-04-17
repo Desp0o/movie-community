@@ -96,6 +96,23 @@ const EditPost = () => {
     }
 },[editPostModal.id])
 
+useEffect(()=>{
+  console.log("resPostModal:", editPostModal);
+
+  if (editPostModal.value === true) {
+    console.log("Disabling scrolling");
+    document.body.style.overflow = "hidden";
+  } else {
+    console.log("Enabling scrolling");
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    // Cleanup function to reset overflow when component unmounts or dependency changes
+    document.body.style.overflow = "auto";
+  };
+},[editPostModal])
+
   return (
     <div>
       <>
