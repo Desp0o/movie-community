@@ -88,6 +88,7 @@ const AddPost = () => {
           })
           dispatch(setRefetch(!requestRefetch))
           closeResPostModal()
+          setPostValue({...postValue, text:'', title:''})
           console.log(res.data);
           notify()
         } catch (error: any) {
@@ -108,6 +109,8 @@ const AddPost = () => {
     <>
     {isLoading ? <div className="backdropFilter"><Fetching /></div> : <></>}
     <AddPostDesktop 
+      titleValueProp={postValue.title}
+      textValueProp={postValue.text}
       handlePostTitleProp={handlePostTitle}
       handlePostBodyProp={handlePostBody}
       handleFileChangeProp={handleFileChange}
@@ -121,6 +124,8 @@ const AddPost = () => {
     <>
     {isLoading ? <div className="backdropFilter"><Fetching /></div> : <></>}
     <AddPostResponsive 
+      titleValueProp={postValue.title}
+      textValueProp={postValue.text}
       sendPostProp={sendPost} 
       handlePostTitleProp={handlePostTitle} 
       handlePostBodyProp={handlePostBody} 

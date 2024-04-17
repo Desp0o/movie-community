@@ -14,6 +14,8 @@ interface AddPostDesktopProps {
   fileInputRefProp: RefObject<HTMLInputElement>;
   handleButtonClickProp: () => void;
   uploadedImageProp: string;
+  titleValueProp: string;
+  textValueProp: string;
 }
 
 const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
@@ -23,6 +25,8 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
   handleFileChangeProp,
   handlePostTitleProp,
   handlePostBodyProp,
+  titleValueProp,
+  textValueProp,
 }) => {
 
   const { isDark } = useDarkModeHook()
@@ -44,6 +48,7 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
         </div>
 
         <input
+          value={titleValueProp}
           ref={fileInputRefProp}
           multiple
           type="file"
@@ -52,6 +57,7 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
         />
 
         <input
+          value={textValueProp}
           type="text"
           className="input_style_createPage"
           placeholder="სათაური"

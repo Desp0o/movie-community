@@ -100,7 +100,7 @@ const EditPost = () => {
       <>
         {isLoading ? <Fetching /> : <></>}
         <div className={editPostModal.value ? "edit_post_container active" : "edit_post_container"}>
-        <div className={isDark ? "add_post dark" : "add_post"}>
+        <div className={isDark ? "edit_post dark" : "add_post"}>
         <span style={{ cursor: "pointer"}} onClick={closeEditPostModal}>
               {xIcon}
             </span>

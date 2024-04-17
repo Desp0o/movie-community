@@ -15,7 +15,7 @@
     position: fixed;
     z-index: 111;
     left: 0;
-    bottom: -100%;
+    bottom: -100vh;
     background-color: teal;
     transition: bottom 0.3s ease;
 

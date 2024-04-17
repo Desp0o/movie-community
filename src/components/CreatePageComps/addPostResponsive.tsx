@@ -14,6 +14,8 @@ interface AddPostResponsiveProps {
   fileInputRefProp: RefObject<HTMLInputElement>;
   handleButtonClickProp: () => void;
   uploadedImageProp: string;
+  titleValueProp:string;
+  textValueProp: string;
 }
 
 const AddPostResponsive: React.FC<AddPostResponsiveProps> = ({
@@ -24,6 +26,8 @@ const AddPostResponsive: React.FC<AddPostResponsiveProps> = ({
   fileInputRefProp,
   handleButtonClickProp,
   uploadedImageProp,
+  titleValueProp,
+  textValueProp
 }) => {
   const { isDark } = useDarkModeHook();
   const { resPostModal } = useResPostModal();
@@ -52,6 +56,7 @@ const AddPostResponsive: React.FC<AddPostResponsiveProps> = ({
         </div>
 
         <input
+          value={titleValueProp}
           type="text"
           className="input_style_createPage"
           placeholder="სათაური"
@@ -59,6 +64,7 @@ const AddPostResponsive: React.FC<AddPostResponsiveProps> = ({
         />
 
         <textarea
+          value={textValueProp}
           className="post_body"
           onChange={handlePostBodyProp}
           placeholder="Description (optional)"
