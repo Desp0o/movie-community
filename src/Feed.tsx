@@ -30,6 +30,7 @@ const Feed = () => {
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
   const { requestRefetch } = useRefetchHook()
+  const [commentDataBase, setCommentDataBase] = useState([])
   const [path, setPath] = useState("https://api.pinky.ge/api/guestFeed")
 
   useEffect(()=>{
@@ -52,6 +53,7 @@ const Feed = () => {
             'Content-Type': 'application/json'
           }
         });
+        setCommentDataBase(response.data.comments)
         return response.data; 
       } catch (error) {
         console.log(error);
@@ -59,8 +61,16 @@ const Feed = () => {
     }
   )
 
-  console.log(data);
+  // console.log(data);
+
+  useEffect(()=>{
+    
+      console.log(commentDataBase);
+      
   
+    
+  },[data])
+
   useEffect(()=>{
     refetch()        
   },[requestRefetch])

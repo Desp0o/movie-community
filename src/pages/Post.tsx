@@ -24,6 +24,7 @@ interface PostData {
   dislike: number;
   id: number;
   status: number | string;
+  comment:number;
   user: {
     avatar: string;
     name: string;
@@ -35,6 +36,7 @@ const Post = () => {
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const [data, setData] = useState<PostData | null>(null);
+  const [commData, setComData] = useState([])
   const [isLoading, setLoading] = useState(false);
 
   const openFullScreen = () => {
@@ -54,10 +56,11 @@ const Post = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_SINGLE_POST}${id}`
         );
-        console.log(response.data[0]);
-        setData(response.data[0]);
+        console.log(response.data.comments);
+        setComData(response.data.comments)
+        setData(response.data.post);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -136,7 +139,8 @@ const Post = () => {
 
             <AddComment postID={id}/>
 
-            <CommentsSection />
+            {Number(data.comment) > 0 ? <CommentsSection fetchedComments={commData}/> : <></>}
+            
           </div>
         </PageLayout>
       ) : (

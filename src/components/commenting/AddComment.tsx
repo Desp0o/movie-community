@@ -10,8 +10,11 @@ interface addCommentProps{
 
 const AddComment:React.FC<addCommentProps> = ({postID}) => {
   const token = localStorage.getItem('token')
-  const [commentValue, setCommentValue] = useState({
-    img: "",
+  const [commentValue, setCommentValue] = useState<{
+    img: File | undefined;
+    text: string;
+  }>({
+    img: undefined,
     text: ""
   })
   const { user } = useUserHook()
@@ -52,6 +55,15 @@ const AddComment:React.FC<addCommentProps> = ({postID}) => {
     }
   }
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // setUploadedImage(URL.createObjectURL(file));
+    }
+
+    setCommentValue({ ...commentValue, img: file });
+  };
+
   return (
     <div className='comment_container'>
         <textarea
@@ -64,6 +76,12 @@ const AddComment:React.FC<addCommentProps> = ({postID}) => {
         placeholder="Write your comment here..."
         />
 
+        
+<input
+          multiple
+          type="file"
+          onChange={handleFileChange}
+        />
     <button className='comment_ntm' onClick={addComment}>add comment</button>
     </div>
   );
