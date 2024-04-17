@@ -44,7 +44,7 @@ const Feed = () => {
     }    
   },[path, user])
 
-  // const PAGE_SIZE = 10
+  const PAGE_SIZE = 3
 
   const { data, fetchNextPage,isLoading, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery(
     'feed-query',
@@ -58,11 +58,11 @@ const Feed = () => {
       return response;
     },
     {
-      getNextPageParam: (_lastPage, allPages) => {
+      getNextPageParam: (lastPage, allPages) => {
         // If the last page is empty or the data length is less than the page size, it indicates no more pages
-        // if (lastPage.length === 0 || lastPage.data.length < PAGE_SIZE) {
-        //   return undefined;
-        // }
+        if (lastPage.data.length === 0 || lastPage.data.length < PAGE_SIZE) {
+          return undefined;
+        }
         // Otherwise, return the next page number
         return allPages.length + 1;
       }
@@ -87,7 +87,7 @@ const Feed = () => {
     <PageLayout>
       {isLoading ? <Fetching /> : <></>}
       <div className="feed">
-  {data?.pages.map((page, pageIndex) => (
+  {data?.pages?.map((page, pageIndex) => (
     <div key={pageIndex}>
       {page.data?.posts.data.map((post: dataProps) => (
         <div key={post.id}>

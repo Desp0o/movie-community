@@ -26,6 +26,7 @@ interface PostData {
   id: number;
   status: number | string;
   comment:number;
+  authLike: string
   user: {
     avatar: string;
     name: string;
@@ -117,26 +118,28 @@ const Post = () => {
               ) : (
                 <></>
               )}
-              {data?.img && data?.type === "0" ? (
+              {data?.img && data?.type === "0" && (
                 <PostImage image={data?.img} funName={openFullScreen} />
-              ) : (
+              ) }
+
+              {data?.img && data?.type === "1" && (
                 <PostVideo image={data?.img} />
-              )}
+              ) }
+
+
             </div>
 
-            {data?.type === 1 ? (
+            {data?.type === 1 && (
               <div className="answers_container">
                 <QuizAnswers />
               </div>
-            ) : (
-              <></>
             )}
 
             <LikeDislikeComment
               likes={data.like}
               dislikes={data.dislike}
               postID={data.id}
-              authLike={""} 
+              authLike={data.authLike} 
               commentLength={data.comment}            
               />
 
