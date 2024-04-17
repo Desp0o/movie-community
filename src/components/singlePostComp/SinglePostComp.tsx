@@ -26,6 +26,7 @@ interface SinglePostProps {
   date: string;
   postUserId:number;
   postStatus:string | number;
+  commentLength: number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -40,7 +41,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   authLike,
   date,
   postUserId,
-  postStatus
+  postStatus,
+  commentLength
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -77,7 +79,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           
           
           
-          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} />
         
           <SeeMore postID={postID} />
         </div>

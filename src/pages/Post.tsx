@@ -14,6 +14,7 @@ import CommentsSection from "../components/commenting/CommentsSection";
 import axios from "axios";
 import Fetching from "../components/fetchingComponent/Fetching";
 import EditPannel from "../components/singlePostComp/EditPannel";
+import PostVideo from "../components/singlePostComp/postVideo";
 
 interface PostData {
   title: string;
@@ -116,10 +117,10 @@ const Post = () => {
               ) : (
                 <></>
               )}
-              {data?.img ? (
+              {data?.img && data?.type === "0" ? (
                 <PostImage image={data?.img} funName={openFullScreen} />
               ) : (
-                <></>
+                <PostVideo image={data?.img} />
               )}
             </div>
 
@@ -130,12 +131,14 @@ const Post = () => {
             ) : (
               <></>
             )}
+
             <LikeDislikeComment
               likes={data.like}
               dislikes={data.dislike}
               postID={data.id}
-              authLike={""}
-            />
+              authLike={""} 
+              commentLength={data.comment}            
+              />
 
             <AddComment postID={id}/>
 

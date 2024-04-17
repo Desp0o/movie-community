@@ -15,9 +15,10 @@ interface LikeDislikeCommentProps {
   dislikes: number;
   postID: number;
   authLike: string;
+  commentLength: number
 }
 
-const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike}) => {
+const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike, commentLength}) => {
   const { user } = useUserHook()
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
@@ -198,7 +199,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
 
         <div className="single_post_comments">
             {commentsIcon}
-            <p>0</p>
+            <p>{commentLength}</p>
         </div>
     </div>
   )

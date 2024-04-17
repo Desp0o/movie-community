@@ -19,6 +19,7 @@ interface dataProps {
   updated_at: string;
   created_at: string;
   status: number | string;
+  comment: number;
   user:{
     id:number;
     name: string;
@@ -61,7 +62,7 @@ const Feed = () => {
     }
   )
 
-  // console.log(data);
+  console.log(data);
 
   useEffect(()=>{
     
@@ -95,7 +96,8 @@ const Feed = () => {
                 authLike={post.authLike}
                 date={post.created_at}
                 postUserId={post.user.id} 
-                postStatus={post.status}                
+                postStatus={post.status}  
+                commentLength={post.comment}             
                 />
             </div>
           )
