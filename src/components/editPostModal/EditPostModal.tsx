@@ -97,18 +97,13 @@ const EditPost = () => {
 },[editPostModal.id])
 
 useEffect(()=>{
-  console.log("resPostModal:", editPostModal);
-
   if (editPostModal.value === true) {
-    console.log("Disabling scrolling");
     document.body.style.overflow = "hidden";
   } else {
-    console.log("Enabling scrolling");
     document.body.style.overflow = "auto";
   }
 
   return () => {
-    // Cleanup function to reset overflow when component unmounts or dependency changes
     document.body.style.overflow = "auto";
   };
 },[editPostModal])
@@ -119,9 +114,18 @@ useEffect(()=>{
         {isLoading ? <Fetching /> : <></>}
         <div className={editPostModal.value ? "edit_post_container active" : "edit_post_container"}>
         <div className={isDark ? "edit_post dark" : "add_post"}>
-        <span style={{ cursor: "pointer"}} onClick={closeEditPostModal}>
-              {xIcon}
-            </span>
+        <div className="close_add">
+          <span style={{ cursor: "pointer" }} onClick={closeEditPostModal}>
+            {xIcon}
+          </span>
+          {
+          window.innerWidth < 601 ? <div className="res_add_btn res_edit_btn" onClick={editPost}>
+            <p>Edit</p>
+          </div>
+          :
+          <></>
+          }
+        </div>
 
           <input
             value={postValue.title}

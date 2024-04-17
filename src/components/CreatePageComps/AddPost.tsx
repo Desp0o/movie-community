@@ -108,15 +108,12 @@ const AddPost = () => {
     console.log("resPostModal:", resPostModal);
   
     if (resPostModal === true) {
-      console.log("Disabling scrolling");
       document.body.style.overflow = "hidden";
     } else {
-      console.log("Enabling scrolling");
       document.body.style.overflow = "auto";
     }
   
     return () => {
-      // Cleanup function to reset overflow when component unmounts or dependency changes
       document.body.style.overflow = "auto";
     };
   },[resPostModal])

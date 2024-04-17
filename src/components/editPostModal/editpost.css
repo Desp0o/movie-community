@@ -31,7 +31,6 @@
 }
 
 .edit_post.dark{
-    padding: 0 100px;
     background-color: var(--dark-bg);
     width: 100%;
     height: 100vh;
@@ -43,9 +42,9 @@
 
 
 @media (max-width:769px) {
-    .edit_post.dark
+    .edit_post
         {
-        padding:20px 0px;
+        padding:50px 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
