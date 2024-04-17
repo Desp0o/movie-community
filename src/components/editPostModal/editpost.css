@@ -1,6 +1,6 @@
 .edit_post_container.active{
     width: 100%;
-    height: 100svb;
+    height: 100%;
     position: fixed;
     z-index: 111;
     left: 0;
@@ -10,7 +10,7 @@
 
 .edit_post_container{
     width: 100%;
-    height: 100svb;
+    height: 100%;
     position: fixed;
     z-index: 111;
     left: 0;
@@ -23,7 +23,6 @@
     padding: 0 100px;
     background-color: var(--light-bg);
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -33,7 +32,7 @@
 .edit_post.dark{
     background-color: var(--dark-bg);
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -140,7 +140,7 @@ useEffect(()=>{
             className="post_body"
             onChange={handlePostBody}
           />
-          <SendPostBTN funName={editPost} />
+          {window.innerWidth > 600 ? <SendPostBTN funName={editPost} /> : <></>}
         </div>
         </div>
       </>
