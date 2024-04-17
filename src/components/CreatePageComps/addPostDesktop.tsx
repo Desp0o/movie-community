@@ -48,7 +48,6 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
         </div>
 
         <input
-          value={titleValueProp}
           ref={fileInputRefProp}
           multiple
           type="file"
@@ -57,14 +56,14 @@ const AddPostDesktop: React.FC<AddPostDesktopProps> = ({
         />
 
         <input
-          value={textValueProp}
+          value={titleValueProp}
           type="text"
           className="input_style_createPage"
           placeholder="სათაური"
           onChange={handlePostTitleProp}
         />
 
-        <textarea className="post_body" onChange={handlePostBodyProp} />
+        <textarea value={textValueProp} className="post_body" onChange={handlePostBodyProp} placeholder="Description (optional)"/>
         <SendPostBTN funName={CreatePostProp} />
       </div>
     </div>

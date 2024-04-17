@@ -57,7 +57,7 @@ const EditPost = () => {
       dispatch(setRefetch(!requestRefetch))
       dispatch(setEditPostModal({value: false}))
       notify()
-      
+      setPostValue({...postValue, text:"", title:""})
     } catch (error: any) {
       console.log(error.response.data);
       notifyError()
@@ -72,6 +72,7 @@ const EditPost = () => {
 
   const closeEditPostModal = () => {
     dispatch(setEditPostModal(false))
+    setPostValue({...postValue, text: "", title: ""})
   }
 
   const getPostForEdit = async () => {
