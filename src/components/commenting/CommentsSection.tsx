@@ -1,10 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { useUserHook } from "../../hooks/useUserHook";
+import { deleteComment } from "./DELcomment";
+import { editComment } from "./EDITcomment";
 
 interface Comment {
   id: number;
   text: string;
   img: string;
+  user_id:string
 }
 
 interface ComProps {
@@ -13,69 +16,26 @@ interface ComProps {
 
 const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
   const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
-  const token = localStorage.getItem("token");
+  const {user} = useUserHook()
 
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [commentValue, setCommentValue] = useState<{
-    img: File | undefined;
     text: string;
   }>({
-    img: undefined,
     text: "",
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      // setUploadedImage(URL.createObjectURL(file));
-    }
-    setCommentValue({ ...commentValue, img: file });
-  };
-
-  const deleteComment = async (comID: number) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_DEL_COMMENT}${comID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const editComment = async (comID: number) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_EDIT_COMMENT}${comID}`,
-        commentValue,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-      setEditingCommentId(null); // Reset editing state after successful edit
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
-    <div>
+    <div style={{display:"flex" , flexDirection:"column", gap:"30px"}}>
       {fetchedComments?.map((item) => (
         <div key={item.id}>
-          <p
+          {Number(item.user_id) === Number(user.userID) && (<p
             onClick={() => setEditingCommentId(item.id)}
             style={{ color: "pink", fontWeight: "900" }}
           >
             EDIT POST
-          </p>
+          </p>)}
           <div onClick={() => deleteComment(item.id)}>
             <p>{item.text}</p>
             {item.img ? (
@@ -88,7 +48,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
               <></>
             )}
           </div>
-          {editingCommentId === item.id && (
+          {editingCommentId === item.id && Number(user.userID) === Number(item.user_id) &&  (
             <div className="comment_container">
               <textarea
                 className="comment_textarea"
@@ -101,10 +61,10 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
                 }}
                 placeholder="Write your comment here..."
               />
-              <input multiple type="file" onChange={handleFileChange} />
+              
               <button
                 className="comment_ntm"
-                onClick={() => editComment(item.id)}
+                onClick={() => editComment(item.id, commentValue, setEditingCommentId)}
               >
                 edit comment
               </button>
