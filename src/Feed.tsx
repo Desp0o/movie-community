@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import Fetching from "./components/fetchingComponent/Fetching";
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
@@ -31,8 +31,8 @@ const Feed = () => {
   const token = localStorage.getItem('token')
   const { user } = useUserHook()
   const { requestRefetch } = useRefetchHook()
-  const [commentDataBase, setCommentDataBase] = useState([])
-  const [path, setPath] = useState("https://api.pinky.ge/api/guestFeed")
+  // const [commentDataBase, setCommentDataBase] = useState([])
+  const [path, setPath] = useState("https://api.pinky.ge/api/authFeed?page=1")
 
   useEffect(()=>{
     if(user.name && user.userID){
@@ -44,33 +44,39 @@ const Feed = () => {
     }    
   },[path, user])
 
-  const {isLoading, data, refetch} = useQuery(
-    ['feed-query', path], 
-    async () => {
-      try {
-        const response = await axios.get(path, {
-          headers:{
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        setCommentDataBase(response.data.comments)
-        return response.data; 
-      } catch (error) {
-        console.log(error);
+  // const PAGE_SIZE = 10
+
+  const { data, fetchNextPage,isLoading, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery(
+    'feed-query',
+    async ({ pageParam = 1 }) => {
+      const response = await axios.get(`https://api.pinky.ge/api/authFeed?page=${pageParam}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      return response;
+    },
+    {
+      getNextPageParam: (_lastPage, allPages) => {
+        // If the last page is empty or the data length is less than the page size, it indicates no more pages
+        // if (lastPage.length === 0 || lastPage.data.length < PAGE_SIZE) {
+        //   return undefined;
+        // }
+        // Otherwise, return the next page number
+        return allPages.length + 1;
       }
     }
-  )
+  );
+
+  const loadNextPage = () => {
+    if (!isFetchingNextPage && hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
   console.log(data);
 
-  useEffect(()=>{
-    
-      console.log(commentDataBase);
-      
-  
-    
-  },[data])
 
   useEffect(()=>{
     refetch()        
@@ -81,29 +87,31 @@ const Feed = () => {
     <PageLayout>
       {isLoading ? <Fetching /> : <></>}
       <div className="feed">
-        {data?.posts?.map((post: dataProps)=>{
-          return(
-            <div key={post.id}>
-              <SinglePostComp 
-                authorName={post.user.name}
-                authorAvatar={post.user.avatar}
-                postTitle={post.title}
-                postID={post.id}
-                image={post.img}
-                likes={post.like}
-                dislikes={post.dislike}
-                type={post.type}
-                authLike={post.authLike}
-                date={post.created_at}
-                postUserId={post.user.id} 
-                postStatus={post.status}  
-                commentLength={post.comment}             
-                />
-            </div>
-          )
-        })}
-      </div>
-
+  {data?.pages.map((page, pageIndex) => (
+    <div key={pageIndex}>
+      {page.data?.posts.data.map((post: dataProps) => (
+        <div key={post.id}>
+          <SinglePostComp 
+            authorName={post.user.name}
+            authorAvatar={post.user.avatar}
+            postTitle={post.title}
+            postID={post.id}
+            image={post.img}
+            likes={post.like}
+            dislikes={post.dislike}
+            type={post.type}
+            authLike={post.authLike}
+            date={post.created_at}
+            postUserId={post.user.id} 
+            postStatus={post.status}  
+            commentLength={post.comment}             
+          />
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+  <button onClick={loadNextPage}>load more psts</button>
     </PageLayout>
   );
 };
