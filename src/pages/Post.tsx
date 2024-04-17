@@ -56,7 +56,7 @@ const Post = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_SINGLE_POST}${id}`
         );
-        console.log(response.data.comments);
+        console.log(response.data);
         setComData(response.data.comments)
         setData(response.data.post);
       } catch (error) {
