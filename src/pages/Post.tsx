@@ -9,8 +9,8 @@ import "../components/singlePostPage/singlePostPage.css";
 import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
 import { useEffect, useState } from "react";
 import { xIcon } from "../assets/svg/Xicon";
-import AddComment from "../components/singlePostPage/AddComment";
-import CommentsSection from "../components/singlePostPage/CommentsSection";
+import AddComment from "../components/commenting/AddComment";
+import CommentsSection from "../components/commenting/CommentsSection";
 import axios from "axios";
 import Fetching from "../components/fetchingComponent/Fetching";
 import EditPannel from "../components/singlePostComp/EditPannel";
@@ -134,7 +134,7 @@ const Post = () => {
               authLike={""}
             />
 
-            <AddComment />
+            <AddComment postID={id}/>
 
             <CommentsSection />
           </div>
