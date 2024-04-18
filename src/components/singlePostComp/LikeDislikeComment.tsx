@@ -9,6 +9,7 @@ import { activeDislike } from "../../assets/svg/activeDislike";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
+import { useRefetchHook } from "../../hooks/useRefetchHook";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -20,6 +21,7 @@ interface LikeDislikeCommentProps {
 
 const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike, commentLength}) => {
   const { user } = useUserHook()
+  const { requestRefetch } = useRefetchHook()
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
   const [isLikeActive, setLikeActive] = useState(false)
@@ -70,7 +72,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setLikeIcon(arrowLike)
     }
     // eslint-disable-next-line
-  },[user.name, authLike, user.userID])
+  },[user.name, authLike, user.userID, requestRefetch])
 
   const unlikeFunction = async () => {
     try {

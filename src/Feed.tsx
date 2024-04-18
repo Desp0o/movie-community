@@ -30,7 +30,7 @@ interface dataProps {
 const Feed = () => {
   const { requestRefetch } = useRefetchHook();
   const {user} = useUserHook()
-  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching } = FeedFunctions()
+  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
   const loadNextPage = () => {
     if (!isFetchingNextPage && hasNextPage) {
@@ -42,6 +42,7 @@ const Feed = () => {
     refetch();
     console.log("refetching");
     console.log("ეს არის იუზერის იდი " + user.userID);
+    console.log(requestRefetch);
     
   }, [requestRefetch]);
 
@@ -63,7 +64,6 @@ const Feed = () => {
   return (
     <PageLayout>
       {isLoading && <Fetching />}
-      {isFetching && <div style={{width:"100%", height:"100vh",backgroundColor:"red", position:"fixed", zIndex:"999"}}></div>}
       <div className="feed">
         {data?.pages?.map((page, pageIndex) => (
           <div key={pageIndex}>
