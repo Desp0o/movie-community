@@ -138,11 +138,6 @@ const Feed = () => {
           </div>
         ))}
       </div>
-      {hasNextPage && (
-        <button onClick={loadNextPage} disabled={isFetchingNextPage}>
-          {isFetchingNextPage ? "Loading..." : "Load More Posts"}
-        </button>
-      )}
     </PageLayout>
   );
 };
