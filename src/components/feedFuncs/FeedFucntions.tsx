@@ -17,14 +17,19 @@ export const FeedFunctions = () => {
         localStorage.setItem('lastPage', lastPage.toString());
     }, [lastPage]);
 
-    const [path, setPath] = useState('https://api.pinky.ge/api/authFeed?page=')
+    const [path, setPath] = useState('https://api.pinky.ge/api/guestFeed?page=')
     useEffect(()=>{
-      if(user.userID){
-        setPath('https://api.pinky.ge/api/authFeed?page=')
+
+      if(!user.name){
+        setPath('https://api.pinky.ge/api/guestFeed?page=')
       }else{
         setPath('https://api.pinky.ge/api/authFeed?page=')
       }
-    },[user])
+      console.log(path);
+      console.log(user.name);
+      
+      refetch
+    },[user.userID,path])
 
     const {
         data,
@@ -42,14 +47,13 @@ export const FeedFunctions = () => {
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
-                            "Content-Type": "application/json",
                         },
                     }
                 );
                 setLastPage(response.data.posts.last_page);
                 return response;
             } catch (error) {
-                throw new Error('Failed to fetch data');
+                console.error(error)
             }
         },
         {

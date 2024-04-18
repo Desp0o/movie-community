@@ -17,9 +17,11 @@ export const useLogOut = () => {
     try {
       dispatch(setUser({name: '', avatar: '', userID: ''}))
       localStorage.removeItem('token')
+      localStorage.removeItem('avatar')
       localStorage.removeItem('userName')
       localStorage.removeItem('token_death')
       localStorage.removeItem('userID')
+      localStorage.removeItem('score')
     } catch (error) {
       console.error("Logout Error:", error);
     }

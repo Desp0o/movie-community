@@ -65,7 +65,8 @@ function App() {
             setUser({
               name: response.data.name, 
               userID: response.data.id, 
-              avatar: response.data.avatar
+              avatar: response.data.avatar,
+              score: response.data.point
             })
           )
           

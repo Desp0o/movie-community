@@ -42,7 +42,7 @@ export const useGoogleLogIn = () => {
           
           localStorage.setItem('token',res.data.token)
           localStorage.setItem('userID', res.data.user_id)
-          dispatch(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: res.data.user_id}))
+          dispatch(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: res.data.user_id, points: res.data.point}))
           dispatch(setRefetch(!requestRefetch))
           return signIn;
         } catch (error) {

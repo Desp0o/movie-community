@@ -6,7 +6,8 @@ const userSlicer = createSlice({
         user: {
             name: '' || localStorage.getItem('userName'),
             userID: 0 || localStorage.getItem('userID'),
-            avatar: '' ||localStorage.getItem('avatar')
+            avatar: '' ||localStorage.getItem('avatar'),
+            score: parseInt('2')
         }
     },
     reducers:{
@@ -14,6 +15,7 @@ const userSlicer = createSlice({
             state.user.name = action.payload.name;
             state.user.avatar = action.payload.avatar;
             state.user.userID = action.payload.userID;
+            state.user.score = action.payload.score;
         }
     }
 })

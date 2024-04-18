@@ -82,7 +82,6 @@ const Navbar = () => {
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
           <p>LOGO</p>
         </div>
-
         <div className="nav_search">
           <div className="nav_search_icon">{searchIcon}</div>
           <input
@@ -110,6 +109,7 @@ const Navbar = () => {
                   {addIcon}
                   <p>Create</p>
                 </div>
+                <p style={{color:"blue", fontWeight:"900"}}>{user?.score}</p>
 
               <div
                 className={
@@ -129,6 +129,7 @@ const Navbar = () => {
                     : "nav_profile_item_parent"
                 }
               >
+                
                 <img
                   src={user.avatar ? user.avatar : noAvatar}
                   alt="user avatr"
