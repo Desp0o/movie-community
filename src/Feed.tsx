@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { useRefetchHook } from "./hooks/useRefetchHook";
 
 import "./Feed.css";
-import { FeedFunctions } from "./components/feedComponent/FeedFunctions";
 import { useUserHook } from "./hooks/useUserHook";
+import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 
 interface dataProps {
   id: number;
