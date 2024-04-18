@@ -12,7 +12,6 @@ export const feedFunctions = () => {
         data,
         fetchNextPage,
         isLoading,
-        isFetching,
         hasNextPage,
         isFetchingNextPage,
         refetch,
