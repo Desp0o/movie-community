@@ -65,7 +65,7 @@ const Feed = () => {
     <PageLayout>
       {isLoading && <Fetching />}
       <div className="feed">
-        {data?.pages?.map((page, pageIndex) => (
+        {data?.pages?.map((page: any, pageIndex: number) => (
           <div key={pageIndex}>
             {page.data?.posts.data.map((post: dataProps) => (
               <div key={post.id}>
