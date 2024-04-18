@@ -39,10 +39,6 @@ const Feed = () => {
   useEffect(() => {
     refetch();
     console.log("refetching");
-
-    return ()=> {
-      refetch()
-    }
     // eslint-disable-next-line
   }, [requestRefetch]);
 
