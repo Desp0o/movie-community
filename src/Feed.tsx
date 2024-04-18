@@ -31,8 +31,8 @@ const Feed = () => {
   const token = localStorage.getItem("token");
   const { user } = useUserHook();
   const { requestRefetch } = useRefetchHook();
-  // const [commentDataBase, setCommentDataBase] = useState([])
-  const [path, setPath] = useState("https://api.pinky.ge/api/authFeed?page=1");
+  const [_path, setPath] = useState("https://api.pinky.ge/api/authFeed?page=1");
+  const [lastPage, setLastPage] = useState(0)
 
   useEffect(() => {
     if (user.name && user.userID) {
@@ -42,9 +42,7 @@ const Feed = () => {
     } else {
       setPath("https://api.pinky.ge/api/guestFeed");
     }
-  }, [path, user]);
-
-  const PAGE_SIZE = 3;
+  }, [user]);
 
   const {
     data,
@@ -56,24 +54,30 @@ const Feed = () => {
   } = useInfiniteQuery(
     "feed-query",
     async ({ pageParam = 1 }) => {
-      const response = await axios.get(
-        `https://api.pinky.ge/api/authFeed?page=${pageParam}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response;
+      try {
+        const response = await axios.get(
+          `https://api.pinky.ge/api/authFeed?page=${pageParam}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setLastPage(response.data.posts.last_page)
+        return response; // Return the data from the response, not the response itself
+      } catch (error) {
+        throw new Error('Failed to fetch data');
+      }
     },
     {
-      getNextPageParam: (lastPage, allPages) => {
-        // If the last page is empty or the data length is less than the page size, it indicates no more pages
-        if (lastPage.data.length === 0 || lastPage.data.length < PAGE_SIZE) {
-          return undefined;
+      getNextPageParam: (_lastPage, allPages) => {
+        console.log(allPages);
+        if(allPages.length >= lastPage){
+          return;
         }
-        // Otherwise, return the next page number
+        
         return allPages.length + 1;
       },
     }
@@ -85,15 +89,30 @@ const Feed = () => {
     }
   };
 
-  console.log(data);
-
   useEffect(() => {
     refetch();
   }, [requestRefetch]);
 
+  useEffect(()=>{
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        console.log('hey');
+        loadNextPage()
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  },[data])
+
+  
+
   return (
     <PageLayout>
-      {isLoading ? <Fetching /> : <></>}
+      {isLoading && <Fetching />}
       <div className="feed">
         {data?.pages?.map((page, pageIndex) => (
           <div key={pageIndex}>
@@ -119,7 +138,11 @@ const Feed = () => {
           </div>
         ))}
       </div>
-      <button onClick={loadNextPage}>load more psts</button>
+      {hasNextPage && (
+        <button onClick={loadNextPage} disabled={isFetchingNextPage}>
+          {isFetchingNextPage ? "Loading..." : "Load More Posts"}
+        </button>
+      )}
     </PageLayout>
   );
 };
