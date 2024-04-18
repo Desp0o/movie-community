@@ -4,9 +4,9 @@ const userSlicer = createSlice({
     name: 'userSlicer',
     initialState:{
         user: {
-            name: localStorage.getItem('userName') || '',
-            userID: localStorage.getItem('userID') || 0,
-            avatar: localStorage.getItem('avatar') || ''
+            name: '' || localStorage.getItem('userName'),
+            userID: 0 || localStorage.getItem('userID'),
+            avatar: '' ||localStorage.getItem('avatar')
         }
     },
     reducers:{

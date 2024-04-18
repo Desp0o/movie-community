@@ -44,7 +44,7 @@ const Feed = () => {
     console.log("ეს არის იუზერის იდი " + user.userID);
     console.log(requestRefetch);
     
-  }, [requestRefetch]);
+  }, [requestRefetch, user]);
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -60,6 +60,7 @@ const Feed = () => {
     };
     // eslint-disable-next-line
   },[data])
+  
 
   return (
     <PageLayout>
