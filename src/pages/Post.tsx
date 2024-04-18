@@ -7,7 +7,7 @@ import PostImage from "../components/singlePostComp/postImage";
 import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css";
 import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/commenting/AddComment";
 import CommentsSection from "../components/commenting/CommentsSection";
@@ -15,31 +15,13 @@ import axios from "axios";
 import Fetching from "../components/fetchingComponent/Fetching";
 import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
-
-interface PostData {
-  title: string;
-  created_at: string;
-  img: string;
-  type: number | string;
-  like: number;
-  dislike: number;
-  id: number;
-  status: number | string;
-  comment:number;
-  authLike: string
-  user: {
-    avatar: string;
-    name: string;
-  };
-}
+import { useQuery } from "react-query";
 
 const Post = () => {
   const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
-  const [data, setData] = useState<PostData | null>(null);
   const [commData, setComData] = useState([])
-  const [isLoading, setLoading] = useState(false);
 
   const openFullScreen = () => {
     setFullScreenImage(true);
@@ -51,27 +33,21 @@ const Post = () => {
     document.body.style.overflow = "auto";
   };
 
-  useEffect(() => {
-    const requestSInglePost = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SINGLE_POST}${id}`
-        );
-        console.log(response.data);
-        setComData(response.data.comments)
-        setData(response.data.post);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    requestSInglePost();
-  }, []);
+  const { data, isLoading, isError, error, refetch } = useQuery(
+    `single-post`,
+    async () => {
+      const response = await axios.get(`${import.meta.env.VITE_SINGLE_POST}${id}`);
+      setComData(response.data.comments);
+      return response.data.post; 
+    }
+  );
 
   if (isLoading) {
     return <Fetching />;
+  }
+
+  if(isError){
+    console.error(error)
   }
 
   return (
@@ -143,9 +119,9 @@ const Post = () => {
               commentLength={data.comment}            
               />
 
-            <AddComment postID={id}/>
+            <AddComment postID={id} callBack={refetch}/>
 
-            {Number(data.comment) > 0 ? <CommentsSection fetchedComments={commData}/> : <></>}
+            {Number(data.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
             
           </div>
         </PageLayout>

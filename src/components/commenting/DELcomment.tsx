@@ -2,9 +2,9 @@ import axios from "axios";
 
 const token = localStorage.getItem("token");
 
-export const deleteComment = async (comID: number) => {
+export const deleteComment = async (comID: number, callback: ()=>void) => {
     try {
-      const response = await axios.get(
+      await axios.get(
         `${import.meta.env.VITE_DEL_COMMENT}${comID}`,
         {
           headers: {
@@ -12,7 +12,7 @@ export const deleteComment = async (comID: number) => {
           },
         }
       );
-      console.log(response);
+      callback()
     } catch (error) {
       console.error(error);
     }

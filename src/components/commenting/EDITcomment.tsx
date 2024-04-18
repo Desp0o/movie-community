@@ -3,9 +3,9 @@ import { SetStateAction } from "react";
 
 const token = localStorage.getItem("token");
 
-export const editComment = async (comID: number, commentValue: any, setter: { (value: SetStateAction<number | null>): void; (arg0: null): void; }) => {
+export const editComment = async (callback:()=>void, comID: number, commentValue: any, setter: { (value: SetStateAction<number | null>): void; (arg0: null): void; }) => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_EDIT_COMMENT}${comID}`,
         commentValue,
         {
@@ -14,8 +14,8 @@ export const editComment = async (comID: number, commentValue: any, setter: { (v
           },
         }
       );
-      console.log(response);
-      setter(null); // Reset editing state after successful edit
+      callback()
+      setter(null);
     } catch (error) {
       console.error(error);
     }

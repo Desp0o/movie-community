@@ -12,9 +12,10 @@ interface Comment {
 
 interface ComProps {
   fetchedComments: Comment[];
+  callback:()=>void
 }
 
-const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
+const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
   const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
   const {user} = useUserHook()
 
@@ -36,7 +37,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
           >
             EDIT POST
           </p>)}
-          <div onClick={() => deleteComment(item.id)}>
+          <div onClick={() => deleteComment(item.id, callback)}>
             <p>{item.text}</p>
             {item.img ? (
               <img
@@ -64,7 +65,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments }) => {
               
               <button
                 className="comment_ntm"
-                onClick={() => editComment(item.id, commentValue, setEditingCommentId)}
+                onClick={() => editComment(callback, item.id, commentValue, setEditingCommentId)}
               >
                 edit comment
               </button>
