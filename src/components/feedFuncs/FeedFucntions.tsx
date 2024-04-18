@@ -17,12 +17,12 @@ export const FeedFunctions = () => {
         localStorage.setItem('lastPage', lastPage.toString());
     }, [lastPage]);
 
-    const [path, setPath] = useState(import.meta.env.VITE_GUEST_FEED)
+    const [path, setPath] = useState('https://api.pinky.ge/api/authFeed?page=')
     useEffect(()=>{
       if(user.userID){
-        setPath(import.meta.env.VITE_FEED_POSTS)
+        setPath('https://api.pinky.ge/api/authFeed?page=')
       }else{
-        setPath(import.meta.env.VITE_GUEST_FEED)
+        setPath('https://api.pinky.ge/api/authFeed?page=')
       }
     },[user])
 
@@ -59,7 +59,7 @@ export const FeedFunctions = () => {
                 }
                 return allPages.length + 1;
             },
-        }
+        },
     );
 
     return { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching };

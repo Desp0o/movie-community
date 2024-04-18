@@ -56,7 +56,7 @@ const Post = () => {
       setComData(response.data.comments);
       return response.data.post; 
     },{
-      cacheTime:0
+      cacheTime:0,
     }
   );
 
