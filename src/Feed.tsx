@@ -138,6 +138,7 @@ const Feed = () => {
           </div>
         ))}
       </div>
+      {!hasNextPage && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
     </PageLayout>
   );
 };
