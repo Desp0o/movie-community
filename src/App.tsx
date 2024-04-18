@@ -89,7 +89,7 @@ function App() {
       setLoading(false)
     }
 
-  },[dispatch])
+  },[dispatch, token])
 
   useEffect(()=>{
     isDark ?

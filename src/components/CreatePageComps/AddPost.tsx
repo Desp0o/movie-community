@@ -51,7 +51,7 @@ const AddPost = () => {
       setPostValue({ ...postValue, type: 0 });
     }
     
-  },[postValue.img])
+  },[postValue])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });

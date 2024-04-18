@@ -46,6 +46,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
+  const { isDark } = useDarkModeHook()
 
 
   useEffect(()=>{
@@ -56,7 +57,6 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }
   },[user, isUserLogged])
 
-  const { isDark } = useDarkModeHook()
   return (
     <>
     <div className="post_borders">
@@ -66,23 +66,20 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Author avatar={authorAvatar} name={authorName} date={date} />
             {isUserLogged ? <EditPannel postID={postID}/> : <></>}
           </div>
-            <PostTitle title={postTitle} postStatus={postStatus} />
-          
-          
+          <PostTitle title={postTitle} postStatus={postStatus} />
+      
           {type === "0"
             ? (image ? <PostImage image={image} /> : <></>)
             : type === "1" ?
             (image ? <PostVideo image={image} /> : <></>)
             : <></>
-
           }
-          
-          
-          
+
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} />
         
           <SeeMore postID={postID} />
         </div>
+        
       </div>
     </>
     
