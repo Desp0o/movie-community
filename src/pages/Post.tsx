@@ -7,7 +7,7 @@ import PostImage from "../components/singlePostComp/postImage";
 import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css";
 import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/commenting/AddComment";
 import CommentsSection from "../components/commenting/CommentsSection";
@@ -16,12 +16,15 @@ import Fetching from "../components/fetchingComponent/Fetching";
 import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
 import { useQuery } from "react-query";
+import { useUserHook } from "../hooks/useUserHook";
 
 const Post = () => {
+  const token = localStorage.getItem('token')
   const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const [commData, setComData] = useState([])
+  const {user} = useUserHook()
 
   const openFullScreen = () => {
     setFullScreenImage(true);
@@ -33,14 +36,32 @@ const Post = () => {
     document.body.style.overflow = "auto";
   };
 
+  const [path, setPath] = useState(import.meta.env.VITE_SINGLE_GUEST_POST)
+  useEffect(()=>{
+    if(user.userID){
+      setPath(import.meta.env.VITE_SINGLE_AUTH_POST)
+    }else{
+      setPath(import.meta.env.VITE_SINGLE_GUEST_POST)
+    }
+  },[user])
+
   const { data, isLoading, isError, error, refetch } = useQuery(
-    `single-post`,
+    [`single-post`, path],
     async () => {
-      const response = await axios.get(`${import.meta.env.VITE_SINGLE_POST}${id}`);
+      const response = await axios.get(`${path}${id}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
       setComData(response.data.comments);
       return response.data.post; 
+    },{
+      cacheTime:0
     }
   );
+
+  console.log(data);
+  
 
   if (isLoading) {
     return <Fetching />;
