@@ -3,7 +3,7 @@ import { SetStateAction } from "react";
 
 const token = localStorage.getItem("token");
 
-export const editComment = async (callback:()=>void, comID: number, commentValue: any, setter: { (value: SetStateAction<number | null>): void; (arg0: null): void; }) => {
+export const editComment = async (callback:()=>void, comID: number, commentValue: unknown, setter: { (value: SetStateAction<number | null>): void; (arg0: null): void; }) => {
     try {
       await axios.post(
         `${import.meta.env.VITE_EDIT_COMMENT}${comID}`,
@@ -16,7 +16,7 @@ export const editComment = async (callback:()=>void, comID: number, commentValue
       );
       callback()
       setter(null);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
     }
   };

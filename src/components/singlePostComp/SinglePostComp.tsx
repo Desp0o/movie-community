@@ -55,7 +55,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }else{
       setUserLoged(false)
     }
-  },[user, isUserLogged])
+  },[user, isUserLogged, postUserId])
 
   return (
     <>

@@ -58,8 +58,8 @@ const EditPost = () => {
       dispatch(setEditPostModal({value: false}))
       notify()
       setPostValue({...postValue, text:"", title:""})
-    } catch (error: any) {
-      console.log(error.response.data);
+    } catch (error: unknown) {
+      console.error(error);
       notifyError()
     } finally {
       setLoading(false);
@@ -94,6 +94,7 @@ const EditPost = () => {
         getPostForEdit()
 
     }
+    // eslint-disable-next-line
 },[editPostModal.id])
 
 useEffect(()=>{

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useUserHook } from '../../hooks/useUserHook';
 
-export const feedFunctions = () => {
+export const FeedFunctions = () => {
     const token = localStorage.getItem("token");
     const [lastPage, setLastPage] = useState(0)
   const {user} = useUserHook()
@@ -28,7 +28,6 @@ export const feedFunctions = () => {
                 },
               }
             );
-            console.log(response.data);
             setLastPage(response.data.posts.last_page)
             return response; // Return the data from the response, not the response itself
           } catch (error) {
@@ -37,7 +36,6 @@ export const feedFunctions = () => {
         },
         {
           getNextPageParam: (_lastPage, allPages) => {
-            console.log(allPages);
             if(allPages.length >= lastPage){
               return;
             }

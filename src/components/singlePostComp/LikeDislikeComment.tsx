@@ -9,6 +9,8 @@ import { activeDislike } from "../../assets/svg/activeDislike";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
+import { setRefetch } from "../../Redux/RefetchSlicer";
+import { useRefetchHook } from "../../hooks/useRefetchHook";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -20,6 +22,7 @@ interface LikeDislikeCommentProps {
 
 const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike, commentLength}) => {
   const { user } = useUserHook()
+  const { requestRefetch } = useRefetchHook()
   const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
   const [isLikeActive, setLikeActive] = useState(false)
@@ -28,11 +31,11 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
   const dispatch = useDispatch()
 
-  const [isLike, _setLike] = useState({
+  const [isLike,] = useState({
     post: postID,
     like: 'like'
   })
-  const [isUnlike, _setUnLike] = useState({
+  const [isUnlike,] = useState({
     post: postID,
     like: 'dislike'
   })
@@ -69,8 +72,10 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setLikeActive(false)
       setLikeIcon(arrowLike)
     }
-
-  },[user.name, authLike, user.userID])
+    dispatch(setRefetch(!requestRefetch))
+    
+    // eslint-disable-next-line
+  },[user.name, authLike, user.userID, dispatch])
 
   const unlikeFunction = async () => {
     try {

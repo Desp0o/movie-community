@@ -93,7 +93,7 @@ const AddPost = () => {
           setPostValue({...postValue, text:'', title:''})
           console.log(res.data);
           notify()
-        } catch (error: any) {
+        } catch (error: unknown) {
           notifyError()
         }finally{
         setLoading(false)

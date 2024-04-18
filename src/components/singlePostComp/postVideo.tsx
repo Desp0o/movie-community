@@ -20,6 +20,7 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
     setControlShown(false)
   }
 
+  // eslint-disable-next-line
   const videoRef: LegacyRef<any> | undefined = useRef()
 
   useEffect(() => {

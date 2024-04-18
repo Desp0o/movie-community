@@ -2,10 +2,10 @@ import Fetching from "./components/fetchingComponent/Fetching";
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
-import { useUserHook } from "./hooks/useUserHook";
 import { useRefetchHook } from "./hooks/useRefetchHook";
-import { feedFunctions } from "./components/FeedComponent/feedFunctions";
+
 import "./Feed.css";
+import { FeedFunctions } from "./components/feedComponent/FeedFunctions";
 
 interface dataProps {
   id: number;
@@ -27,9 +27,8 @@ interface dataProps {
 }
 
 const Feed = () => {
-  const { user } = useUserHook();
   const { requestRefetch } = useRefetchHook();
-  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = feedFunctions()
+  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
   const loadNextPage = () => {
     if (!isFetchingNextPage && hasNextPage) {
@@ -39,12 +38,17 @@ const Feed = () => {
 
   useEffect(() => {
     refetch();
-  }, [requestRefetch, user]);
+    console.log("refetching");
+
+    return ()=> {
+      refetch()
+    }
+    // eslint-disable-next-line
+  }, [requestRefetch]);
 
   useEffect(()=>{
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log('hey');
         loadNextPage()
       }
     };
@@ -54,6 +58,7 @@ const Feed = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line
   },[data])
 
   return (
@@ -90,3 +95,4 @@ const Feed = () => {
 };
 
 export default Feed;
+

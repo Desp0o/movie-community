@@ -32,7 +32,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
     event.target.style.height = `${event.target.scrollHeight}px`;
   };
 
-  const handleCommentValues = (event: any) => {
+  const handleCommentValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue({ ...commentValue, text: event.target.value });
   };
 
@@ -71,7 +71,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
       );
 
       callBack()
-    } catch (error) {
+    } catch (error:unknown) {
       console.error(error);
     }
   };
