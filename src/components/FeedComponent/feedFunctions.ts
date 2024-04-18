@@ -6,12 +6,13 @@ import { useUserHook } from '../../hooks/useUserHook';
 export const FeedFunctions = () => {
     const token = localStorage.getItem("token");
     const [lastPage, setLastPage] = useState(0)
-  const {user} = useUserHook()
+    const {user} = useUserHook()
 
     const {
         data,
         fetchNextPage,
         isLoading,
+        isFetching,
         hasNextPage,
         isFetchingNextPage,
         refetch,
@@ -29,7 +30,7 @@ export const FeedFunctions = () => {
               }
             );
             setLastPage(response.data.posts.last_page)
-            return response; // Return the data from the response, not the response itself
+            return response; 
           } catch (error) {
             throw new Error('Failed to fetch data');
           }
@@ -46,5 +47,5 @@ export const FeedFunctions = () => {
       );
 
 
-  return {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch}
+  return {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching}
 }

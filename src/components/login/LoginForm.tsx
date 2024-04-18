@@ -5,9 +5,12 @@ import { useDispatch } from "react-redux"
 import { setModalVisible } from "../../Redux/loginModalSlicer"
 import { setUser } from "../../Redux/userSlicer"
 import Fetching from "../fetchingComponent/Fetching"
+import { useRefetchHook } from "../../hooks/useRefetchHook"
+import { setRefetch } from "../../Redux/RefetchSlicer"
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const {requestRefetch} = useRefetchHook()
   const [isLoading, setLoading] = useState(false)
   const [loginInputs, setLoginInputs] = useState({
     email: '',
@@ -27,11 +30,12 @@ const LoginForm = () => {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('token_death', response.data.token_death)
       localStorage.setItem('userID', response.data.user.id)
+      dispatch(setRefetch(!requestRefetch))
       dispatch(setModalVisible(false))
       dispatch(setUser({name: response.data.user.name, avatar: response.data.user.avatar, userID: response.data.user.id}))
       localStorage.setItem('userName', response.data.user.name)
     } catch (error) {
-      console.log(error);
+      console.error(error);
       
     }finally{
       setLoading(false)

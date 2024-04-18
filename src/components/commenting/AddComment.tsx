@@ -19,7 +19,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
     text: "",
   });
   const { user } = useUserHook();
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = (event: {
     target: {
@@ -38,7 +38,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
 
   //თუ არ არის ავტორიზებული გამოუჩინოს ლოიგნის პანელი
   const logInHandler = () => {
-    disptach(setModalVisible(true));
+    dispatch(setModalVisible(true));
   };
 
   if (!user.name) {

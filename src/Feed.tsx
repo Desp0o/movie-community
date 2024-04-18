@@ -6,6 +6,7 @@ import { useRefetchHook } from "./hooks/useRefetchHook";
 
 import "./Feed.css";
 import { FeedFunctions } from "./components/feedComponent/FeedFunctions";
+import { useUserHook } from "./hooks/useUserHook";
 
 interface dataProps {
   id: number;
@@ -28,7 +29,8 @@ interface dataProps {
 
 const Feed = () => {
   const { requestRefetch } = useRefetchHook();
-  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
+  const {user} = useUserHook()
+  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching } = FeedFunctions()
 
   const loadNextPage = () => {
     if (!isFetchingNextPage && hasNextPage) {
@@ -39,7 +41,8 @@ const Feed = () => {
   useEffect(() => {
     refetch();
     console.log("refetching");
-    // eslint-disable-next-line
+    console.log("ეს არის იუზერის იდი " + user.userID);
+    
   }, [requestRefetch]);
 
   useEffect(()=>{
@@ -60,6 +63,7 @@ const Feed = () => {
   return (
     <PageLayout>
       {isLoading && <Fetching />}
+      {isFetching && <div style={{width:"100%", height:"100vh",backgroundColor:"red", position:"fixed", zIndex:"999"}}></div>}
       <div className="feed">
         {data?.pages?.map((page, pageIndex) => (
           <div key={pageIndex}>

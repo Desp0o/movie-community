@@ -19,7 +19,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
   const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
   const {user} = useUserHook()
 
-  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+  const [editTextArea, setEditTextArea] = useState(false);
   const [commentValue, setCommentValue] = useState<{
     text: string;
   }>({
@@ -32,7 +32,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
       {fetchedComments?.map((item) => (
         <div key={item.id}>
           {Number(item.user_id) === Number(user.userID) && (<p
-            onClick={() => setEditingCommentId(item.id)}
+            onClick={() => setEditTextArea(!editTextArea)}
             style={{ color: "pink", fontWeight: "900" }}
           >
             EDIT POST
@@ -49,7 +49,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
               <></>
             )}
           </div>
-          {editingCommentId === item.id && Number(user.userID) === Number(item.user_id) &&  (
+          {editTextArea && Number(user.userID) === Number(item.user_id) &&  (
             <div className="comment_container">
               <textarea
                 className="comment_textarea"
@@ -65,7 +65,7 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
               
               <button
                 className="comment_ntm"
-                onClick={() => editComment(callback, item.id, commentValue, setEditingCommentId)}
+                onClick={() => editComment(callback, item.id, commentValue, setEditTextArea, editTextArea)}
               >
                 edit comment
               </button>

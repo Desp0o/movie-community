@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/userSlicer';
 import { setModalVisible } from '../Redux/loginModalSlicer';
 import axios from 'axios';
+import { setRefetch } from '../Redux/RefetchSlicer';
+import { useRefetchHook } from './useRefetchHook';
 
 
 export const useGoogleLogIn = () => {
-
-    const disptach = useDispatch()
+    const {requestRefetch} = useRefetchHook()
+    const dispatch = useDispatch()
 
     const googleLogIn = async () => {
         const auth = getAuth(app);
@@ -19,7 +21,7 @@ export const useGoogleLogIn = () => {
     
         try {
           const signIn = await signInWithPopup(auth, provider);
-          disptach(setModalVisible(false))
+          dispatch(setModalVisible(false))
           signIn.user.displayName && localStorage.setItem('userName', signIn.user.displayName)
           
           const avatarFromGoogle = signIn.user.photoURL
@@ -37,10 +39,11 @@ export const useGoogleLogIn = () => {
               'Content-Type': 'application/json'
             }
           })
+          
           localStorage.setItem('token',res.data.token)
           localStorage.setItem('userID', res.data.user_id)
-          disptach(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: res.data.user_id}))
-          
+          dispatch(setUser({name: signIn.user.displayName, avatar: signIn.user.photoURL, userID: res.data.user_id}))
+          dispatch(setRefetch(!requestRefetch))
           return signIn;
         } catch (error) {
           console.error(error);
