@@ -155,13 +155,7 @@ const Navbar = () => {
         <UserDash />
       </div>
 
-      {isModalVisible ? (
-        <div className="login_modal_container">
-          <Login />
-        </div>
-      ) : (
-        <></>
-      )}
+      
     </>
   );
 };

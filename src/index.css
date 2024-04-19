@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 *, *::after, *::before{
   margin: 0;
   padding: 0;
@@ -14,7 +16,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --light-bg: #fff;
+  --light-bg: #F9FBFF;
   --dark-bg: #0B1416;
   --post-bg-light: #FDFAF7;
   --post-bg-dark: #171109;
@@ -23,6 +25,9 @@
   --hover-light: #eaedf0;
   --grey: #CCCCCC;
   --reddit: #D93A00;
+
+  --black:#131518;
+  --light-grey:#CCD4DE;
 }
 
 
@@ -57,6 +62,17 @@ input{
   outline: none;
 }
 
+.input_style{
+  display: flex;
+width: 386px;
+height: 52px;
+padding: 10px 16px;
+align-items: center;
+gap: 10px;
+border-radius: 8px;
+border: 1px solid var(--light-grey);
+}
+
 button{
   border: none;
 }
@@ -84,4 +100,8 @@ body {
   .responsive_hidden{
     display: none;
   }
+}
+
+.button{
+  cursor: pointer;
 }

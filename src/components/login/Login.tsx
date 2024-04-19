@@ -9,9 +9,12 @@ import { emailIcon } from "../../assets/svg/emailIcon";
 import { useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
+import { eyeIcon } from "../../assets/svg/eyeIco";
+import { useLoginModal } from "../../hooks/useLoginModal";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const {isModalVisible} = useLoginModal()
   const { googleLogIn } = useGoogleLogIn();
   const { isDark } = useDarkModeHook();
   const [regForm, setRegForm] = useState(false);
@@ -36,72 +39,54 @@ const Login = () => {
     setLoginForm(false);
   }
 
+
+  const [loginMode, setLoginMode] = useState(true)
+  const [regMode, setRegMode] = useState(false)
+
+  const loginModeHandler = () => {
+    setLoginMode(true)
+    setRegMode(false)
+  }
+
+  const regModeHandler = () => {
+    setLoginMode(false)
+    setRegMode(true)
+  }
+
   return (
-    <>
+    isModalVisible 
+    ? 
+    <div className="login_Container">
       <div className="login_backdrop" onClick={modalCloser} />
-      <div className={isDark ? "login_modal dark" : "login_modal"}>
-        <div
-          className={isDark ? "x_icon_login_modal dark" : "x_icon_login_modal"}
-          onClick={modalCloser}
-        >
-          {xIcon}
+      <div className="logind_modal">
+        <div className="login_modal_inner">
+
+          <div className="log_modal_title_mode">
+
+            <div className="title_close_icon">
+              <p className="login_title">Authorization</p>
+              <span className="button" onClick={modalCloser}>{xIcon}</span>
+            </div>
+
+            <div className="login_modal_modes">
+              <p className={loginMode ? "mode_btn active" : 'mode_btn'} onClick={loginModeHandler}>Sign In</p>
+              <p className={regMode ? "mode_btn active" : 'mode_btn'} onClick={regModeHandler}>Sign In</p>
+            </div>
+
+            <form className="login_form">
+              <input type="text" className="input_style" value='' onChange={()=>{}} placeholder="Name" />
+
+              <div className="pasword_input_container">
+                <span className="eye_icon">{eyeIcon}</span>
+                <input type="password" className="input_style" value='' onChange={()=>{}} placeholder="Name" />
+              </div>
+            </form>
+
+          </div>
         </div>
-
-        {loginForm ? (
-          <>
-            <LoginForm />
-            <p style={{ marginTop: "30px" }}>
-              dont't have acc,{" "}
-              <span
-                onClick={register}
-                style={{ color: "var(--reddit)", cursor: "pointer" }}
-              >
-                Register
-              </span>
-            </p>
-          </>
-        ) : !regForm ? (
-          <>
-            <div className="log_modal_block1">
-              <p>Log In</p>
-              <p>
-                By continuing, you agree to our User Agreement and <br />{" "}
-                acknowledge that you understand the Privacy Policy.
-              </p>
-            </div>
-
-            <div className="login_button">
-              <div className="login_btn" onClick={googleLogIn}>
-                {googleAuthIcon}
-                <p>Log With Google</p>
-              </div>
-
-              <div className="login_btn" onClick={login}>
-                <>
-                  {emailIcon}
-                  <p>Log With Email</p>
-                </>
-              </div>
-            </div>
-
-            <p style={{ marginTop: "30px" }}>
-              dont't have acc,{" "}
-              <span
-                onClick={register}
-                style={{ color: "var(--reddit)", cursor: "pointer" }}
-              >
-                Register
-              </span>
-            </p>
-          </>
-        ) : (
-          <>
-          <RegisterForm />
-          <p style={{marginTop:"15px"}}>do you have acc ? <span style={{color:"var(--reddit)", cursor:"pointer"}} onClick={closeLoginRegWindows}>Log in</span></p>
-          </>
-        )}
       </div>
-    </>
+    </div>
+    : <></>
   );
 };
 

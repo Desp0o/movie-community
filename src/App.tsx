@@ -21,6 +21,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import AddPost from "./components/CreatePageComps/AddPost"
 import { ToastContainer } from "react-toastify"
 import EditPost from "./components/editPostModal/EditPostModal"
+import Login from "./components/login/Login"
 
 const queryClient = new QueryClient()
 
@@ -107,6 +108,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className={isDark ? "app darkMode" : "app"}>
         <Navbar />
+        <Login />
         <LeftNavigation />
         <AddPost />
         <ToastContainer/>

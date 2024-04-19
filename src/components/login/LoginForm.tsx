@@ -12,6 +12,7 @@ const LoginForm = () => {
   const dispatch = useDispatch()
   const {requestRefetch} = useRefetchHook()
   const [isLoading, setLoading] = useState(false)
+ 
   const [loginInputs, setLoginInputs] = useState({
     email: '',
     password: ''
@@ -25,18 +26,21 @@ const LoginForm = () => {
           'Content-Type': 'application/json'
         }
       })
-      console.log(response.data);
       
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('token_death', response.data.token_death)
       localStorage.setItem('userID', response.data.user.id)
+      localStorage.setItem('userName', response.data.user.name)
       dispatch(setRefetch(!requestRefetch))
       dispatch(setModalVisible(false))
       dispatch(setUser({name: response.data.user.name, avatar: response.data.user.avatar, userID: response.data.user.id}))
-      localStorage.setItem('userName', response.data.user.name)
-    } catch (error) {
-      console.error(error);
       
+      console.log(response.data);
+      
+
+      //eslint-disable-next-line
+    } catch (error:any) {
+      console.error(error);
     }finally{
       setLoading(false)
     }
@@ -44,14 +48,6 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading ? <Fetching /> : <></>}
-      <p className="login_title">login</p>
-      <form className="login_form">
-        <input value={loginInputs.email} name="email" type="text" placeholder="Email" className="form_inputs" onChange={(e)=> setLoginInputs({...loginInputs, email: e.target.value})} autoComplete="email"/>
-        <input value={loginInputs.password} name="password" type="password" placeholder="Password" className="form_inputs"  onChange={(e)=> setLoginInputs({...loginInputs, password: e.target.value})} autoComplete="current-password"/>
-
-        <LoginModalBtn title={"Log in"} funName={LogInFunction} />
-      </form>
     </>
   )
 }
