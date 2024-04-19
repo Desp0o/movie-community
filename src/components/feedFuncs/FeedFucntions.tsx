@@ -17,6 +17,15 @@ export const FeedFunctions = () => {
         localStorage.setItem('lastPage', lastPage.toString());
     }, [lastPage]);
 
+    useEffect(() => {
+        //fix scroll in location change
+        window.addEventListener('popstate', ()=>{});
+
+        return () => {
+            window.removeEventListener('popstate', ()=>{});
+        };
+    }, []);
+
     const [path, setPath] = useState('https://api.pinky.ge/api/guestFeed?page=')
     useEffect(()=>{
 

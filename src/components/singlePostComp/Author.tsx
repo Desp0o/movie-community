@@ -14,38 +14,39 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
   useEffect(() => {
     const updateTimeAgo = () => {
       const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-
-      let interval = Math.floor(seconds / 31536000);
-      if (interval > 1) {
+      console.log(Math.floor(seconds / 3600));
+      
+      let interval
+      interval = Math.floor(seconds / 31536000);
+      if (interval >= 1) {
         setTimeAgo(`${interval} years ago`);
         return;
       }
+
       interval = Math.floor(seconds / 2592000);
-      if (interval > 1) {
+      if (interval >= 1) {
         setTimeAgo(`${interval} months ago`);
         return;
       }
+
       interval = Math.floor(seconds / 86400);
-      if (interval > 1) {
+      if (interval >= 1) {
         setTimeAgo(`${interval} days ago`);
         return;
       }
+
       interval = Math.floor(seconds / 3600);
-      if (interval > 1) {
+      if (interval >= 1) {
         setTimeAgo(`${interval} hours ago`);
-        return;
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval > 1) {
-        setTimeAgo(`${interval} minutes ago`);
         return;
       }
 
       interval = Math.floor(seconds / 60);
-      if (interval > 0) {
+      if (interval > 1) {
         setTimeAgo(`${interval} minutes ago`);
         return;
       }
+      
       setTimeAgo(`Just now`);
     };
 
