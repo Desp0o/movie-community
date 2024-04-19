@@ -17,6 +17,7 @@ import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
 import { useQuery } from "react-query";
 import { useUserHook } from "../hooks/useUserHook";
+import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 
 const Post = () => {
   const token = localStorage.getItem('token')
@@ -70,6 +71,7 @@ const Post = () => {
 
   return (
     <div>
+      <ScrollToTop />
       {data ? (
         <PageLayout>
           <div className="single_post_page">
