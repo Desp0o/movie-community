@@ -20,15 +20,25 @@ interface LikeDislikeCommentProps {
 }
 
 const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, postID, authLike, commentLength}) => {
+  const token = localStorage.getItem('token')
+  const dispatch = useDispatch()
   const { user } = useUserHook()
   const { requestRefetch } = useRefetchHook()
-  const token = localStorage.getItem('token')
   const [votes, seteVotes] = useState(likes - dislikes)
-  const [isLikeActive, setLikeActive] = useState(false)
-  const [isDislikeActive, setDislikeActive] = useState(false)
-  const [likeIcon, setLikeIcon] = useState(arrowLike)
-  const [dislikeIcon, setDislikeIcon] = useState(arrowDislike)
-  const dispatch = useDispatch()
+
+  const [likeEmoj, setLikeEmoj] = useState({
+    active: authLike === 'like' ? true : false,
+    icon: authLike === 'like' ? activeLike : arrowLike
+  })
+
+  const [disLikeEmoj, setDislikeEmoj] = useState({
+    active: authLike === 'dislike' ? true : false,
+    icon: authLike === 'dislike' ? activeDislike : arrowDislike 
+  })
+
+  useEffect(()=>{
+    seteVotes(likes - dislikes)
+  },[likes, dislikes])
 
   const [isLike,] = useState({
     post: postID,
@@ -41,35 +51,23 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
 
   useEffect(()=>{
     if(user.name !== "" && authLike === 'like'){
-      setLikeActive(true)
-      setLikeIcon(activeLike)
-
-      setDislikeActive(false)
-      setDislikeIcon(arrowDislike)
+      setLikeEmoj({active: true, icon: activeLike})
+      setDislikeEmoj({active: false, icon: arrowDislike})
     }
     
     if(user.name !== "" && authLike === 'dislike'){
-      setDislikeActive(true)
-      setDislikeIcon(activeDislike)
-
-      setLikeActive(false)
-      setLikeIcon(arrowLike)
+      setDislikeEmoj({active: true, icon: activeDislike})
+      setLikeEmoj({active: false, icon: arrowLike})
     }
 
     if(user.name !== "" && authLike === null){
-      setDislikeActive(false)
-      setDislikeIcon(arrowDislike)
-
-      setLikeActive(false)
-      setLikeIcon(arrowLike)
+      setDislikeEmoj({active: false, icon: arrowDislike})
+      setLikeEmoj({active: false, icon: arrowLike})
     }
 
     if(user.name === "" && authLike === undefined){
-      setDislikeActive(false)
-      setDislikeIcon(arrowDislike)
-
-      setLikeActive(false)
-      setLikeIcon(arrowLike)
+      setDislikeEmoj({active: false, icon: arrowDislike})
+      setLikeEmoj({active: false, icon: arrowLike})
     }
     // eslint-disable-next-line
   },[user.name, authLike, user.userID, requestRefetch])
@@ -84,7 +82,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       console.log(response.data);
       
     } catch (error) {
-      console.log(error);
+      console.error(error);
       
     }
   }
@@ -99,29 +97,28 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       console.log(response.data);
       
     } catch (error) {
-      console.log(error);
+      console.error(error);
       
     }
   }
 
   const sendLike = async () => {
     if(user.userID){
-      if(!isLikeActive){
-        setLikeActive(true) // set like button active 
+      if(!likeEmoj.active){
+        setLikeEmoj({active: true, icon:activeLike})
+        setDislikeEmoj({active: false, icon: arrowDislike})
+        
         seteVotes(votes + 1) // add vote 
-        setLikeIcon(activeLike) // make like button green
-        setDislikeIcon(arrowDislike) //set dislike button inherit
-        setDislikeActive(false) // make dislike button active
         likeFunction() //send like function
   
-        if(isDislikeActive){
+        if(disLikeEmoj.active){
           unDislikeFunction()
           seteVotes(votes + 2)
          }
       }else{
-        setLikeActive(false) //set like button inactive 
+        setLikeEmoj({active: false, icon:arrowLike})
+
         seteVotes(votes - 1) 
-        setLikeIcon(arrowLike)
         unlikeFunction()
       }
     }else{
@@ -130,7 +127,6 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   }
 
   const dislikeFunction = async () => {
-    console.log('i disliked post');
     
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
@@ -141,7 +137,7 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       console.log(response.data);
       
     } catch (error) {
-      console.log(error);
+      console.error(error);
       
     }
   }
@@ -156,29 +152,28 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       console.log(response.data);
       
     } catch (error) {
-      console.log(error);
+      console.error(error);
       
     }
   }
 
   const sendUnlike = async () => {
       if(user.userID){
-        if(!isDislikeActive){
-          setDislikeActive(true)
+        if(!disLikeEmoj.active){
+          setLikeEmoj({active: false, icon:arrowLike})
+          setDislikeEmoj({active: true, icon: activeDislike})
+          
           seteVotes(votes - 1)
-          setDislikeIcon(activeDislike)
-          setLikeIcon(arrowLike)
-          setLikeActive(false)
-     
-          if(isLikeActive){
+          
+          if(likeEmoj.active){
            unlikeFunction()
            seteVotes(votes - 2)
           }
           dislikeFunction()
          }else{
-           setDislikeActive(false)
+           setDislikeEmoj({active: true, icon: activeDislike})
+
            seteVotes(votes + 1)
-           setDislikeIcon(arrowDislike)
            unDislikeFunction()
          }
       }else{
@@ -190,9 +185,9 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
   return (
     <div className="likeDislikeComment_container">
         <div className="like_dislike">
-            <span onClick={sendLike}>{likeIcon}</span>
+            <span onClick={sendLike}>{likeEmoj.icon}</span>
             <p style={{width: votes > 99 ? "35px" : "20px",textAlign:"center", color: votes > 0 ? "green" : votes === 0 ? 'currentColor' : "red", userSelect:"none" }}>{votes}</p>
-            <span onClick={sendUnlike}>{dislikeIcon}</span>
+            <span onClick={sendUnlike}>{disLikeEmoj.icon}</span>
         </div>
 
         <div className="single_post_comments">

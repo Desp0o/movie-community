@@ -60,7 +60,11 @@ const Post = () => {
     }
   );
 
-  console.log(data);
+  if(data){
+    
+    console.log(data);
+  }
+
   
 
   if (isLoading) {
@@ -133,11 +137,11 @@ const Post = () => {
             )}
 
             <LikeDislikeComment
-              likes={data?.like}
-              dislikes={data?.dislike}
-              postID={data?.id}
-              authLike={data?.authLike} 
-              commentLength={data?.comment}            
+              likes={data.like}
+              dislikes={data.dislike}
+              postID={data.id}
+              authLike={data.authLike} 
+              commentLength={data.comment}            
               />
 
             <AddComment postID={id} callBack={refetch}/>

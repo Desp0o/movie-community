@@ -3,10 +3,9 @@ import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
 import { useRefetchHook } from "./hooks/useRefetchHook";
-
-import "./Feed.css";
 import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
+import "./Feed.css";
 
 interface dataProps {
   id: number;
@@ -39,11 +38,7 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    refetch();
-    console.log("refetching");
-    console.log("ეს არის იუზერის იდი " + user.userID);
-    console.log(requestRefetch);
-    
+    refetch();    
   }, [requestRefetch, user]);
 
   useEffect(()=>{
@@ -61,6 +56,10 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
+if(data){
+  console.log(data);
+
+}  
 
   return (
     <PageLayout>

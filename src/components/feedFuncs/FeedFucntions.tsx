@@ -4,13 +4,13 @@ import { useInfiniteQuery } from 'react-query';
 import { useUserHook } from '../../hooks/useUserHook';
 
 export const FeedFunctions = () => {
-    const token = localStorage.getItem("token");
+    const { user } = useUserHook();
+    const [token, setToken] = useState(localStorage.getItem("token")) //set state to avoid error in path changing
     const [lastPage, setLastPage] = useState(() => {
         // Retrieve lastPage from localStorage or set it to 1 if not present
         const storedLastPage = localStorage.getItem('lastPage');
         return storedLastPage ? parseInt(storedLastPage) : 1;
     });
-    const { user } = useUserHook();
 
     useEffect(() => {
         // Save lastPage to localStorage whenever it changes
@@ -22,11 +22,11 @@ export const FeedFunctions = () => {
 
       if(!user.name){
         setPath('https://api.pinky.ge/api/guestFeed?page=')
+        setToken(token)
       }else{
         setPath('https://api.pinky.ge/api/authFeed?page=')
+        setToken(localStorage.getItem("token"))
       }
-      console.log(path);
-      console.log(user.name);
       
       refetch
     },[user.userID,path])

@@ -51,7 +51,7 @@ const AddPost = () => {
       setPostValue({ ...postValue, type: 0 });
     }
     
-  },[postValue])
+  },[postValue.img])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {
     setPostValue({ ...postValue, title: event.target.value });
@@ -82,7 +82,7 @@ const AddPost = () => {
   const sendPost = async () => {   
     setLoading(true)             
       try {
-          const res = await axios.post(import.meta.env.VITE_POSTING , postValue, {
+          await axios.post(import.meta.env.VITE_POSTING , postValue, {
             headers: {
               Authorization:`Bearer ${token}`,
               'Content-Type': 'multipart/form-data, application/json, text/plain, */*'
@@ -91,7 +91,6 @@ const AddPost = () => {
           dispatch(setRefetch(!requestRefetch))
           closeResPostModal()
           setPostValue({...postValue, text:'', title:''})
-          console.log(res.data);
           notify()
         } catch (error: unknown) {
           notifyError()
@@ -104,9 +103,7 @@ const AddPost = () => {
     sendPost()
   }
 
-  useEffect(()=>{
-    console.log("resPostModal:", resPostModal);
-  
+  useEffect(()=>{  
     if (resPostModal === true) {
       document.body.style.overflow = "hidden";
     } else {

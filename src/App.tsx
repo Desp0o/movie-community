@@ -71,7 +71,7 @@ function App() {
           )
           
       } catch (error) {
-        console.log(error);
+        console.error(error);
         localStorage.removeItem('userName')
         localStorage.removeItem('token')
         localStorage.removeItem('userID')

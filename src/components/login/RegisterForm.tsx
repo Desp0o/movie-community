@@ -35,7 +35,6 @@ const RegisterForm = () => {
                     }
                 })
     
-                console.log(res.data);
                 setResponse(res.data.message)
 
                 if(res.data.message === 'User registered by Mail'){
@@ -44,8 +43,6 @@ const RegisterForm = () => {
                             'Content-Type': 'application/json'
                         }
                     });
-
-                    console.log(res);
                     
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('token_death', res.data.token_death)
@@ -55,7 +52,7 @@ const RegisterForm = () => {
                 }
                 
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 
             }
             finally{
@@ -64,7 +61,6 @@ const RegisterForm = () => {
         }
 
         if(regInputs.password_confirmation !== regInputs.password){
-            console.log('pass do not match');
             setPwdEqual(true)
             return
         }
