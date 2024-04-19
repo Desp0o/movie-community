@@ -58,14 +58,7 @@ const Post = () => {
     },{
       cacheTime:0,
     }
-  );
-
-  if(data){
-    
-    console.log(data);
-  }
-
-  
+  );  
 
   if (isLoading) {
     return <Fetching />;

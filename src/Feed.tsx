@@ -38,7 +38,7 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    refetch();    
+    refetch();
   }, [requestRefetch, user]);
 
   useEffect(()=>{

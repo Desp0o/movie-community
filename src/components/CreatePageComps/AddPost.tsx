@@ -50,7 +50,7 @@ const AddPost = () => {
     if(postValue.img?.type.includes('image')){
       setPostValue({ ...postValue, type: 0 });
     }
-    
+    //eslint-disable-next-line
   },[postValue.img])
 
   const handlePostTitle = (event: { target: { value: string; }; }) => {

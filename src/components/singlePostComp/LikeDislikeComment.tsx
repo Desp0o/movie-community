@@ -9,7 +9,6 @@ import { activeDislike } from "../../assets/svg/activeDislike";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -29,8 +28,8 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const { requestRefetch } = useRefetchHook();
   const [votes, seteVotes] = useState(likes - dislikes);
+
 
   const [likeEmoj, setLikeEmoj] = useState({
     active: authLike === "like" ? true : false,
@@ -81,7 +80,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       setDislikeEmoj({ active: false, icon: arrowDislike });
     }
     // eslint-disable-next-line
-  }, [user.name, authLike, user.userID, requestRefetch]);
+  }, [user.name, authLike, user.userID]);
 
   const unlikeFunction = async () => {
     try {
@@ -103,6 +102,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -113,9 +113,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
     if (user.userID) {
       if (!likeEmoj.active) {
         setLikeEmoj({ active: true, icon: activeLike });
-        setDislikeEmoj({ active: false, icon: arrowDislike });
-
-        seteVotes(votes + 1); // add vote
+        setDislikeEmoj({ active: false, icon: arrowDislike });        seteVotes(votes + 1); // add vote
         likeFunction(); //send like function
 
         if (disLikeEmoj.active) {
@@ -123,8 +121,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
           seteVotes(votes + 2);
         }
       } else {
-        setLikeEmoj({ active: false, icon: arrowLike });
-
+        setLikeEmoj({ active: false, icon: arrowLike })
         seteVotes(votes - 1);
         unlikeFunction();
       }
@@ -140,6 +137,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -169,7 +167,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
         setLikeEmoj({ active: false, icon: arrowLike });
         setDislikeEmoj({ active: true, icon: activeDislike });
 
-        seteVotes(votes - 1);
+        seteVotes(votes - 1)
 
         if (likeEmoj.active) {
           unlikeFunction();
@@ -179,7 +177,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       } else {
         setDislikeEmoj({ active: false, icon: arrowDislike });
 
-        seteVotes(votes + 1);
+        seteVotes(votes + 1)
         unDislikeFunction();
       }
     } else {
