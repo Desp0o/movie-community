@@ -1,13 +1,11 @@
 import { goBackIcon } from '../../assets/svg/goBack'
-import { useNavigate } from 'react-router-dom'
 import { useDarkModeHook } from '../../hooks/useDarkModeHook'
 
 const GoBack = () => {
     const { isDark } = useDarkModeHook()
-    const navigate = useNavigate()
     
     const goBackHandler = () => {
-        navigate(-1)
+      window.history.back();
     }
 
   return (
