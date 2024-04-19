@@ -69,6 +69,11 @@ const LikeDislikeComment:React.FC<LikeDislikeCommentProps> = ({likes, dislikes, 
       setDislikeEmoj({active: false, icon: arrowDislike})
       setLikeEmoj({active: false, icon: arrowLike})
     }
+
+    if(!user.name && !user.userID){
+      setDislikeEmoj({active: false, icon: arrowDislike})
+      setLikeEmoj({active: false, icon: arrowLike})      
+    }
     // eslint-disable-next-line
   },[user.name, authLike, user.userID, requestRefetch])
 
