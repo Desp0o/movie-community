@@ -146,6 +146,24 @@ useEffect(()=>{
   //   }
   // };
 
+  useEffect(()=>{
+    if(authGul === 0 && user.userID){
+      setHeart(false)
+      setGulIcon(heartIcon)
+    }
+
+    if(authGul === 1 && user.userID){
+      setHeart(true)
+      setGulIcon(activeHeartIcon)
+    }
+
+    if(!user.userID){
+      setHeart(false)
+      setGulIcon(heartIcon)
+    }
+
+  },[user.userID, guls, authGul])
+
 
   const sendHeart = () => {
     setHeart(!isHeart)

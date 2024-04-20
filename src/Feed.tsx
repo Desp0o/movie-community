@@ -2,8 +2,8 @@ import Fetching from "./components/fetchingComponent/Fetching";
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
-import { useRefetchHook } from "./hooks/useRefetchHook";
-import { useUserHook } from "./hooks/useUserHook";
+// import { useRefetchHook } from "./hooks/useRefetchHook";
+// import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
 
@@ -29,8 +29,8 @@ interface dataProps {
 }
 
 const Feed = () => {
-  const { requestRefetch } = useRefetchHook();
-  const {user} = useUserHook()
+  // const { requestRefetch } = useRefetchHook();
+  // const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
   const loadNextPage = () => {
@@ -40,8 +40,10 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    refetch();
-  }, [requestRefetch, user]);
+    refetch
+    console.log("ref");
+    
+  }, []);
 
   useEffect(()=>{
     const handleScroll = () => {
