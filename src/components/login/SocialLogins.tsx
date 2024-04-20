@@ -8,15 +8,16 @@ import { GoogleIcon } from '../../assets/svg/googleIcon'
 import { useGoogleLogIn } from '../../hooks/useGoogleAuth'
 
 interface SocialLoginsProps {
-    funName?: ()=>void
+    funName: ()=>void;
+    buttonName: string;
 }
 
-const LoginButtons:React.FC<SocialLoginsProps> = ({funName}) => {
+const LoginButtons:React.FC<SocialLoginsProps> = ({funName , buttonName}) => {
   const { googleLogIn } = useGoogleLogIn();
 
   return (
     <div className="login_btns">
-        <LoginModalBtn title="Log in" funName={funName ? funName : ()=>{}} />
+        <LoginModalBtn title={buttonName} funName={funName} />
 
         <div className="modal_lines">
           {line}

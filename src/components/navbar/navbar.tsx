@@ -7,7 +7,6 @@ import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { useEffect, useRef, useState } from "react";
-import Login from "../login/Login";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch, useSelector } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
@@ -27,7 +26,7 @@ const Navbar = () => {
   const { user } = useUserHook();
   const { isDark } = useDarkModeHook();
   const { userDashState } = useUserDashHook();
-  const { isModalVisible, handleVisibility } = useLoginModal();
+  const { handleVisibility } = useLoginModal();
   const [isOpen, setOpen] = useState(false)
   const dispatch = useDispatch();
   const isLeftMenuOpen = useSelector((state: RootState) => state.leftMenuStore.isLeftMenuOpen)

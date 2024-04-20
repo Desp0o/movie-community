@@ -1,6 +1,6 @@
 .login_Container {
-  position: absolute;
-  z-index: 1;
+  position: fixed;
+  z-index: 113;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -217,4 +217,22 @@
   justify-content: flex-start;
   align-items: center;
   gap: 12px;
+}
+
+.reg_err_message {
+  text-align: left;
+  color: var(--black);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.reg_err_msg_container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
 }

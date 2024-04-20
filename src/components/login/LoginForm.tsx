@@ -1,5 +1,4 @@
 import { useState } from "react";
-import LoginModalBtn from "./LoginModalBtn";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
@@ -7,18 +6,12 @@ import { setUser } from "../../Redux/userSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { eyeIcon } from "../../assets/svg/eyeIco";
-import { line } from "../../assets/svg/line";
-import { Facebook } from "../../assets/svg/facebook";
-import { GoogleIcon } from "../../assets/svg/googleIcon";
-import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
-import SocLogBtn from "./SocLogBtn";
 import { ErrorIcon } from "../../assets/svg/errorIcon";
 import InputComponent from "../inputComponent/InputComponent";
 import LoginButtons from "./SocialLogins";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { googleLogIn } = useGoogleLogIn();
   const { requestRefetch } = useRefetchHook();
   const [_isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -152,7 +145,7 @@ const LoginForm = () => {
 
       <p className="forget_pwd">Forget password?</p>
 
-     <LoginButtons funName={LogInFunction}/>
+     <LoginButtons buttonName="Log in" funName={LogInFunction}/>
     </form>
   );
 };
