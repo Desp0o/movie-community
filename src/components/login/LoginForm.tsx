@@ -102,8 +102,8 @@ const LoginForm = () => {
       )}
 
       <InputComponent
-        type="email"
-        autoComplete="current-email"
+        type="mail"
+        autoComplete="email"
         placeholder={"Email"}
         value={loginInputs.email}
         isError={errMessage.emailErr ? true : false}

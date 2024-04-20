@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { arrowDislike } from "../../assets/svg/arrowDislike";
 // import { arrowLike } from "../../assets/svg/arrowLike";
 import { commentsIcon } from "../../assets/svg/commentsIcon";
@@ -36,6 +36,13 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   const [votes, seteVotes] = useState(guls);
 const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
 const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
+
+useEffect(()=>{
+  if(!user.userID){
+    setHeart(false)
+    setGulIcon(heartIcon)
+  }
+},[user.userID])
 
   // const [likeEmoj, setLikeEmoj] = useState({
   //   active: authLike === "like" ? true : false,
@@ -172,14 +179,7 @@ const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIc
       <div className="like_dislike">
         {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
         <span onClick={sendHeart}>{gulIcon}</span>
-        <p
-          style={{
-            width: votes > 99 ? "35px" : "20px",
-            textAlign: "center",
-            color: votes > 0 ? "green" : votes === 0 ? "currentColor" : "red",
-            userSelect: "none",
-          }}
-        >
+        <p>
           {votes}
         </p>
         {/* <span onClick={sendUnlike}>{disLikeEmoj.icon}</span> */}
