@@ -33,7 +33,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const [votes, seteVotes] = useState(guls);
+  const [votes, seteVotes] = useState(Number(guls));
 const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
 const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
 
