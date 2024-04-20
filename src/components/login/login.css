@@ -130,7 +130,7 @@
   background: var(--btn-blue);
 
   color: var(--white);
-  font-family: "Roboto";
+  font-family: "Inter";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -180,30 +180,30 @@
   cursor: pointer;
 }
 
-.err_panel_log{
+.err_panel_log {
   display: flex;
-width: 386px;
-height: 52px;
-padding: 10px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 10px;
+  width: 386px;
+  height: 52px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-border-radius: 8px;
-border: 1px solid #F08783;
+  border-radius: 8px;
+  border: 1px solid #f08783;
 
-background: #FAEDEA;
+  background: #faedea;
 
-color: var(--black);
-font-family: "Inter";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; /* 142.857% */
+  color: var(--black);
+  font-family: "Inter";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
 }
 
-.error_container{
+.error_container {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -211,7 +211,7 @@ line-height: 20px; /* 142.857% */
 
 /* რეგისტრაცია */
 
-.reg_form{
+.reg_form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

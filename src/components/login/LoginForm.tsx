@@ -14,6 +14,7 @@ import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
 import SocLogBtn from "./SocLogBtn";
 import { ErrorIcon } from "../../assets/svg/errorIcon";
 import InputComponent from "../inputComponent/InputComponent";
+import LoginButtons from "./SocialLogins";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -151,28 +152,7 @@ const LoginForm = () => {
 
       <p className="forget_pwd">Forget password?</p>
 
-      <div className="login_btns">
-        <LoginModalBtn title={"Log in"} funName={LogInFunction} />
-
-        <div className="modal_lines">
-          {line}
-          <p className="or">OR</p>
-          {line}
-        </div>
-
-        <div className="fb_google">
-          <SocLogBtn
-            socialName={"Sign in with Facebook"}
-            icon={Facebook}
-            funcName={() => {}}
-          />
-          <SocLogBtn
-            socialName={"Sign in with Google"}
-            icon={GoogleIcon}
-            funcName={googleLogIn}
-          />
-        </div>
-      </div>
+     <LoginButtons funName={LogInFunction}/>
     </form>
   );
 };

@@ -129,7 +129,7 @@ const RegisterForm = () => {
             />
         </div>
 
-        <LoginModalBtn funName={regUser} title="Register" />
+        <LoginModalBtn funName={regUser} title="Create accaunt" />
       </form>
 
       {response ? (
