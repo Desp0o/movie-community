@@ -61,13 +61,13 @@ const Login = () => {
           <div className="log_modal_title_mode">
 
             <div className="title_close_icon">
-              <p className="login_title">Authorization</p>
+              <p className="login_title">{loginMode ? "Authorization" : "Registration"}</p>
               <span className="button" onClick={modalCloser}>{xIcon}</span>
             </div>
 
             <div className="login_modal_modes">
               <p className={loginMode ? "mode_btn active" : 'mode_btn'} onClick={loginModeHandler}>Sign In</p>
-              <p className={regMode ? "mode_btn active" : 'mode_btn'} onClick={regModeHandler}>Sign In</p>
+              <p className={regMode ? "mode_btn active" : 'mode_btn'} onClick={regModeHandler}>Sign Up</p>
             </div>
 
             {loginMode && <LoginForm />}

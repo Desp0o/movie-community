@@ -1,0 +1,20 @@
+input{
+    border: none;
+    outline: none;
+  }
+
+.input_style{
+    display: flex;
+  width: 386px;
+  height: 52px;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--light-grey);
+  }
+
+  .input_style.error{
+    border: 1px solid red;
+
+  }

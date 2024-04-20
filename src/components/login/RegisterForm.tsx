@@ -5,7 +5,6 @@ import "./login.css"
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { setUser } from "../../Redux/userSlicer";
 import { useDispatch } from "react-redux";
-import Fetching from "../fetchingComponent/Fetching";
 
 const loginPath = import.meta.env.VITE_LOGIN;
 const regPath = import.meta.env.VITE_REGISTER;
@@ -13,7 +12,7 @@ const regPath = import.meta.env.VITE_REGISTER;
 const RegisterForm = () => {
     const dispatch = useDispatch()
     const [response, setResponse] = useState('')
-    const [isLoading, setLoading] = useState(false)
+    const [_isLoading, setLoading] = useState(false)
     const [isPwdEqual, setPwdEqual] = useState(false)
     const [regInputs, setRegInputs] = useState({
         name: '',
@@ -69,7 +68,6 @@ const RegisterForm = () => {
 
   return (
     <>
-        {isLoading ? <Fetching /> : <></>}
         <p className="register_title">Register</p>
         <form className="reg_form" onSubmit={regUser}> 
             <input placeholder="Name" name='name' value={regInputs.name} type="text" className="form_inputs" onChange={(e)=>setRegInputs({ ...regInputs, name: e.target.value })} autoComplete="name"/>

@@ -13,12 +13,13 @@ import { GoogleIcon } from "../../assets/svg/googleIcon";
 import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
 import SocLogBtn from "./SocLogBtn";
 import { ErrorIcon } from "../../assets/svg/errorIcon";
+import InputComponent from "../inputComponent/InputComponent";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { googleLogIn } = useGoogleLogIn();
   const { requestRefetch } = useRefetchHook();
-  const [isLoading, setLoading] = useState(false);
+  const [_isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const [errMessage, setErrMessage] = useState({
@@ -38,46 +39,9 @@ const LoginForm = () => {
 
   const LogInFunction = async () => {
     setError(false);
-    setErrMessage({
-      ...errMessage,
-      emailErr: "",
-      passwordErr: "",
-    });
-
-    if (!loginInputs.email && !loginInputs.password) {
-      setError(true);
-      setErrMessage({
-        ...errMessage,
-        emailErr: "The email field is required",
-        passwordErr: "The password field is required.",
-      });
-
-      return;
-    }
-
-    if (!loginInputs.email.includes("@")) {
-      setError(true);
-      setErrMessage({
-        ...errMessage,
-        emailErr: "Incorrect email format",
-        passwordErr: "",
-      });
-
-      return;
-    }
-
-    if (!loginInputs.password) {
-      setError(true);
-      setErrMessage({
-        ...errMessage,
-        emailErr: "",
-        passwordErr: "The password field is required.",
-      });
-
-      return;
-    }
-
+    setErrMessage({ ...errMessage, emailErr: "", passwordErr: "" });
     setLoading(true);
+
     try {
       const response = await axios.post(
         import.meta.env.VITE_LOGIN,
@@ -108,7 +72,13 @@ const LoginForm = () => {
 
       //eslint-disable-next-line
     } catch (error: any) {
-      console.error(error);
+      console.log(error.response.data.errors);
+      setError(true);
+      setErrMessage({
+        ...errMessage,
+        emailErr: error.response.data.errors.email,
+        passwordErr: error.response.data.errors.password,
+      });
     } finally {
       setLoading(false);
     }
@@ -125,52 +95,57 @@ const LoginForm = () => {
         >
           {/* თუ მეილის ერორია */}
           <div>
-            {errMessage.emailErr && (
+            {errMessage.emailErr ? (
               <div className="error_container">
                 {ErrorIcon}
                 <p style={{ fontSize: "14px", lineHeight: "16px" }}>
                   {errMessage.emailErr}
                 </p>
               </div>
+            ) : (
+              <></>
             )}
 
             {/* //თუ პაროლის ერორია */}
-            <div className="error_container">
-              {ErrorIcon}
-              {errMessage.passwordErr && (
+            {errMessage.passwordErr ? (
+              <div className="error_container">
+                {ErrorIcon}
                 <p style={{ fontSize: "14px", lineHeight: "16px" }}>
                   {errMessage.passwordErr}
                 </p>
-              )}
-            </div>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       )}
 
-      <input
+      <InputComponent
         type="text"
-        className="input_style"
+        autoComplete="current-email"
+        placeholder={"Email"}
         value={loginInputs.email}
-        autoComplete="email"
-        onChange={(e) => {
-          setLoginInputs({ ...loginInputs, email: e.target.value });
-        }}
-        placeholder="Email"
+        isError={errMessage.emailErr ? true : false}
+        onChange={(e) =>
+          setLoginInputs({ ...loginInputs, email: e.target.value })
+        }
       />
 
       <div className="pasword_input_container">
         <span className="eye_icon" onClick={handlePwdVisibility}>
           {eyeIcon}
         </span>
-        <input
+
+        <InputComponent
           type={showPwd ? "text" : "password"}
-          className="input_style"
-          value={loginInputs.password}
           autoComplete="current-password"
-          onChange={(e) => {
-            setLoginInputs({ ...loginInputs, password: e.target.value });
-          }}
-          placeholder="Password"
+          placeholder={"Password"}
+          value={loginInputs.password}
+          isError={errMessage.passwordErr ? true : false}
+          onChange={(e) =>
+            setLoginInputs({ ...loginInputs, password: e.target.value })
+          }
         />
       </div>
 
