@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { xIcon } from "../../assets/svg/Xicon";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
-import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
+// import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+// import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
 import "./login.css";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { useState } from "react";
@@ -13,28 +13,28 @@ import { useLoginModal } from "../../hooks/useLoginModal";
 const Login = () => {
   const dispatch = useDispatch();
   const {isModalVisible} = useLoginModal()
-  const { isDark } = useDarkModeHook();
-  const [regForm, setRegForm] = useState(false);
-  const [loginForm, setLoginForm] = useState(false);
+  // const { isDark } = useDarkModeHook();
+  // const [regForm, setRegForm] = useState(false);
+  // const [loginForm, setLoginForm] = useState(false);
 
   const modalCloser = () => {
     dispatch(setModalVisible(false));
   };
 
-  const register = () => {
-    setRegForm(true);
-    setLoginForm(false);
-  };
+  // const register = () => {
+  //   setRegForm(true);
+  //   setLoginForm(false);
+  // };
 
-  const login = () => {
-    setRegForm(false);
-    setLoginForm(true);
-  };
+  // const login = () => {
+  //   setRegForm(false);
+  //   setLoginForm(true);
+  // };
 
-  const closeLoginRegWindows = () => {
-    setRegForm(false);
-    setLoginForm(false);
-  }
+  // const closeLoginRegWindows = () => {
+  //   setRegForm(false);
+  //   setLoginForm(false);
+  // }
 
 
   const [loginMode, setLoginMode] = useState(true)

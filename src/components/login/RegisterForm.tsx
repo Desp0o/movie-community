@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import InputComponent from "../inputComponent/InputComponent";
 import { eyeIcon } from "../../assets/svg/eyeIco";
 import LoginButtons from "./SocialLogins";
-import { ErrorIcon } from "../../assets/svg/errorIcon";
 import { RegErrMsg } from "./RegErrMsg";
 
 const loginPath = import.meta.env.VITE_LOGIN;
