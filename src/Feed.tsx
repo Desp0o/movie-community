@@ -19,6 +19,8 @@ interface dataProps {
   created_at: string;
   status: number | string;
   comment: number;
+  authGul: number;
+  gul: number;
   user: {
     id: number;
     name: string;
@@ -67,7 +69,7 @@ if(data){
       <div className="feed">
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div key={pageIndex}>
-            {page.data?.posts.data.map((post: dataProps) => (
+            {page?.data?.posts?.data?.map((post: dataProps) => (
               <div key={post.id}>
                 <SinglePostComp
                   authorName={post.user.name}
@@ -75,14 +77,16 @@ if(data){
                   postTitle={post.title}
                   postID={post.id}
                   image={post.img}
-                  likes={post.like}
-                  dislikes={post.dislike}
+                  likes={0}
+                  dislikes={0}
                   type={post.type}
-                  authLike={post.authLike}
+                  authLike={'ლიკე'}
                   date={post.created_at}
                   postUserId={post.user.id}
                   postStatus={post.status}
                   commentLength={post.comment}
+                  authGul={post.authGul}
+                  guls={post.gul}
                 />
               </div>
             ))}

@@ -6,17 +6,17 @@ import { setUser } from "../../Redux/userSlicer";
 import { useDispatch } from "react-redux";
 import InputComponent from "../inputComponent/InputComponent";
 import { eyeIcon } from "../../assets/svg/eyeIco";
-import LoginButtons from "./SocialLogins";
 import { RegErrMsg } from "./RegErrMsg";
+import LoginModalBtn from "./LoginModalBtn";
 
 const loginPath = import.meta.env.VITE_LOGIN;
 const regPath = import.meta.env.VITE_REGISTER;
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const [response, setResponse] = useState("");
+  const [_response, _setResponse] = useState("");
   const [_isLoading, setLoading] = useState(false);
-  const [isPwdEqual, setPwdEqual] = useState(false);
+  const [_isPwdEqual, setPwdEqual] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const [showRePwd, setReShowPwd] = useState(false);
   const [regInputs, setRegInputs] = useState({
@@ -38,6 +38,14 @@ const RegisterForm = () => {
   })
 
   const regUser = async () => {
+    setErrorHandler({...errorHandlers, nameError: false,
+        nameErrorMessage: "",
+        emailError: false,
+        emailErrorMessage: "",
+        passwordError: false,
+        passwordErrorMessage: "",
+        rePasswordError: false,
+        rePasswordErrorMessage: ""})
    
       setLoading(true);
       setPwdEqual(false);
@@ -47,8 +55,6 @@ const RegisterForm = () => {
             "Content-Type": "application/json",
           },
         });
-
-        setResponse(res.data.message);
 
         if (res.data.message === "User registered by Mail") {
           const res = await axios.post(
@@ -73,8 +79,18 @@ const RegisterForm = () => {
             })
           );
         }
-      } catch (error) {
-        console.error(error);
+      } catch (error:any) {
+        console.error(error.response.data.errors);
+        const errorResponse = error.response.data.errors
+        setErrorHandler({
+            ...errorHandlers, 
+            nameError: errorResponse?.name && true,
+            nameErrorMessage: errorResponse?.name,
+            emailError: errorResponse?.email && true,
+            emailErrorMessage: errorResponse?.email,
+            passwordError: errorResponse?.password && true,
+            passwordErrorMessage: errorResponse?.password
+        })
       } finally {
         setLoading(false);
       }
@@ -97,6 +113,9 @@ const RegisterForm = () => {
   return (
     <>
       <form className="reg_form" onSubmit={regUser}>
+
+        {/* სახელის ინპუტი და ერორი */}
+        {errorHandlers.nameError && <RegErrMsg message={errorHandlers.nameErrorMessage}/>}
         <InputComponent
           type="text"
           autoComplete="name"
@@ -106,23 +125,19 @@ const RegisterForm = () => {
           onChange={(e) => setRegInputs({ ...regInputs, name: e.target.value })}
         />
 
+        {/* იმეილის ინპუტი და ერორი */}
+        {errorHandlers.emailError && <RegErrMsg message={errorHandlers.emailErrorMessage}/>}
         <InputComponent
-          type="text"
+          type="email"
           autoComplete="current-email"
           placeholder="Email"
           value={regInputs.email}
           isError={errorHandlers.emailError ? true : false}
-          onChange={(e) =>
-            setRegInputs({ ...regInputs, email: e.target.value })
-          }
+          onChange={(e) => setRegInputs({ ...regInputs, email: e.target.value })}
         />
 
-        {
-            errorHandlers.passwordError && errorHandlers.rePasswordError 
-            &&
-            <RegErrMsg message={errorHandlers.passwordErrorMessage}/>  
-        }
-
+        {/* პაროლი და ერორი */}
+        {errorHandlers.passwordError && <RegErrMsg message={errorHandlers.passwordErrorMessage}/>}
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setShowPwd(!showPwd)}>
             {eyeIcon}
@@ -158,19 +173,9 @@ const RegisterForm = () => {
           />
         </div>
 
-        <LoginButtons buttonName="Create accaunt" funName={regUser} />
+            <LoginModalBtn title={"Create accaunt"} funName={regUser} />
       </form>
 
-      {response ? (
-        <p className="reg_fomr_res_status_okey">{response}</p>
-      ) : (
-        <></>
-      )}
-      {isPwdEqual ? (
-        <p className="password_do_not_match">Password do not match</p>
-      ) : (
-        <></>
-      )}
     </>
   );
 };

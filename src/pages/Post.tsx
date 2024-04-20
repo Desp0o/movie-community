@@ -135,9 +135,8 @@ const Post = () => {
               likes={data.like}
               dislikes={data.dislike}
               postID={data.id}
-              authLike={data.authLike} 
-              commentLength={data.comment}            
-              />
+              authLike={data.authLike}
+              commentLength={data.comment} authGul={0} guls={0}              />
 
             <AddComment postID={id} callBack={refetch}/>
 

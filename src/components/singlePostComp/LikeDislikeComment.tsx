@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { arrowDislike } from "../../assets/svg/arrowDislike";
-import { arrowLike } from "../../assets/svg/arrowLike";
+import React, { useState } from "react";
+// import { arrowDislike } from "../../assets/svg/arrowDislike";
+// import { arrowLike } from "../../assets/svg/arrowLike";
 import { commentsIcon } from "../../assets/svg/commentsIcon";
 import "./singlePostComp.css";
-import axios from "axios";
-import { activeLike } from "../../assets/svg/activeLike";
-import { activeDislike } from "../../assets/svg/activeDislike";
+// import { activeLike } from "../../assets/svg/activeLike";
+// import { activeDislike } from "../../assets/svg/activeDislike";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
+import { activeHeartIcon, heartIcon } from "../../assets/svg/heartIcon";
+import { Guling, UnGuling } from "./likeFunction/GulingFuction";
+// import { DislikeFunction, Liking, UnDislikeFunction, Unliking } from "./likeFunction/LikeFunctions";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -16,179 +18,160 @@ interface LikeDislikeCommentProps {
   postID: number;
   authLike: string;
   commentLength: number;
+  authGul: number;
+  guls: number;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
-  likes,
-  dislikes,
+  // likes,
+  // dislikes,
   postID,
-  authLike,
+  // authLike,
   commentLength,
+  authGul,
+  guls
 }) => {
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const [votes, seteVotes] = useState(likes - dislikes);
+  const [votes, seteVotes] = useState(guls);
+const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
+const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
+
+  // const [likeEmoj, setLikeEmoj] = useState({
+  //   active: authLike === "like" ? true : false,
+  //   icon: authLike === "like" ? activeLike : arrowLike,
+  // });
+
+  // const [disLikeEmoj, setDislikeEmoj] = useState({
+  //   active: authLike === "dislike" ? true : false,
+  //   icon: authLike === "dislike" ? activeDislike : arrowDislike,
+  // });
+
+  // useEffect(() => {
+  //   seteVotes(likes - dislikes);
+  // }, [likes, dislikes]);
+
+  // const [isLike] = useState({
+  //   post: postID,
+  //   like: "like",
+  // });
+  // const [isUnlike] = useState({
+  //   post: postID,
+  //   like: "dislike",
+  // });
+
+  // useEffect(() => {
+  //   if (user.name !== "" && authLike === "like") {
+  //     setLikeEmoj({ active: true, icon: activeLike });
+  //     setDislikeEmoj({ active: false, icon: arrowDislike });
+  //   }
+
+  //   if (user.name !== "" && authLike === "dislike") {
+  //     setLikeEmoj({ active: false, icon: arrowLike });
+  //     setDislikeEmoj({ active: true, icon: activeDislike });
+  //   }
+
+  //   if (user.name !== "" && authLike === null) {
+  //     setLikeEmoj({ active: false, icon: arrowLike });
+  //     setDislikeEmoj({ active: false, icon: arrowDislike });
+  //   }
+
+  //   if (user.name === "" && authLike === undefined) {
+  //     setLikeEmoj({ active: false, icon: arrowLike });
+  //     setDislikeEmoj({ active: false, icon: arrowDislike });
+  //   }
+
+  //   if (!user.name && !user.userID) {
+  //     setLikeEmoj({ active: false, icon: arrowLike });
+  //     setDislikeEmoj({ active: false, icon: arrowDislike });
+  //   }
+  //   // eslint-disable-next-line
+  // }, [user.name, authLike, user.userID]);
 
 
-  const [likeEmoj, setLikeEmoj] = useState({
-    active: authLike === "like" ? true : false,
-    icon: authLike === "like" ? activeLike : arrowLike,
-  });
 
-  const [disLikeEmoj, setDislikeEmoj] = useState({
-    active: authLike === "dislike" ? true : false,
-    icon: authLike === "dislike" ? activeDislike : arrowDislike,
-  });
+  // const sendLike = async () => {
+  //   if (user.userID) {
+  //     if (!likeEmoj.active) {
+  //       setLikeEmoj({ active: true, icon: activeLike });
+  //       setDislikeEmoj({ active: false, icon: arrowDislike });        
+  //       seteVotes(votes + 1); // add vote
+  //       Liking(isLike)
 
-  useEffect(() => {
-    seteVotes(likes - dislikes);
-  }, [likes, dislikes]);
+  //       if (disLikeEmoj.active) {
+  //         UnDislikeFunction(isUnlike)
+  //         seteVotes(votes + 2);
+  //       }
+  //     } else {
+  //       setLikeEmoj({ active: false, icon: arrowLike })
+  //       seteVotes(votes - 1);
+  //       Unliking(isLike)
+  //     }
+  //   } else {
+  //     dispatch(setModalVisible(true));
+  //   }
+  // };
 
-  const [isLike] = useState({
-    post: postID,
-    like: "like",
-  });
-  const [isUnlike] = useState({
-    post: postID,
-    like: "dislike",
-  });
 
-  useEffect(() => {
-    if (user.name !== "" && authLike === "like") {
-      setLikeEmoj({ active: true, icon: activeLike });
-      setDislikeEmoj({ active: false, icon: arrowDislike });
-    }
 
-    if (user.name !== "" && authLike === "dislike") {
-      setLikeEmoj({ active: false, icon: arrowLike });
-      setDislikeEmoj({ active: true, icon: activeDislike });
-    }
+  // const sendUnlike = async () => {
+  //   if (user.userID) {
+  //     if (!disLikeEmoj.active) {
+  //       setLikeEmoj({ active: false, icon: arrowLike });
+  //       setDislikeEmoj({ active: true, icon: activeDislike });
 
-    if (user.name !== "" && authLike === null) {
-      setLikeEmoj({ active: false, icon: arrowLike });
-      setDislikeEmoj({ active: false, icon: arrowDislike });
-    }
+  //       seteVotes(votes - 1)
 
-    if (user.name === "" && authLike === undefined) {
-      setLikeEmoj({ active: false, icon: arrowLike });
-      setDislikeEmoj({ active: false, icon: arrowDislike });
-    }
+  //       if (likeEmoj.active) {
+  //         Unliking(isLike)
 
-    if (!user.name && !user.userID) {
-      setLikeEmoj({ active: false, icon: arrowLike });
-      setDislikeEmoj({ active: false, icon: arrowDislike });
-    }
-    // eslint-disable-next-line
-  }, [user.name, authLike, user.userID]);
+  //         seteVotes(votes - 2);
+  //       }
+  //       DislikeFunction(isUnlike)
+  //     } else {
+  //       setDislikeEmoj({ active: false, icon: arrowDislike });
 
-  const unlikeFunction = async () => {
-    try {
-      const response = await axios.post(import.meta.env.VITE_UNLIKING, isLike, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //       seteVotes(votes + 1)
+  //       UnDislikeFunction(isUnlike)
+  //     }
+  //   } else {
+  //     dispatch(setModalVisible(true));
+  //   }
+  // };
 
-  const likeFunction = async () => {
-    try {
-      const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
 
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const sendLike = async () => {
-    if (user.userID) {
-      if (!likeEmoj.active) {
-        setLikeEmoj({ active: true, icon: activeLike });
-        setDislikeEmoj({ active: false, icon: arrowDislike });        seteVotes(votes + 1); // add vote
-        likeFunction(); //send like function
-
-        if (disLikeEmoj.active) {
-          unDislikeFunction();
-          seteVotes(votes + 2);
-        }
-      } else {
-        setLikeEmoj({ active: false, icon: arrowLike })
+  const sendHeart = () => {
+    setHeart(!isHeart)
+    if(user.userID){
+      if(!isHeart){
+        //send heart
+        seteVotes(votes + 1);
+        Guling(postID)
+        setGulIcon(activeHeartIcon)
+      }
+  
+      if(isHeart){
+        //send unheart
         seteVotes(votes - 1);
-        unlikeFunction();
+        UnGuling(postID)
+        setGulIcon(heartIcon)
+
       }
-    } else {
+    }else {
       dispatch(setModalVisible(true));
     }
-  };
 
-  const dislikeFunction = async () => {
-    try {
-      const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    console.log(isHeart);
+    
+  }
 
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const unDislikeFunction = async () => {
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_UNLIKING,
-        isUnlike,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const sendUnlike = async () => {
-    if (user.userID) {
-      if (!disLikeEmoj.active) {
-        setLikeEmoj({ active: false, icon: arrowLike });
-        setDislikeEmoj({ active: true, icon: activeDislike });
-
-        seteVotes(votes - 1)
-
-        if (likeEmoj.active) {
-          unlikeFunction();
-          seteVotes(votes - 2);
-        }
-        dislikeFunction();
-      } else {
-        setDislikeEmoj({ active: false, icon: arrowDislike });
-
-        seteVotes(votes + 1)
-        unDislikeFunction();
-      }
-    } else {
-      dispatch(setModalVisible(true));
-    }
-  };
+  
 
   return (
     <div className="likeDislikeComment_container">
       <div className="like_dislike">
-        <span onClick={sendLike}>{likeEmoj.icon}</span>
+        {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
+        <span onClick={sendHeart}>{gulIcon}</span>
         <p
           style={{
             width: votes > 99 ? "35px" : "20px",
@@ -199,7 +182,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
         >
           {votes}
         </p>
-        <span onClick={sendUnlike}>{disLikeEmoj.icon}</span>
+        {/* <span onClick={sendUnlike}>{disLikeEmoj.icon}</span> */}
       </div>
 
       <div className="single_post_comments">

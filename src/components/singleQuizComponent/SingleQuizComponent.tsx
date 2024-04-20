@@ -1,7 +1,7 @@
 import React from "react";
 import Author from "../singlePostComp/Author";
 import PostImage from "../singlePostComp/postImage";
-import LikeDislikeComment from "../singlePostComp/LikeDislikeComment";
+// import LikeDislikeComment from "../singlePostComp/LikeDislikeComment";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import PostTitle from "../singlePostComp/PostTitle";
 import "./singleQuizComp.css"
@@ -25,7 +25,7 @@ const SingleQuizComponent:React.FC<SingleQuizComponentProps> = ({authorAvatar, a
         <Author avatar={authorAvatar} name={authorName} date={""} />
         <PostTitle title={postTitle} postStatus={""} />
         {image ? <PostImage image={image} /> : <></>}
-        <LikeDislikeComment likes={0} dislikes={0} postID={0} authLike={""} commentLength={0} />
+        {/* <LikeDislikeComment likes={0} dislikes={0} postID={0} authLike={""} commentLength={0} authGul={0} guls={0} /> */}
         
         <div className="answers_container">
             <QuizAnswers />

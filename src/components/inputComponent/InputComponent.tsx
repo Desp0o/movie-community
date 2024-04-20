@@ -25,6 +25,7 @@ const InputComponent: React.FC<inputProps> = ({
       className={isError ? "input_style error" : "input_style"}
       value={value}
       onChange={onChange}
+      required
     />
   );
 };

@@ -6,9 +6,9 @@ import { setUser } from "../../Redux/userSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { eyeIcon } from "../../assets/svg/eyeIco";
-import { ErrorIcon } from "../../assets/svg/errorIcon";
 import InputComponent from "../inputComponent/InputComponent";
 import LoginButtons from "./SocialLogins";
+import { RegErrMsg } from "./RegErrMsg";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -47,31 +47,32 @@ const LoginForm = () => {
         }
       );
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("token_death", response.data.token_death);
-      localStorage.setItem("userID", response.data.user.id);
-      localStorage.setItem("userName", response.data.user.name);
+      localStorage.setItem("token", response?.data?.token);
+      localStorage.setItem("token_death", response?.data?.token_death);
+      localStorage.setItem("userID", response.data?.user?.id);
+      localStorage.setItem("userName", response.data?.user?.name);
       dispatch(setRefetch(!requestRefetch));
       dispatch(setModalVisible(false));
       dispatch(
         setUser({
-          name: response.data.user.name,
-          avatar: response.data.user.avatar,
-          userID: response.data.user.id,
+          name: response?.data?.user?.name,
+          avatar: response?.data?.user?.avatar,
+          userID: response?.data?.user?.id,
         })
       );
 
       setError(false); //error panel hide
-      console.log(response.data);
-
+      console.log(response);
+      
       //eslint-disable-next-line
     } catch (error: any) {
-      console.log(error.response.data.errors);
+      console.error(error.response.data)
       setError(true);
       setErrMessage({
         ...errMessage,
-        emailErr: error.response.data.errors.email,
-        passwordErr: error.response.data.errors.password,
+        emailErr: error?.response?.data?.errors?.email,
+        passwordErr: error?.response?.data?.errors?.password,
+        normalErr: error?.response?.data?.message
       });
     } finally {
       setLoading(false);
@@ -79,44 +80,29 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="login_form">
+    <form className="login_form" onSubmit={LogInFunction}>
       {isError && (
         <div
           className="err_panel_log"
           style={{
-            gap: errMessage.emailErr && errMessage.passwordErr ? "2px" : "10px",
+            gap: errMessage.emailErr && errMessage.passwordErr ? "2px" : "0px",
           }}
         >
-          {/* თუ მეილის ერორია */}
-          <div>
-            {errMessage.emailErr ? (
-              <div className="error_container">
-                {ErrorIcon}
-                <p style={{ fontSize: "14px", lineHeight: "16px" }}>
-                  {errMessage.emailErr}
-                </p>
-              </div>
-            ) : (
-              <></>
-            )}
 
-            {/* //თუ პაროლის ერორია */}
-            {errMessage.passwordErr ? (
-              <div className="error_container">
-                {ErrorIcon}
-                <p style={{ fontSize: "14px", lineHeight: "16px" }}>
-                  {errMessage.passwordErr}
-                </p>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
+          {/* თუ ერორი არიეს ეს მაშინ მხოლოდ ეს შეტყობინება გამოდის */}
+          {errMessage.normalErr === "Invalid email or password" &&  <RegErrMsg message='Invalid email or password' />}
+
+          {/* იმეილის ერორის */}
+          {errMessage.emailErr &&  <RegErrMsg message={errMessage.emailErr} />}
+           
+          {/* //თუ პაროლის ერორია */}
+          {errMessage.passwordErr && <RegErrMsg message={errMessage.passwordErr} />}
+
         </div>
       )}
 
       <InputComponent
-        type="text"
+        type="email"
         autoComplete="current-email"
         placeholder={"Email"}
         value={loginInputs.email}

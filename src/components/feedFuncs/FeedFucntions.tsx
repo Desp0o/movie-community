@@ -14,7 +14,7 @@ export const FeedFunctions = () => {
 
     useEffect(() => {
         // Save lastPage to localStorage whenever it changes
-        localStorage.setItem('lastPage', lastPage.toString());
+        localStorage.setItem('lastPage', lastPage?.toString());
     }, [lastPage]);
 
     // useEffect(() => {
@@ -59,7 +59,7 @@ export const FeedFunctions = () => {
                         },
                     }
                 );
-                setLastPage(response.data.posts.last_page);
+                setLastPage(response?.data?.posts?.last_page);
                 return response;
             } catch (error) {
                 console.error(error)
