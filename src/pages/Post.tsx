@@ -69,6 +69,9 @@ const Post = () => {
     console.error(error)
   }
 
+  console.log(data);
+  
+
   return (
     <div>
       <ScrollToTop />
@@ -132,11 +135,13 @@ const Post = () => {
             )}
 
             <LikeDislikeComment
-              likes={data.like}
-              dislikes={data.dislike}
-              postID={data.id}
-              authLike={data.authLike}
-              commentLength={data.comment} authGul={0} guls={0}              />
+              likes={data?.like}
+              dislikes={data?.dislike}
+              postID={data?.id}
+              authLike={data?.authLike}
+              commentLength={data?.comment} authGul={data?.authGul
+              } guls={data?.gul}              
+              />
 
             <AddComment postID={id} callBack={refetch}/>
 
