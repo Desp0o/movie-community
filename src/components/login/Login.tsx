@@ -4,7 +4,7 @@ import { xIcon } from "../../assets/svg/Xicon";
 // import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
 import "./login.css";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import { useLoginModal } from "../../hooks/useLoginModal";
@@ -20,6 +20,10 @@ const Login = () => {
   const modalCloser = () => {
     dispatch(setModalVisible(false));
   };
+
+  useEffect(()=>{
+   document.body.style.overflow = `${isModalVisible ? 'hidden' : 'auto'}`
+  },[isModalVisible])
 
   // const register = () => {
   //   setRegForm(true);
@@ -52,7 +56,9 @@ const Login = () => {
 
   return (
     isModalVisible 
-    ? 
+    ?
+    <>
+    <div className="backdrop" onClick={modalCloser}/>
     <div className="login_Container">
       <div className="login_backdrop" onClick={modalCloser} />
       <div className="logind_modal">
@@ -77,6 +83,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
     : <></>
   );
 };

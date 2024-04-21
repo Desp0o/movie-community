@@ -127,7 +127,7 @@
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background: var(--btn-blue);
+  background: var(--purple);
 
   color: var(--white);
   font-family: "Inter";
