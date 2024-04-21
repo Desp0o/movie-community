@@ -2,7 +2,7 @@ import Fetching from "./components/fetchingComponent/Fetching";
 import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
-// import { useRefetchHook } from "./hooks/useRefetchHook";
+import { useRefetchHook } from "./hooks/useRefetchHook";
 // import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
@@ -29,7 +29,7 @@ interface dataProps {
 }
 
 const Feed = () => {
-  // const { requestRefetch } = useRefetchHook();
+  const { requestRefetch } = useRefetchHook();
   // const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
@@ -40,10 +40,10 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    refetch
+    refetch();
     console.log("ref");
     
-  }, []);
+  }, [requestRefetch]);
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -60,10 +60,9 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
-if(data){
-  console.log(data);
+console.log(data);
 
-}  
+
 
   return (
     <PageLayout>
@@ -82,19 +81,20 @@ if(data){
                   likes={0}
                   dislikes={0}
                   type={post.type}
-                  authLike={'ლიკე'}
+                  authLike={post.authLike}
                   date={post.created_at}
                   postUserId={post.user.id}
                   postStatus={post.status}
                   commentLength={post.comment}
                   authGul={post.authGul}
-                  guls={post.gul}
+                  guls={Number(post.gul)}
                 />
               </div>
             ))}
           </div>
         ))}
       </div>
+      <button onClick={()=>refetch()}>ref</button>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
     </PageLayout>
   );

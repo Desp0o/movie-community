@@ -8,6 +8,7 @@ import spinnerSlicer from "./spinnerSlicer";
 import ResposnivePostAddSlice from "./ResposnivePostAddSlice";
 import RefetchSlicer from "./RefetchSlicer";
 import EditPostSlicer from "./EditPostSlicer";
+import VotesSlicer from "./VotesSlicer";
 
 const store = configureStore({
     reducer:{
@@ -19,7 +20,8 @@ const store = configureStore({
         spinnerSote: spinnerSlicer,
         resPostAddStore: ResposnivePostAddSlice,
         refetchStore: RefetchSlicer,
-        editPostStroe: EditPostSlicer
+        editPostStroe: EditPostSlicer,
+        voteStore: VotesSlicer
     }
 })
 

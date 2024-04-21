@@ -32,13 +32,17 @@ export const FeedFunctions = () => {
       if(!user.name){
         setPath('https://api.pinky.ge/api/guestFeed?page=')
         setToken(token)
-      }else{
+      }
+      if(user.userID){
         setPath('https://api.pinky.ge/api/authFeed?page=')
         setToken(localStorage.getItem("token"))
       }
       
-      refetch
-    },[user.userID,path])
+      refetch();
+
+      console.log(path);
+      
+    },[user.userID])
 
     const {
         data,
