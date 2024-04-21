@@ -33,12 +33,11 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  // const [votes, seteVotes] = useState<number>(guls);
+  const [votes, seteVotes] = useState<number>(guls);
 const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
 const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
 
 useEffect(()=>{
-  // seteVotes(Number(guls))
   if(!user.userID){
     setHeart(false)
     setGulIcon(heartIcon)
@@ -174,14 +173,14 @@ useEffect(()=>{
     if(user.userID){
       if(!isHeart){
         //send heart
-        // seteVotes(votes + 1);
+        seteVotes(votes + 1);
         Guling(postID)
         setGulIcon(activeHeartIcon)
       }
   
       if(isHeart){
         //send unheart
-        // seteVotes(votes - 1);
+        seteVotes(votes - 1);
         UnGuling(postID)
         setGulIcon(heartIcon)
 
@@ -202,7 +201,7 @@ useEffect(()=>{
         {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
         <span onClick={sendHeart}>{gulIcon}</span>
         <p>
-          
+          {votes}
         </p>
         {/* <span onClick={sendUnlike}>{disLikeEmoj.icon}</span> */}
       </div>
