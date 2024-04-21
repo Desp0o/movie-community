@@ -19,7 +19,7 @@ interface LikeDislikeCommentProps {
   authLike: string;
   commentLength: number;
   authGul: number;
-  guls: number;
+  gul: number;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
@@ -29,13 +29,17 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   // authLike,
   commentLength,
   authGul,
-  guls
+  gul
 }) => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const [votes, seteVotes] = useState<number>(guls);
+  const [votes, seteVotes] = useState(gul);
 const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
 const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
+
+useEffect(() => {
+  seteVotes(gul);
+}, [gul]);
 
 useEffect(()=>{
   if(!user.userID){
@@ -47,107 +51,6 @@ useEffect(()=>{
   
 },[user.userID])
 
-  // const [likeEmoj, setLikeEmoj] = useState({
-  //   active: authLike === "like" ? true : false,
-  //   icon: authLike === "like" ? activeLike : arrowLike,
-  // });
-
-  // const [disLikeEmoj, setDislikeEmoj] = useState({
-  //   active: authLike === "dislike" ? true : false,
-  //   icon: authLike === "dislike" ? activeDislike : arrowDislike,
-  // });
-
-  // useEffect(() => {
-  //   seteVotes(likes - dislikes);
-  // }, [likes, dislikes]);
-
-  // const [isLike] = useState({
-  //   post: postID,
-  //   like: "like",
-  // });
-  // const [isUnlike] = useState({
-  //   post: postID,
-  //   like: "dislike",
-  // });
-
-  // useEffect(() => {
-  //   if (user.name !== "" && authLike === "like") {
-  //     setLikeEmoj({ active: true, icon: activeLike });
-  //     setDislikeEmoj({ active: false, icon: arrowDislike });
-  //   }
-
-  //   if (user.name !== "" && authLike === "dislike") {
-  //     setLikeEmoj({ active: false, icon: arrowLike });
-  //     setDislikeEmoj({ active: true, icon: activeDislike });
-  //   }
-
-  //   if (user.name !== "" && authLike === null) {
-  //     setLikeEmoj({ active: false, icon: arrowLike });
-  //     setDislikeEmoj({ active: false, icon: arrowDislike });
-  //   }
-
-  //   if (user.name === "" && authLike === undefined) {
-  //     setLikeEmoj({ active: false, icon: arrowLike });
-  //     setDislikeEmoj({ active: false, icon: arrowDislike });
-  //   }
-
-  //   if (!user.name && !user.userID) {
-  //     setLikeEmoj({ active: false, icon: arrowLike });
-  //     setDislikeEmoj({ active: false, icon: arrowDislike });
-  //   }
-  //   // eslint-disable-next-line
-  // }, [user.name, authLike, user.userID]);
-
-
-
-  // const sendLike = async () => {
-  //   if (user.userID) {
-  //     if (!likeEmoj.active) {
-  //       setLikeEmoj({ active: true, icon: activeLike });
-  //       setDislikeEmoj({ active: false, icon: arrowDislike });        
-  //       seteVotes(votes + 1); // add vote
-  //       Liking(isLike)
-
-  //       if (disLikeEmoj.active) {
-  //         UnDislikeFunction(isUnlike)
-  //         seteVotes(votes + 2);
-  //       }
-  //     } else {
-  //       setLikeEmoj({ active: false, icon: arrowLike })
-  //       seteVotes(votes - 1);
-  //       Unliking(isLike)
-  //     }
-  //   } else {
-  //     dispatch(setModalVisible(true));
-  //   }
-  // };
-
-
-
-  // const sendUnlike = async () => {
-  //   if (user.userID) {
-  //     if (!disLikeEmoj.active) {
-  //       setLikeEmoj({ active: false, icon: arrowLike });
-  //       setDislikeEmoj({ active: true, icon: activeDislike });
-
-  //       seteVotes(votes - 1)
-
-  //       if (likeEmoj.active) {
-  //         Unliking(isLike)
-
-  //         seteVotes(votes - 2);
-  //       }
-  //       DislikeFunction(isUnlike)
-  //     } else {
-  //       setDislikeEmoj({ active: false, icon: arrowDislike });
-
-  //       seteVotes(votes + 1)
-  //       UnDislikeFunction(isUnlike)
-  //     }
-  //   } else {
-  //     dispatch(setModalVisible(true));
-  //   }
-  // };
 
   useEffect(()=>{
     if(authGul === 0 && user.userID){
@@ -165,22 +68,24 @@ useEffect(()=>{
       setGulIcon(heartIcon)
     }
 
-  },[user.userID, guls, authGul])
+  },[user.userID, authGul])
 
 
   const sendHeart = () => {
     setHeart(!isHeart)
+
     if(user.userID){
       if(!isHeart){
+        seteVotes(Number(votes + 1));
         //send heart
-        seteVotes(votes + 1);
         Guling(postID)
         setGulIcon(activeHeartIcon)
       }
   
       if(isHeart){
         //send unheart
-        seteVotes(votes - 1);
+        seteVotes(Number(votes - 1));
+
         UnGuling(postID)
         setGulIcon(heartIcon)
 
@@ -199,7 +104,7 @@ useEffect(()=>{
     <div className="likeDislikeComment_container">
       <div className="like_dislike">
         {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
-        <span onClick={sendHeart}>{gulIcon}</span>
+        <span onClick={sendHeart} style={{cursor:"pointer"}}>{gulIcon}</span>
         <p>
           {votes}
         </p>

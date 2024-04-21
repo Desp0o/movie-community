@@ -3,11 +3,13 @@ import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
 import { useRefetchHook } from "./hooks/useRefetchHook";
-// import { useUserHook } from "./hooks/useUserHook";
+import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
 
 interface dataProps {
+  gul: number;
+  authGul: number;
   id: number;
   title: string;
   img: string;
@@ -19,8 +21,6 @@ interface dataProps {
   created_at: string;
   status: number | string;
   comment: number;
-  authGul: number;
-  gul: number;
   user: {
     id: number;
     name: string;
@@ -30,7 +30,7 @@ interface dataProps {
 
 const Feed = () => {
   const { requestRefetch } = useRefetchHook();
-  // const {user} = useUserHook()
+  const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
   const loadNextPage = () => {
@@ -41,9 +41,7 @@ const Feed = () => {
 
   useEffect(() => {
     refetch();
-    console.log("ref");
-    
-  }, [requestRefetch]);
+  }, [requestRefetch, user]);
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -60,9 +58,10 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
-console.log(data);
+if(data){
+  console.log(data);
 
-
+}  
 
   return (
     <PageLayout>
@@ -70,7 +69,7 @@ console.log(data);
       <div className="feed">
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div key={pageIndex}>
-            {page?.data?.posts?.data?.map((post: dataProps) => (
+            {page.data?.posts.data.map((post: dataProps) => (
               <div key={post.id}>
                 <SinglePostComp
                   authorName={post.user.name}
@@ -78,23 +77,22 @@ console.log(data);
                   postTitle={post.title}
                   postID={post.id}
                   image={post.img}
-                  likes={0}
-                  dislikes={0}
+                  likes={post.like}
+                  dislikes={post.dislike}
                   type={post.type}
                   authLike={post.authLike}
                   date={post.created_at}
                   postUserId={post.user.id}
                   postStatus={post.status}
-                  commentLength={post.comment}
-                  authGul={post.authGul}
-                  guls={Number(post.gul)}
+                  commentLength={post.comment} 
+                  authGul={post.authGul} 
+                  gul={post.gul}                
                 />
               </div>
             ))}
           </div>
         ))}
       </div>
-      <button onClick={()=>refetch()}>ref</button>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
     </PageLayout>
   );
