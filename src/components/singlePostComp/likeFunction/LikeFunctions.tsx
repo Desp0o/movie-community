@@ -1,8 +1,9 @@
 import axios from "axios";
-const token = localStorage.getItem('token')
 
 
 export const Liking = async (isLike: { post: number; like: string; }) => {
+  const token = localStorage.getItem('token')
+
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isLike, {
         headers: {
@@ -17,6 +18,8 @@ export const Liking = async (isLike: { post: number; like: string; }) => {
   };
 
   export const Unliking = async (isLike: { post: number; like: string; }) => {
+    const token = localStorage.getItem('token')
+
     try {
       const response = await axios.post(import.meta.env.VITE_UNLIKING, isLike, {
         headers: {
@@ -30,6 +33,8 @@ export const Liking = async (isLike: { post: number; like: string; }) => {
   };
 
   export const DislikeFunction = async (isUnlike: { post: number; like: string; }) => {
+    const token = localStorage.getItem('token')
+
     try {
       const response = await axios.post(import.meta.env.VITE_LIKING, isUnlike, {
         headers: {
@@ -44,6 +49,8 @@ export const Liking = async (isLike: { post: number; like: string; }) => {
   };
 
   export const UnDislikeFunction = async (isUnlike: { post: number; like: string; }) => {
+    const token = localStorage.getItem('token')
+
     try {
       const response = await axios.post(
         import.meta.env.VITE_UNLIKING,

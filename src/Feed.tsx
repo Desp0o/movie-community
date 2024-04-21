@@ -58,10 +58,11 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
+
+
 if(data){
   console.log(data);
-
-}  
+}
 
   return (
     <PageLayout>

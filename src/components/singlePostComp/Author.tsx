@@ -14,7 +14,6 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
   useEffect(() => {
     const updateTimeAgo = () => {
       const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-      console.log(Math.floor(seconds / 3600));
       
       let interval
       interval = Math.floor(seconds / 31536000);

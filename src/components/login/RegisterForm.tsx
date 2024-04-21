@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import InputComponent from "../inputComponent/InputComponent";
 import { eyeIcon } from "../../assets/svg/eyeIco";
 import { RegErrMsg } from "./RegErrMsg";
-import LoginModalBtn from "./LoginModalBtn";
+import SocialLogins from "./SocialLogins";
 
 const loginPath = import.meta.env.VITE_LOGIN;
 const regPath = import.meta.env.VITE_REGISTER;
@@ -18,6 +18,7 @@ const RegisterForm = () => {
   const [_isLoading, setLoading] = useState(false);
   const [_isPwdEqual, setPwdEqual] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
+  const [errMsg, setErrMsg] = useState('')
   const [showRePwd, setReShowPwd] = useState(false);
   const [regInputs, setRegInputs] = useState({
     name: "",
@@ -26,26 +27,15 @@ const RegisterForm = () => {
     password_confirmation: "",
   });
 
-  const [errorHandlers, setErrorHandler] = useState({
+  const [errorHandlers, _setErrorHandler] = useState({
     nameError: false,
-    nameErrorMessage: "",
     emailError: false,
-    emailErrorMessage: "",
     passwordError: false,
-    passwordErrorMessage: "",
     rePasswordError: false,
-    rePasswordErrorMessage: ""
   })
 
   const regUser = async () => {
-    setErrorHandler({...errorHandlers, nameError: false,
-        nameErrorMessage: "",
-        emailError: false,
-        emailErrorMessage: "",
-        passwordError: false,
-        passwordErrorMessage: "",
-        rePasswordError: false,
-        rePasswordErrorMessage: ""})
+    setErrMsg('')
    
       setLoading(true);
       setPwdEqual(false);
@@ -80,17 +70,18 @@ const RegisterForm = () => {
           );
         }
       } catch (error:any) {
-        console.error(error.response.data.errors);
-        const errorResponse = error.response.data.errors
-        setErrorHandler({
-            ...errorHandlers, 
-            nameError: errorResponse?.name && true,
-            nameErrorMessage: errorResponse?.name,
-            emailError: errorResponse?.email && true,
-            emailErrorMessage: errorResponse?.email,
-            passwordError: errorResponse?.password && true,
-            passwordErrorMessage: errorResponse?.password
-        })
+
+        for (const key in error.response.data.errors) {
+          // Check if the errors array for the current key is not empty
+          if (error.response.data.errors[key].length > 0) {
+              // Log the first error message for the current key
+              setErrMsg(error.response.data.errors[key][0].substring(0, error.response.data.errors[key][0].length - 1));
+              
+              // Exit the loop after logging the first error
+              break;
+          }
+      }
+        
       } finally {
         setLoading(false);
       }
@@ -98,14 +89,7 @@ const RegisterForm = () => {
 
     if (regInputs.password_confirmation !== regInputs.password) {
       setPwdEqual(true);
-      setErrorHandler(
-        {
-            ...errorHandlers,
-            passwordError: true,
-            rePasswordError: true,
-            passwordErrorMessage: "Passwords do not match"
-        }
-      )
+      setErrMsg('Passwords do not match')
       return
     }
   };
@@ -115,7 +99,7 @@ const RegisterForm = () => {
       <form className="reg_form" onSubmit={regUser}>
 
         {/* სახელის ინპუტი და ერორი */}
-        {errorHandlers.nameError && <RegErrMsg message={errorHandlers.nameErrorMessage}/>}
+        {errMsg === 'The name field is required' && <RegErrMsg message={errMsg}/>}
         <InputComponent
           type="text"
           autoComplete="name"
@@ -126,7 +110,7 @@ const RegisterForm = () => {
         />
 
         {/* იმეილის ინპუტი და ერორი */}
-        {errorHandlers.emailError && <RegErrMsg message={errorHandlers.emailErrorMessage}/>}
+        {errMsg === 'The email field is required' || errMsg === 'The email field must be a valid email address' && <RegErrMsg message={errMsg}/>}
         <InputComponent
           type="email"
           autoComplete="current-email"
@@ -137,7 +121,7 @@ const RegisterForm = () => {
         />
 
         {/* პაროლი და ერორი */}
-        {errorHandlers.passwordError && <RegErrMsg message={errorHandlers.passwordErrorMessage}/>}
+        {errMsg === 'The password field is required' && <RegErrMsg message={errMsg}/>}
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setShowPwd(!showPwd)}>
             {eyeIcon}
@@ -154,6 +138,8 @@ const RegisterForm = () => {
           />
         </div>
 
+        {errorHandlers.passwordError && <RegErrMsg message={errMsg}/>}
+
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setReShowPwd(!showRePwd)}>
             {eyeIcon}
@@ -163,7 +149,7 @@ const RegisterForm = () => {
             autoComplete={"current_password"}
             placeholder="Password"
             value={regInputs.password_confirmation}
-            isError={errorHandlers.rePasswordError ? true : false}
+            isError={errorHandlers.passwordError ? true : false}
             onChange={(e) =>
               setRegInputs({
                 ...regInputs,
@@ -173,7 +159,8 @@ const RegisterForm = () => {
           />
         </div>
 
-            <LoginModalBtn title={"Create accaunt"} funName={regUser} />
+            <SocialLogins funName={regUser} buttonName={"Create accaunt"} />
+            
       </form>
 
     </>

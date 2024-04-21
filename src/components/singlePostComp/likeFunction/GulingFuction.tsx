@@ -1,7 +1,8 @@
 import axios from 'axios';
-const token = localStorage.getItem('token')
 
 export const Guling = async (postID: number) => {
+const token = localStorage.getItem('token')
+
     try {
       const response = await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
         headers:{
@@ -18,6 +19,8 @@ export const Guling = async (postID: number) => {
 
 
 export const UnGuling = async (postID: number) => {
+const token = localStorage.getItem('token')
+
     try {
       const response = await axios.get(`https://api.pinky.ge/api/unguling/${postID}`,{
         headers:{

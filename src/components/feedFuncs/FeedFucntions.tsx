@@ -40,7 +40,6 @@ export const FeedFunctions = () => {
       
       refetch();
 
-      console.log(path);
       
     },[user.userID])
 
