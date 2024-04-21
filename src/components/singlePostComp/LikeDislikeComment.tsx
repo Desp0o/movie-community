@@ -72,11 +72,11 @@ useEffect(()=>{
 
 
   const sendHeart = () => {
-    setHeart(!isHeart)
 
     if(user.userID){
       if(!isHeart){
         seteVotes(Number(votes + 1));
+        setHeart(true)
         //send heart
         Guling(postID)
         setGulIcon(activeHeartIcon)
@@ -85,6 +85,7 @@ useEffect(()=>{
       if(isHeart){
         //send unheart
         seteVotes(Number(votes - 1));
+        setHeart(false)
 
         UnGuling(postID)
         setGulIcon(heartIcon)
