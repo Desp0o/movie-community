@@ -104,7 +104,7 @@ useEffect(()=>{
     <div className="likeDislikeComment_container">
       <div className="like_dislike">
         {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
-        <span onClick={sendHeart} style={{cursor:"pointer"}}>{gulIcon}</span>
+        <span onClick={sendHeart} className="icon">{gulIcon}</span>
         <p>
           {votes}
         </p>
