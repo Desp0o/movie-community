@@ -3,14 +3,14 @@ import "./singlePostComp.css";
 import Author from "./Author";
 import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+// import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
-import SeeMore from "./SeeMore";
 import PostVideo from "./postVideo";
 import { useUserHook } from "../../hooks/useUserHook";
 import 'react-toastify/dist/ReactToastify.css';
 import EditPannel from "./EditPannel";
+import { Link } from "react-router-dom";
 
 
 interface SinglePostProps {
@@ -50,7 +50,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
-  const { isDark } = useDarkModeHook()
+  // const { isDark } = useDarkModeHook()
 
 
   useEffect(()=>{
@@ -63,28 +63,25 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
   return (
     <>
-    <div className="post_borders">
-        
-        <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
-          <div className="author_pannel_container">
-          <Author avatar={authorAvatar} name={authorName} date={date} />
             {isUserLogged ? <EditPannel postID={postID}/> : <></>}
+        
+        <div className="single_post_comp">
+          <div className="author_pannel_container">
+            <Author avatar={authorAvatar} name={authorName} date={date} />
+            <Link to={`/pages/Post/${postID}`}><PostTitle title={postTitle} postStatus={postStatus} /></Link>
           </div>
-          <PostTitle title={postTitle} postStatus={postStatus} />
       
           {type === "0"
-            ? (image ? <PostImage image={image} /> : <></>)
+            ? (image ? <Link to={`/pages/Post/${postID}`}><PostImage image={image} /></Link> : <></>)
             : type === "1" ?
-            (image ? <PostVideo image={image} /> : <></>)
+            (image ? <Link to={`/pages/Post/${postID}`}><PostVideo image={image} /> </Link>: <></>)
             : <></>
           }
 
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul} gul={gul} />
         
-          <SeeMore postID={postID} />
         </div>
         
-      </div>
     </>
     
   );

@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { activeHeartIcon, heartIcon } from "../../assets/svg/heartIcon";
 import { Guling, UnGuling } from "./likeFunction/GulingFuction";
+import { shareIcon } from "../../assets/svg/shareIcon";
+import { saveIcon } from "../../assets/svg/saveIcon";
 // import { DislikeFunction, Liking, UnDislikeFunction, Unliking } from "./likeFunction/LikeFunctions";
 
 interface LikeDislikeCommentProps {
@@ -103,19 +105,32 @@ useEffect(()=>{
 
   return (
     <div className="likeDislikeComment_container">
-      <div className="like_dislike">
-        {/* <span onClick={sendLike}>{likeEmoj.icon}</span> */}
-        <span onClick={sendHeart} className="icon">{gulIcon}</span>
-        <p>
-          {Number(votes)}
-        </p>
-        {/* <span onClick={sendUnlike}>{disLikeEmoj.icon}</span> */}
+      <div className="like_comment_share">
+       
+        {/* like */}
+        <div className="like_container">
+          <span onClick={sendHeart} className="icon_container_likeComp">{gulIcon}</span>
+          <p>{Number(votes)}</p>
+        </div>
+
+        {/* share */}
+        <div className="like_container">
+          <span className="icon_container_likeComp">{commentsIcon}</span>
+          <p>{commentLength}</p>
+        </div>
+
+        {/* share */}
+        <div className="like_container">
+          <span className="icon_container_likeComp">{shareIcon}</span>
+          <p>{commentLength}</p>
+        </div>
+        
       </div>
 
-      <div className="single_post_comments">
-        {commentsIcon}
-        <p>{commentLength}</p>
-      </div>
+      {/* save */}
+      <div className="like_container">
+          <span className="icon_container_likeComp">{saveIcon}</span>
+        </div>
     </div>
   );
 };

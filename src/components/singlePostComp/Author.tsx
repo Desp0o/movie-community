@@ -67,12 +67,11 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
         <p>{name}</p>
       </div>
 
-      <span
-        className="span_dot"
-        style={{ backgroundColor: "currentColor" }}
-      ></span>
+      <div className="author_header_dot">
+        <span className="span_dot" />
+      </div>
 
-      <p>{timeAgo}</p>
+      <p className="elapsed_time">{timeAgo}</p>
     </div>
   );
 };

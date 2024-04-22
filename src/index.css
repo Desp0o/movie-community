@@ -18,7 +18,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --light-bg: #F2F3F5;
-  --dark-bg: #0B1416;
+  
   --post-bg-light: #FDFAF7;
   --post-bg-dark: #171109;
   --active-page-light: #F2F4F5;
@@ -29,6 +29,7 @@
 
   --white:#fff;
   --black:#131518;
+  --dark-mode: #0A0C14;
   --light-grey:#CCD4DE;
   --dark-grey:#4C5158;
   --btn-blue:#13AFE0;
@@ -83,7 +84,7 @@ body {
 }
 
 .darkMode{
-  background-color: var(--dark-bg);
+  background-color: var(--dark-mode);
   color: #fff;
 }
 
