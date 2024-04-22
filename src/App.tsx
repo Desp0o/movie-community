@@ -23,7 +23,15 @@ import { ToastContainer } from "react-toastify"
 import EditPost from "./components/editPostModal/EditPostModal"
 import Login from "./components/login/Login"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
+    }
+  }
+})
 
 function App() {
   const token = localStorage.getItem('token')
