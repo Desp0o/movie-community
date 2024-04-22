@@ -139,7 +139,6 @@ const RegisterForm = () => {
         </div>
 
         {errorHandlers.passwordError && <RegErrMsg message={errMsg}/>}
-
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setReShowPwd(!showRePwd)}>
             {eyeIcon}
@@ -157,6 +156,11 @@ const RegisterForm = () => {
               })
             }
           />
+        </div>
+
+        <div className="checkbox_reg">
+          <input type="checkbox" className="checkbox_style_reg"/>
+          <p className="checkbox_text">I agree with the <span className="checkbox_span">Terms</span> and <span className="checkbox_span">Privacy policy</span></p>
         </div>
 
             <SocialLogins funName={regUser} buttonName={"Create accaunt"} />
