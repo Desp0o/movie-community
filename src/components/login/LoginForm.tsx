@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
@@ -10,7 +10,11 @@ import InputComponent from "../inputComponent/InputComponent";
 import LoginButtons from "./SocialLogins";
 import { RegErrMsg } from "./RegErrMsg";
 
-const LoginForm = () => {
+interface LoginProps{
+  funcName: () => void
+}
+
+const LoginForm:React.FC<LoginProps> = ({funcName}) => {
   const dispatch = useDispatch();
   const { requestRefetch } = useRefetchHook();
   const [_isLoading, setLoading] = useState(false);
@@ -129,9 +133,9 @@ const LoginForm = () => {
         />
       </div>
 
-      <p className="forget_pwd">Forget password?</p>
+      <p className="forget_pwd" onClick={funcName}>Forget password?</p>
 
-     <LoginButtons buttonName="Log in" funName={LogInFunction}/>
+     <span style={{marginTop:"-18px"}}><LoginButtons buttonName="Log in" funName={LogInFunction}/></span>
     </form>
   );
 };

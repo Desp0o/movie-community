@@ -1,45 +1,33 @@
 import { useDispatch } from "react-redux";
 import { xIcon } from "../../assets/svg/Xicon";
-// import { useDarkModeHook } from "../../hooks/useDarkModeHook";
-// import { useGoogleLogIn } from "../../hooks/useGoogleAuth";
 import "./login.css";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import { useLoginModal } from "../../hooks/useLoginModal";
+import ForgetPassword from "./ForgetPassword";
 
 
 const Login = () => {
   const dispatch = useDispatch();
   const {isModalVisible} = useLoginModal()
+  const [openForgetPWD, setOpenForgetPWD] = useState(false)
   // const { isDark } = useDarkModeHook();
-  // const [regForm, setRegForm] = useState(false);
-  // const [loginForm, setLoginForm] = useState(false);
 
   const modalCloser = () => {
     dispatch(setModalVisible(false));
+    setOpenForgetPWD(false)
   };
+
+  useEffect(()=>{
+console.log(openForgetPWD);
+
+  },[openForgetPWD])
 
   useEffect(()=>{
    document.body.style.overflow = `${isModalVisible ? 'hidden' : 'auto'}`
   },[isModalVisible])
-
-  // const register = () => {
-  //   setRegForm(true);
-  //   setLoginForm(false);
-  // };
-
-  // const login = () => {
-  //   setRegForm(false);
-  //   setLoginForm(true);
-  // };
-
-  // const closeLoginRegWindows = () => {
-  //   setRegForm(false);
-  //   setLoginForm(false);
-  // }
-
 
   const [loginMode, setLoginMode] = useState(true)
   const [regMode, setRegMode] = useState(false)
@@ -52,6 +40,10 @@ const Login = () => {
   const regModeHandler = () => {
     setLoginMode(false)
     setRegMode(true)
+  }
+
+  const forgetPwdHandler = () => {
+    setOpenForgetPWD(true)
   }
 
   return (
@@ -67,10 +59,11 @@ const Login = () => {
           <div className="log_modal_title_mode">
 
             <div className="title_close_icon">
-              <p className="login_title">{loginMode ? "Authorization" : "Registration"}</p>
+              <p className="login_title">{openForgetPWD ? "Reset password" : (loginMode ? "Authorization" : "Registration")}</p>
               <span className="button_xclose_modal_login" onClick={modalCloser}>{xIcon}</span>
             </div>
 
+            {!openForgetPWD &&
             <div className="login_modal_modes">
               <div className="mode_btn_styles">
                 <p className={loginMode ? "mode_btn active" : 'mode_btn'} onClick={loginModeHandler}>Sign In</p>
@@ -78,13 +71,12 @@ const Login = () => {
               </div>
 
               <div className="">
-                {loginMode && <LoginForm />}
+                {loginMode && <LoginForm funcName={forgetPwdHandler} />}
                 {regMode && <RegisterForm />}
               </div>
             </div>
-
-            
-            
+            }
+            {openForgetPWD && <ForgetPassword />}
           </div>
         </div>
       </div>
