@@ -14,6 +14,7 @@ const regPath = import.meta.env.VITE_REGISTER;
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
+  const [isChecked, setChecked] = useState(false)
   const [_response, _setResponse] = useState("");
   const [_isLoading, setLoading] = useState(false);
   const [_isPwdEqual, setPwdEqual] = useState(false);
@@ -37,56 +38,57 @@ const RegisterForm = () => {
   const regUser = async () => {
     setErrMsg('')
    
-      setLoading(true);
-      setPwdEqual(false);
-      try {
-        const res = await axios.post(regPath, regInputs, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (res.data.message === "User registered by Mail") {
-          const res = await axios.post(
-            loginPath,
-            { email: regInputs.email, password: regInputs.password },
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("token_death", res.data.token_death);
-          localStorage.setItem("userID", res.data.user.id);
-          dispatch(setModalVisible(false));
-          dispatch(
-            setUser({
-              name: res.data.user.email,
-              avatar: res.data.user.avatar,
-              userID: res.data.user.id,
-            })
-          );
-        }
-      } catch (error:any) {
-
-        for (const key in error.response.data.errors) {
-          // Check if the errors array for the current key is not empty
-          if (error.response.data.errors[key].length > 0) {
-              // Log the first error message for the current key
-              setErrMsg(error.response.data.errors[key][0].substring(0, error.response.data.errors[key][0].length - 1));
-              
-              // Exit the loop after logging the first error
-              break;
+      if(isChecked){
+        setLoading(true);
+        setPwdEqual(false);
+        try {
+          const res = await axios.post(regPath, regInputs, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+  
+          if (res.data.message === "User registered by Mail") {
+            const res = await axios.post(
+              loginPath,
+              { email: regInputs.email, password: regInputs.password },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+  
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("token_death", res.data.token_death);
+            localStorage.setItem("userID", res.data.user.id);
+            dispatch(setModalVisible(false));
+            dispatch(
+              setUser({
+                name: res.data.user.email,
+                avatar: res.data.user.avatar,
+                userID: res.data.user.id,
+              })
+            );
           }
+        } catch (error:any) {
+  
+          for (const key in error.response.data.errors) {
+            // Check if the errors array for the current key is not empty
+            if (error.response.data.errors[key].length > 0) {
+                // Log the first error message for the current key
+                setErrMsg(error.response.data.errors[key][0].substring(0, error.response.data.errors[key][0].length - 1));
+                
+                // Exit the loop after logging the first error
+                break;
+            }
+        }
+          
+        } finally {
+          setLoading(false);
+        }
       }
-        
-      } finally {
-        setLoading(false);
-      }
-    
-
+      
     if (regInputs.password_confirmation !== regInputs.password) {
       setPwdEqual(true);
       setErrMsg('Passwords do not match')
@@ -157,13 +159,13 @@ const RegisterForm = () => {
             }
           />
         </div>
-
+  
         <div className="checkbox_reg">
-          <input type="checkbox" className="checkbox_style_reg"/>
+          <input checked={isChecked} type="checkbox" className="checkbox_style_reg" onChange={()=>setChecked(!isChecked)} />
           <p className="checkbox_text">I agree with the <span className="checkbox_span">Terms</span> and <span className="checkbox_span">Privacy policy</span></p>
         </div>
 
-            <SocialLogins funName={regUser} buttonName={"Create accaunt"} />
+            <span style={{marginTop:"-12px"}}><SocialLogins funName={regUser} buttonName={"Create accaunt"} /></span>
             
       </form>
 
