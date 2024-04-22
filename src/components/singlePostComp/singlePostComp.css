@@ -13,9 +13,15 @@
     border-bottom: 1px solid #1E222E;
 }
 
+.author_pannel_container_parent{
+    width: 603px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .author_pannel_container{
     display: flex;
-    width: 603px;
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;

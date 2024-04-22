@@ -117,21 +117,19 @@ function App() {
       <div className={isDark ? "app darkMode" : "app"}>
         <Navbar />
         <Login />
-        <LeftNavigation />
         <AddPost />
         <ToastContainer/>
         <EditPost />
-        <Routes>
-          <Route path="/" element={<Outlet />} />
-          <Route index element={<Feed />} />
-          <Route path="/pages/privacy" element={<Privacy />} />
-          <Route path="/pages/Post/:id" element={<Post />} />
-
-          <Route element={<RequireAuth />}>
-            <Route path="/pages/Profile" element={<Profile />} />
-          </Route>
-
-        </Routes>
+            <LeftNavigation />
+            <Routes>
+              <Route path="/" element={<Outlet />} />
+              <Route index element={<Feed />} />
+              <Route path="/pages/privacy" element={<Privacy />} />
+              <Route path="/pages/Post/:id" element={<Post />} />
+              <Route element={<RequireAuth />}>
+                <Route path="/pages/Profile" element={<Profile />} />
+              </Route>
+            </Routes>
         {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
       </div>
     </QueryClientProvider>

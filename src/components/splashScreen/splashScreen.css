@@ -21,7 +21,7 @@ z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-bg);
+    background-color: var(--dark-mode);
   }
 
 .loader {

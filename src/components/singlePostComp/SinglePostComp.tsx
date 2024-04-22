@@ -63,13 +63,15 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
   return (
     <>
-            {isUserLogged ? <EditPannel postID={postID}/> : <></>}
         
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
-          <div className="author_pannel_container">
-            <Author avatar={authorAvatar} name={authorName} date={date} />
-            <Link to={`/pages/Post/${postID}`}><PostTitle title={postTitle} postStatus={postStatus} /></Link>
-          </div>
+          <div className="author_pannel_container_parent">
+            <div className="author_pannel_container">
+              <Author avatar={authorAvatar} name={authorName} date={date} />
+              <Link to={`/pages/Post/${postID}`}><PostTitle title={postTitle} postStatus={postStatus} /></Link>
+            </div>
+            {isUserLogged ? <EditPannel postID={postID}/> : <></>}
+          </div>  
       
           {type === "0"
             ? (image ? <Link to={`/pages/Post/${postID}`}><PostImage image={image} /></Link> : <></>)
