@@ -3,7 +3,7 @@ import "./singlePostComp.css";
 import Author from "./Author";
 import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
-// import { useDarkModeHook } from "../../hooks/useDarkModeHook";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import LikeDislikeComment from "./LikeDislikeComment";
 import "./singlePostComp.css"
 import PostVideo from "./postVideo";
@@ -50,7 +50,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
-  // const { isDark } = useDarkModeHook()
+  const { isDark } = useDarkModeHook()
 
 
   useEffect(()=>{
@@ -65,7 +65,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     <>
             {isUserLogged ? <EditPannel postID={postID}/> : <></>}
         
-        <div className="single_post_comp">
+        <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
           <div className="author_pannel_container">
             <Author avatar={authorAvatar} name={authorName} date={date} />
             <Link to={`/pages/Post/${postID}`}><PostTitle title={postTitle} postStatus={postStatus} /></Link>

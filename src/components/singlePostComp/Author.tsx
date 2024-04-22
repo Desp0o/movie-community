@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./singlePostComp.css";
 import noAvatar from "../../assets/noAvatar.jpeg";
+import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 
 interface AuthorProps {
   avatar: string;
@@ -10,6 +11,7 @@ interface AuthorProps {
 
 const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
   const [timeAgo, setTimeAgo] = useState('');
+  const { isDark } = useDarkModeHook()
 
   useEffect(() => {
     const updateTimeAgo = () => {
@@ -71,7 +73,7 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
         <span className="span_dot" />
       </div>
 
-      <p className="elapsed_time">{timeAgo}</p>
+      <p className={isDark ? "elapsed_time dark" : "elapsed_time"}>{timeAgo}</p>
     </div>
   );
 };

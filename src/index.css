@@ -17,16 +17,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --light-bg: #F2F3F5;
-  
-  --post-bg-light: #FDFAF7;
-  --post-bg-dark: #171109;
-  --active-page-light: #F2F4F5;
-  --active-page-dark: #1A282D;
-  --hover-light: #eaedf0;
-  --grey: #CCCCCC;
-  --reddit: #D93A00;
 
+  --dark-mode-txt:#F2F3F5;
   --white:#fff;
   --black:#131518;
   --dark-mode: #0A0C14;
@@ -87,7 +79,7 @@ body {
 
 .darkMode{
   background-color: var(--dark-mode);
-  color: #fff;
+  color: var(--dark-mode-txt);
 }
 
 @media (max-width:600px) {
