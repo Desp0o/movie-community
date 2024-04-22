@@ -12,6 +12,7 @@ import { activeHeartIcon, heartIcon } from "../../assets/svg/heartIcon";
 import { Guling, UnGuling } from "./likeFunction/GulingFuction";
 import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
+import IconContainer from "./IconContainer";
 // import { DislikeFunction, Liking, UnDislikeFunction, Unliking } from "./likeFunction/LikeFunctions";
 
 interface LikeDislikeCommentProps {
@@ -105,26 +106,17 @@ useEffect(()=>{
 
   return (
     <div className="likeDislikeComment_container">
-      <div className="like_comment_share">
-       
+      <div className="like_comment_share">       
         {/* like */}
-        <div className="like_container">
-          <span onClick={sendHeart} className="icon_container_likeComp">{gulIcon}</span>
-          <p>{Number(votes)}</p>
-        </div>
+        <IconContainer funcName={sendHeart} icon={gulIcon} number={Number(votes)} />
 
         {/* share */}
-        <div className="like_container">
-          <span className="icon_container_likeComp">{commentsIcon}</span>
-          <p>{commentLength}</p>
-        </div>
+        <IconContainer icon={commentsIcon} number={commentLength} />
+
 
         {/* share */}
-        <div className="like_container">
-          <span className="icon_container_likeComp">{shareIcon}</span>
-          <p>{commentLength}</p>
-        </div>
-        
+        <IconContainer icon={shareIcon} number={0} />
+
       </div>
 
       {/* save */}
