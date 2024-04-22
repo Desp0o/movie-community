@@ -119,8 +119,8 @@ function App() {
         <Login />
         <AddPost />
         <ToastContainer/>
-        <EditPost />
             <LeftNavigation />
+        <EditPost />
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />

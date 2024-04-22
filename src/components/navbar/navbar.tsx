@@ -138,7 +138,7 @@ const Navbar = () => {
             </div>
           ) : (
             <button className="nav_login_btn" onClick={handleVisibility}>
-              Log In
+                <p>Log In</p>
             </button>
           )}
         </div>

@@ -1,4 +1,5 @@
 .single_post_comp{
+    width: 645px;
     display: flex;
     padding: 16px 12px;
     flex-direction: column;

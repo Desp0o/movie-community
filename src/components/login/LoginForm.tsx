@@ -5,7 +5,7 @@ import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { setUser } from "../../Redux/userSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { setRefetch } from "../../Redux/RefetchSlicer";
-import { eyeIcon } from "../../assets/svg/eyeIco";
+import { eyeClose, eyeIcon } from "../../assets/svg/eyeIco";
 import InputComponent from "../inputComponent/InputComponent";
 import LoginButtons from "./SocialLogins";
 import { RegErrMsg } from "./RegErrMsg";
@@ -118,7 +118,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
 
       <div className="pasword_input_container">
         <span className="eye_icon" onClick={handlePwdVisibility}>
-          {eyeIcon}
+          {showPwd ? eyeClose : eyeIcon}
         </span>
 
         <InputComponent
