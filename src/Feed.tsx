@@ -70,7 +70,7 @@ if(data){
       <div className="feed">
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div key={pageIndex}>
-            {page.data?.posts.data.map((post: dataProps) => (
+            {page?.data?.posts.data?.map((post: dataProps) => (
               <div key={post.id}>
                 <SinglePostComp
                   authorName={post.user.name}

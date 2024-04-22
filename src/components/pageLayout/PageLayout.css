@@ -7,5 +7,9 @@
     padding-left: 296px;
     padding-right: 328px;
     padding-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 

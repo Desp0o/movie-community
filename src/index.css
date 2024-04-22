@@ -17,7 +17,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-
+  --toastify-color-success:#6558F2;
+  --toastify-color-error:'#EA5651';
+  --toastify-toast-min-height:'20px';
   --dark-mode-txt:#F2F3F5;
   --white:#fff;
   --black:#131518;
@@ -29,6 +31,7 @@
   --purple: #6558F2;
   --secondary: #695DED;
   --heart: #F91880;
+  --orange-sec:#EA5651;
 }
 
 

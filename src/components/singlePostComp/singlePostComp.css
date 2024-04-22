@@ -6,12 +6,10 @@
     align-items: center;
     gap: 12px;
     border-top: 1px solid var(--light-grey);
-    border-bottom: 1px solid var(--light-grey);
 }
 
 .single_post_comp.dark{
     border-top: 1px solid #1E222E;
-    border-bottom: 1px solid #1E222E;
 }
 
 .author_pannel_container_parent{

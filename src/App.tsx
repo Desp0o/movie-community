@@ -118,7 +118,7 @@ function App() {
         <Navbar />
         <Login />
         <AddPost />
-        <ToastContainer/>
+        <ToastContainer closeOnClick={true}/>
             <LeftNavigation />
         <EditPost />
             <Routes>

@@ -7,6 +7,7 @@
     bottom: -100%;
     z-index: 111;
     transition: bottom 0.3s ease;
+    background-color: #000;
 }
 
 .add_post_desktop.active{
