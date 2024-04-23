@@ -1,269 +1,258 @@
-.single_post_comp{
-    width: 645px;
-    display: flex;
-    padding: 16px 18px;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    border-radius: 6px;
-    background-color: var(--post-bg-light);
+.single_post_comp {
+  width: 645px;
+  display: flex;
+  padding: 16px 18px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-radius: 6px;
+  background-color: var(--post-bg-light);
 }
 
-.single_post_comp.dark{
-    background-color: var(--post-bg-dark);
+.single_post_comp.dark {
+  background-color: var(--post-bg-dark);
 }
 
-
-
-.author_pannel_container_parent{
-    width: 603px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.author_pannel_container_parent {
+  width: 603px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.author_pannel_container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+.author_pannel_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
-.post_title{
-    color: currentColor;
-font-family: "Inter";
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 150% */
+.post_title {
+  color: currentColor;
+  font-family: "Inter";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
 }
 
-.author{
-display: flex;
-align-items: center;
+.author {
+  display: flex;
+  align-items: center;
 }
 
-.author_credentials{
-    display: flex;
-align-items: center;
-gap: 8px;
-padding: 6px 0;
+.author_credentials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
 }
 
-.author_avatar{
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
+.author_avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
 }
 
-.author_header_dot{
-    display: flex;
-height: 18px;
-padding: 0px 6px;
-justify-content: center;
-align-items: center;
-gap: 10px;
+.author_header_dot {
+  display: flex;
+  height: 18px;
+  padding: 0px 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-.span_dot{
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: currentColor;
+.span_dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: currentColor;
 }
 
-.elapsed_time{
-    color: var(--dark-grey);
-    /* H1/regular */
-    font-family: "Inter";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px; /* 150% */
+.elapsed_time {
+  color: var(--dark-grey);
+  /* H1/regular */
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
 }
 
-.elapsed_time.dark{
-    color: var(--ligth-grey-sec);
+.elapsed_time.dark {
+  color: var(--ligth-grey-sec);
 }
 
-.single_post_image_container{
-    position: relative;
-    
-    width: 602px;
-    height: 425px;
-    flex-shrink: 0;
-    border-radius: 12px;
+.single_post_image_container {
+  position: relative;
+
+  width: 602px;
+  height: 425px;
+  flex-shrink: 0;
+  border-radius: 12px;
 }
 
-.single_post_cover{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(20%) blur(1px);
-    border-radius: 10px;
+.single_post_cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(20%) blur(1px);
+  border-radius: 10px;
 }
-.single_post_img{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
-
-.post-line-wrapper{
-    height: 1px;
-    width: 100%;
-    background-color: #BEC2C9;
+.single_post_img {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
-.post-line-wrapper.dark{
-    background-color: #3E4047;
+.post-line-wrapper {
+  height: 1px;
+  width: 100%;
+  background-color: #bec2c9;
 }
 
-.likeDislikeComment_container{
-    display: flex;
-    width: 621px;
-    justify-content: space-between;
-    align-items: center;
-    gap: 346px;
+.post-line-wrapper.dark {
+  background-color: #3e4047;
 }
 
-.like_comment_share{
-    display: flex;
-    align-items: center;
-    gap: 32px;
+.likeDislikeComment_container {
+  display: flex;
+  width: 621px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 346px;
 }
 
-.like_container{
-    display: flex;
-    align-items: center;
+.like_comment_share {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.icon_container_likeComp{
-    display: flex;
-width: 34px;
-height: 34px;
-padding: 10px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 10px;
-cursor: pointer;
+.like_container {
+  display: flex;
+  align-items: center;
 }
 
-
-
-
-
-
-.single_post_comments{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
+.icon_container_likeComp {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
+.single_post_comments {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
 
-
-.like_dislike{
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.like_dislike {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .up_vote,
-.down_vote{
-    transition: all 0.3s ease;
-    cursor: pointer;
+.down_vote {
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.up_vote:hover{
-    fill: green;
+.up_vote:hover {
+  fill: green;
 }
 
-.down_vote:hover{
-    fill: red;
+.down_vote:hover {
+  fill: red;
 }
 
-.comment_icon{
-    transition: all 0.3s ease;
-    cursor: pointer;
+.comment_icon {
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.comment_icon:hover{
-    fill: blue;
+.comment_icon:hover {
+  fill: blue;
 }
 
-.see_more_post{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+.see_more_post {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.see_more_post p{
-    padding: 5px 10px;
-    background-color: var(--purple);
-    border-radius: 20px ;
-    color: #fff;
-    font-weight: 600;
+.see_more_post p {
+  padding: 5px 10px;
+  background-color: var(--purple);
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 600;
 }
 
-.video_container{
-    margin: 0 auto;
+.video_container {
+  margin: 0 auto;
 }
 
-.video_container video{
-    border-radius: 12px;
+.video_container video {
+  border-radius: 12px;
 }
 
-.delete_btn{
-    padding: 5px 10px;
-    background-color: var(--reddit);
-    border-radius: 20px;
-    width: fit-content;
-    cursor: pointer;
+.delete_btn {
+  padding: 5px 10px;
+  background-color: var(--reddit);
+  border-radius: 20px;
+  width: fit-content;
+  cursor: pointer;
 }
 
-.post_setting_pannel{
-    padding: 15px;
-    border-radius: 20px;
+.post_setting_pannel {
+  padding: 15px;
+  border-radius: 20px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
 
-    width: fit-content;
+  width: fit-content;
 
-    background-color: var(--grey);
+  background-color: var(--grey);
 
-    position: absolute;
-    right: 0;
-    z-index: 110;
+  position: absolute;
+  right: 0;
+  z-index: 110;
 }
 
-.post_setting_pannel.dark{
-    padding: 15px;
-    border-radius: 20px;
+.post_setting_pannel.dark {
+  padding: 15px;
+  border-radius: 20px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
 
-    width: fit-content;
+  width: fit-content;
 
-    background-color: #2e434b;
+  background-color: #2e434b;
 }
 
-
-
-.pannel_dots{
-    cursor: pointer;
-    margin-top: -10px;
-    user-select: none;
+.pannel_dots {
+  cursor: pointer;
+  margin-top: -10px;
+  user-select: none;
 }

@@ -17,6 +17,8 @@
   gap: 20px;
   overflow: hidden;
   border-bottom: 1px solid var(--light-grey);
+  background-color: #fff;
+  
 }
 
 .navbar.dark {
