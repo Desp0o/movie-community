@@ -67,9 +67,9 @@ if(data){
   return (
     <PageLayout>
       {isLoading && <Fetching />}
-      <div className="feed">
+      <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
-          <div key={pageIndex}>
+          <div className="feed" key={pageIndex}>
             {page?.data?.posts.data?.map((post: dataProps) => (
               <div key={post.id}>
                 <SinglePostComp

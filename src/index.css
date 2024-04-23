@@ -20,10 +20,10 @@
   --toastify-color-success:#6558F2;
   --toastify-color-error:'#EA5651';
   --toastify-toast-min-height:'20px';
-  --dark-mode-txt:#F2F3F5;
+  --dark-mode-txt:#FFFFFF;
   --white:#fff;
   --black:#131518;
-  --dark-mode: #0A0C14;
+  --dark-mode: #000;
   --light-grey:#CCD4DE;
   --ligth-grey-sec: #ABAFB8;
   --dark-grey:#4C5158;
@@ -32,6 +32,8 @@
   --secondary: #695DED;
   --heart: #F91880;
   --orange-sec:#EA5651;
+  --post-bg-dark:#131313;
+  --post-bg-light:#F7F7F7;
 }
 
 
