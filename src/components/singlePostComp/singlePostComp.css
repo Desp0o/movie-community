@@ -203,6 +203,10 @@ cursor: pointer;
     margin: 0 auto;
 }
 
+.video_container video{
+    border-radius: 12px;
+}
+
 .delete_btn{
     padding: 5px 10px;
     background-color: var(--reddit);
