@@ -1,7 +1,7 @@
 .left_nav{
     position: fixed;
     top: 124px;
-    width: 318px;
+    width: 118px;
     height: 100vh;
 
     border-right: 1px solid var(--grey);

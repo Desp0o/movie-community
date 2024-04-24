@@ -205,10 +205,14 @@
 
 .video_container {
   margin: 0 auto;
+  width: 602px;
+
 }
 
 .video_container video {
   border-radius: 12px;
+  width: 602px;
+
   height: 425px;
 }
 

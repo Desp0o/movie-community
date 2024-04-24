@@ -60,7 +60,6 @@ const Feed = () => {
 
 
 if(data){
-  console.log(data);
 }
 
   return (

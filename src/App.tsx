@@ -25,12 +25,14 @@ import PageLayout from "./components/pageLayout/PageLayout"
 const queryClient = new QueryClient({
   defaultOptions:{
     queries:{
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-      refetchOnReconnect: true,
+      refetchOnMount: "always",
+      refetchOnWindowFocus: "always",
+      refetchOnReconnect: "always",
+      refetchIntervalInBackground: true,
     }
   }
 })
+
 
 function App() {
   const token = localStorage.getItem('token')
