@@ -1,5 +1,4 @@
 import Fetching from "./components/fetchingComponent/Fetching";
-import PageLayout from "./components/pageLayout/PageLayout";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
 import { useRefetchHook } from "./hooks/useRefetchHook";
@@ -65,7 +64,7 @@ if(data){
 }
 
   return (
-    <PageLayout>
+    <>
       {isLoading && <Fetching />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
@@ -95,7 +94,7 @@ if(data){
         ))}
       </div>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
-    </PageLayout>
+    </>
   );
 };
 

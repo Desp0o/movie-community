@@ -209,6 +209,7 @@
 
 .video_container video {
   border-radius: 12px;
+  height: 425px;
 }
 
 .delete_btn {
