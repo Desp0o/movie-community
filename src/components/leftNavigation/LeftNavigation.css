@@ -1,14 +1,12 @@
 .left_nav{
     position: fixed;
-    top: 0;
     z-index: 108;
-
-    width: 270px;
+    top: 124px;
+    width: 318px;
     height: 100vh;
 
     border-right: 1px solid var(--grey);
 
-    padding-top: 72px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;
@@ -65,28 +63,3 @@
 }
 
 
-@media (hover: hover) {
-    .left_nav_item:hover{
-        background-color: var(--hover-light);
-    }
-
-    .left_nav_item.dark:hover{
-        background-color: var(--active-page-dark)
-    }
-}
-
-.left_nav_section{
-    padding-bottom: 14px;
-}
-
-
-@media (max-width:1200px) {
-    .left_nav{
-        left: -270px;
-        transition: left 0.2s linear;
-    }
-
-    .left_nav.active{
-        left: 0;
-    }
-}

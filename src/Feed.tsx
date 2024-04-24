@@ -64,7 +64,7 @@ if(data){
 }
 
   return (
-    <>
+    <div style={{marginTop:"-20px"}}>
       {isLoading && <Fetching />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
@@ -94,7 +94,7 @@ if(data){
         ))}
       </div>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
-    </>
+    </div>
   );
 };
 
