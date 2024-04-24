@@ -13,6 +13,7 @@ import { Guling, UnGuling } from "./likeFunction/GulingFuction";
 import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
+import { FeedFunctions } from "../feedFuncs/FeedFucntions";
 // import { DislikeFunction, Liking, UnDislikeFunction, Unliking } from "./likeFunction/LikeFunctions";
 
 interface LikeDislikeCommentProps {
@@ -36,6 +37,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
+  const {refetch} = FeedFunctions()
   const [votes, seteVotes] = useState(Number(gul));
 const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
 const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
@@ -75,34 +77,51 @@ useEffect(()=>{
 
 
   const sendHeart = () => {
-
-    if(user.userID){
-      if(!isHeart){
-        seteVotes((prevVotes: number) => prevVotes + 1);
-        setHeart(true)
-        //send heart
-        Guling(postID)
-        setGulIcon(activeHeartIcon)
-      }
-  
-      if(isHeart){
-        //send unheart
-        seteVotes((prevVotes: number) => prevVotes - 1);
-        setHeart(false)
-
-        UnGuling(postID)
-        setGulIcon(heartIcon)
-
-      }
-    }else {
+    if (!user.userID) {
       dispatch(setModalVisible(true));
+      return;
     }
 
-    console.log(isHeart);
-    
-  }
+    if (!isHeart) {
+      seteVotes((prevVotes) => prevVotes + 1);
+      setHeart(true);
+      setGulIcon(activeHeartIcon);
 
-  
+      // Optimistic update
+      Guling(postID)
+        .then(() => {
+          // Data mutation successful
+          refetch();
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error occurred:", error);
+          // Rollback optimistic update
+          seteVotes((prevVotes) => prevVotes - 1);
+          setHeart(false);
+          setGulIcon(heartIcon);
+        });
+    } else {
+      seteVotes((prevVotes) => prevVotes - 1);
+      setHeart(false);
+      setGulIcon(heartIcon);
+
+      // Optimistic update
+      UnGuling(postID)
+        .then(() => {
+          // Data mutation successful
+          refetch();
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error occurred:", error);
+          // Rollback optimistic update
+          seteVotes((prevVotes) => prevVotes + 1);
+          setHeart(true);
+          setGulIcon(activeHeartIcon);
+        });
+    }
+  };
 
   return (
     <div className="likeDislikeComment_container">

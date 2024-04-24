@@ -27,8 +27,8 @@ interface SinglePostProps {
   postUserId:number;
   postStatus:string | number;
   commentLength: number;
-  authGul: number;
-  gul: number;
+  authGul?: number;
+  gul?: number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -82,7 +82,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
           <div className={isDark ? "post-line-wrapper dark" : "post-line-wrapper"} />
 
-          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul} gul={gul} />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={gul ? gul : 0} />
         
         </div>
         

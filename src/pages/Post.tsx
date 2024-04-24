@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import PageLayout from "../components/pageLayout/PageLayout";
 import GoBack from "../components/singlePostPage/GoBack";
 import Author from "../components/singlePostComp/Author";
 import PostTitle from "../components/singlePostComp/PostTitle";
@@ -76,7 +75,7 @@ const Post = () => {
     <div>
       <ScrollToTop />
       {data ? (
-        <PageLayout>
+        <>
           <div className="single_post_page">
             <div className="goBack_authorInfo_container">
               <div className="goBack_authorInfo">
@@ -148,7 +147,7 @@ const Post = () => {
             {Number(data.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
             
           </div>
-        </PageLayout>
+        </>
       ) : (
         <p>post not found</p>
       )}

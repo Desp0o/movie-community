@@ -3,13 +3,12 @@
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding-top: 76px;
-    padding-left: 296px;
-    padding-right: 328px;
-    padding-bottom: 50px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding-top: 124px;
 }
 
+.page_layout_inner{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

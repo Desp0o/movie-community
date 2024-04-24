@@ -1,6 +1,5 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import Feed from "./Feed"
-import Navbar from "./components/navbar/navbar"
 import { useDarkModeHook } from "./hooks/useDarkModeHook"
 import "./index.css"
 import { useEffect, useState } from "react"
@@ -10,7 +9,6 @@ import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
 import BottomNavigation from "./components/bottomNav/BottomNavigation"
 import { useUserHook } from "./hooks/useUserHook"
-import LeftNavigation from "./components/leftNavigation/LeftNavigation"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
@@ -22,16 +20,19 @@ import AddPost from "./components/CreatePageComps/AddPost"
 import { ToastContainer } from "react-toastify"
 import EditPost from "./components/editPostModal/EditPostModal"
 import Login from "./components/login/Login"
+import PageLayout from "./components/pageLayout/PageLayout"
 
 const queryClient = new QueryClient({
   defaultOptions:{
     queries:{
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-      refetchOnReconnect: true,
+      refetchOnMount: "always",
+      refetchOnWindowFocus: "always",
+      refetchOnReconnect: "always",
+      refetchIntervalInBackground: true,
     }
   }
 })
+
 
 function App() {
   const token = localStorage.getItem('token')
@@ -115,12 +116,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className={isDark ? "app darkMode" : "app"}>
-        <Navbar />
         <Login />
         <AddPost />
         <ToastContainer closeOnClick={true}/>
-            <LeftNavigation />
         <EditPost />
+        <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
@@ -130,6 +130,7 @@ function App() {
                 <Route path="/pages/Profile" element={<Profile />} />
               </Route>
             </Routes>
+            </PageLayout>
         {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
       </div>
     </QueryClientProvider>
