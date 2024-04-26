@@ -22,7 +22,7 @@
   --toastify-toast-min-height:'20px';
   --dark-mode-txt:#F0F2F5;
   --white:#fff;
-  --black:#000;
+  --black:#131518;
   --light-mode: #F6F7F9;
   --dark-mode: #131518;
   --light-grey:#CCD4DE;
@@ -82,6 +82,7 @@ body {
 .app{
   width: 100%;
   min-height: 100vh;
+  color: var(--black);
   background-color: var(--light-mode);
 }
 

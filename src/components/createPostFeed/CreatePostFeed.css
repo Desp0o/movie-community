@@ -18,8 +18,7 @@
   gap: 12px;
 
   padding-bottom: 14px;
-  border-bottom: 1px solid #E5E8EE;
-  
+  border-bottom: 1px solid #e5e8ee;
 }
 
 .user_avatar_feed {
@@ -29,7 +28,7 @@
   border-radius: 32px;
 }
 
-.popUp_avatar{
+.popUp_avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -47,9 +46,9 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; 
+  line-height: 24px;
+  cursor: pointer;
 }
-
 
 .choose_post_style {
   display: inline-flex;
@@ -72,7 +71,7 @@
 
 .postStyle_container p {
   color: var(--black);
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -84,7 +83,104 @@
   align-items: center;
 }
 
-.feed_cr_border_container{
+.feed_cr_border_container {
   width: 100%;
   padding: 0 17px;
+}
+
+/* 
+========
+add post
+======== 
+*/
+
+.AddPostPopUp {
+  width: 528px;
+  height: 500px;
+  border-radius: 8px;
+  background-color: var(--white);
+
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.create_title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 150px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e1e6ee;
+}
+
+.create_title p {
+  color: #131518;
+  font-family: "Inter";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 130% */
+}
+
+.post_body {
+  padding: 24px 24px 16px 24px;
+
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.popup_author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup_author p {
+  color: var(--black);
+  font-family: "Inter";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+}
+
+.popup_textarea {
+  width: 100%;
+  height: 120px;
+  color: var(--black);
+  font-family: "Inter";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+.popup_textarea::placeholder {
+  color: var(--dark-grey);
+}
+
+.post_txtarea_smile {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.post_txtarea_smile span {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center; 
+  gap: 10px;
+
+  align-self: flex-end;
+  cursor: pointer;
 }

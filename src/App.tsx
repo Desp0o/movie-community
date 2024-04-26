@@ -19,6 +19,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { ToastContainer } from "react-toastify"
 import Login from "./components/login/Login"
 import PageLayout from "./components/pageLayout/PageLayout"
+import AddPostPopUp from "./components/createPostFeed/AddPostPopUp"
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -116,7 +117,7 @@ function App() {
       <div className={isDark ? "app darkMode" : "app"}>
         <Login />
         <ToastContainer closeOnClick={true}/>
-        
+        <AddPostPopUp />
         <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />

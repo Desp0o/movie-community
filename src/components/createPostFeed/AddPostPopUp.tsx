@@ -1,9 +1,18 @@
+import CreateTitle from "./addPostComps/CreateTitle"
+import PostAuthor from "./addPostComps/PostAuthor"
+import PostTextarea from "./addPostComps/PostTextarea"
 
 const AddPostPopUp = () => {
   return (
     <div className="AddPostPopUp">
-        <div className="post_poup_author">
-            <img src="" alt="user avatr" className="popUp_avatar" />
+        <CreateTitle title={"Create Post"} />
+        <div className="post_body">
+
+            <PostAuthor />
+
+            <PostTextarea />
+
+            
         </div>
     </div>
   )
