@@ -12,22 +12,22 @@ const PostBottomButtons = () => {
 
 
   const openDefaultPostModal = () => {
-    dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, openImageUpload:false}))
+    dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, openImageUpload:false, showPostButtons: true}))
 
     if(addPostModalStates.defaultPost){
       console.log('okey i will open img');
-      dispatch(setAddPostModal({defaultPost: true, openImageUpload:true}))
+      dispatch(setAddPostModal({defaultPost: true, openImageUpload:true, quizPost: false, pollPost: false, showPostButtons: true}))
     }
 
   }
 
   const openPollPost = () => {
-    dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false, openImageUpload:false}))
+    dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false, openImageUpload:false, showPostButtons: true}))
   }
 
 
   const openQuizPost = () => {
-    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false}))
+    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false, showPostButtons: true}))
   }
 
 

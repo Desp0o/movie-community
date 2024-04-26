@@ -195,7 +195,7 @@ add post
 
 .uploaded_image_addPost_container{
   border-radius: 10px;
-  height: 338px;
+  max-height: 338px;
   width: 100%;
   overflow: hidden;
 }

@@ -7,6 +7,7 @@ interface RootState{
         pollPost: boolean;
         quizPost: boolean;
         openImageUpload: boolean;
+        showPostButtons: boolean;
     }
 }
 

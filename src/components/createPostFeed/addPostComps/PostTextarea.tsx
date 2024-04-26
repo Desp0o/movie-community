@@ -43,13 +43,14 @@ const PostTextarea = () => {
     if(addPostModalStates.openImageUpload){
       fileInputRef.current && fileInputRef.current.click(); //ინპუტზე დაკლიკების იმიტაცია
     }
-    dispatch(setAddPostModal({defaultPost: true, pollPost: false})) //გახდება ფოლსი ახლიდან დაკლიკება რო შევძლოთ ინფუთზე
+    dispatch(setAddPostModal({defaultPost: true, pollPost: false, showPostButtons: true})) //გახდება ფოლსი ახლიდან დაკლიკება რო შევძლოთ ინფუთზე
   },[addPostModalStates.openImageUpload])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedImage(URL.createObjectURL(file));
+      dispatch(setAddPostModal({defaultPost: true, pollPost: false, showPostButtons: false})) 
     }
 
     setPostValue({ ...postValue, img: file });

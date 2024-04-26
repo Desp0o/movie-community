@@ -7,6 +7,7 @@ import PostBottomButtons from "./addPostComps/PostBottomButtons"
 import PostTextarea from "./addPostComps/PostTextarea"
 import { setAddPostModal } from "../../Redux/postModal"
 import { usePostAddModalHook } from "../../hooks/usePostAddModalHook"
+import { useEffect } from "react"
 
 const AddPostPopUp = () => {
   const dispatch = useDispatch()
@@ -14,10 +15,13 @@ const AddPostPopUp = () => {
 
 
   const closeDefaultPostAddModal = () => {
-    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: false, openImageUpload: false}))
+    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: false, openImageUpload: false, showPostButtons: true}))
   }
 
-  
+  useEffect(()=>{
+console.log(addPostModalStates);
+
+  },[addPostModalStates])
 
   return (
     
@@ -29,7 +33,7 @@ const AddPostPopUp = () => {
             <div className="post_body">
                 <PostAuthor />
                 <PostTextarea />
-                <PostBottomButtons />
+                {addPostModalStates.showPostButtons && <PostBottomButtons /> }
             </div>
 
             <div className="add_post_popup_btn">
