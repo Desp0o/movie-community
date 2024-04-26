@@ -16,9 +16,7 @@ import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
 import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
-import AddPost from "./components/CreatePageComps/AddPost"
 import { ToastContainer } from "react-toastify"
-import EditPost from "./components/editPostModal/EditPostModal"
 import Login from "./components/login/Login"
 import PageLayout from "./components/pageLayout/PageLayout"
 
@@ -117,9 +115,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className={isDark ? "app darkMode" : "app"}>
         <Login />
-        <AddPost />
         <ToastContainer closeOnClick={true}/>
-        <EditPost />
+        
         <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />
