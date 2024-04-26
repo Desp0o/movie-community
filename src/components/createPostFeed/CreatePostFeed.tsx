@@ -1,10 +1,17 @@
+import { useDispatch } from "react-redux";
 import { useUserHook } from "../../hooks/useUserHook"
 import "./CreatePostFeed.css"
 import PostBottomButtons from "./addPostComps/PostBottomButtons"
+import { setAddPostModal } from "../../Redux/postModal";
 
 
 const CreatePostFeed = () => {
     const { user } = useUserHook();
+    const dispatch = useDispatch()
+    
+    const openDefaultPostModal = () => {
+        dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false}))
+      }    
 
     return (
         <div className="CreatePostFeed">
@@ -19,6 +26,7 @@ const CreatePostFeed = () => {
                     type="text"
                     className="feed_input"
                     placeholder="Create post"
+                    onClick={openDefaultPostModal}
                 />
             </div>
 

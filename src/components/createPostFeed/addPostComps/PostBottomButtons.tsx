@@ -12,11 +12,21 @@ const PostBottomButtons = () => {
     dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false}))
   }
 
+  const openPollPost = () => {
+    dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false}))
+  }
+
+
+  const openQuizPost = () => {
+    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true}))
+  }
+
+
   return (
     <div className="choose_post_style">
       <PostStyle styleName={"Photo/video"} styleIocn={addMediaIocn} funcName={openDefaultPostModal}/>
-      <PostStyle styleName={"Quiz"} styleIocn={quizFeedIocn} />
-      <PostStyle styleName={"Poll"} styleIocn={pollIcon} />
+      <PostStyle styleName={"Quiz"} styleIocn={quizFeedIocn} funcName={openQuizPost}/>
+      <PostStyle styleName={"Poll"} styleIocn={pollIcon} funcName={openPollPost}/>
     </div>
   );
 };
