@@ -10,6 +10,6 @@ interface RootState{
 }
 
 export const usePostAddModalHook = () => {
-    const addPostModalStates = useSelector((state:RootState) => state.addPostModalStore)
+  const addPostModalStates = useSelector((state:RootState) => state.addPostModalStore)
   return { addPostModalStates }
 }

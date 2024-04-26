@@ -37,16 +37,6 @@
   --post-bg-light:#FFFFFF;
 }
 
-
-::-webkit-scrollbar {
-  width: 6px; 
-}
-
-::-webkit-scrollbar-thumb {
-  height: 20px;
-  border-radius: 10px;
-}
-
 .backdropFilter{
   position: fixed;
   z-index: 998;
