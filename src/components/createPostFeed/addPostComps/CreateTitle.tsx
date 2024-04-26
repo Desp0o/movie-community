@@ -9,7 +9,7 @@ const CreateTitle:React.FC<CreateTitleProps> = ({title}) => {
   return (
     <div className='create_title'>
         <p>{title}</p>
-        <span style={{width:"32px", height:"32px"}}>{xIcon}</span>
+        <span style={{width:"32px", height:"32px", cursor:"pointer"}}>{xIcon}</span>
     </div>
   )
 }
