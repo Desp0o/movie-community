@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { addMediaIocn } from "../../assets/svg/addMediaIcon"
 import { pollIcon } from "../../assets/svg/poolIcon"
 import { quizFeedIocn } from "../../assets/svg/quizFeedIcon"
@@ -9,14 +8,6 @@ import PostStyle from "./PostStyle"
 
 const CreatePostFeed = () => {
     const { user } = useUserHook();
-    const [inputValue, setInputValue] = useState('')
-
-    const handleChange = (event: { target: { style: { height: string }; scrollHeight: any , value: string} }) => {
-        event.target.style.height = "44px";
-        event.target.style.height = `${event.target.scrollHeight}px`;
-        
-        setInputValue(event.target.value)
-    };
 
     return (
         <div className="CreatePostFeed">
@@ -27,11 +18,10 @@ const CreatePostFeed = () => {
                     className="user_avatar_feed"
                 />
 
-                <textarea
+                <input
+                    type="text"
                     className="feed_input"
                     placeholder="Create post"
-                    value={inputValue}
-                    onChange={handleChange}
                 />
             </div>
 
