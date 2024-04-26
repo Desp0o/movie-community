@@ -23,6 +23,7 @@
   --dark-mode-txt:#F0F2F5;
   --white:#fff;
   --black:#000;
+  --light-mode: #F6F7F9;
   --dark-mode: #131518;
   --light-grey:#CCD4DE;
   --ligth-grey-sec: #ABAFB8;
@@ -33,7 +34,7 @@
   --heart: #F91880;
   --orange-sec:#EA5651;
   --post-bg-dark:#1C1F24;
-  --post-bg-light:#fff;
+  --post-bg-light:#FFFFFF;
 }
 
 
@@ -81,7 +82,7 @@ body {
 .app{
   width: 100%;
   min-height: 100vh;
-  background-color: var(--dark-mode-txt);
+  background-color: var(--light-mode);
 }
 
 .darkMode{

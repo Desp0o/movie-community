@@ -5,6 +5,7 @@ import { useRefetchHook } from "./hooks/useRefetchHook";
 import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
+import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 
 interface dataProps {
   gul: number;
@@ -64,6 +65,7 @@ if(data){
 
   return (
     <div style={{marginTop:"-20px"}}>
+      <CreatePostFeed />
       {isLoading && <Fetching />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
