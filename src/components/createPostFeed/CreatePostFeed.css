@@ -210,3 +210,7 @@ add post
   object-fit: contain;
   border-radius: 10px !important;
 }
+
+.uploaded_image_addPost_container video{
+  border-radius: 10px;
+}
