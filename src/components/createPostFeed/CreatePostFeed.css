@@ -19,6 +19,7 @@
 
   padding-bottom: 14px;
   border-bottom: 1px solid #E5E8EE;
+  
 }
 
 .user_avatar_feed {
@@ -26,16 +27,13 @@
   height: 32px;
   flex-shrink: 0;
   border-radius: 32px;
+  align-self: flex-start;
 }
 
 .feed_input {
-  display: flex;
   width: 558px;
   height: 44px;
   padding: 10px 14px;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
   border-radius: 8px;
   border: 1px solid #ccd0d6;
 
@@ -44,18 +42,21 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 150% */
-  word-break: break-all;
+  line-height: 24px; 
+  word-break: break-word; /* This line enables word breaking */
+  resize: none;
+  outline: none;
 }
+
 
 .choose_post_style {
   display: inline-flex;
   align-items: center;
   gap: 40px;
   display: flex;
-width: 602px;
-align-items: center;
-gap: 12px;
+  width: 602px;
+  align-items: center;
+  gap: 12px;
 }
 
 .postStyle_container {
