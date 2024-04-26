@@ -16,6 +16,9 @@
   width: 602px;
   align-items: center;
   gap: 12px;
+
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E5E8EE;
 }
 
 .user_avatar_feed {
@@ -76,4 +79,9 @@ gap: 12px;
 .postStyle_container span {
   display: flex;
   align-items: center;
+}
+
+.feed_cr_border_container{
+  width: 100%;
+  padding: 0 17px;
 }
