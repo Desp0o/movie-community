@@ -7,7 +7,7 @@ interface inputProps {
   placeholder: string;
   value: string;
   isError: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const InputComponent: React.FC<inputProps> = ({
   type,
