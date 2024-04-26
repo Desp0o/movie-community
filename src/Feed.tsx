@@ -1,4 +1,3 @@
-import Fetching from "./components/fetchingComponent/Fetching";
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
 import { useRefetchHook } from "./hooks/useRefetchHook";
@@ -66,7 +65,7 @@ if(data){
   return (
     <div style={{marginTop:"-20px"}}>
       <CreatePostFeed />
-      {isLoading && <Fetching />}
+      
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>

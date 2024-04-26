@@ -5,9 +5,7 @@ import userDahsSlicer from "./userDahsSlicer";
 import loginModalSlicer from "./loginModalSlicer";
 import leftMenuSlicer from "./leftMenuSlicer";
 import spinnerSlicer from "./spinnerSlicer";
-import ResposnivePostAddSlice from "./ResposnivePostAddSlice";
 import RefetchSlicer from "./RefetchSlicer";
-import EditPostSlicer from "./EditPostSlicer";
 import postModalSclier from "./postModal"
 
 const store = configureStore({
@@ -18,9 +16,7 @@ const store = configureStore({
         loginModalStore: loginModalSlicer,
         leftMenuStore: leftMenuSlicer,
         spinnerSote: spinnerSlicer,
-        resPostAddStore: ResposnivePostAddSlice,
         refetchStore: RefetchSlicer,
-        editPostStroe: EditPostSlicer,
         addPostModalStore: postModalSclier
     }
 })

@@ -2,7 +2,6 @@ import "./navbar.css";
 import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
 import { bellPasiveIcon } from "../../assets/svg/bell";
-import { addIcon } from "../../assets/svg/addIcon";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useDarkModeHook } from "../../hooks/useDarkModeHook";
@@ -13,7 +12,6 @@ import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
 import noAvatar from "../../assets/noAvatar.jpeg"
-import { setResponsivePostAddState } from "../../Redux/ResposnivePostAddSlice";
 
 
 interface RootState {
@@ -34,9 +32,6 @@ const Navbar = () => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
 
-  const openPostAddModal = () => {
-    dispatch(setResponsivePostAddState(true))
-  }
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -98,16 +93,6 @@ const Navbar = () => {
           )}
           {user.name ? (
             <div className="nav_profile_items">
-                <div onClick={openPostAddModal}
-                  className={
-                    isDark
-                      ? "nav_create_post dark responsive_hidden"
-                      : "nav_create_post responsive_hidden"
-                  }
-                >
-                  {addIcon}
-                  <p>Create</p>
-                </div>
                 <p style={{color:"blue", fontWeight:"900"}}>{user?.score}</p>
 
               <div

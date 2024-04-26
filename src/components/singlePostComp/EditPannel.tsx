@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDarkModeHook } from '../../hooks/useDarkModeHook'
-import { penIcon } from '../../assets/svg/penIcon'
 import { canIcon } from '../../assets/svg/canIcon'
 import axios from 'axios';
 import { setRefetch } from '../../Redux/RefetchSlicer';
 import { useDispatch } from 'react-redux';
 import { useRefetchHook } from '../../hooks/useRefetchHook';
 import { toast } from 'react-toastify';
-import { setEditPostModal } from '../../Redux/EditPostSlicer';
 import { useNavigate } from 'react-router-dom';
 
 interface EditPannelPros{
@@ -71,11 +69,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
         }
     }
 
-    const editPost = () => {
-        dispatch(setEditPostModal({value: true, id: postID}))
-      }
-
-
   return (
     <div ref={editPanelRef}>
         <p className='pannel_dots' onClick={handlePannel}>. . .</p>
@@ -84,7 +77,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
             isActive 
             ?
             <div className={isDark ? "post_setting_pannel dark" : "post_setting_pannel"}>
-            <div onClick={editPost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px",cursor:"pointer"}}>{penIcon} Edit</div>
             <div onClick={deletePost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px",cursor:"pointer"}}>{canIcon} Delete</div>
             </div>
             :

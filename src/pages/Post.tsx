@@ -11,7 +11,6 @@ import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/commenting/AddComment";
 import CommentsSection from "../components/commenting/CommentsSection";
 import axios from "axios";
-import Fetching from "../components/fetchingComponent/Fetching";
 import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
 import { useQuery } from "react-query";
@@ -45,7 +44,7 @@ const Post = () => {
     }
   },[user])
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const { data, isError, error, refetch } = useQuery(
     [`single-post`, path],
     async () => {
       const response = await axios.get(`${path}${id}`,{
@@ -60,9 +59,6 @@ const Post = () => {
     }
   );  
 
-  if (isLoading) {
-    return <Fetching />;
-  }
 
   if(isError){
     console.error(error)

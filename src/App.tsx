@@ -7,8 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
-import BottomNavigation from "./components/bottomNav/BottomNavigation"
-import { useUserHook } from "./hooks/useUserHook"
+// import { useUserHook } from "./hooks/useUserHook"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
@@ -36,7 +35,7 @@ const queryClient = new QueryClient({
 function App() {
   const token = localStorage.getItem('token')
   const {isDark} = useDarkModeHook()
-  const {user} = useUserHook()
+  // const {user} = useUserHook()
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(true)
 
@@ -129,7 +128,6 @@ function App() {
               </Route>
             </Routes>
             </PageLayout>
-        {window.innerWidth < 601 && user.name ? <BottomNavigation /> : <></>}
       </div>
     </QueryClientProvider>
   )
