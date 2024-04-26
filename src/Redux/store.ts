@@ -8,6 +8,7 @@ import spinnerSlicer from "./spinnerSlicer";
 import ResposnivePostAddSlice from "./ResposnivePostAddSlice";
 import RefetchSlicer from "./RefetchSlicer";
 import EditPostSlicer from "./EditPostSlicer";
+import postModalSclier from "./postModal"
 
 const store = configureStore({
     reducer:{
@@ -20,7 +21,9 @@ const store = configureStore({
         resPostAddStore: ResposnivePostAddSlice,
         refetchStore: RefetchSlicer,
         editPostStroe: EditPostSlicer,
+        addPostModalStore: postModalSclier
     }
 })
 
 export default store
+
