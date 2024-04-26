@@ -1,9 +1,6 @@
-import { addMediaIocn } from "../../assets/svg/addMediaIcon"
-import { pollIcon } from "../../assets/svg/poolIcon"
-import { quizFeedIocn } from "../../assets/svg/quizFeedIcon"
 import { useUserHook } from "../../hooks/useUserHook"
 import "./CreatePostFeed.css"
-import PostStyle from "./PostStyle"
+import PostBottomButtons from "./addPostComps/PostBottomButtons"
 
 
 const CreatePostFeed = () => {
@@ -25,13 +22,9 @@ const CreatePostFeed = () => {
                 />
             </div>
 
-            <div className="choose_post_style">
-                <PostStyle styleName={"Photo/video"} styleIocn={addMediaIocn} />
-                <PostStyle styleName={"Quiz"} styleIocn={quizFeedIocn} />
-                <PostStyle styleName={"Poll"} styleIocn={pollIcon} />
-            </div>
+            <span style={{paddingLeft:"58px"}}><PostBottomButtons /></span>
         </div>
-    );
+    );  
 };
 
 

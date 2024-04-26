@@ -1,5 +1,6 @@
 import CreateTitle from "./addPostComps/CreateTitle"
 import PostAuthor from "./addPostComps/PostAuthor"
+import PostBottomButtons from "./addPostComps/PostBottomButtons"
 import PostTextarea from "./addPostComps/PostTextarea"
 
 const AddPostPopUp = () => {
@@ -12,7 +13,7 @@ const AddPostPopUp = () => {
 
             <PostTextarea />
 
-            
+            <PostBottomButtons />
         </div>
     </div>
   )
