@@ -6,6 +6,7 @@ interface RootState{
         defaultPost: boolean;
         pollPost: boolean;
         quizPost: boolean;
+        openImageUpload: boolean;
     }
 }
 

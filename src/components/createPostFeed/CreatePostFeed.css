@@ -96,8 +96,10 @@ add post
 
 .AddPostPopUp {
   width: 528px;
+  max-height: 600px;
   border-radius: 8px;
   background-color: var(--white);
+  overflow-y: auto;
 
   position: fixed;
   z-index: 111;
@@ -189,4 +191,21 @@ add post
   padding: 16px 24px;
   width: 100%;
   margin: 0 auto;
+}
+
+.uploaded_image_addPost_container{
+  border-radius: 10px;
+  height: 338px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.uploaded_image_addPost{
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-position: center;
+  object-fit: contain;
+  border-radius: 10px !important;
 }

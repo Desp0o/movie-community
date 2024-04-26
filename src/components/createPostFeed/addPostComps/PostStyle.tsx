@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 interface PostStyleProps {
     styleName: string;
     styleIocn: ReactElement;
-    funcName?: () => void
+    funcName: () => void
 }
 
 const PostStyle:React.FC<PostStyleProps> = ({styleName, styleIocn, funcName}) => {

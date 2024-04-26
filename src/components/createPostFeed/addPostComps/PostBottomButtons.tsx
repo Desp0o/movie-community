@@ -4,21 +4,30 @@ import { quizFeedIocn } from "../../../assets/svg/quizFeedIcon";
 import { pollIcon } from "../../../assets/svg/poolIcon";
 import { useDispatch } from "react-redux";
 import { setAddPostModal } from "../../../Redux/postModal";
+import { usePostAddModalHook } from "../../../hooks/usePostAddModalHook";
 
 const PostBottomButtons = () => {
   const dispatch = useDispatch()
+  const { addPostModalStates } = usePostAddModalHook()
+
 
   const openDefaultPostModal = () => {
-    dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false}))
+    dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, openImageUpload:false}))
+
+    if(addPostModalStates.defaultPost){
+      console.log('okey i will open img');
+      dispatch(setAddPostModal({defaultPost: true, openImageUpload:true}))
+    }
+
   }
 
   const openPollPost = () => {
-    dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false}))
+    dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false, openImageUpload:false}))
   }
 
 
   const openQuizPost = () => {
-    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true}))
+    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false}))
   }
 
 

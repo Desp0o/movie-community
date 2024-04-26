@@ -6,12 +6,14 @@ const postModalSclier = createSlice({
         defaultPost: false,
         pollPost:false,
         quizPost:false,
+        openImageUpload: false
     },
     reducers:{
         setAddPostModal(state, action){
             state.defaultPost = action.payload.defaultPost
             state.pollPost = action.payload.pollPost
             state.quizPost = action.payload.quizPost
+            state.openImageUpload = action.payload.openImageUpload
         }
     }
 })
