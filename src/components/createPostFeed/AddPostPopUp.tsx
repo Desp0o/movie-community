@@ -114,6 +114,12 @@ const AddPostPopUp = () => {
     setPostValue({ ...postValue, title: event.target.value });
   };
 
+  const clearMedia = () => {
+    setUploadedImage('')
+    setUploadedVideo('')
+    dispatch(setAddPostModal({ showPostButtons: true, defaultPost: true }));
+  }
+
   const sendPost = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -159,6 +165,7 @@ const AddPostPopUp = () => {
               fileInputRefProp={fileInputRef}
               handleFileChangeProp={handleFileChange}
               uploadedVideoProp={uploadedVideo}
+              clearMediaProp={clearMedia}
             />
 
             {addPostModalStates.showPostButtons && <PostBottomButtons />}

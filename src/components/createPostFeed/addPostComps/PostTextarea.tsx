@@ -1,6 +1,7 @@
 import React, { RefObject } from "react";
 import { smileIcon } from "../../../assets/svg/smileIcon";
 import ReactPlayer from "react-player";
+import { xIcon } from "../../../assets/svg/Xicon";
 
 interface PostTextareaProps {
   postValieProp: string;
@@ -11,6 +12,7 @@ interface PostTextareaProps {
   fileInputRefProp: RefObject<HTMLInputElement>;
   handleFileChangeProp: (event: React.ChangeEvent<HTMLInputElement>) => void;
   uploadedVideoProp: string;
+  clearMediaProp: () => void
 }
 
 const PostTextarea: React.FC<PostTextareaProps> = ({
@@ -20,6 +22,7 @@ const PostTextarea: React.FC<PostTextareaProps> = ({
   fileInputRefProp,
   handleFileChangeProp,
   uploadedVideoProp,
+  clearMediaProp
 }) => {
   return (
     <div className="post_txtarea_smile">
@@ -31,18 +34,18 @@ const PostTextarea: React.FC<PostTextareaProps> = ({
       />
       <span>{smileIcon}</span>
 
-      {uploadedImageProp && (
-        <div className="uploaded_image_addPost_container">
+      <div className="uploaded_image_addPost_container">
+        <span onClick={clearMediaProp}>{xIcon}</span>
+
+        {uploadedImageProp && (
           <img
             src={uploadedImageProp}
             alt="uploaded post img"
             className="uploaded_image_addPost"
           />
-        </div>
-      )}
+        )}
 
-      {uploadedVideoProp && (
-        <div className="uploaded_image_addPost_container">
+        {uploadedVideoProp && (
           <ReactPlayer
             className="video_popupPorst_add"
             url={`${uploadedVideoProp}`}
@@ -58,8 +61,8 @@ const PostTextarea: React.FC<PostTextareaProps> = ({
               },
             }}
           />
-        </div>
-      )}
+        )}
+      </div>
 
       <input
         ref={fileInputRefProp}

@@ -57,7 +57,7 @@
   display: flex;
   width: 602px;
   align-items: center;
-  gap: 40     px;
+  gap: 40 px;
 }
 
 .postStyle_container {
@@ -119,7 +119,7 @@ add post
 }
 
 .create_title p {
-  color:currentColor;
+  color: currentColor;
   font-family: "Inter";
   font-size: 20px;
   font-style: normal;
@@ -181,27 +181,45 @@ add post
   height: 32px;
   padding: 2px;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   gap: 10px;
 
   align-self: flex-end;
   cursor: pointer;
 }
 
-.add_post_popup_btn{
+.add_post_popup_btn {
   padding: 16px 24px;
   width: 100%;
   margin: 0 auto;
 }
 
-.uploaded_image_addPost_container{
+.uploaded_image_addPost_container {
+  position: relative;
   border-radius: 10px;
   max-height: 338px;
   width: 100%;
   overflow: hidden;
 }
 
-.uploaded_image_addPost{
+.uploaded_image_addPost_container span {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  position: absolute;
+  z-index: 3;
+  right: 14px;
+  top: 14px;
+}
+
+.uploaded_image_addPost {
   width: auto;
   max-width: 100%;
   height: auto;
@@ -211,6 +229,6 @@ add post
   border-radius: 10px !important;
 }
 
-.uploaded_image_addPost_container video{
+.uploaded_image_addPost_container video {
   border-radius: 10px;
 }
