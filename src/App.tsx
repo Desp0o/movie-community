@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify"
 import Login from "./components/login/Login"
 import PageLayout from "./components/pageLayout/PageLayout"
 import AddPostPopUp from "./components/createPostFeed/AddPostPopUp"
+import AddQuiz from "./components/createPostFeed/AddQuiz"
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -117,6 +118,7 @@ function App() {
         <Login />
         <ToastContainer closeOnClick={true}/>
         <AddPostPopUp />
+        <AddQuiz />
         <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />

@@ -15,7 +15,6 @@ const PostBottomButtons = () => {
     dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, openImageUpload:false, showPostButtons: true}))
 
     if(addPostModalStates.defaultPost){
-      console.log('okey i will open img');
       dispatch(setAddPostModal({defaultPost: true, openImageUpload:true, quizPost: false, pollPost: false, showPostButtons: true}))
     }
 
@@ -27,7 +26,11 @@ const PostBottomButtons = () => {
 
 
   const openQuizPost = () => {
+    console.log('jaja');
+    
+    
     dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false, showPostButtons: true}))
+    console.log(addPostModalStates);
   }
 
 
