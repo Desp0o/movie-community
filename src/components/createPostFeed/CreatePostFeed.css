@@ -317,3 +317,18 @@ line-height: 24px; /* 171.429% */
   width: 100%;
   border-radius: 8px;
 }
+
+/* poll */
+.add_option{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.add_option p{
+  color: var(--secondary);
+  font-family: "Inter";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}

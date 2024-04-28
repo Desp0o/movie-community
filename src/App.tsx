@@ -20,6 +20,7 @@ import Login from "./components/login/Login"
 import PageLayout from "./components/pageLayout/PageLayout"
 import AddPostPopUp from "./components/createPostFeed/AddPostPopUp"
 import AddQuiz from "./components/createPostFeed/AddQuiz"
+import AddPoll from "./components/createPostFeed/AddPoll"
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -119,6 +120,7 @@ function App() {
         <ToastContainer closeOnClick={true}/>
         <AddPostPopUp />
         <AddQuiz />
+        <AddPoll />
         <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />

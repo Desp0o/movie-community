@@ -103,7 +103,6 @@ const AddQuiz = () => {
             </div>
           </div>
 
-          <div className="quiz_answers"></div>
 
           <div className="quiz_answ_block">
             <p className="Correct_answer">Correct answer</p>
