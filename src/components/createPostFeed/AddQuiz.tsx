@@ -17,7 +17,13 @@ const AddQuiz = () => {
   const quizFileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedImage, setUploadedImage] = useState("");
   const [uploadedVideo, setUploadedVideo] = useState("");
-  const [quizAnswers, setQuizAnswers] = useState({
+  const [quizAnswers, setQuizAnswers] = useState<{
+    file: File | undefined;
+    question: string;
+    geoAnswer: string;
+    engAnswer: string;
+    }>({
+    file: undefined,
     question: "",
     geoAnswer: "",
     engAnswer: "",
@@ -47,6 +53,8 @@ const AddQuiz = () => {
       console.log(response?.data);
     } catch (error) {
       console.error(error);
+      console.log(quizAnswers);
+      
     }
   };
 
@@ -56,6 +64,7 @@ const AddQuiz = () => {
 
   const handleQuizFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0];
+    setQuizAnswers({...quizAnswers, file: file})
     if (file) {
       if (file.type.includes("image")) {
         setUploadedImage(URL.createObjectURL(file));
