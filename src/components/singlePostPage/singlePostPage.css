@@ -108,36 +108,52 @@
 }
 
 .comment_container{
+    /* for space above  */
+    padding-top: 14px;
+    width: 617px;
+    margin: 0 auto;
     position: relative;
     border: 1px solid var(--grey);
-    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .comment_textarea{
-    width: 100%;
-    border-radius: 20px;
+    width: 494px;
+    height: 48px;
+    border-radius: 8px;
     background-color: inherit;
     color: currentColor;
     font-size: 14px;
+    border: 1px solid #A9B1BF;
+    padding:16px;
 
-    padding: 15px 15px 30px 15px;
     outline: none;
     resize: none;
-    border: none;
+    overflow: hidden;
 }
 
 .comment_ntm{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-
-    background-color: var(--reddit);
-    border-radius: 20px;
-    padding: 5px 7px;
-    font-size: 10px;
-    color: currentColor;
-
+    width: 67px;
+    height: 40px;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.comment_ntm p{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.comment_user_avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
 
 .smile_icon{

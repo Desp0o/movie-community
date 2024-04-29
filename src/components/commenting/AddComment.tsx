@@ -24,12 +24,17 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
   const handleChange = (event: {
     target: {
       value: SetStateAction<string>;
-      style: { height: string };
+      style: {
+        overflow: string; height: string 
+};
       scrollHeight: number;
     };
   }) => {
-    event.target.style.height = "auto";
+    event.target.style.height = "48px";
     event.target.style.height = `${event.target.scrollHeight}px`;
+    if (parseInt(event.target.style.height) > 48) {
+      event.target.style.overflow = "auto";
+  }
   };
 
   const handleCommentValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -76,17 +81,18 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      // setUploadedImage(URL.createObjectURL(file));
-    }
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     // setUploadedImage(URL.createObjectURL(file));
+  //   }
 
-    setCommentValue({ ...commentValue, img: file });
-  };
+  //   setCommentValue({ ...commentValue, img: file });
+  // };
 
   return (
     <div className="comment_container">
+      {user.avatar && <img src={user?.avatar} alt="user avatar" className="comment_user_avatar"/>}
       <textarea
         className="comment_textarea"
         value={commentValue.text}
@@ -97,10 +103,10 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
         placeholder="Write your comment here..."
       />
 
-      <input multiple type="file" onChange={handleFileChange} />
-      <button className="comment_ntm" onClick={addComment}>
-        add comment
-      </button>
+      {/* <input multiple type="file" onChange={handleFileChange} /> */}
+      <div className="comment_ntm" onClick={addComment}>
+        <p>Post</p>
+      </div>
     </div>
   );
 };
