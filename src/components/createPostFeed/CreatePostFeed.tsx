@@ -31,7 +31,7 @@ const CreatePostFeed = () => {
                 />
             </div>
 
-            <span style={{paddingLeft:"58px"}}><PostBottomButtons /></span>
+            <span className="btn_post_style_padding_left"><PostBottomButtons /></span>
         </div>
     );  
 };
