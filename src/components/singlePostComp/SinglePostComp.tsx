@@ -11,6 +11,7 @@ import { useUserHook } from "../../hooks/useUserHook";
 import 'react-toastify/dist/ReactToastify.css';
 import EditPannel from "./EditPannel";
 import { Link } from "react-router-dom";
+import PostPollQuest from "./PostPollQuest";
 
 
 interface SinglePostProps {
@@ -77,11 +78,11 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
          
          {/* picture or image */}
-          {type === "0"
+          {type === "2"
             ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage image={image} /></Link> : <></>)
             : type === "1" ?
             (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
-            : <></>
+            : type === "0" ? <PostPollQuest /> :<></>
           }
             </div>
 

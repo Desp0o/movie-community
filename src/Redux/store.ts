@@ -17,7 +17,7 @@ const store = configureStore({
         leftMenuStore: leftMenuSlicer,
         spinnerSote: spinnerSlicer,
         refetchStore: RefetchSlicer,
-        addPostModalStore: postModalSclier
+        addPostModalStore: postModalSclier,
     }
 })
 

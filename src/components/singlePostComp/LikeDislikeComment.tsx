@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { arrowDislike } from "../../assets/svg/arrowDislike";
-// import { arrowLike } from "../../assets/svg/arrowLike";
 import { commentsIcon } from "../../assets/svg/commentsIcon";
 import "./singlePostComp.css";
-// import { activeLike } from "../../assets/svg/activeLike";
-// import { activeDislike } from "../../assets/svg/activeDislike";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
@@ -14,7 +10,6 @@ import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
 import { FeedFunctions } from "../feedFuncs/FeedFucntions";
-// import { DislikeFunction, Liking, UnDislikeFunction, Unliking } from "./likeFunction/LikeFunctions";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -27,10 +22,7 @@ interface LikeDislikeCommentProps {
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
-  // likes,
-  // dislikes,
   postID,
-  // authLike,
   commentLength,
   authGul,
   gul
@@ -47,19 +39,12 @@ useEffect(() => {
 }, [gul]);
 
 useEffect(()=>{
+  // if not user deactivate
   if(!user.userID){
     setHeart(false)
     setGulIcon(heartIcon)
-  }
-  
-  // console.log(typeof votes + ('12'));
-  
+  }  
 },[user.userID])
-
-useEffect(()=>{
-  console.log(isHeart, votes + " ეს უნდა გასწირდეს");
-  
-},[isHeart, votes])
 
   useEffect(()=>{
     if(authGul === 0 && user.userID){
