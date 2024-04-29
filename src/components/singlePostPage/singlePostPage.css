@@ -225,12 +225,23 @@
     line-height: 20px;
 }
 
-@media (max-width:769px) {
-    .EmojiPickerReact{
-        position: fixed !important;
-        z-index: 110;
-        left: 0;
-        bottom: 10px;
-        width: 100% !important;
-    } 
+@media (max-width:430px) {
+    .single_post_page{
+        position: relative;
+      width: 375px;
+      display: flex;
+      margin: 0 auto;
+      padding: 14px 17px;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      border-radius: 6px;
+      border: 1px solid #D5DAE3;
+    
+      background-color: var(--post-bg-light);
+    }
+
+    .single_posted_comment{
+        width: 355px;
+    }
 }

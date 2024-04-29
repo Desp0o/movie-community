@@ -277,7 +277,27 @@ line-height: 18px; /* 150% */
 @media (max-width:430px) {
   .single_post_comp {
     width: 375px;
-    overflow: hidden;
+    align-items: flex-start;
   }
-    
+
+    .single_post_image_container{
+      width: 343px;
+      max-width: inherit;
+    }
+
+    .author_pannel_container{
+      width: 100%;
+    }
+
+    .likeDislikeComment_container {
+      display: flex;
+      width: 357px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon_container_likeComp{
+      padding: 0;
+      align-items: flex-start;
+    }
 }

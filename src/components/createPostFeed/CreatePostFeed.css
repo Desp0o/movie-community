@@ -347,7 +347,6 @@ add post
 @media (max-width: 430px) {
   .CreatePostFeed {
     width: 375px;
-    max-width: 95%;
     margin: 0 auto;
   }
 
