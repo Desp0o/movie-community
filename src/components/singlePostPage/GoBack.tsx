@@ -1,16 +1,15 @@
 import { goBackIcon } from '../../assets/svg/goBack'
-import { useDarkModeHook } from '../../hooks/useDarkModeHook'
 
 const GoBack = () => {
-    const { isDark } = useDarkModeHook()
     
     const goBackHandler = () => {
       window.history.back();
     }
 
   return (
-    <div className={isDark ? "go_back dark" : 'go_back'} onClick={goBackHandler}>
-        {goBackIcon}
+    <div className="go_back" onClick={goBackHandler}>
+        <span style={{width:"40px", height:"40px"}}>{goBackIcon}</span>
+        <p>Back</p>
     </div>
   )
 }

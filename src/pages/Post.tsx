@@ -72,10 +72,11 @@ const Post = () => {
       <ScrollToTop />
       {data ? (
         <>
+        <GoBack />
           <div className="single_post_page">
             <div className="goBack_authorInfo_container">
               <div className="goBack_authorInfo">
-                <GoBack />
+                
                 <Author
                   avatar={data?.user?.avatar}
                   name={data?.user?.name}
