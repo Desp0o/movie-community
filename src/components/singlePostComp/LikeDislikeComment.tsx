@@ -51,11 +51,15 @@ useEffect(()=>{
     setHeart(false)
     setGulIcon(heartIcon)
   }
-
+  
   // console.log(typeof votes + ('12'));
   
 },[user.userID])
 
+useEffect(()=>{
+  console.log(isHeart, votes + " ეს უნდა გასწირდეს");
+  
+},[isHeart, votes])
 
   useEffect(()=>{
     if(authGul === 0 && user.userID){

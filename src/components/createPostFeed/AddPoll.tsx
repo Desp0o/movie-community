@@ -8,6 +8,7 @@ import { smileIcon } from "../../assets/svg/smileIcon";
 import axios from "axios";
 import { optionsAddIcon } from "../../assets/svg/optionsAddIcon";
 import InputComponent from "../inputComponent/InputComponent";
+import BackDrop from "../backDrop/BackDrop";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
@@ -62,6 +63,7 @@ const AddPoll = () => {
   return (
     addPostModalStates.pollPost && (
       <div style={{ width: "100%" }}>
+        <BackDrop funcName={closeDefaultPostAddModal} />
         <div className="AddPostPopUp">
           <CreateTitle title={"Create poll"} funcName={closeDefaultPostAddModal} />
 
