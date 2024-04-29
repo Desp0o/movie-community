@@ -4,6 +4,7 @@ import { useRefetchHook } from "./hooks/useRefetchHook";
 import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
+import noAvatar from "./assets/noAvatar.jpeg"
 import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 
 interface dataProps {
@@ -73,7 +74,7 @@ if(data){
               <div key={post.id}>
                 <SinglePostComp
                   authorName={post.user.name}
-                  authorAvatar={post.user.avatar}
+                  authorAvatar={post.user.avatar ? post.user.avatar : noAvatar}
                   postTitle={post.title}
                   postID={post.id}
                   image={post.img}

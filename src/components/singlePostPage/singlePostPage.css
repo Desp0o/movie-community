@@ -12,6 +12,27 @@
   background-color: var(--post-bg-light);
 }
 
+.like_comment_{
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.comment_heart_icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.replay{
+    color: #414855;
+    font-size: 13px;
+    line-height: 18px;
+    cursor: pointer;
+}
+
 .go_back{
 
     border-radius: 50%;
@@ -164,6 +185,23 @@
     border-radius: 50%;
 }
 
+.comment_authorname_time{
+    position: relative;
+    width: 558px;
+}
+
+.comment_dots{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: -5px;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    cursor: pointer;
+}
+
 .smile_icon{
     position: absolute;
     left: 10px;
@@ -187,6 +225,19 @@
     left: 0;
     bottom: 10px;
 } 
+
+.single_posted_comment{
+    width: 603px;
+
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.comment_text{
+    font-size: 14px;
+    line-height: 20px;
+}
 
 @media (max-width:769px) {
     .EmojiPickerReact{

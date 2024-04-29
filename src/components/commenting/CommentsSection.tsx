@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useUserHook } from "../../hooks/useUserHook";
+import noAvatar from "../../assets/noAvatar.jpeg"
 import { deleteComment } from "./DELcomment";
 import { editComment } from "./EDITcomment";
+import Author from "../singlePostComp/Author";
+import { heartIcon } from "../../assets/svg/heartIcon";
+import { dotsIcons } from "../../assets/svg/dotsIcons";
 
 interface Comment {
+  [x: string]: any;
   id: number;
   text: string;
   img: string;
@@ -26,51 +31,32 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
     text: "",
   });
 
+  console.log(fetchedComments);
+  
 
   return (
     <div style={{display:"flex" , flexDirection:"column", gap:"30px"}}>
       {fetchedComments?.map((item) => (
-        <div key={item.id}>
-          {Number(item.user_id) === Number(user.userID) && (<p
-            onClick={() => setEditTextArea(!editTextArea)}
-            style={{ color: "pink", fontWeight: "900" }}
-          >
-            EDIT POST
-          </p>)}
-          <div onClick={() => deleteComment(item.id, callback)}>
-            <p>{item.text}</p>
-            {item.img ? (
-              <img
-                style={{ width: "50px" }}
-                src={`${imageStoragePath}${item.img}.webp`}
-                alt="Comment"
-              />
-            ) : (
-              <></>
-            )}
-          </div>
-          {editTextArea && Number(user.userID) === Number(item.user_id) &&  (
-            <div className="comment_container">
-              <textarea
-                className="comment_textarea"
-                value={commentValue.text}
-                onChange={(event) => {
-                  setCommentValue({
-                    ...commentValue,
-                    text: event.target.value,
-                  });
-                }}
-                placeholder="Write your comment here..."
-              />
-              
-              <button
-                className="comment_ntm"
-                onClick={() => editComment(callback, item.id, commentValue, setEditTextArea, editTextArea)}
-              >
-                edit comment
-              </button>
+        <div key={item.id} className="single_posted_comment">
+          {/* avatar */}
+          <img src={item.user.avatar ? item?.user?.avatar : noAvatar} alt="user vatar" className="comment_user_avatar" />
+          
+          {/* name comment like replay */}
+          <div className="comment_authorname_time">
+            <Author name={item.user.name} date={item.created_at} />
+            <p className="comment_text">{item.text}</p>
+
+            {Number(user.userID) === Number(item.user_id) && <span className="comment_dots">{dotsIcons}</span>}
+            
+
+            {/* comment likes */}
+            <div className="like_comment_">
+                <span className="comment_heart_icon">{heartIcon}</span>
+                <span style={{height:"14px", borderRight:"1px solid #CCD4DE"}}/>
+                <p className="replay">Replay</p>
             </div>
-          )}
+
+          </div>
         </div>
       ))}
     </div>

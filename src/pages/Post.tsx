@@ -68,7 +68,7 @@ const Post = () => {
   
 
   return (
-    <div>
+    <div style={{paddingBottom:"30px"}}>
       <ScrollToTop />
       {data ? (
         <>
