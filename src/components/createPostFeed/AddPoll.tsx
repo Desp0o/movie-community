@@ -3,7 +3,7 @@ import { setAddPostModal } from "../../Redux/postModal";
 import LoginModalBtn from "../login/LoginModalBtn";
 import CreateTitle from "./addPostComps/CreateTitle";
 import { usePostAddModalHook } from "../../hooks/usePostAddModalHook";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { smileIcon } from "../../assets/svg/smileIcon";
 import axios from "axios";
 import { optionsAddIcon } from "../../assets/svg/optionsAddIcon";
@@ -12,10 +12,12 @@ import BackDrop from "../backDrop/BackDrop";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
+  const optionsContainerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch();
   const { addPostModalStates } = usePostAddModalHook();
   const [pollQuestion, setPollQuestion] = useState("");
   const [pollOptions, setPollOptions] = useState(["", ""]);
+  const [divLength, setDivLength] = useState(true)
 
   const closeDefaultPostAddModal = () => {
     dispatch(
@@ -60,6 +62,12 @@ const AddPoll = () => {
     }
   };
 
+  useEffect(()=>{
+    if(optionsContainerRef.current && optionsContainerRef.current?.children.length >= 4){
+      setDivLength(false)
+    }
+  },[optionsContainerRef.current?.children.length, divLength])
+
   return (
     addPostModalStates.pollPost && (
       <div style={{ width: "100%" }}>
@@ -81,7 +89,7 @@ const AddPoll = () => {
           <div className="quiz_answ_block">
             <p className="Correct_answer">Options</p>
 
-            <div className="options_container">
+            <div className="options_container" ref={optionsContainerRef}>
               {pollOptions.map((option, index) => (
                 <InputComponent
                   key={index}
@@ -96,10 +104,11 @@ const AddPoll = () => {
               ))}
             </div>
 
-              <div className="add_option" onClick={addOption}>
+              {divLength && <div className="add_option" onClick={addOption}>
                 {optionsAddIcon}
                 <p>Add option</p>
-              </div>
+              </div>}
+              
           </div>
 
           <div className="quiz_btn_block">
