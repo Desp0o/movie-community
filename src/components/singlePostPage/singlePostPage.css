@@ -1,7 +1,14 @@
 .single_post_page{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+    position: relative;
+  width: 637px;
+  display: flex;
+  padding: 14px 17px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #D5DAE3;
+
+  background-color: var(--post-bg-light);
 }
 
 .go_back{
