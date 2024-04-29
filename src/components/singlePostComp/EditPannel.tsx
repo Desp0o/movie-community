@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useRefetchHook } from '../../hooks/useRefetchHook';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { penIcon } from '../../assets/svg/penIcon';
 
 interface EditPannelPros{
     postID: string | number;
@@ -77,7 +78,15 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
             isActive 
             ?
             <div className={isDark ? "post_setting_pannel dark" : "post_setting_pannel"}>
-            <div onClick={deletePost} style={{display:"flex", alignItems:"center", gap:"5px", fontSize:"14px",cursor:"pointer"}}>{canIcon} Delete</div>
+              <div onClick={deletePost} className='post_delete'>
+                <span style={{width:"20px", height:"20px"}}>{canIcon}</span>
+                 Delete
+                 </div>
+
+                 <div onClick={deletePost} className='edit_delete'>
+                <span style={{width:"20px", height:"20px"}}>{penIcon}</span>
+                 Edit post
+                 </div>
             </div>
             :
             <></>
