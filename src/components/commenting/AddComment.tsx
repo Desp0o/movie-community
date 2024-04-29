@@ -100,7 +100,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
           handleChange(event);
           handleCommentValues(event);
         }}
-        placeholder="Write your comment here..."
+        placeholder="Add comment..."
       />
 
       {/* <input multiple type="file" onChange={handleFileChange} /> */}
