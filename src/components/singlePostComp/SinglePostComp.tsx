@@ -65,22 +65,26 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     <>
         
         <div className={isDark ? "single_post_comp dark" : "single_post_comp"}>
-          <div className="author_pannel_container_parent">
+
+            <div className="autor_title_image_">
+              {/* author name date paneledit */}
             <div className="author_pannel_container">
               <Author avatar={authorAvatar} name={authorName} date={date} />
-              <Link to={`/pages/Post/${postID}`}><PostTitle title={postTitle} postStatus={postStatus} /></Link>
+              {isUserLogged ? <EditPannel postID={postID}/> : <></>}
             </div>
-            {isUserLogged ? <EditPannel postID={postID}/> : <></>}
-          </div>  
-      
+            
+            {/* title */}
+          <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
+         
+         {/* picture or image */}
           {type === "0"
             ? (image ? <Link to={`/pages/Post/${postID}`}><PostImage image={image} /></Link> : <></>)
             : type === "1" ?
             (image ? <Link to={`/pages/Post/${postID}`}><PostVideo image={image} /> </Link>: <></>)
             : <></>
           }
+            </div>
 
-          <div className={isDark ? "post-line-wrapper dark" : "post-line-wrapper"} />
 
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={gul ? gul : 0} />
         
