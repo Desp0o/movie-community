@@ -29,6 +29,9 @@ const AddPoll = () => {
         showPostButtons: true,
       })
     );
+
+    setDivLength(true)
+    setPollOptions(["" ,""])
   };
 
   const addOption = () => {
