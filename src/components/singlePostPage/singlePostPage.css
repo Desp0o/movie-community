@@ -13,7 +13,6 @@
 }
 
 .like_comment_{
-    margin-top: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -188,6 +187,9 @@
 .comment_authorname_time{
     position: relative;
     width: 558px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .comment_dots{
@@ -209,22 +211,6 @@
 
     cursor: pointer;
 }
-
-.emoji_backdrop{
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 110;
-    width: 100vw;
-    height: 100vh;
-}
-
-.EmojiPickerReact{
-    position: absolute !important;
-    z-index: 110;
-    left: 0;
-    bottom: 10px;
-} 
 
 .single_posted_comment{
     width: 603px;

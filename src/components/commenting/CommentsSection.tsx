@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useUserHook } from "../../hooks/useUserHook";
 import noAvatar from "../../assets/noAvatar.jpeg"
-import { deleteComment } from "./DELcomment";
-import { editComment } from "./EDITcomment";
+// import { deleteComment } from "./DELcomment";
+// import { editComment } from "./EDITcomment";
 import Author from "../singlePostComp/Author";
 import { heartIcon } from "../../assets/svg/heartIcon";
 import { dotsIcons } from "../../assets/svg/dotsIcons";
@@ -20,18 +20,18 @@ interface ComProps {
   callback:()=>void
 }
 
-const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
-  const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
+// callback
+const CommentsSection: React.FC<ComProps> = ({ fetchedComments,  }) => {
+  // const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
   const {user} = useUserHook()
 
-  const [editTextArea, setEditTextArea] = useState(false);
-  const [commentValue, setCommentValue] = useState<{
-    text: string;
-  }>({
-    text: "",
-  });
+  // const [editTextArea, setEditTextArea] = useState(false);
+  // const [commentValue, setCommentValue] = useState<{
+  //   text: string;
+  // }>({
+  //   text: "",
+  // });
 
-  console.log(fetchedComments);
   
 
   return (
