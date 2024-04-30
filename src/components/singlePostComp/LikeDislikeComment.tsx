@@ -10,6 +10,7 @@ import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
 import { FeedFunctions } from "../feedFuncs/FeedFucntions";
+import { Link } from "react-router-dom";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -118,10 +119,11 @@ useEffect(()=>{
         {/* like */}
         <IconContainer funcName={sendHeart} icon={gulIcon} number={Number(votes)} />
 
-        {/* share */}
-        <IconContainer icon={commentsIcon} number={commentLength} />
-
-
+        {/* comment */}
+        <Link to={`pages/Post/${postID}`}>
+          <IconContainer icon={commentsIcon} number={commentLength} />
+        </Link>
+        
         {/* share */}
         <IconContainer icon={shareIcon} number={0} />
 
