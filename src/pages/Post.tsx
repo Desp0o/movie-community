@@ -16,6 +16,7 @@ import PostVideo from "../components/singlePostComp/postVideo";
 import { useQuery } from "react-query";
 import { useUserHook } from "../hooks/useUserHook";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
+import Spinner from "../components/spinner/Spinner";
 
 const Post = () => {
   const token = localStorage.getItem('token')
@@ -44,7 +45,7 @@ const Post = () => {
     }
   },[user])
 
-  const { data, isError, error, refetch } = useQuery(
+  const { data, isError, error, refetch, isLoading } = useQuery(
     [`single-post`, path],
     async () => {
       const response = await axios.get(`${path}${id}`,{
@@ -64,11 +65,14 @@ const Post = () => {
     console.error(error)
   }
 
-  console.log(data);
   
+  if(isLoading){
+    return <Spinner />
+  }
 
   return (
     <div style={{paddingBottom:"30px"}}>
+      
       <ScrollToTop />
       {data ? (
         <>

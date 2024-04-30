@@ -4,7 +4,7 @@
     top: 0;
     width: 100%;
     height: 100vh;
-  z-index: 999;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,6 +38,7 @@
     width: 48px;
     height: 48px;
     border: 5px solid var(--dark-bg);
+    fill: red;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

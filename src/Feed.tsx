@@ -87,7 +87,8 @@ if(data){
                   postStatus={post.status}
                   commentLength={post.comment} 
                   authGul={post.authGul} 
-                  gul={post.gul}                
+                  gul={post.gul}   
+                               
                 />
               </div>
             ))}

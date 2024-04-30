@@ -20,13 +20,15 @@ interface LikeDislikeCommentProps {
   commentLength: number;
   authGul: number;
   gul: number;
+  pathToSinglePost?:number;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   postID,
   commentLength,
   authGul,
-  gul
+  gul,
+  pathToSinglePost
 }) => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
@@ -120,7 +122,7 @@ useEffect(()=>{
         <IconContainer funcName={sendHeart} icon={gulIcon} number={Number(votes)} />
 
         {/* comment */}
-        <Link to={`pages/Post/${postID}`}>
+        <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ''}>
           <IconContainer icon={commentsIcon} number={commentLength} />
         </Link>
         
