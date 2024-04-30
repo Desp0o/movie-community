@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import Feed from "./Feed"
 import { useDarkModeHook } from "./hooks/useDarkModeHook"
 import "./index.css"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
-import SplashScreen from "./components/splashScreen/SplashScreen"
 import Post from "./pages/Post"
 import axios from "axios"
 import { QueryClient, QueryClientProvider } from "react-query"
@@ -39,7 +38,6 @@ function App() {
   const {isDark} = useDarkModeHook()
   // const {user} = useUserHook()
   const dispatch = useDispatch()
-  const [isLoading, setLoading] = useState(true)
 
   useEffect(()=>{
     Boolean(localStorage.getItem('darkMode'))    
@@ -87,7 +85,7 @@ function App() {
         localStorage.removeItem('userID')
       }
       finally{
-        setLoading(false)
+        
       }
     }
 
@@ -97,7 +95,7 @@ function App() {
     }
 
     if(!token){
-      setLoading(false)
+     
     }
 
   },[dispatch, token])
@@ -108,10 +106,6 @@ function App() {
            :
             document.documentElement.style.backgroundColor = '#fff'
   },[isDark])
-
-  if(isLoading){
-    return <SplashScreen />
-  }
 
   return (
     <QueryClientProvider client={queryClient}>

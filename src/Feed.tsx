@@ -6,6 +6,7 @@ import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
 import noAvatar from "./assets/noAvatar.jpeg"
 import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
+import Spinner from "./components/spinner/Spinner";
 
 interface dataProps {
   gul: number;
@@ -65,8 +66,8 @@ if(data){
 
   return (
     <div style={{marginTop:"-20px"}}>
-      <CreatePostFeed />
-      
+      {user.name && user.userID && <CreatePostFeed />}
+      {isLoading && <Spinner />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
