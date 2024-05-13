@@ -185,6 +185,10 @@ const AddPostPopUp = () => {
       textareaRef.current.style.height = "120px"
     }
 
+    if(textareaRef.current && postValue.title !== '' && postValue.img === undefined){
+      textareaRef.current.style.height = "120px"
+    }
+
   },[postValue.img, postValue.title])
 
   return (
