@@ -117,7 +117,7 @@ const AddPostPopUp = () => {
   const clearMedia = () => {
     setUploadedImage('')
     setUploadedVideo('')
-    setPostValue({...postValue, img:undefined})
+    setPostValue({...postValue, img:undefined, type: null})
     dispatch(setAddPostModal({ showPostButtons: true, defaultPost: true }));
   }
 
