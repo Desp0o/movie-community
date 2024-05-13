@@ -236,11 +236,18 @@
 }
 
 .checkbox_style_reg {
+
+  appearance: none;
+  -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid var(--light-grey);
   cursor: pointer;
+}
+
+.checkbox_style_reg:checked {
+  appearance: auto;
 }
 
 .checkbox_text {
@@ -273,7 +280,20 @@
 }
 
 input[type="checkbox"]:checked {
-  accent-color: var(--secondary);
+  
+  appearance: none;
+  background-color: var(--secondary);
+  border: none;
+  border-radius: 4px;
+}
+
+input[type="checkbox"]:checked:before {
+  content: "✔";
+}
+
+input[type="checkbox"]:check {
+  background-color: black;
+  accent-color: red;
 }
 
 .err_panel_log {

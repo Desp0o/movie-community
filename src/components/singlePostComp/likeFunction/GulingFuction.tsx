@@ -1,35 +1,52 @@
 import axios from 'axios';
 
-export const Guling = async (postID: number) => {
-const token = localStorage.getItem('token')
+import { useEffect, useState } from 'react'
 
-    try {
-      const response = await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
-        headers:{
-          Authorization:`Bearer ${token}`
+export const GulingFuction = () => {
+    const [ungGulingError, setUngullingError] = useState(false)
+    const [gulingError, setGulingError] = useState(false)
+
+
+    
+
+    const Guling = async (postID: number) => {
+      
+    const token = localStorage.getItem('token')
+    
+        try {
+          const response = await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
+            headers:{
+              Authorization:`Bearer ${token}`
+            }
+          })
+          console.log(response.status + " გულინგ");
+          setGulingError(false)
+        } catch (error:any) {
+          console.error(error);
+          setGulingError(true)
         }
-      })
-      console.log(response);
-      
-    } catch (error) {
-      console.log(error) 
-    }
-  }
-
-
-export const UnGuling = async (postID: number) => {
-const token = localStorage.getItem('token')
-
-    try {
-      const response = await axios.get(`https://api.pinky.ge/api/unguling/${postID}`,{
-        headers:{
-          Authorization:`Bearer ${token}`
+      }
+    
+    
+    const UnGuling = async (postID: number) => {
+    
+    const token = localStorage.getItem('token')
+    
+        try {
+          const response = await axios.get(`https://api.pinky.ge/api/unguling/${postID}`,{
+            headers:{
+              Authorization:`Bearer ${token}`
+            }
+          })
+          setUngullingError(false)
+          console.log(response.status+ " ჰათინგ");
+          
+        } catch (error:any) {
+          console.error(error);
+          setUngullingError(true)            
         }
-      })
-      console.log(response);
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
+      }
+
+  return {UnGuling, Guling, ungGulingError, gulingError, setGulingError, setUngullingError}
+}
+

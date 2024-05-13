@@ -9,6 +9,7 @@
 }
 
 .PostPollQuest_questions_item{
+    position: relative;
     height: 40px;
     background-color: var(--poll-item);
     border-radius: 8px;

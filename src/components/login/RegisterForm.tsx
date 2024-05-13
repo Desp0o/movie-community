@@ -8,6 +8,8 @@ import InputComponent from "../inputComponent/InputComponent";
 import { eyeIcon } from "../../assets/svg/eyeIco";
 import { RegErrMsg } from "./RegErrMsg";
 import SocialLogins from "./SocialLogins";
+import { checked } from "../../assets/svg/checked";
+import { unchecked } from "../../assets/svg/unchecked";
 
 const loginPath = import.meta.env.VITE_LOGIN;
 const regPath = import.meta.env.VITE_REGISTER;
@@ -161,7 +163,7 @@ const RegisterForm = () => {
         </div>
   
         <div className="checkbox_reg">
-          <input checked={isChecked} type="checkbox" className="checkbox_style_reg" onChange={()=>setChecked(!isChecked)} />
+          <span style={{cursor:"pointer"}} onClick={()=>setChecked(!isChecked)}> {isChecked ? checked : unchecked} </span>
           <p className="checkbox_text">I agree with the <span className="checkbox_span">Terms</span> and <span className="checkbox_span">Privacy policy</span></p>
         </div>
 

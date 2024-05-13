@@ -27,6 +27,7 @@ const AddPostPopUp = () => {
   const { requestRefetch } = useRefetchHook();
   const { addPostModalStates } = usePostAddModalHook();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [uploadedVideo, setUploadedVideo] = useState("");
   const [postValue, setPostValue] = useState<{
@@ -109,7 +110,6 @@ const AddPostPopUp = () => {
       scrollHeight: number;
     };
   }) => {
-    event.target.style.height = "120px";
     event.target.style.height = `${event.target.scrollHeight}px`;
     setPostValue({ ...postValue, title: event.target.value });
   };
@@ -117,6 +117,7 @@ const AddPostPopUp = () => {
   const clearMedia = () => {
     setUploadedImage('')
     setUploadedVideo('')
+    setPostValue({...postValue, img:undefined})
     dispatch(setAddPostModal({ showPostButtons: true, defaultPost: true }));
   }
 
@@ -147,6 +148,24 @@ const AddPostPopUp = () => {
     }
   };
 
+
+
+  useEffect(() => {
+    
+    if (postValue.title !== '') {
+      // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
+      if(textareaRef.current){
+        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      }
+    }
+
+    // თუ ტექსტარეა ცარიელია მაშინ დაუბრუნდეს საწყის ზომას 
+    if(textareaRef.current && postValue.title === ''){
+      textareaRef.current.style.height = "32px"
+    }
+    
+  }, [postValue.title]);
+
   return (
     addPostModalStates.defaultPost && (
       <div style={{ width: "100%" }}>
@@ -165,8 +184,9 @@ const AddPostPopUp = () => {
               fileInputRefProp={fileInputRef}
               handleFileChangeProp={handleFileChange}
               uploadedVideoProp={uploadedVideo}
-              clearMediaProp={clearMedia}
-            />
+              clearMediaProp={clearMedia} 
+              textareaRefProp={textareaRef}            
+              />
 
             {addPostModalStates.showPostButtons && <PostBottomButtons />}
           </div>

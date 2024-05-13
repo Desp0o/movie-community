@@ -5,7 +5,7 @@ import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { activeHeartIcon, heartIcon } from "../../assets/svg/heartIcon";
-import { Guling, UnGuling } from "./likeFunction/GulingFuction";
+import { GulingFuction } from "./likeFunction/GulingFuction";
 import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
@@ -20,7 +20,7 @@ interface LikeDislikeCommentProps {
   commentLength: number;
   authGul: number;
   gul: number;
-  pathToSinglePost?:number;
+  pathToSinglePost?: number;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
@@ -28,44 +28,47 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   commentLength,
   authGul,
   gul,
-  pathToSinglePost
+  pathToSinglePost,
 }) => {
   const dispatch = useDispatch();
+  const { Guling, UnGuling, ungGulingError, gulingError, setGulingError, setUngullingError } = GulingFuction();
   const { user } = useUserHook();
-  const {refetch} = FeedFunctions()
+  const { refetch } = FeedFunctions();
   const [votes, seteVotes] = useState(Number(gul));
-const [isHeart, setHeart] = useState(authGul === 0 ? false : true)
-const [gulIcon, setGulIcon] = useState(authGul === 0 ? heartIcon : activeHeartIcon)
+  const [isHeart, setHeart] = useState(authGul === 0 ? false : true);
+  const [gulIcon, setGulIcon] = useState(
+    authGul === 0 ? heartIcon : activeHeartIcon
+  );
 
-useEffect(() => {
-  seteVotes(Number(gul));
-}, [gul]);
+  useEffect(() => {
+    seteVotes(Number(gul));
+  }, [gul]);
 
-useEffect(()=>{
-  // if not user deactivate
-  if(!user.userID){
-    setHeart(false)
-    setGulIcon(heartIcon)
-  }  
-},[user.userID])
+  useEffect(() => {
+    // if not user deactivate
+    if (!user.userID) {
+      setHeart(false);
+      setGulIcon(heartIcon);
+    }
+  }, [user.userID]);
 
-  useEffect(()=>{
-    if(authGul === 0 && user.userID){
-      setHeart(false)
-      setGulIcon(heartIcon)
+  useEffect(() => {
+    if (authGul === 0 && user.userID) {
+      setHeart(false);
+      setGulIcon(heartIcon);
     }
 
-    if(authGul === 1 && user.userID){
-      setHeart(true)
-      setGulIcon(activeHeartIcon)
+    if (authGul === 1 && user.userID) {
+      setHeart(true);
+      setGulIcon(activeHeartIcon);
     }
 
-    if(!user.userID){
-      setHeart(false)
-      setGulIcon(heartIcon)
+    if (!user.userID) {
+      setHeart(false);
+      setGulIcon(heartIcon);
     }
+  }, [user.userID, authGul]);
 
-  },[user.userID, authGul])
 
 
   const sendHeart = () => {
@@ -74,67 +77,51 @@ useEffect(()=>{
       return;
     }
 
+    if(ungGulingError || gulingError){
+      window.location.reload();
+      
+      return
+    }
+
     if (!isHeart) {
       seteVotes((prevVotes) => prevVotes + 1);
       setHeart(true);
       setGulIcon(activeHeartIcon);
+      Guling(postID);
+    }
 
-      // Optimistic update
-      Guling(postID)
-        .then(() => {
-          // Data mutation successful
-          refetch();
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error occurred:", error);
-          // Rollback optimistic update
-          seteVotes((prevVotes) => prevVotes - 1);
-          setHeart(false);
-          setGulIcon(heartIcon);
-        });
-    } else {
+    if (isHeart) {
       seteVotes((prevVotes) => prevVotes - 1);
       setHeart(false);
       setGulIcon(heartIcon);
-
-      // Optimistic update
-      UnGuling(postID)
-        .then(() => {
-          // Data mutation successful
-          refetch();
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error occurred:", error);
-          // Rollback optimistic update
-          seteVotes((prevVotes) => prevVotes + 1);
-          setHeart(true);
-          setGulIcon(activeHeartIcon);
-        });
+      UnGuling(postID);
     }
+
   };
 
   return (
     <div className="likeDislikeComment_container">
-      <div className="like_comment_share">       
+      <div className="like_comment_share">
         {/* like */}
-        <IconContainer funcName={sendHeart} icon={gulIcon} number={Number(votes)} />
+        <IconContainer
+          funcName={sendHeart}
+          icon={gulIcon}
+          number={Number(votes)}
+        />
 
         {/* comment */}
-        <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ''}>
+        <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ""}>
           <IconContainer icon={commentsIcon} number={commentLength} />
         </Link>
-        
+
         {/* share */}
         <IconContainer icon={shareIcon} number={0} />
-
       </div>
 
       {/* save */}
       <div className="like_container">
-          <span className="icon_container_likeComp">{saveIcon}</span>
-        </div>
+        <span className="icon_container_likeComp">{saveIcon}</span>
+      </div>
     </div>
   );
 };

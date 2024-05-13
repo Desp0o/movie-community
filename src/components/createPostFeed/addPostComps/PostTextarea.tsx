@@ -1,7 +1,7 @@
 import React, { RefObject } from "react";
 import { smileIcon } from "../../../assets/svg/smileIcon";
 import ReactPlayer from "react-player";
-import { xIcon } from "../../../assets/svg/Xicon";
+import { xIcon } from '../../../assets/svg/Xicon';
 
 interface PostTextareaProps {
   postValieProp: string;
@@ -12,7 +12,8 @@ interface PostTextareaProps {
   fileInputRefProp: RefObject<HTMLInputElement>;
   handleFileChangeProp: (event: React.ChangeEvent<HTMLInputElement>) => void;
   uploadedVideoProp: string;
-  clearMediaProp: () => void
+  clearMediaProp: () => void;
+  textareaRefProp: RefObject<HTMLTextAreaElement>;
 }
 
 const PostTextarea: React.FC<PostTextareaProps> = ({
@@ -22,20 +23,24 @@ const PostTextarea: React.FC<PostTextareaProps> = ({
   fileInputRefProp,
   handleFileChangeProp,
   uploadedVideoProp,
-  clearMediaProp
+  clearMediaProp,
+  textareaRefProp
 }) => {
   return (
     <div className="post_txtarea_smile">
+      <div className="postTextarea_and_smile_parent">
       <textarea
         className="popup_textarea"
         placeholder="Write post..."
         value={postValieProp}
         onChange={handleChangeProp}
+        ref={textareaRefProp}
       />
-      <span>{smileIcon}</span>
+      <span className="smile_icon_postadd">{smileIcon}</span>
+      </div>
 
       <div className="uploaded_image_addPost_container">
-        <span onClick={clearMediaProp}>{xIcon}</span>
+        <span style={{width:"32px", height:"32px", cursor:"pointer"}} onClick={clearMediaProp}>{xIcon}</span>
 
         {uploadedImageProp && (
           <img

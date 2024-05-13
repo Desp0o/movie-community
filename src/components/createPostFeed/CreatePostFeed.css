@@ -151,8 +151,10 @@ add post
 }
 
 .popup_textarea {
+  box-sizing: border-box;
+  position: relative;
   width: 100%;
-  height: 120px;
+  height: 32px;
   color: currentColor;
   font-family: "Inter";
   font-size: 16px;
@@ -162,16 +164,21 @@ add post
   resize: none;
   outline: none;
   border: none;
+  background-color: inherit;
+    
 }
 
 .popup_textarea::placeholder {
   color: var(--dark-grey);
 }
 
-.post_txtarea_smile {
+.postTextarea_and_smile_parent{
   display: flex;
-  flex-direction: column;
-  gap: 32px;
+  align-items: center;
+  position: relative;
+  height: fit-content;
+  padding-right: 32px;
+  background-color: red;
 }
 
 .post_txtarea_smile span {
@@ -185,7 +192,16 @@ add post
 
   align-self: flex-end;
   cursor: pointer;
+  background-color: green;
+
 }
+
+.smile_icon_postadd{
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+}
+
 
 .add_post_popup_btn {
   padding: 16px 24px;
@@ -202,15 +218,7 @@ add post
 }
 
 .uploaded_image_addPost_container span {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  padding: 6px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  cursor: pointer;
+  
 
   position: absolute;
   z-index: 3;
