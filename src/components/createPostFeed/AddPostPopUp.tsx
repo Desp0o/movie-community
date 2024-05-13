@@ -151,20 +151,41 @@ const AddPostPopUp = () => {
 
 
   useEffect(() => {
-    
     if (postValue.title !== '') {
       // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
       if(textareaRef.current){
+        textareaRef.current.style.height = "120px"
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
     }
 
     // თუ ტექსტარეა ცარიელია მაშინ დაუბრუნდეს საწყის ზომას 
     if(textareaRef.current && postValue.title === ''){
-      textareaRef.current.style.height = "32px"
+      textareaRef.current.style.height = "120px"
     }
     
   }, [postValue.title]);
+
+
+  useEffect(()=>{
+    if (postValue.title !== '' && postValue.img !== undefined) {
+      // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
+      if(textareaRef.current){
+        textareaRef.current.style.height = "32px"
+        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      }
+    }
+
+    // თუ ტექსტარეა ცარიელია და სურათი არსებობს მაშინ დაუბრუნდეს საწყის ზომას 
+    if(textareaRef.current && postValue.title === '' && postValue.img !== undefined){
+      textareaRef.current.style.height = "32px"
+    }
+
+    if(textareaRef.current && postValue.title === '' && postValue.img === undefined){
+      textareaRef.current.style.height = "120px"
+    }
+
+  },[postValue.img, postValue.title])
 
   return (
     addPostModalStates.defaultPost && (
