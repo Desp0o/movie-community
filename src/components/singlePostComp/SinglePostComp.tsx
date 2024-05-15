@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditPannel from "./EditPannel";
 import { Link } from "react-router-dom";
 import PostPollQuest from "./PostPollQuest";
+import AnswerQuizComp from "./AnswerQuizComp";
 
 
 interface SinglePostProps {
@@ -78,17 +79,19 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
          
          {/* picture or image */}
-          {type === "2"
+          {type === 0
             ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage image={image} /></Link> : <></>)
-            : type === "1" ?
+            : type === 1 ?
             (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
-            : type === "0" ? <PostPollQuest /> :<></>
+            : type === 3 ? <PostPollQuest /> :<></>
           }
+          <AnswerQuizComp />
             </div>
 
 
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={gul ? gul : 0} pathToSinglePost={postID} />
-        
+          
+
         </div>
         
     </>
