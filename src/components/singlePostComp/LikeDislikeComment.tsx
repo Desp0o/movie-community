@@ -9,7 +9,6 @@ import { GulingFuction } from "./likeFunction/GulingFuction";
 import { shareIcon } from "../../assets/svg/shareIcon";
 import { saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
-import { FeedFunctions } from "../feedFuncs/FeedFucntions";
 import { Link } from "react-router-dom";
 
 interface LikeDislikeCommentProps {
@@ -31,9 +30,8 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   pathToSinglePost,
 }) => {
   const dispatch = useDispatch();
-  const { Guling, UnGuling, ungGulingError, gulingError, setGulingError, setUngullingError } = GulingFuction();
+  const { Guling, UnGuling, ungGulingError, gulingError } = GulingFuction();
   const { user } = useUserHook();
-  const { refetch } = FeedFunctions();
   const [votes, seteVotes] = useState(Number(gul));
   const [isHeart, setHeart] = useState(authGul === 0 ? false : true);
   const [gulIcon, setGulIcon] = useState(

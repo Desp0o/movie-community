@@ -2,13 +2,13 @@ import { useState } from "react"
 import "./postPollStyles.css"
 
 const PostPollQuest = () => {
-  const [pollStats, setPollStats] = useState({
+  const [pollStats, _setPollStats] = useState({
     poll1: 10,
     poll2: 24,
     poll3: 61,
     poll4: 7
   })
-  const [voteSummery, setVoteSummery] = useState(pollStats.poll1 + pollStats.poll2 + pollStats.poll3 + pollStats.poll4)
+  const [voteSummery, _setVoteSummery] = useState(pollStats.poll1 + pollStats.poll2 + pollStats.poll3 + pollStats.poll4)
 
 
   return (
