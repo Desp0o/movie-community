@@ -184,7 +184,6 @@ add post
   display: flex;
   width: 32px;
   height: 32px;
-  padding: 2px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -194,9 +193,19 @@ add post
 }
 
 .smile_icon_postadd{
-  position: absolute;
-  right: 0;
-  bottom: 0px;
+  display: flex;
+width: 32px;
+height: 32px;
+padding: 2px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+
+background-color: red;
+position: absolute;
+right: 0;
+top: 0;
 }
 
 
@@ -212,7 +221,7 @@ add post
   max-height: 338px;
   width: 100%;
   overflow: hidden;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .uploaded_image_addPost_container span {
