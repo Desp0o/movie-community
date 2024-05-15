@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { quizImgAddIcon } from "../../assets/svg/quizImgAddIcon";
 import ReactPlayer from "react-player";
+import { xIcon } from "../../assets/svg/Xicon";
 
 const AddQuiz = () => {
   const token = localStorage.getItem("token");
@@ -78,6 +79,13 @@ const AddQuiz = () => {
     }
   };
 
+  const clearMedia = () => {
+    setUploadedImage('')
+    setUploadedVideo('')
+    setQuizAnswers({...quizAnswers, file:undefined})
+
+  }
+
   return (
     addPostModalStates.quizPost && (
       <div style={{ width: "100%" }}>
@@ -137,14 +145,21 @@ const AddQuiz = () => {
             </div>
 
             <div className="uploaded_image_quiz_container">
+            
+
               {uploadedImage && (
+               <>
+                <span style={{width:"32px", height:"32px", cursor:"pointer"}} className="quiz_media_close_icon" onClick={clearMedia}>{xIcon}</span>
                 <img
                   src={uploadedImage}
                   className="uploaded_image_addPost"
                   alt="quiz img"
                 />
+               </>
               )}
               {uploadedVideo && (
+                <>
+                <span style={{width:"32px", height:"32px", cursor:"pointer"}} className="quiz_media_close_icon" onClick={clearMedia}>{xIcon}</span>
                 <ReactPlayer
                   className="video_popupPorst_add"
                   url={`${uploadedVideo}`}
@@ -160,6 +175,7 @@ const AddQuiz = () => {
                     },
                   }}
                 />
+                </>
               )}
             </div>
           </div>
@@ -174,6 +190,8 @@ const AddQuiz = () => {
             ref={quizFileInputRef}
             onChange={handleQuizFileChange}
           />
+
+
         </div>
       </div>
     )

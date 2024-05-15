@@ -225,8 +225,6 @@ top: 0;
 }
 
 .uploaded_image_addPost_container span {
-  
-
   position: absolute;
   z-index: 3;
   right: 14px;
@@ -322,8 +320,16 @@ top: 0;
 }
 
 .uploaded_image_quiz_container {
+  position: relative;
   margin-top: 24px;
   width: 100%;
+}
+
+.uploaded_image_quiz_container img{
+      border-radius: 10px;
+    max-height: 338px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .uploaded_image_quiz_container video {
@@ -358,6 +364,13 @@ top: 0;
 
 .btn_post_style_padding_left {
   padding-left: 58px;
+}
+
+.quiz_media_close_icon{
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 2;
 }
 
 @media (max-width: 430px) {
