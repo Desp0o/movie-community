@@ -88,7 +88,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           
             </div>
 
-          <AnswerQuizComp />
+
+        {type === 4 && <AnswerQuizComp />}  
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={gul ? gul : 0} pathToSinglePost={postID} />
           
 
