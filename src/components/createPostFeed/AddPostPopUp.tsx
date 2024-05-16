@@ -13,6 +13,7 @@ import axios from "axios";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
+import { setSpinnerState } from "../../Redux/spinnerSlicer";
 
 const AddPostPopUp = () => {
   const notify = () =>
@@ -123,6 +124,7 @@ const AddPostPopUp = () => {
 
   const sendPost = async () => {
     const token = localStorage.getItem("token");
+    dispatch(setSpinnerState(true))
     try {
       await axios.post(import.meta.env.VITE_POSTING, postValue, {
         headers: {
@@ -145,6 +147,7 @@ const AddPostPopUp = () => {
     } catch (error: unknown) {
       notifyError();
     } finally {
+      dispatch(setSpinnerState(false))
     }
   };
 
