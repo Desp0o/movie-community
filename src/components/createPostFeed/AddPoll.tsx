@@ -9,6 +9,7 @@ import axios from "axios";
 import { optionsAddIcon } from "../../assets/svg/optionsAddIcon";
 import InputComponent from "../inputComponent/InputComponent";
 import BackDrop from "../backDrop/BackDrop";
+import { setSpinnerState } from "../../Redux/spinnerSlicer";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
@@ -46,12 +47,13 @@ const AddPoll = () => {
 
 
   const sendPoll = async () => {
+    dispatch(setSpinnerState(true))
     try {
       const response = await axios.post(
-        "/api/polls",
+        "https://api.pinky.ge/api/pollAdding",
         {
-          question: pollQuestion,
-          options: pollOptions,
+          text: pollQuestion,
+          pollAnswers: pollOptions,
         },
         {
           headers: {
@@ -62,6 +64,8 @@ const AddPoll = () => {
       console.log(response.data);
     } catch (error) {
       console.error(error);      
+    }finally{
+      dispatch(setSpinnerState(false))
     }
   };
 
@@ -70,6 +74,11 @@ const AddPoll = () => {
       setDivLength(false)
     }
   },[optionsContainerRef.current?.children.length, divLength])
+
+  useEffect(()=>{
+console.log(pollOptions);
+
+  },[pollOptions])
 
   return (
     addPostModalStates.pollPost && (

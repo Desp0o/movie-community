@@ -17,12 +17,18 @@ import { useUserHook } from "../hooks/useUserHook";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 import Spinner from "../components/spinner/Spinner";
 
+interface PollProps {
+  id: number;
+  title: string;
+}
+
 const Post = () => {
   const token = localStorage.getItem('token')
   const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
   const [commData, setComData] = useState([])
+  const [pollAnswers, setPollAnswer] = useState([])
   const {user} = useUserHook()
 
   const openFullScreen = () => {
@@ -53,12 +59,32 @@ const Post = () => {
         }
       });
       setComData(response.data.comments);
-      return response.data.post; 
+      setPollAnswer(response.data.polls)
+      return response.data; 
     },{
       cacheTime:0,
     }
   );  
 
+  console.log(data);
+
+  const sendPollAnswer = async (id:number) => {
+    const token = localStorage.getItem('token')
+
+   try {
+    const res = await axios.get(`https://api.pinky.ge/api/pollAnswering/${id}`, {headers:{
+      Authorization: `Bearer ${token}`
+    }})
+
+    console.log(res);
+    
+   } catch (error) {
+    console.error(error)
+   }
+
+    
+  }
+  
 
   if(isError){
     console.error(error)
@@ -81,16 +107,16 @@ const Post = () => {
               <div className="goBack_authorInfo">
                 
                 <Author
-                  avatar={data?.user?.avatar}
-                  name={data?.user?.name}
-                  date={data?.created_at}
+                  avatar={data?.post?.user?.avatar}
+                  name={data?.post?.user?.name}
+                  date={data?.post?.created_at}
                 />
               </div>
-              <EditPannel postID={data?.id} isInnerPage={true}/>
+              <EditPannel postID={data?.post?.id} isInnerPage={true}/>
             </div>
 
             <div className="single_page_title">
-              <PostTitle title={data?.title} postStatus={data?.status} />
+              <PostTitle title={data?.post?.text} postStatus={data?.post?.status} />
             </div>
 
             <div className="single_post_image">
@@ -113,26 +139,34 @@ const Post = () => {
               ) : (
                 <></>
               )}
-              {data?.img && data?.type === 0 && (
-                <PostImage image={data?.img} funName={openFullScreen} />
+              {data?.post?.img && data?.post?.type === 0 && (
+                <PostImage image={data?.post?.img} funName={openFullScreen} />
               ) }
 
-              {data?.img && data?.type === 1 && (
-                <PostVideo image={data?.img} />
+              {data?.post?.img && data?.post?.type === 1 && (
+                <PostVideo image={data?.post?.img} />
               ) }
 
 
             </div>
 
-            
+            <div className="">
+              {
+                pollAnswers?.map((poll: PollProps)=>{
+                  return(
+                    <p key={poll.id} onClick={()=>sendPollAnswer(poll.id)}> {poll.title} </p>
+                  )
+                })
+              }
+            </div>
 
             <LikeDislikeComment
-              likes={data?.like}
-              dislikes={data?.dislike}
-              postID={data?.id}
-              authLike={data?.authLike}
-              commentLength={data?.comment} authGul={data?.authGul} 
-              gul={data?.gul}              
+              likes={data?.post?.like}
+              dislikes={data?.post?.dislike}
+              postID={data?.post?.id}
+              authLike={data?.post?.authLike}
+              commentLength={data?.post?.comment} authGul={data?.post?.authGul} 
+              gul={data?.post?.gul}              
               />
 
             <AddComment postID={id} callBack={refetch}/>
