@@ -66,7 +66,7 @@ const AddPoll = () => {
   };
 
   useEffect(()=>{
-    if(optionsContainerRef.current && optionsContainerRef.current?.children.length >= 4){
+    if(optionsContainerRef.current && optionsContainerRef.current?.children.length >= 20){
       setDivLength(false)
     }
   },[optionsContainerRef.current?.children.length, divLength])
