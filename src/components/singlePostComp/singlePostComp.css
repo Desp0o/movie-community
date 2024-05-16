@@ -296,22 +296,21 @@
 @media (max-width: 430px) {
   .single_post_comp {
     width: 375px;
-    align-items: flex-start;
   }
 
   .single_post_image_container {
     width: 343px;
     height: 425px;
-    max-width: inherit;
+    overflow: hidden;
   }
 
   .author_pannel_container {
-    width: 100%;
+    width: 343px;
   }
 
   .likeDislikeComment_container {
     display: flex;
-    width: 357px;
+    width: 363px;
     justify-content: space-between;
     align-items: center;
   }
