@@ -154,7 +154,13 @@ const Post = () => {
               {
                 pollAnswers?.map((poll: PollProps)=>{
                   return(
-                    <p key={poll.id} onClick={()=>sendPollAnswer(poll.id)}> {poll.title} </p>
+                    <div key={poll.id} onClick={()=>sendPollAnswer(poll.id)} className="poll_item">
+                      <span className="poll_item_bg" style={{width: '20px'}}/>
+                      <p className="poll_item_text"> {poll.title} </p>
+                      <p className="poll_item_text">30%</p>
+                    </div>
+
+                    
                   )
                 })
               }
@@ -171,7 +177,7 @@ const Post = () => {
 
             <AddComment postID={id} callBack={refetch}/>
 
-            {Number(data.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
+            {Number(data?.post?.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
             
           </div>
         </>
