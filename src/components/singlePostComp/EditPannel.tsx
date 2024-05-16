@@ -8,6 +8,7 @@ import { useRefetchHook } from '../../hooks/useRefetchHook';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { penIcon } from '../../assets/svg/penIcon';
+import { setSpinnerState } from '../../Redux/spinnerSlicer';
 
 interface EditPannelPros{
     postID: string | number;
@@ -49,6 +50,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
 
 
     const deletePost = async () => {
+      dispatch(setSpinnerState(true))
         try {
           const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
             {
@@ -67,6 +69,8 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
         } catch (error) {
           console.error(error);
           notifyError()
+        }finally{
+          dispatch(setSpinnerState(false))
         }
     }
 
