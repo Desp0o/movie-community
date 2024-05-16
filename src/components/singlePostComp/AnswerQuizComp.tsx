@@ -1,6 +1,10 @@
+import { useState } from "react";
 import InputComponent from "../inputComponent/InputComponent";
 
 const AnswerQuizComp = () => {
+
+  const [answerValue, setAnswerValue] = useState('')
+
   return (
     <div>
       <div className="quiz_answer_input_container">
@@ -10,8 +14,9 @@ const AnswerQuizComp = () => {
           type={"text"}
           autoComplete={""}
           placeholder={"Enter the correct answer"}
-          value={""}
+          value={answerValue}
           isError={false}
+          onChange={(e)=>setAnswerValue(e.target.value)}
         />
 
         <div className="post_quiz_answer_text">

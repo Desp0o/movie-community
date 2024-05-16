@@ -376,7 +376,6 @@ top: 0;
   .CreatePostFeed {
     width: 375px;
     margin: 0 auto;
-    border-radius: 0;
   }
 
   .user_avatar_input {
@@ -395,5 +394,11 @@ top: 0;
   }
   .btn_post_style_padding_left {
     padding-left: 0px;
+  }
+}
+
+@media (max-width:375px) {
+  .CreatePostFeed {
+    border-radius: 0;
   }
 }

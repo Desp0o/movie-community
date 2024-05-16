@@ -297,7 +297,6 @@
   .single_post_comp {
     width: 375px;
     align-items: flex-start;
-    border-radius: 0;
   }
 
   .single_post_image_container {
@@ -331,5 +330,11 @@
   .video_container {
     margin: 0 auto;
     width: 343px;
+  }
+}
+
+@media (max-width:375px) {
+  .single_post_comp {
+    border-radius: 0;
   }
 }

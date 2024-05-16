@@ -19,31 +19,31 @@ const DateFormater: React.FC<DateFormaterProps> = ({ date }) => {
       let interval;
       interval = Math.floor(seconds / 31536000);
       if (interval >= 1) {
-        setTimeAgo(`${interval} years ago`);
+        setTimeAgo(`${interval} y.ago`);
         return;
       }
 
       interval = Math.floor(seconds / 2592000);
       if (interval >= 1) {
-        setTimeAgo(`${interval} months ago`);
+        setTimeAgo(`${interval} m.ago`);
         return;
       }
 
       interval = Math.floor(seconds / 86400);
       if (interval >= 1) {
-        setTimeAgo(`${interval} days ago`);
+        setTimeAgo(`${interval} d.ago`);
         return;
       }
 
       interval = Math.floor(seconds / 3600);
       if (interval >= 1) {
-        setTimeAgo(`${interval} hours ago`);
+        setTimeAgo(`${interval} hr.ago`);
         return;
       }
 
       interval = Math.floor(seconds / 60);
       if (interval > 1) {
-        setTimeAgo(`${interval} minutes ago`);
+        setTimeAgo(`${interval} min.ago`);
         return;
       }
 
