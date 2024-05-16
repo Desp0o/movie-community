@@ -97,13 +97,13 @@ const AddPoll = () => {
                 <InputComponent
                   key={index}
                   type={"text"}
-                  autoComplete={""}
                   placeholder={"Option " + (index + 1)}
                   value={option}
                   isError={false}
                   widthProp="100%"
-                  onChange={(e) => updateOption(index, e.target.value)}
-                />
+                  onChange={(e) => updateOption(index, e.target.value)} 
+                  nameProp={`option${index+1}`}                
+                  />
               ))}
             </div>
 

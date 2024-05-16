@@ -3,13 +3,14 @@ import "./inputStyles.css";
 
 interface inputProps {
   type: string;
-  autoComplete: string;
+  autoComplete?: string;
   placeholder: string;
   value: string;
   isError: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   widthProp?: string;
   heightProp?: string;
+  nameProp: string;
 }
 const InputComponent: React.FC<inputProps> = ({
   type,
@@ -19,7 +20,8 @@ const InputComponent: React.FC<inputProps> = ({
   isError,
   onChange,
   widthProp,
-  heightProp
+  heightProp,
+  nameProp
 }) => {
   return (
     <input
@@ -30,6 +32,7 @@ const InputComponent: React.FC<inputProps> = ({
       value={value}
       onChange={onChange}
       required
+      name={nameProp}
       style={{width:`${widthProp}`, height:`${heightProp}`}}
     />
   );

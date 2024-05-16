@@ -111,10 +111,9 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
         placeholder={"Email"}
         value={loginInputs.email}
         isError={errMessage.emailErr ? true : false}
-        onChange={(e) =>
-          setLoginInputs({ ...loginInputs, email: e.target.value })
-        }
-      />
+        onChange={(e) => setLoginInputs({ ...loginInputs, email: e.target.value })} 
+        nameProp={"Email"}      
+        />
 
       <div className="pasword_input_container">
         <span className="eye_icon" onClick={handlePwdVisibility}>
@@ -125,6 +124,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
           type={showPwd ? "text" : "password"}
           autoComplete="current-password"
           placeholder={"Password"}
+          nameProp="password"
           value={loginInputs.password}
           isError={errMessage.passwordErr ? true : false}
           onChange={(e) =>

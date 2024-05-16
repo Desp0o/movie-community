@@ -7,10 +7,10 @@ const AnswerQuizComp = () => {
   return (
     <div className="quiz_answer_input_container">
       <InputComponent
+      nameProp="correctAnswerquiz"
         widthProp={window.innerWidth > 430 ? "538px" : "280px"}
         heightProp={"44px"}
         type={"text"}
-        autoComplete={""}
         placeholder={"Enter the correct answer"}
         value={answerValue}
         isError={false}

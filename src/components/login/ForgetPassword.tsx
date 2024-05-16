@@ -19,8 +19,9 @@ const ForgetPassword = () => {
             placeholder={"Email"}
             value={emailInput}
             isError={false}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />
+            onChange={(e) => setEmailInput(e.target.value)} 
+            nameProp={"email"}          
+            />
           <LoginModalBtn title="Send" funName={pwdRecovery} />
         </div>
       </form>

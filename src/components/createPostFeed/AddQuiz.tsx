@@ -121,11 +121,11 @@ const AddQuiz = () => {
             <div className="quiz_answer_inputs">
               <InputComponent
                 type={"text"}
-                autoComplete={""}
                 placeholder={"Georgian"}
                 value={quizAnswers.geoAnswer}
                 isError={false}
                 widthProp="100%"
+                nameProp="GeorgianAnswer"
                 onChange={(e) =>
                   setQuizAnswers({ ...quizAnswers, geoAnswer: e.target.value })
                 }
@@ -133,8 +133,8 @@ const AddQuiz = () => {
 
               <InputComponent
                 type={"text"}
-                autoComplete={""}
                 placeholder={"Eglish"}
+                nameProp="EnglishAnswer"
                 value={quizAnswers.engAnswer}
                 isError={false}
                 widthProp="100%"

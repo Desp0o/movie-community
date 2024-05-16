@@ -79,6 +79,7 @@ const Navbar = () => {
         <div className="nav_search">
           <div className="nav_search_icon">{searchIcon}</div>
           <input
+            name="search"
             type="text"
             className={isDark ? "nav_search_input dark" : "nav_search_input"}
             placeholder="search..."

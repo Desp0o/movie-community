@@ -107,6 +107,7 @@ const RegisterForm = () => {
         <InputComponent
           type="text"
           autoComplete="name"
+          nameProp="name"
           placeholder="Name"
           value={regInputs.name}
           isError={errorHandlers.nameError ? true : false}
@@ -119,6 +120,7 @@ const RegisterForm = () => {
           type="email"
           autoComplete="current-email"
           placeholder="Email"
+          nameProp="emailreg"
           value={regInputs.email}
           isError={errorHandlers.emailError ? true : false}
           onChange={(e) => setRegInputs({ ...regInputs, email: e.target.value })}
@@ -131,6 +133,7 @@ const RegisterForm = () => {
             {eyeIcon}
           </span>
           <InputComponent
+            nameProp="paswdreg"
             type={showPwd ? "text" : "password"}
             autoComplete={"current_password"}
             placeholder="Password"
@@ -148,6 +151,7 @@ const RegisterForm = () => {
             {eyeIcon}
           </span>
           <InputComponent
+            nameProp="curpaswd"
             type={showRePwd ? "text" : "password"}
             autoComplete={"current_password"}
             placeholder="Password"
