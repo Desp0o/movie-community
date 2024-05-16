@@ -10,11 +10,14 @@ import { optionsAddIcon } from "../../assets/svg/optionsAddIcon";
 import InputComponent from "../inputComponent/InputComponent";
 import BackDrop from "../backDrop/BackDrop";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
+import { setRefetch } from "../../Redux/RefetchSlicer";
+import { useRefetchHook } from "../../hooks/useRefetchHook";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
   const optionsContainerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch();
+  const { requestRefetch } = useRefetchHook();
   const { addPostModalStates } = usePostAddModalHook();
   const [pollQuestion, setPollQuestion] = useState("");
   const [pollOptions, setPollOptions] = useState(["", ""]);
@@ -61,6 +64,8 @@ const AddPoll = () => {
           },
         }
       );
+      dispatch(setRefetch(!requestRefetch));
+      closeDefaultPostAddModal()
       console.log(response.data);
     } catch (error) {
       console.error(error);      
