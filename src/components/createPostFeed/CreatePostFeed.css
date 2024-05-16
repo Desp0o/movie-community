@@ -165,6 +165,7 @@ add post
   outline: none;
   border: none;
   background-color: inherit;
+  padding-top: 2px;
     
 }
 
@@ -204,7 +205,6 @@ flex-shrink: 0;
 
 position: absolute;
 right: 0;
-top: 0;
 }
 
 
