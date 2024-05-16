@@ -103,10 +103,7 @@ const Post = () => {
                   >
                     {xIcon}
                   </span>
-                  <img
-                    src={`${imageStoragePath}${data?.img}.webp`}
-                    className="full_screen_cover"
-                    alt="full screen cover"
+                  <div style={{backgroundColor:"black"}}
                   />
                   <img
                     src={`${imageStoragePath}${data?.img}.webp`}
