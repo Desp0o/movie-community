@@ -6,6 +6,7 @@ const AnswerQuizComp = () => {
       <div className="quiz_answer_input_container">
         <InputComponent
           widthProp="538px"
+          heightProp={'44px'}
           type={"text"}
           autoComplete={""}
           placeholder={"Enter the correct answer"}

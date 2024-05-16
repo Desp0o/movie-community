@@ -9,6 +9,7 @@ interface inputProps {
   isError: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   widthProp?: string;
+  heightProp?: string;
 }
 const InputComponent: React.FC<inputProps> = ({
   type,
@@ -17,7 +18,8 @@ const InputComponent: React.FC<inputProps> = ({
   value,
   isError,
   onChange,
-  widthProp
+  widthProp,
+  heightProp
 }) => {
   return (
     <input
@@ -28,7 +30,7 @@ const InputComponent: React.FC<inputProps> = ({
       value={value}
       onChange={onChange}
       required
-      style={{width:`${widthProp}`}}
+      style={{width:`${widthProp}`, height:`${heightProp}`}}
     />
   );
 };

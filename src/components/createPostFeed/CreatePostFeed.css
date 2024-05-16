@@ -376,6 +376,7 @@ top: 0;
   .CreatePostFeed {
     width: 375px;
     margin: 0 auto;
+    border-radius: 0;
   }
 
   .user_avatar_input {

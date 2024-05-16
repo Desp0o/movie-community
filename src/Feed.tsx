@@ -72,8 +72,9 @@ if(data){
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
             {page?.data?.posts.data?.map((post: dataProps) => (
-              <div key={post.id}>
+              
                 <SinglePostComp
+                  key={post.id}
                   authorName={post.user.name}
                   authorAvatar={post.user.avatar ? post.user.avatar : noAvatar}
                   postTitle={post.title}
@@ -91,7 +92,7 @@ if(data){
                   gul={post.gul}   
                                
                 />
-              </div>
+              
             ))}
           </div>
         ))}
