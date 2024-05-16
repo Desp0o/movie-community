@@ -76,6 +76,7 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
       );
 
       callBack()
+      setCommentValue({...commentValue, text: ''})
     } catch (error:unknown) {
       console.error(error);
     }
