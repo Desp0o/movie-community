@@ -3,6 +3,7 @@ import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import axios from "axios";
+import { setSpinnerState } from "../../Redux/spinnerSlicer";
 
 interface addCommentProps {
   postID: number | undefined | string;
@@ -62,6 +63,8 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
   }
 
   const addComment = async () => {
+    if(commentValue.text !== ""){
+      dispatch(setSpinnerState(true))
     try {
        await axios.post(
         `${import.meta.env.VITE_ADD_COMMENT}${postID}`,
@@ -79,6 +82,9 @@ const AddComment: React.FC<addCommentProps> = ({ postID, callBack }) => {
       setCommentValue({...commentValue, text: ''})
     } catch (error:unknown) {
       console.error(error);
+    }finally{
+      dispatch(setSpinnerState(false))
+    }
     }
   };
 

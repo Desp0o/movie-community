@@ -20,6 +20,8 @@ import PageLayout from "./components/pageLayout/PageLayout"
 import AddPostPopUp from "./components/createPostFeed/AddPostPopUp"
 import AddQuiz from "./components/createPostFeed/AddQuiz"
 import AddPoll from "./components/createPostFeed/AddPoll"
+import Spinner from "./components/spinner/Spinner"
+import { useSpinnerHook } from "./hooks/useSpinnerHook"
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -35,6 +37,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const token = localStorage.getItem('token')
+  const {isSpinner} = useSpinnerHook()
   const {isDark} = useDarkModeHook()
   // const {user} = useUserHook()
   const dispatch = useDispatch()
@@ -110,6 +113,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className={isDark ? "app darkMode" : "app"}>
+        {isSpinner && <Spinner />}
         <Login />
         <ToastContainer closeOnClick={true}/>
         <AddPostPopUp />

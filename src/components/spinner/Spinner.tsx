@@ -7,7 +7,9 @@ const Spinner = () => {
 
   return (
     <div className={isDark ? "spinner_container dark" : "spinner_container"}>
-      <span className={isDark ? "spinner" : "spinner_light"}></span>{" "}
+      <div className="spinner_cube">
+        <span className={isDark ? "spinner" : "spinner_light"}></span>{" "}
+      </div>
     </div>
   );
 };
