@@ -12,7 +12,7 @@ interface dataProps {
   gul: number;
   authGul: number;
   id: number;
-  title: string;
+  text: string;
   img: string;
   like: number;
   dislike: number;
@@ -62,6 +62,8 @@ const Feed = () => {
 
 
 if(data){
+  console.log(data);
+  
 }
 
   return (
@@ -77,7 +79,7 @@ if(data){
                   key={post.id}
                   authorName={post.user.name}
                   authorAvatar={post.user.avatar ? post.user.avatar : noAvatar}
-                  postTitle={post.title}
+                  postTitle={post.text}
                   postID={post.id}
                   image={post.img}
                   likes={post.like}

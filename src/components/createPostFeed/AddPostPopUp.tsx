@@ -112,7 +112,7 @@ const AddPostPopUp = () => {
     };
   }) => {
     event.target.style.height = `${event.target.scrollHeight}px`;
-    setPostValue({ ...postValue, title: event.target.value });
+    setPostValue({ ...postValue, text: event.target.value });
   };
 
   const clearMedia = () => {
@@ -154,7 +154,7 @@ const AddPostPopUp = () => {
 
 
   useEffect(() => {
-    if (postValue.title !== '') {
+    if (postValue.text !== '') {
       // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
       if(textareaRef.current){
         textareaRef.current.style.height = "120px"
@@ -163,15 +163,15 @@ const AddPostPopUp = () => {
     }
 
     // თუ ტექსტარეა ცარიელია მაშინ დაუბრუნდეს საწყის ზომას 
-    if(textareaRef.current && postValue.title === ''){
+    if(textareaRef.current && postValue.text === ''){
       textareaRef.current.style.height = "120px"
     }
     
-  }, [postValue.title]);
+  }, [postValue.text]);
 
 
   useEffect(()=>{
-    if (postValue.title !== '' && postValue.img !== undefined) {
+    if (postValue.text !== '' && postValue.img !== undefined) {
       // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
       if(textareaRef.current){
         textareaRef.current.style.height = "32px"
@@ -180,19 +180,19 @@ const AddPostPopUp = () => {
     }
 
     // თუ ტექსტარეა ცარიელია და სურათი არსებობს მაშინ დაუბრუნდეს საწყის ზომას 
-    if(textareaRef.current && postValue.title === '' && postValue.img !== undefined){
+    if(textareaRef.current && postValue.text === '' && postValue.img !== undefined){
       textareaRef.current.style.height = "32px"
     }
 
-    if(textareaRef.current && postValue.title === '' && postValue.img === undefined){
+    if(textareaRef.current && postValue.text === '' && postValue.img === undefined){
       textareaRef.current.style.height = "120px"
     }
 
-    if(textareaRef.current && postValue.title !== '' && postValue.img === undefined){
+    if(textareaRef.current && postValue.text !== '' && postValue.img === undefined){
       textareaRef.current.style.height = "120px"
     }
 
-  },[postValue.img, postValue.title])
+  },[postValue.img, postValue.text])
 
   return (
     addPostModalStates.defaultPost && (
@@ -206,7 +206,7 @@ const AddPostPopUp = () => {
           <div className="post_body">
             <PostAuthor />
             <PostTextarea
-              postValieProp={postValue.title}
+              postValieProp={postValue.text}
               handleChangeProp={handleChange}
               uploadedImageProp={uploadedImage}
               fileInputRefProp={fileInputRef}
