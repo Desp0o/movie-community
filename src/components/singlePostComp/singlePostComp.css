@@ -320,6 +320,7 @@
   .likeDislikeComment_container {
     display: flex;
     width: 363px;
+    margin: 0 auto;
     justify-content: space-between;
     align-items: center;
   }
