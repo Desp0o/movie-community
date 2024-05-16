@@ -125,11 +125,7 @@ const Post = () => {
 
             </div>
 
-            {data?.type === 1 && (
-              <div className="answers_container">
-                <QuizAnswers />
-              </div>
-            )}
+            
 
             <LikeDislikeComment
               likes={data?.like}
