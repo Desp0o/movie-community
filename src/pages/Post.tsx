@@ -131,7 +131,7 @@ const Post = () => {
                   <div style={{backgroundColor:"black"}}
                   />
                   <img
-                    src={`${imageStoragePath}${data?.img}.webp`}
+                    src={`${imageStoragePath}${data?.post?.img}.webp`}
                     className="full_screen_photo"
                     alt="full screen photo"
                   />
