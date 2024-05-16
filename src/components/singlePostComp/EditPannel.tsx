@@ -72,7 +72,11 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
 
   return (
     <div ref={editPanelRef}>
-        <p className='pannel_dots' onClick={handlePannel}>. . .</p>
+        <div className='pannel_dots' onClick={handlePannel}>
+          <span className='panel_single_dot' />
+          <span className='panel_single_dot' />
+          <span className='panel_single_dot' />
+        </div>
 
         {
             isActive 

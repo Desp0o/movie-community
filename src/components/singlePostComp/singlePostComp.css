@@ -266,8 +266,17 @@
 
 .pannel_dots {
   cursor: pointer;
-  margin-top: -10px;
   user-select: none;
+
+  display: flex;
+  gap: 4px;
+}
+
+.panel_single_dot{
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 50%;
 }
 
 .quiz_answer_input_container {
