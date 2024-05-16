@@ -77,7 +77,7 @@ const Post = () => {
     }})
 
     console.log(res);
-    
+    refetch()
    } catch (error) {
     console.error(error)
    }
@@ -155,7 +155,7 @@ const Post = () => {
                 pollAnswers?.map((poll: PollProps)=>{
                   return(
                     <div key={poll.id} onClick={()=>sendPollAnswer(poll.id)} className="poll_item">
-                      <span className="poll_item_bg" style={{width: '20px'}}/>
+                      <span className="poll_item_bg" style={{width: '20px', backgroundColor: poll.id === data?.post?.myPoll ? 'var(--purple)' : 'var(--poll-item)'}}/>
                       <p className="poll_item_text"> {poll.title} </p>
                       <p className="poll_item_text">30%</p>
                     </div>
