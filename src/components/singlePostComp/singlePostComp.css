@@ -284,6 +284,7 @@
   align-items: center;
   gap: 10px;
   width: 603px;
+  margin-top: 14px;
 }
 
 .post_quiz_answer_text {
