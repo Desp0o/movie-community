@@ -3,7 +3,6 @@ import GoBack from "../components/singlePostPage/GoBack";
 import Author from "../components/singlePostComp/Author";
 import PostTitle from "../components/singlePostComp/PostTitle";
 import PostImage from "../components/singlePostComp/postImage";
-import QuizAnswers from "../components/singleQuizComponent/QuizAnswers";
 import "../components/singlePostPage/singlePostPage.css";
 import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
 import { useEffect, useState } from "react";
