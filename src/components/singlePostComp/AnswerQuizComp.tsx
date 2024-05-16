@@ -5,7 +5,7 @@ const AnswerQuizComp = () => {
     <div>
       <div className="quiz_answer_input_container">
         <InputComponent
-          widthProp="538px"
+          widthProp={window.innerWidth > 430 ? "538px" : "280px"}
           heightProp={'44px'}
           type={"text"}
           autoComplete={""}
