@@ -12,6 +12,7 @@ import BackDrop from "../backDrop/BackDrop";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
+import { toast } from "react-toastify";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
@@ -48,30 +49,39 @@ const AddPoll = () => {
     setPollOptions(newOptions);    
   };
 
+  useEffect(()=>{
+    console.log(pollOptions);
+    
+  },[pollOptions])
 
   const sendPoll = async () => {
-    dispatch(setSpinnerState(true))
-    try {
-      const response = await axios.post(
-        "https://api.pinky.ge/api/pollAdding",
-        {
-          text: pollQuestion,
-          pollAnswers: pollOptions,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+
+    if(pollOptions[0] === '' && pollOptions[1] === '' && pollQuestion.length < 4){
+      toast.error("Fill all fields", { autoClose: 3000, theme: "colored" })
+    }else{
+      dispatch(setSpinnerState(true))
+      try {
+        const response = await axios.post(
+          "https://api.pinky.ge/api/pollAdding",
+          {
+            text: pollQuestion,
+            pollAnswers: pollOptions,
           },
-        }
-      );
-      dispatch(setRefetch(!requestRefetch));
-      closeDefaultPostAddModal()
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);      
-    }finally{
-      dispatch(setSpinnerState(false))
-    }
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch(setRefetch(!requestRefetch));
+        closeDefaultPostAddModal()
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);      
+      }finally{
+        dispatch(setSpinnerState(false))
+      }
+    }    
   };
 
   useEffect(()=>{
@@ -79,11 +89,6 @@ const AddPoll = () => {
       setDivLength(false)
     }
   },[optionsContainerRef.current?.children.length, divLength])
-
-  useEffect(()=>{
-console.log(pollOptions);
-
-  },[pollOptions])
 
   return (
     addPostModalStates.pollPost && (
