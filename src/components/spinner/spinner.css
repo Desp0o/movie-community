@@ -28,7 +28,7 @@
     position: relative;
     width: 48px;
     height: 48px;
-    border: 5px solid #e70606;
+    border: 5px solid var(--purple);
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
@@ -41,8 +41,8 @@
 
     width: 48px;
     height: 48px;
-    border: 5px solid currentColor;
-    fill: red;
+    border: 5px solid var(--purple);
+    fill: var(--purple);
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
