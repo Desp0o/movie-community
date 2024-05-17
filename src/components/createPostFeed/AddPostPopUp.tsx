@@ -120,6 +120,9 @@ const AddPostPopUp = () => {
     setUploadedVideo('')
     setPostValue({...postValue, img:undefined, type: null})
     dispatch(setAddPostModal({ showPostButtons: true, defaultPost: true }));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; // Reset the file input value
+    }
   }
 
   const sendPost = async () => {

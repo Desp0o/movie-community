@@ -23,7 +23,7 @@ const AddQuiz = () => {
     question: string;
     geoAnswer: string;
     engAnswer: string;
-    }>({
+  }>({
     file: undefined,
     question: "",
     geoAnswer: "",
@@ -55,7 +55,6 @@ const AddQuiz = () => {
     } catch (error) {
       console.error(error);
       console.log(quizAnswers);
-      
     }
   };
 
@@ -65,7 +64,7 @@ const AddQuiz = () => {
 
   const handleQuizFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0];
-    setQuizAnswers({...quizAnswers, file: file})
+    setQuizAnswers({ ...quizAnswers, file: file });
     if (file) {
       if (file.type.includes("image")) {
         setUploadedImage(URL.createObjectURL(file));
@@ -80,11 +79,13 @@ const AddQuiz = () => {
   };
 
   const clearMedia = () => {
-    setUploadedImage('')
-    setUploadedVideo('')
-    setQuizAnswers({...quizAnswers, file:undefined})
-
-  }
+    setUploadedImage("");
+    setUploadedVideo("");
+    setQuizAnswers({ ...quizAnswers, file: undefined });
+    if (quizFileInputRef.current) {
+      quizFileInputRef.current.value = ""; // Reset the file input value
+    }
+  };
 
   return (
     addPostModalStates.quizPost && (
@@ -99,18 +100,76 @@ const AddQuiz = () => {
           <div className="quiz_quest_title">
             <p className="your_question">Your question</p>
             <div className="quiz_txtArea_container">
-              <span className="quizImgAddIcon" onClick={openFileUploadWindow}>
-                {quizImgAddIcon}
-              </span>
+              {uploadedImage === "" && uploadedVideo === "" && (
+                <span className="quizImgAddIcon" onClick={openFileUploadWindow}>
+                  {quizImgAddIcon}
+                </span>
+              )}
               <textarea
                 className="question_textarea"
                 onChange={(e) =>
                   setQuizAnswers({ ...quizAnswers, question: e.target.value })
                 }
               />
+
+              {uploadedImage || uploadedVideo ? (
+                <div className="uploaded_image_quiz_container">
+                  {uploadedImage && (
+                    <>
+                      <span
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          cursor: "pointer",
+                        }}
+                        className="quiz_media_close_icon"
+                        onClick={clearMedia}
+                      >
+                        {xIcon}
+                      </span>
+                      <img
+                        src={uploadedImage}
+                        className="uploaded_image_addPost"
+                        alt="quiz img"
+                      />
+                    </>
+                  )}
+                  {uploadedVideo && (
+                    <>
+                      <span
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          cursor: "pointer",
+                        }}
+                        className="quiz_media_close_icon"
+                        onClick={clearMedia}
+                      >
+                        {xIcon}
+                      </span>
+                      <ReactPlayer
+                        className="video_popupPorst_add"
+                        url={`${uploadedVideo}`}
+                        muted={true}
+                        width="100%"
+                        height=""
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload",
+                              playsInline: true,
+                            },
+                          },
+                        }}
+                      />
+                    </>
+                  )}
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
-
 
           <div className="quiz_answ_block">
             <p className="Correct_answer">Correct answer</p>
@@ -143,41 +202,6 @@ const AddQuiz = () => {
                 }
               />
             </div>
-
-            <div className="uploaded_image_quiz_container">
-            
-
-              {uploadedImage && (
-               <>
-                <span style={{width:"32px", height:"32px", cursor:"pointer"}} className="quiz_media_close_icon" onClick={clearMedia}>{xIcon}</span>
-                <img
-                  src={uploadedImage}
-                  className="uploaded_image_addPost"
-                  alt="quiz img"
-                />
-               </>
-              )}
-              {uploadedVideo && (
-                <>
-                <span style={{width:"32px", height:"32px", cursor:"pointer"}} className="quiz_media_close_icon" onClick={clearMedia}>{xIcon}</span>
-                <ReactPlayer
-                  className="video_popupPorst_add"
-                  url={`${uploadedVideo}`}
-                  muted={true}
-                  width="100%"
-                  height="100%"
-                  config={{
-                    file: {
-                      attributes: {
-                        controlsList: "nodownload",
-                        playsInline: true,
-                      },
-                    },
-                  }}
-                />
-                </>
-              )}
-            </div>
           </div>
 
           <div className="quiz_btn_block">
@@ -190,8 +214,6 @@ const AddQuiz = () => {
             ref={quizFileInputRef}
             onChange={handleQuizFileChange}
           />
-
-
         </div>
       </div>
     )

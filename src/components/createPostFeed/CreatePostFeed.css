@@ -166,14 +166,13 @@ add post
   border: none;
   background-color: inherit;
   padding-top: 2px;
-    
 }
 
 .popup_textarea::placeholder {
   color: var(--dark-grey);
 }
 
-.postTextarea_and_smile_parent{
+.postTextarea_and_smile_parent {
   display: flex;
   align-items: center;
   position: relative;
@@ -193,20 +192,19 @@ add post
   cursor: pointer;
 }
 
-.smile_icon_postadd{
+.smile_icon_postadd {
   display: flex;
-width: 32px;
-height: 32px;
-padding: 2px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 
-position: absolute;
-right: 0;
+  position: absolute;
+  right: 0;
 }
-
 
 .add_post_popup_btn {
   padding: 16px 24px;
@@ -309,31 +307,40 @@ right: 0;
 .quiz_txtArea_container {
   width: 100%;
   position: relative;
+
+  background-color: green;
 }
 
 .quizImgAddIcon {
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  top: 16px;
   cursor: pointer;
 }
 
 .uploaded_image_quiz_container {
   position: relative;
-  margin-top: 24px;
-  width: 100%;
+  background-color: red;
+
+  width: 448px;
+  height: 316.279px;
+
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
-.uploaded_image_quiz_container img{
-      border-radius: 10px;
-    max-height: 338px;
-    width: 100%;
-    object-fit: cover;
+.uploaded_image_quiz_container img {
+  border-radius: 8px;
+  width: 448px;
+  height: 316.279px;
+  object-fit: cover;
 }
 
 .uploaded_image_quiz_container video {
   width: 100%;
   border-radius: 8px;
+  width: 448px;
+  height: 316.279px;
 }
 
 /* poll */
@@ -365,7 +372,7 @@ right: 0;
   padding-left: 58px;
 }
 
-.quiz_media_close_icon{
+.quiz_media_close_icon {
   position: absolute;
   right: 14px;
   top: 14px;
@@ -397,7 +404,7 @@ right: 0;
   }
 }
 
-@media (max-width:375px) {
+@media (max-width: 375px) {
   .CreatePostFeed {
     border-radius: 0;
   }
