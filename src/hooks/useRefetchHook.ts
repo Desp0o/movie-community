@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 
 interface RootState {
   refetchStore: {
-    value: boolean;
+    isRefetched: boolean;
   };
 }
 
 export const useRefetchHook = () => {
   const requestRefetch = useSelector(
-    (state: RootState) => state.refetchStore.value
+    (state: RootState) => state.refetchStore.isRefetched
   );
 
   return { requestRefetch };

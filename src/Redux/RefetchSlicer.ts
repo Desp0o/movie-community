@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const refetchSlicer = createSlice({
     name: 'refetchSlicer',
     initialState:{
-        value: false
+            isRefetched: false
     },
     reducers:{
         setRefetch(state, action){
-            state.value = action.payload
+            state.isRefetched = action.payload
         }
     }
 })

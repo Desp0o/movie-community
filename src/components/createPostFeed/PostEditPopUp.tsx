@@ -95,7 +95,7 @@ console.log(postValue);
       }
     })
     dispatch(setRefetch(!requestRefetch))
-    closeEditPostModal()
+    closeEditPostModal()    
     notify()
   } catch (error) {
     console.error(error)
@@ -120,11 +120,6 @@ console.log(postValue);
     }
     //eslint-disable-next-line
   }, [postValue.img]);
-
-  useEffect(() => {
-    
-    //გახდება ფოლსი ახლიდან დაკლიკება რო შევძლოთ ინფუთზე
-  }, []);
 
   //სურათის ასატვირთი ფუნქცია
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
