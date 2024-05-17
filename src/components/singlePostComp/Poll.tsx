@@ -102,7 +102,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
         />
         <p className="poll_item_text"> {poll.title} </p>
         <p className="poll_item_text">
-          {Math.round((100 / answersSum) * poll.sum)}%
+          {answersSum > 0 ? Math.round((100 / answersSum) * poll.sum) : 0}%
         </p>
       </div>
     );

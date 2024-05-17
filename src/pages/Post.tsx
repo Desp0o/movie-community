@@ -64,7 +64,7 @@ const Post = () => {
     }
   );  
 
-  // console.log(data);
+  console.log(data);
 
   
   
