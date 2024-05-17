@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { penIcon } from '../../assets/svg/penIcon';
 import { setSpinnerState } from '../../Redux/spinnerSlicer';
+import PostEditPopUp from '../createPostFeed/PostEditPopUp';
 
 interface EditPannelPros{
     postID: string | number;
@@ -22,6 +23,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
     const {isDark} = useDarkModeHook()
     const {requestRefetch} = useRefetchHook()
     const [isActive, setActive] = useState(false)
+    const [openEditModal, setOpenEditModal] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
@@ -74,7 +76,25 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
         }
     }
 
+    
+
+    const openEditPostModal = () => {
+      setOpenEditModal(true)
+    }
+
+    //prop function for edit modal close
+    const closeEditPostModal = () => {
+      setOpenEditModal(false)
+    }
+
   return (
+    <>
+    {openEditModal && 
+      <PostEditPopUp 
+        postID={postID}
+        closeEditPostModal={closeEditPostModal}
+      />
+    }
     <div ref={editPanelRef}>
         <div className='pannel_dots' onClick={handlePannel}>
           <span className='panel_single_dot' />
@@ -91,7 +111,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
                  Delete
                  </div>
 
-                 <div onClick={deletePost} className='edit_delete'>
+                 <div onClick={openEditPostModal} className='edit_delete'>
                 <span style={{width:"20px", height:"20px"}}>{penIcon}</span>
                  Edit post
                  </div>
@@ -100,8 +120,8 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
             <></>
         }
     </div>
+    </>
   )
 }
 
 export default EditPannel
-
