@@ -321,7 +321,7 @@ border: 1px solid var(--light-grey);
 .quizImgAddIcon {
   position: absolute;
   right: 16px;
-  top: 16px;
+  bottom: 12px;
   cursor: pointer;
 }
 
