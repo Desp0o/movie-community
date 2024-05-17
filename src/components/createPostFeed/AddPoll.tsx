@@ -13,6 +13,7 @@ import { setSpinnerState } from "../../Redux/spinnerSlicer";
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
+import { closePoll } from "../../assets/svg/closePoll";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
@@ -48,6 +49,11 @@ const AddPoll = () => {
     const newOptions = [...pollOptions];
     newOptions[index] = value;
     setPollOptions(newOptions);    
+  };
+
+  const removeOption = (index: number) => {
+    const newOptions = pollOptions.filter((_, i) => i !== index);
+    setPollOptions(newOptions);
   };
 
   useEffect(()=>{
@@ -123,6 +129,7 @@ const AddPoll = () => {
 
             <div className="options_container" ref={optionsContainerRef}>
               {pollOptions.map((option, index) => (
+                <div className="poll_single_input">
                 <InputComponent
                   key={index}
                   type={"text"}
@@ -133,6 +140,13 @@ const AddPoll = () => {
                   onChange={(e) => updateOption(index, e.target.value)} 
                   nameProp={`option${index+1}`}                
                   />
+
+                  {index > 1 && (
+                    <span className="remove_option" onClick={() => removeOption(index)}>
+                      {closePoll}  {/* Add the close icon here */}
+                    </span>
+                  )}
+                </div>
               ))}
             </div>
 

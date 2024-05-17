@@ -367,6 +367,23 @@ border: 1px solid var(--light-grey);
   line-height: 24px; /* 150% */
 }
 
+.remove_option{
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.poll_single_input{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .options_container {
   margin-top: 8px;
   display: flex;
