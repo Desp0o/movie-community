@@ -275,13 +275,19 @@ add post
 }
 
 .question_textarea {
+  font-family: "Inter";
   width: 100%;
-  height: 84px;
+  height: 72px;
   border-radius: 8px;
   resize: none;
   padding: 12px 36px 12px 12px;
   outline: none;
-  border: 1px solid var(--light-grey);
+  border: none;
+
+  font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
 }
 
 .Correct_answer {
@@ -308,7 +314,8 @@ add post
   width: 100%;
   position: relative;
 
-  background-color: green;
+  border-radius: 8px;
+border: 1px solid var(--light-grey);
 }
 
 .quizImgAddIcon {
@@ -320,12 +327,13 @@ add post
 
 .uploaded_image_quiz_container {
   position: relative;
-  background-color: red;
 
   width: 448px;
-  height: 316.279px;
+  height: fit-content;
+  max-height: 316.279px;
 
   margin: 0 auto;
+  margin-top: 0px;
   border-radius: 8px;
 }
 
@@ -340,7 +348,6 @@ add post
   width: 100%;
   border-radius: 8px;
   width: 448px;
-  height: 316.279px;
 }
 
 /* poll */

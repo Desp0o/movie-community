@@ -5,7 +5,7 @@ import { setAddPostModal } from "../../Redux/postModal";
 import BackDrop from "../backDrop/BackDrop";
 import InputComponent from "../inputComponent/InputComponent";
 import LoginModalBtn from "../login/LoginModalBtn";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { quizImgAddIcon } from "../../assets/svg/quizImgAddIcon";
 import ReactPlayer from "react-player";
@@ -13,6 +13,8 @@ import { xIcon } from "../../assets/svg/Xicon";
 
 const AddQuiz = () => {
   const token = localStorage.getItem("token");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const areaContainerRef = useRef<HTMLDivElement>(null)
   const { addPostModalStates } = usePostAddModalHook();
   const dispatch = useDispatch();
   const quizFileInputRef = useRef<HTMLInputElement>(null);
@@ -87,6 +89,33 @@ const AddQuiz = () => {
     }
   };
 
+  useEffect(()=>{
+    if(textAreaRef.current){
+      textAreaRef.current.style.height = '72px'
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  },[quizAnswers.question])
+
+  useEffect(()=>{
+    if(textAreaRef.current){
+      if(uploadedImage || uploadedVideo){
+        textAreaRef.current.style.height = '32px'
+        textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+      }else{
+        textAreaRef.current.style.height = '72px'
+        textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+      }
+
+      if(areaContainerRef.current){
+        if(uploadedImage || uploadedVideo){
+          areaContainerRef.current.style.paddingBottom = '12px'
+        }else{
+          areaContainerRef.current.style.paddingBottom = '0px'
+        }
+      }
+    }
+  },[uploadedImage, uploadedVideo, quizAnswers.question])
+
   return (
     addPostModalStates.quizPost && (
       <div style={{ width: "100%" }}>
@@ -99,14 +128,16 @@ const AddQuiz = () => {
 
           <div className="quiz_quest_title">
             <p className="your_question">Your question</p>
-            <div className="quiz_txtArea_container">
+            <div ref={areaContainerRef} className="quiz_txtArea_container">
               {uploadedImage === "" && uploadedVideo === "" && (
                 <span className="quizImgAddIcon" onClick={openFileUploadWindow}>
                   {quizImgAddIcon}
                 </span>
               )}
               <textarea
+                ref={textAreaRef}
                 className="question_textarea"
+                placeholder="Write a question"
                 onChange={(e) =>
                   setQuizAnswers({ ...quizAnswers, question: e.target.value })
                 }
