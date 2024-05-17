@@ -134,8 +134,7 @@
 }
 
 .likeDislikeComment_container {
-  padding-left: 3.4px;
-  width: 621px;
+  width: 624px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -330,9 +329,10 @@
 
   .likeDislikeComment_container {
     display: flex;
-    width: 357px;
+    width: 365px;
     padding-left: 0;
     margin: 0 auto;
+    margin-left: -2.5px;
     justify-content: space-between;
     align-items: center;
   }
@@ -351,6 +351,9 @@
   .video_container {
     margin: 0 auto;
     width: 343px;
+  }
+  .pannel_dots{
+    width: 17px;
   }
 }
 
