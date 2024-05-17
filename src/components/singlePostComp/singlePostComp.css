@@ -154,7 +154,6 @@
   display: flex;
   width: 34px;
   height: 34px;
-  padding: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -187,6 +186,10 @@
 
 .down_vote:hover {
   fill: red;
+}
+
+.activeHeartIocn{
+  fill: #ea5651 !important;
 }
 
 .see_more_post {

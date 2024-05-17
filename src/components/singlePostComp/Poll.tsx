@@ -82,6 +82,8 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
     <>
     
     {pollAnswers?.map((poll: PollProps, index: number) => {
+    
+
     return (
       <div
         key={poll.id}
