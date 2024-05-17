@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const optionsContainerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch();
   const { requestRefetch } = useRefetchHook();
@@ -90,6 +91,13 @@ const AddPoll = () => {
     }
   },[optionsContainerRef.current?.children.length, divLength])
 
+  useEffect(()=>{
+    if(textAreaRef.current){
+      textAreaRef.current.style.height = '72px'
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  },[pollQuestion])
+
   return (
     addPostModalStates.pollPost && (
       <div style={{ width: "100%" }}>
@@ -102,6 +110,8 @@ const AddPoll = () => {
             <div className="quiz_txtArea_container">
               <span className="quizImgAddIcon">{smileIcon}</span>
               <textarea
+                ref={textAreaRef}
+                placeholder="Write a question"
                 className="question_textarea"
                 onChange={(e) => setPollQuestion(e.target.value)}
               />
