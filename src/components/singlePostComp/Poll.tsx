@@ -26,7 +26,7 @@ interface PollPropsMain {
 
 const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
   const [answersSum, setAnswersSum] = useState(0);
-  const [isVoted, setVoted] = useState(data.post.myPoll === 0 ? false : true)
+  const [isVoted, _setVoted] = useState(data.post.myPoll === 0 ? false : true)
 
     useEffect(()=>{
         console.log(isVoted);
