@@ -16,11 +16,9 @@ import { useQuery } from "react-query";
 import { useUserHook } from "../hooks/useUserHook";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 import Spinner from "../components/spinner/Spinner";
+import Poll from "../components/singlePostComp/Poll";
 
-interface PollProps {
-  id: number;
-  title: string;
-}
+
 
 const Post = () => {
   const token = localStorage.getItem('token')
@@ -68,22 +66,7 @@ const Post = () => {
 
   console.log(data);
 
-  const sendPollAnswer = async (id:number) => {
-    const token = localStorage.getItem('token')
-
-   try {
-    const res = await axios.get(`https://api.pinky.ge/api/pollAnswering/${id}`, {headers:{
-      Authorization: `Bearer ${token}`
-    }})
-
-    console.log(res);
-    refetch()
-   } catch (error) {
-    console.error(error)
-   }
-
-    
-  }
+  
   
 
   if(isError){
@@ -150,21 +133,7 @@ const Post = () => {
 
             </div>
 
-            <div className="">
-              {
-                pollAnswers?.map((poll: PollProps)=>{
-                  return(
-                    <div key={poll.id} onClick={()=>sendPollAnswer(poll.id)} className="poll_item">
-                      <span className="poll_item_bg" style={{width: '20px', backgroundColor: poll.id === data?.post?.myPoll ? 'var(--purple)' : 'var(--poll-item)'}}/>
-                      <p className="poll_item_text"> {poll.title} </p>
-                      <p className="poll_item_text">30%</p>
-                    </div>
-
-                    
-                  )
-                })
-              }
-            </div>
+           <Poll pollAnswers={pollAnswers} data={data} refetch={refetch}/> 
 
             <LikeDislikeComment
               likes={data?.post?.like}
