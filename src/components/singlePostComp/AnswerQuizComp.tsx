@@ -1,13 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputComponent from "../inputComponent/InputComponent";
 import axios from "axios";
+import { movieDataBase } from "../createPostFeed/functions/fetchDB";
 
 interface AnswerQuizCompProps{
   id: number;
 }
 
 const AnswerQuizComp:React.FC<AnswerQuizCompProps> = ({id}) => {
+  const { requestMovieDB } = movieDataBase()
   const [answerValue, setAnswerValue] = useState("");
+  const [fetchedMovieDb, setFetchedMovieDb] = useState([])
+  const [stopFunc, setStopFunc] = useState(false)
+  const [newMovie, setNewMovie] = useState('') //ფილმების ბაზის ფეჩინგის შესამომწებლად
+
+  useEffect(()=>{  
+    if(answerValue.length > 0 && !stopFunc){
+      //დაიმპორტებული ფუქნცია
+      requestMovieDB(setFetchedMovieDb, answerValue)
+    }
+      
+  },[answerValue, stopFunc])
+
+
+  useEffect(()=>{  
+    if(answerValue !== newMovie){
+      setStopFunc(false)
+    }
+      
+    if(answerValue.length < 1){
+      setAnswerValue('')
+      setNewMovie('')
+      setStopFunc(true)
+    }
+  },[answerValue])
+
+  //ფილმების ბაზიდან ფილმების არჩევა და მოქმედებები
+  const chooseMovieName = (movieName: string) => {
+    setAnswerValue(movieName)
+    setFetchedMovieDb([])
+    setStopFunc(true)
+    setNewMovie(movieName)
+  }
+
+  useEffect(()=>{
+    if(answerValue.length === 0){
+      setFetchedMovieDb([])
+    }
+  },[answerValue])
 
   const sendAnswer = async () => {
     const token = localStorage.getItem('token')

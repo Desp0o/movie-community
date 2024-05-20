@@ -132,7 +132,7 @@ const AddPoll = () => {
 
             <div className="options_container" ref={optionsContainerRef}>
               {pollOptions.map((option, index) => (
-                <div className="poll_single_input">
+                <div className="poll_single_input" key={index}>
                 <InputComponent
                   key={index}
                   type={"text"}

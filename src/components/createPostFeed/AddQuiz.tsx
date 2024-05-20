@@ -13,6 +13,7 @@ import { xIcon } from "../../assets/svg/Xicon";
 import limitedIMG from "../../assets/limited.webp"
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
+import { movieDataBase } from "./functions/fetchDB";
 
 interface fetchedDataBaseProps {
     id: number;
@@ -23,6 +24,7 @@ interface fetchedDataBaseProps {
 
 const AddQuiz = () => {
   const { requestRefetch } = useRefetchHook();
+  const { requestMovieDB } =movieDataBase()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const areaContainerRef = useRef<HTMLDivElement>(null)
   const { addPostModalStates } = usePostAddModalHook();
@@ -116,25 +118,10 @@ const AddQuiz = () => {
     }
   },[uploadedImage, uploadedVideo, quizAnswers.question])
 
-  const requestMovieDB = async () => {
-    const token = localStorage.getItem('token')
-
-    try {
-      const response = await axios.post('https://api.pinky.ge/api/movieDB', {movie:quizAnswers.answer}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(response.data);
-      setFetchedMovieDb(response.data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   useEffect(()=>{  
     if(quizAnswers.answer.length > 0 && !stopFunc){
-      requestMovieDB()
+      //დაიმპორტებული ფუქნცია
+      requestMovieDB(setFetchedMovieDb, quizAnswers.answer)
     }
       
   },[quizAnswers.answer, stopFunc])

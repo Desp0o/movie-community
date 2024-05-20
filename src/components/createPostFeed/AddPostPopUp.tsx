@@ -42,7 +42,7 @@ const AddPostPopUp = () => {
     title: "",
     text: "",
     user_id: user.userID,
-    type: null,
+    type: 1,
   });
 
   // close modal
@@ -150,6 +150,7 @@ const AddPostPopUp = () => {
         type: 0,
       });
     } catch (error: unknown) {
+      console.error(error)
       notifyError();
     } finally {
       dispatch(setSpinnerState(false))
