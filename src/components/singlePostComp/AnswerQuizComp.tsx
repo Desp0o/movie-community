@@ -1,8 +1,29 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import InputComponent from "../inputComponent/InputComponent";
+import axios from "axios";
 
-const AnswerQuizComp = () => {
+interface AnswerQuizCompProps{
+  id: number;
+}
+
+const AnswerQuizComp:React.FC<AnswerQuizCompProps> = ({id}) => {
   const [answerValue, setAnswerValue] = useState("");
+
+  const sendAnswer = async () => {
+    const token = localStorage.getItem('token')
+
+    try {
+      const response =  await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, {answer: answerValue}, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response);
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className="quiz_answer_input_container">
@@ -17,7 +38,7 @@ const AnswerQuizComp = () => {
         onChange={(e) => setAnswerValue(e.target.value)}
       />
 
-      <div className="post_quiz_answer_text">
+      <div className="post_quiz_answer_text" onClick={sendAnswer}>
         <p>Post</p>
       </div>
     </div>

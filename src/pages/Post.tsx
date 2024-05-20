@@ -18,6 +18,7 @@ import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 import Spinner from "../components/spinner/Spinner";
 import Poll from "../components/singlePostComp/Poll";
 import { useRefetchHook } from "../hooks/useRefetchHook";
+import AnswerQuizComp from "../components/singlePostComp/AnswerQuizComp";
 
 
 const Post = () => {
@@ -142,6 +143,8 @@ const Post = () => {
             </div>
 
             {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data} refetch={refetch}/> }
+            {data?.post?.type === 4 && <AnswerQuizComp id={data?.question?.id} /> }
+
 
             <LikeDislikeComment
               likes={data?.post?.like}

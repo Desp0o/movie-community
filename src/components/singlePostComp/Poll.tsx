@@ -30,8 +30,8 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
 
     useEffect(()=>{
         console.log(isVoted);
-        
-    },[isVoted])
+        pollAnswers
+    },[isVoted, pollAnswers])
 
 
   useEffect(() => {
@@ -82,11 +82,9 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
     <>
     
     {pollAnswers?.map((poll: PollProps, index: number) => {
-    
-
     return (
       <div
-        key={poll.id}
+        key={index}
         onClick={() => (sendPollAnswer(poll.id), setActivePollItem(index))}
         className="poll_item" 
       >

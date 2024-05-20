@@ -11,6 +11,8 @@ import { quizImgAddIcon } from "../../assets/svg/quizImgAddIcon";
 import ReactPlayer from "react-player";
 import { xIcon } from "../../assets/svg/Xicon";
 import limitedIMG from "../../assets/limited.webp"
+import { setRefetch } from "../../Redux/RefetchSlicer";
+import { useRefetchHook } from "../../hooks/useRefetchHook";
 
 interface fetchedDataBaseProps {
     id: number;
@@ -20,6 +22,7 @@ interface fetchedDataBaseProps {
 
 
 const AddQuiz = () => {
+  const { requestRefetch } = useRefetchHook();
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const areaContainerRef = useRef<HTMLDivElement>(null)
   const { addPostModalStates } = usePostAddModalHook();
@@ -184,7 +187,7 @@ const AddQuiz = () => {
           "multipart/form-data, application/json, text/plain, */*",
         }
       })
-
+      dispatch(setRefetch(!requestRefetch));
       console.log(response.data);
       closeDefaultPostAddModal()
     } catch (error) {
