@@ -30,6 +30,8 @@ const AddQuiz = () => {
   const [uploadedVideo, setUploadedVideo] = useState("");
   const [movie, setMovie] = useState('')
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
+  const [newMovie, setNewMovie] = useState('')
+  const [stopFunc, setStopFunc] = useState(false)
   const [quizAnswers, setQuizAnswers] = useState<{
     file: File | undefined;
     question: string;
@@ -144,14 +146,25 @@ const AddQuiz = () => {
   }
 
   useEffect(()=>{  
-    if(movie.length > 0){
+    if(movie.length > 0 && !stopFunc){
       requestMovieDB()
     }
+      
+  },[movie, stopFunc])
+
+
+  useEffect(()=>{  
+    if(movie !== newMovie){
+      setStopFunc(false)
+    }
+      
   },[movie])
 
   const chooseMovieName = (movieName: string) => {
     setMovie(movieName)
     setFetchedMovieDb([])
+    setStopFunc(true)
+    setNewMovie(movieName)
   }
 
   useEffect(()=>{
