@@ -82,12 +82,6 @@ body {
   color: var(--dark-mode-txt);
 }
 
-@media (max-width:600px) {
-  .responsive_hidden{
-    display: none;
-  }
-}
-
 .button{
   cursor: pointer;
 }
@@ -104,4 +98,10 @@ body {
   width: 100%;
   height: 100vh;
   background-color: #0b141677;
+}
+
+@media (max-width:600px) {
+  .responsive_hidden{
+    display: none;
+  }
 }
