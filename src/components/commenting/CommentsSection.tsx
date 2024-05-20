@@ -21,16 +21,9 @@ interface ComProps {
 }
 
 // callback
-const CommentsSection: React.FC<ComProps> = ({ fetchedComments,  }) => {
+const CommentsSection: React.FC<ComProps> = ({ fetchedComments  }) => {
   // const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
   const {user} = useUserHook()
-
-  // const [editTextArea, setEditTextArea] = useState(false);
-  // const [commentValue, setCommentValue] = useState<{
-  //   text: string;
-  // }>({
-  //   text: "",
-  // });
 
   
 

@@ -85,7 +85,7 @@ const AddQuiz = () => {
   const clearMedia = () => {
     setUploadedImage("");
     setUploadedVideo("");
-    setQuizAnswers({ ...quizAnswers, img: undefined });
+    setQuizAnswers({ ...quizAnswers, img: undefined, answer: '', question: '' });
     if (quizFileInputRef.current) {
       quizFileInputRef.current.value = ""; // Reset the file input value
     }

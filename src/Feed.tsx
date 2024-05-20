@@ -21,7 +21,9 @@ interface dataProps {
   updated_at: string;
   created_at: string;
   status: number | string;
-  comments: number;
+  comments:{
+    length: number;
+  };
   user: {
     id: number;
     name: string;
@@ -68,30 +70,30 @@ if(data){
 
   return (
     <div style={{marginTop:"-20px"}}>
-      {user.name && user.userID && <CreatePostFeed />}
+      {user.name && user.userID ? <CreatePostFeed /> : <></>}
       {isLoading && <Spinner />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
-            {page?.data?.posts.data?.map((post: dataProps) => (
+            {page?.data?.posts?.data?.map((post: dataProps) => (
               
                 <SinglePostComp
-                  key={post.id}
-                  authorName={post.user.name}
-                  authorAvatar={post.user.avatar ? post.user.avatar : noAvatar}
-                  postTitle={post.text}
-                  postID={post.id}
-                  image={post.img}
-                  likes={post.like}
-                  dislikes={post.dislike}
-                  type={post.type}
-                  authLike={post.authLike}
-                  date={post.created_at}
-                  postUserId={post.user.id}
-                  postStatus={post.status}
-                  commentLength={post.comments} 
-                  authGul={post.authGul} 
-                  guls={post.guls}   
+                  key={post?.id}
+                  authorName={post?.user.name}
+                  authorAvatar={post?.user.avatar ? post?.user.avatar : noAvatar}
+                  postTitle={post?.text}
+                  postID={post?.id}
+                  image={post?.img}
+                  likes={post?.like}
+                  dislikes={post?.dislike}
+                  type={post?.type}
+                  authLike={post?.authLike}
+                  date={post?.created_at}
+                  postUserId={post?.user.id}
+                  postStatus={post?.status}
+                  commentLength={post?.comments.length} 
+                  authGul={post?.authGul} 
+                  guls={post?.guls}   
                                
                 />
               

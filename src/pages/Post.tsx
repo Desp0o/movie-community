@@ -82,6 +82,7 @@ const Post = () => {
 
   console.log(data);
   
+  console.log(commData);
   
   if(isLoading){
     return <Spinner />

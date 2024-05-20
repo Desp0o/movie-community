@@ -425,10 +425,16 @@ border: 1px solid var(--light-grey);
   position: absolute;
   left: 25px;
   z-index: 111;
-  top: 326px;
+  top: 356px;
   background-color: var(--white);
 
   overflow-y: auto;
+}
+
+.answering{
+  left: 18px;
+  top: 170px;
+  width: 538px;
 }
 
 .dropdown_item{
