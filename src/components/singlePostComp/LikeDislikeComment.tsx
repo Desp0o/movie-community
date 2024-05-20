@@ -30,7 +30,8 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   pathToSinglePost,
 }) => {
   const dispatch = useDispatch();
-  const { Guling, UnGuling, ungGulingError, gulingError } = GulingFuction();
+  const { Guling } = GulingFuction();
+  // const { Guling, ungGulingError, gulingError } = GulingFuction();
   const { user } = useUserHook();
   const [votes, seteVotes] = useState(Number(gul));
   const [isHeart, setHeart] = useState(authGul === 0 ? false : true);
@@ -75,11 +76,11 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       return;
     }
 
-    if(ungGulingError || gulingError){
-      window.location.reload();
+    // if(ungGulingError || gulingError){
+    //   // window.location.reload();
       
-      return
-    }
+    //   return
+    // }
 
     if (!isHeart) {
       seteVotes((prevVotes) => prevVotes + 1);
@@ -92,7 +93,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       seteVotes((prevVotes) => prevVotes - 1);
       setHeart(false);
       setGulIcon(heartIcon);
-      UnGuling(postID);
+      Guling(postID);
     }
 
   };
