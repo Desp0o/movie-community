@@ -158,6 +158,11 @@ const AddQuiz = () => {
       setStopFunc(false)
     }
       
+    if(movie.length < 1){
+      setMovie('')
+      setNewMovie('')
+      setStopFunc(true)
+    }
   },[movie])
 
   const chooseMovieName = (movieName: string) => {
