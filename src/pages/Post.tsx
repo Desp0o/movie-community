@@ -155,7 +155,8 @@ const Post = () => {
               gul={data?.post?.guls}              
               />
 
-            <AddComment postID={id} callBack={refetch}/>
+            {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }
+            
 
             {Number(data?.post?.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
             
