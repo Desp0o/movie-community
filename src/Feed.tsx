@@ -9,7 +9,7 @@ import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 import Spinner from "./components/spinner/Spinner";
 
 interface dataProps {
-  gul: number;
+  guls: number;
   authGul: number;
   id: number;
   text: string;
@@ -21,7 +21,7 @@ interface dataProps {
   updated_at: string;
   created_at: string;
   status: number | string;
-  comment: number;
+  comments: number;
   user: {
     id: number;
     name: string;
@@ -59,6 +59,7 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
+console.log(data);
 
 
 // if(data){
@@ -89,9 +90,9 @@ const Feed = () => {
                   date={post.created_at}
                   postUserId={post.user.id}
                   postStatus={post.status}
-                  commentLength={post.comment} 
+                  commentLength={post.comments} 
                   authGul={post.authGul} 
-                  gul={post.gul}   
+                  guls={post.guls}   
                                
                 />
               

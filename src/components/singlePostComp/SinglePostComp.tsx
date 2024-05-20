@@ -30,7 +30,7 @@ interface SinglePostProps {
   postStatus:string | number;
   commentLength: number;
   authGul?: number;
-  gul?: number;
+  guls?: number;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
@@ -48,7 +48,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   postStatus,
   commentLength,
   authGul,
-  gul
+  guls
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -90,7 +90,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
 
         {type === 4 && <AnswerQuizComp />}  
-          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={gul ? gul : 0} pathToSinglePost={postID} />
+          <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={guls ? guls : 0} pathToSinglePost={postID} />
           
 
         </div>
