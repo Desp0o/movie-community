@@ -111,7 +111,8 @@ add post
   max-height: 600px;
   border-radius: 8px;
   background-color: var(--white);
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .create_title {
