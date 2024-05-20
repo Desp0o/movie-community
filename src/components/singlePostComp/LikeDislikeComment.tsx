@@ -20,6 +20,7 @@ interface LikeDislikeCommentProps {
   authGul: number;
   gul: number;
   pathToSinglePost?: number;
+  type?:number | string;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
@@ -28,6 +29,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   authGul,
   gul,
   pathToSinglePost,
+  type
 }) => {
   const dispatch = useDispatch();
   const { Guling } = GulingFuction();
@@ -109,9 +111,11 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
         />
 
         {/* comment */}
-        <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ""}>
+        {
+          type !== 4 && <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ""}>
           <IconContainer icon={commentsIcon} number={commentLength} />
         </Link>
+        }
 
         {/* share */}
         <IconContainer icon={shareIcon} number={0} />

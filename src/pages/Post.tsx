@@ -152,7 +152,8 @@ const Post = () => {
               postID={data?.post?.id}
               authLike={data?.post?.authLike}
               commentLength={data?.post?.comments} authGul={data?.post?.authGul} 
-              gul={data?.post?.guls}              
+              gul={data?.post?.guls}  
+              type={data?.post?.type}            
               />
 
             {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }
