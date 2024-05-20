@@ -30,13 +30,14 @@ const AddQuiz = () => {
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
   const [newMovie, setNewMovie] = useState('') //ფილმების ბაზის ფეჩინგის შესამომწებლად
   const [stopFunc, setStopFunc] = useState(false)
-  const [selectedValue, setSelectedValue] = useState('12')
   const [quizAnswers, setQuizAnswers] = useState<{
-    file: File | undefined;
+    img: File | undefined;
     question: string;
     answer: string;
+    type: string;
   }>({
-    file: undefined,
+    img: undefined,
+    type: "12",
     question: "",
     answer: "",
   });
@@ -62,7 +63,7 @@ const AddQuiz = () => {
 
   const handleQuizFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0];
-    setQuizAnswers({ ...quizAnswers, file: file });
+    setQuizAnswers({ ...quizAnswers, img: file });
     if (file) {
       if (file.type.includes("image")) {
         setUploadedImage(URL.createObjectURL(file));
@@ -79,7 +80,7 @@ const AddQuiz = () => {
   const clearMedia = () => {
     setUploadedImage("");
     setUploadedVideo("");
-    setQuizAnswers({ ...quizAnswers, file: undefined });
+    setQuizAnswers({ ...quizAnswers, img: undefined });
     if (quizFileInputRef.current) {
       quizFileInputRef.current.value = ""; // Reset the file input value
     }
@@ -164,19 +165,19 @@ const AddQuiz = () => {
 
   //კითხვის ფორმის დროპდაუნის ჰენდლერი
   const handleSelectedDropwdonValue = (event:any) => {
-    setSelectedValue(event.target.value);
+    setQuizAnswers({...quizAnswers, type: event.target.value});
   }
 
   //კითხვის ფორმის დროპდაუის არჩევის შედეგად იცვლება ინფო
   useEffect(()=>{
-    console.log(selectedValue);
-  },[selectedValue])
+    console.log(quizAnswers);
+  },[quizAnswers])
 
   const sendQuizQuestion = async () => {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await axios.post('', quizAnswers,{
+      const response = await axios.post('https://api.pinky.ge/api/questionAdding', quizAnswers,{
         headers:{
           Authorization: `Bearer ${token}`
         }
@@ -277,7 +278,7 @@ const AddQuiz = () => {
             </div>
 
             <div className="select_dropdown">
-              <select className="" onChange={handleSelectedDropwdonValue} value={selectedValue}>
+              <select className="" onChange={handleSelectedDropwdonValue} value={quizAnswers.type}>
                 <option value='12'>აირჩიე კითხვია</option>
                 <option value='1'>გამოიცანი ფილმი</option>
                 <option value='2'>გამოიცანი სტარი</option>
