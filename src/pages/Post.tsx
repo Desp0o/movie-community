@@ -139,7 +139,7 @@ const Post = () => {
 
             </div>
 
-            {data?.post?.type === 2 && <Poll pollAnswers={pollAnswers} data={data} refetch={refetch}/> }
+            {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data} refetch={refetch}/> }
 
             <LikeDislikeComment
               likes={data?.post?.like}

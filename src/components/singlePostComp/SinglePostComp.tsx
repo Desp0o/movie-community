@@ -83,7 +83,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage image={image} /></Link> : <></>)
             : type === 0 ?
             (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
-            : type === 2 ? <PostPollQuest /> :<></>
+            : type === 3 ? <PostPollQuest /> :<></>
           }
           
             </div>
