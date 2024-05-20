@@ -160,7 +160,7 @@ const Post = () => {
             {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }
             
 
-            {Number(data?.post?.comment) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
+            {Number(data?.post?.comments) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
             
           </div>
         </>
