@@ -18,16 +18,20 @@ const PostBottomButtons = () => {
       dispatch(setAddPostModal({defaultPost: true, openImageUpload:true, quizPost: false, pollPost: false, showPostButtons: true}))
     }
 
+    document.body.style.overflow='hidden'
+
   }
 
   const openPollPost = () => {
+    document.body.style.overflow='hidden'
+
     dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false, openImageUpload:false, showPostButtons: true}))
   }
 
 
   const openQuizPost = () => {
-    console.log('jaja');
-    
+    document.body.style.overflow='hidden'
+
     
     dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false, showPostButtons: true}))
     console.log(addPostModalStates);

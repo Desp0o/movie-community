@@ -58,6 +58,8 @@ const AddPostPopUp = () => {
     );
     setUploadedImage('')
     setUploadedVideo('')
+    document.body.style.overflow='auto'
+
   };
 
   useEffect(() => {

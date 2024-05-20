@@ -35,7 +35,9 @@ const AddPoll = () => {
         openImageUpload: false,
         showPostButtons: true,
       })
+
     );
+    document.body.style.overflow='auto'
 
     setDivLength(true)
     setPollOptions(["" ,""])

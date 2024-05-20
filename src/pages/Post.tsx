@@ -79,6 +79,8 @@ const Post = () => {
     console.error(error)
   }
 
+  console.log(data);
+  
   
   if(isLoading){
     return <Spinner />
@@ -146,8 +148,8 @@ const Post = () => {
               dislikes={data?.post?.dislike}
               postID={data?.post?.id}
               authLike={data?.post?.authLike}
-              commentLength={data?.post?.comment} authGul={data?.post?.authGul} 
-              gul={data?.post?.gul}              
+              commentLength={data?.post?.comments} authGul={data?.post?.authGul} 
+              gul={data?.post?.guls}              
               />
 
             <AddComment postID={id} callBack={refetch}/>
