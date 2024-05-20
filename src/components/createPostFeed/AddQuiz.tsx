@@ -179,12 +179,14 @@ const AddQuiz = () => {
     try {
       const response = await axios.post('https://api.pinky.ge/api/questionAdding', quizAnswers,{
         headers:{
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type":
+          "multipart/form-data, application/json, text/plain, */*",
         }
       })
 
       console.log(response.data);
-      
+      closeDefaultPostAddModal()
     } catch (error) {
       console.error(error)
     }

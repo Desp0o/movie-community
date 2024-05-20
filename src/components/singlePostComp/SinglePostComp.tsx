@@ -79,16 +79,16 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
          
          {/* picture or image */}
-          {type === 1
-            ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage image={image} /></Link> : <></>)
+          {type !== 0
+            ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage type={type} image={image} /></Link> : <></>)
             : type === 0 ?
             (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
-            : type === 3 ? <PostPollQuest /> :<></>
+            : <></>
           }
           
             </div>
 
-
+            {type === 3 && <PostPollQuest />}  
         {type === 4 && <AnswerQuizComp />}  
           <LikeDislikeComment likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={guls ? guls : 0} pathToSinglePost={postID} />
           

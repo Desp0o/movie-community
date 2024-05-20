@@ -130,8 +130,8 @@ const Post = () => {
               ) : (
                 <></>
               )}
-              {data?.post?.img && data?.post?.type === 1 && (
-                <PostImage image={data?.post?.img} funName={openFullScreen} />
+              {data?.post?.img && data?.post?.type !== 0 && (
+                <PostImage image={data?.post?.img} funName={openFullScreen} type={data?.post?.type} />
               ) }
 
               {data?.post?.img && data?.post?.type === 0 && (
