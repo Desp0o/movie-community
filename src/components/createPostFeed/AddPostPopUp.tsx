@@ -62,12 +62,12 @@ const AddPostPopUp = () => {
 
   useEffect(() => {
     if (postValue.img?.type.includes("video")) {
-      setPostValue({ ...postValue, type: 1 });
+      setPostValue({ ...postValue, type: 0 });
       setUploadedImage("");
     }
 
     if (postValue.img?.type.includes("image")) {
-      setPostValue({ ...postValue, type: 0 });
+      setPostValue({ ...postValue, type: 1 });
       setUploadedVideo("");
     }
     //eslint-disable-next-line

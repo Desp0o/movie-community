@@ -202,14 +202,14 @@
 
 .video_container {
   margin: 0 auto;
-  width: 100%;
+  width: fit-content;
 }
 
 .video_container video {
   border-radius: 12px;
-  width: 100%;
-
-  height: 425px;
+  width: 603px;
+  max-height: 425px;
+  margin: 0 auto;
 }
 
 .delete_btn {
@@ -310,6 +310,10 @@
   font-weight: 500;
   line-height: 24px; /* 150% */
   cursor: pointer;
+}
+
+.post_media_conatiner{
+width: 100%;
 }
 
 @media (max-width: 430px) {
