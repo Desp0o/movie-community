@@ -128,11 +128,11 @@ const Post = () => {
               ) : (
                 <></>
               )}
-              {data?.post?.img && data?.post?.type === 0 && (
+              {data?.post?.img && data?.post?.type === 1 && (
                 <PostImage image={data?.post?.img} funName={openFullScreen} />
               ) }
 
-              {data?.post?.img && data?.post?.type === 1 && (
+              {data?.post?.img && data?.post?.type === 0 && (
                 <PostVideo image={data?.post?.img} />
               ) }
 

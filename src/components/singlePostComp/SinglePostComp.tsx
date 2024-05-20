@@ -79,9 +79,9 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
          
          {/* picture or image */}
-          {type === 0
+          {type === 1
             ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage image={image} /></Link> : <></>)
-            : type === 1 ?
+            : type === 0 ?
             (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
             : type === 2 ? <PostPollQuest /> :<></>
           }
