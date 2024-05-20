@@ -110,7 +110,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 
         {/* comment */}
         <Link to={pathToSinglePost ? `pages/Post/${pathToSinglePost}` : ""}>
-          <IconContainer icon={commentsIcon} number={commentLength} />
+          <IconContainer icon={commentsIcon} number={commentLength ? commentLength : 0} />
         </Link>
 
         {/* share */}
