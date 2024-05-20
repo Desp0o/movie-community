@@ -199,6 +199,7 @@ const AddPostPopUp = () => {
     addPostModalStates.defaultPost && (
       <div style={{ width: "100%" }}>
         <BackDrop funcName={closeDefaultPostAddModal} />
+        <div className="AddPostPopUp_parent">
         <div className="AddPostPopUp">
           <CreateTitle
             title={"Create Post"}
@@ -223,6 +224,7 @@ const AddPostPopUp = () => {
           <div className="add_post_popup_btn">
             <LoginModalBtn title={"Post"} btnWidth="480px" funName={sendPost} />
           </div>
+        </div>
         </div>
       </div>
     )

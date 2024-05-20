@@ -110,6 +110,7 @@ const AddPoll = () => {
     addPostModalStates.pollPost && (
       <div style={{ width: "100%" }}>
         <BackDrop funcName={closeDefaultPostAddModal} />
+        <div className="AddPostPopUp_parent">
         <div className="AddPostPopUp">
           <CreateTitle title={"Create poll"} funcName={closeDefaultPostAddModal} />
 
@@ -162,6 +163,7 @@ const AddPoll = () => {
           <div className="quiz_btn_block">
             <LoginModalBtn title={"Post"} funName={sendPoll} btnWidth="100%" />
           </div>
+        </div>
         </div>
       </div>
     )

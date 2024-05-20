@@ -12,6 +12,7 @@ import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
 import noAvatar from "../../assets/noAvatar.jpeg"
+import { Link } from "react-router-dom";
 
 
 interface RootState {
@@ -74,7 +75,7 @@ const Navbar = () => {
       <nav className={isDark ? "navbar dark" : "navbar"}>
         <div className="logo_burger_menu">
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
-          <p>LOGO</p>
+          <Link to='/'><p>LOGO</p></Link>
         </div>
         <div className="nav_search">
           <div className="nav_search_icon">{searchIcon}</div>
