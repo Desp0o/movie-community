@@ -20,7 +20,6 @@ interface fetchedDataBaseProps {
 
 
 const AddQuiz = () => {
-  const token = localStorage.getItem("token");
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const areaContainerRef = useRef<HTMLDivElement>(null)
   const { addPostModalStates } = usePostAddModalHook();
@@ -28,18 +27,18 @@ const AddQuiz = () => {
   const quizFileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedImage, setUploadedImage] = useState("");
   const [uploadedVideo, setUploadedVideo] = useState("");
-  const [movie, setMovie] = useState('')
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
-  const [newMovie, setNewMovie] = useState('')
+  const [newMovie, setNewMovie] = useState('') //ფილმების ბაზის ფეჩინგის შესამომწებლად
   const [stopFunc, setStopFunc] = useState(false)
+  const [selectedValue, setSelectedValue] = useState('12')
   const [quizAnswers, setQuizAnswers] = useState<{
     file: File | undefined;
     question: string;
-    movie: string;
+    answer: string;
   }>({
     file: undefined,
     question: "",
-    movie: "",
+    answer: "",
   });
 
 
@@ -55,22 +54,6 @@ const AddQuiz = () => {
     );
 
   document.body.style.overflow='auto'
-  };
-
-  const sendQuiz = async () => {
-    try {
-      const response = await axios.post("", quizAnswers, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type":
-            "multipart/form-data, application/json, text/plain, */*",
-        },
-      });
-      console.log(response?.data);
-    } catch (error) {
-      console.error(error);
-      console.log(quizAnswers);
-    }
   };
 
   const openFileUploadWindow = () => {
@@ -133,7 +116,7 @@ const AddQuiz = () => {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await axios.post('https://api.pinky.ge/api/movieDB', {movie:movie}, {
+      const response = await axios.post('https://api.pinky.ge/api/movieDB', {movie:quizAnswers.answer}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -146,42 +129,65 @@ const AddQuiz = () => {
   }
 
   useEffect(()=>{  
-    if(movie.length > 0 && !stopFunc){
+    if(quizAnswers.answer.length > 0 && !stopFunc){
       requestMovieDB()
     }
       
-  },[movie, stopFunc])
+  },[quizAnswers.answer, stopFunc])
 
 
   useEffect(()=>{  
-    if(movie !== newMovie){
+    if(quizAnswers.answer !== newMovie){
       setStopFunc(false)
     }
       
-    if(movie.length < 1){
-      setMovie('')
+    if(quizAnswers.answer.length < 1){
+      setQuizAnswers({...quizAnswers, answer: ''})
       setNewMovie('')
       setStopFunc(true)
     }
-  },[movie])
+  },[quizAnswers.answer])
 
+  //ფილმების ბაზიდან ფილმების არჩევა და მოქმედებები
   const chooseMovieName = (movieName: string) => {
-    setMovie(movieName)
+    setQuizAnswers({...quizAnswers, answer: movieName})
     setFetchedMovieDb([])
     setStopFunc(true)
     setNewMovie(movieName)
   }
 
   useEffect(()=>{
-    console.log(fetchedMovieDb);
-    
-  },[fetchedMovieDb])
-
-  useEffect(()=>{
-    if(movie.length === 0){
+    if(quizAnswers.answer.length === 0){
       setFetchedMovieDb([])
     }
-  },[movie])
+  },[quizAnswers.answer])
+
+  //კითხვის ფორმის დროპდაუნის ჰენდლერი
+  const handleSelectedDropwdonValue = (event:any) => {
+    setSelectedValue(event.target.value);
+  }
+
+  //კითხვის ფორმის დროპდაუის არჩევის შედეგად იცვლება ინფო
+  useEffect(()=>{
+    console.log(selectedValue);
+  },[selectedValue])
+
+  const sendQuizQuestion = async () => {
+    const token = localStorage.getItem('token')
+
+    try {
+      const response = await axios.post('', quizAnswers,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     addPostModalStates.quizPost && (
@@ -270,6 +276,15 @@ const AddQuiz = () => {
               </div>
             </div>
 
+            <div className="select_dropdown">
+              <select className="" onChange={handleSelectedDropwdonValue} value={selectedValue}>
+                <option value='12'>აირჩიე კითხვია</option>
+                <option value='1'>გამოიცანი ფილმი</option>
+                <option value='2'>გამოიცანი სტარი</option>
+                <option value='0'>საკუთარი კითხვა</option>
+              </select>
+            </div>
+
             <div className="quiz_answ_block">
               <p className="Correct_answer">Correct answer</p>
               <p className="answer_desc">
@@ -280,12 +295,12 @@ const AddQuiz = () => {
                 <InputComponent
                   type={"text"}
                   placeholder={"Eglish"}
-                  nameProp="EnglishAnswer"
-                  value={movie}
+                  nameProp="quesionAnswer"
+                  value={quizAnswers.answer}
                   isError={false}
                   widthProp="480px"
                   onChange={(e) =>
-                    setMovie(e.target.value)
+                    setQuizAnswers({...quizAnswers, answer: e.target.value})
                   }
                 />
 
@@ -294,7 +309,7 @@ const AddQuiz = () => {
             </div>
 
             <div className="quiz_btn_block">
-              <LoginModalBtn title={"Post"} funName={sendQuiz} btnWidth="100%" />
+              <LoginModalBtn title={"Post"} funName={sendQuizQuestion} btnWidth="100%" />
             </div>
 
             <input
