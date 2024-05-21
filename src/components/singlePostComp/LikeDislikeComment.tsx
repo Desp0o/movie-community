@@ -40,6 +40,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   const { user } = useUserHook();
   const [votes, seteVotes] = useState(Number(gul));
   const [isHeart, setHeart] = useState(authGul === 0 ? false : true);
+  const [saveIconState, setSaveIconState] = useState(mySave === 0 ? false : true)
   const [gulIcon, setGulIcon] = useState(
     authGul === 0 ? heartIcon : activeHeartIcon
   );
@@ -48,7 +49,14 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 
   const handleSavePost = () => {
     mutate(postID);
-};
+
+    if(!saveIconState){
+
+      setSaveIconState(true)
+    }else{
+      setSaveIconState(false)
+    }
+  };
 
   useEffect(() => {
     seteVotes(Number(gul));
@@ -133,7 +141,7 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       {/* save */}
       <div className="like_container">
         <span className="icon_container_likeComp" onClick={handleSavePost}>
-          {mySave === 0 ? saveIcon : filledSaveIcon}
+          {!saveIconState ? saveIcon : filledSaveIcon}
         </span>
 
       </div>
