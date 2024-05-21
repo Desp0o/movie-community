@@ -62,11 +62,12 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
           name: response?.data?.user?.name,
           avatar: response?.data?.user?.avatar,
           userID: response?.data?.user?.id,
+          bells: response?.data?.user?.bells
         })
       );
 
       setError(false); //error panel hide
-      console.log(response);
+      console.log(response.data);
       
       //eslint-disable-next-line
     } catch (error: any) {

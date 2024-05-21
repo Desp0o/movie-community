@@ -5,8 +5,9 @@ interface RootState {
     user: {
         score: string | number;
         name: string;
-        avatar: string
-        userID: string
+        avatar: string;
+        userID: string;
+        bells: number;
     }
   };
 }

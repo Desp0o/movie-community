@@ -33,6 +33,10 @@ const Navbar = () => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
 
+  useEffect(()=>{
+    console.log(user);
+    
+  },[])
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -95,7 +99,7 @@ const Navbar = () => {
           )}
           {user.name ? (
             <div className="nav_profile_items">
-                <p style={{color:"blue", fontWeight:"900"}}>{user?.score}</p>
+                <p style={{color:"blue", fontWeight:"900"}}>{user?.bells}</p>
 
               <div
                 className={

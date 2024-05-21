@@ -70,14 +70,15 @@ function App() {
           localStorage.setItem('userName', response.data.name)
           localStorage.setItem('userID', response.data.id)
           localStorage.setItem('avatar', response.data.avatar)
-
-
+          
+          
           dispatch(
             setUser({
               name: response.data.name, 
               userID: response.data.id, 
               avatar: response.data.avatar,
-              score: response.data.point
+              score: response.data.point,
+              bells: response.data.bells
             })
           )
           
