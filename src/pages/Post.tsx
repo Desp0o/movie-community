@@ -143,7 +143,7 @@ const Post = () => {
 
             </div>
 
-            {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data} refetch={refetch}/> }
+            {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data?.post?.myPoll} refetch={refetch}/> }
             {data?.post?.type === 4 && <AnswerQuizComp id={data?.question?.id} /> }
 
 
@@ -152,7 +152,8 @@ const Post = () => {
               dislikes={data?.post?.dislike}
               postID={data?.post?.id}
               authLike={data?.post?.authLike}
-              commentLength={data?.post?.comments} authGul={data?.post?.authGul} 
+              commentLength={data?.post?.comments} 
+              authGul={data?.post?.myGul} 
               gul={data?.post?.guls}  
               type={data?.post?.type}            
               />

@@ -12,7 +12,6 @@ import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
-import "./editPost.css"
 import PostStyle from "./addPostComps/PostStyle";
 import { addMediaIocn } from "../../assets/svg/addMediaIcon";
 
@@ -50,8 +49,6 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
     type: null,
   });
 
-  
-
   useEffect(()=>{
     const getPost = async () => {
       const token = localStorage.getItem('token')
@@ -70,8 +67,6 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
             text: response.data.post.text ? response.data.post.text : '',
           }
         )
-        response.data.post.type === 0 && response.data.post.img && setUploadedImage(`${import.meta.env.VITE_IMAGE_PATH}${response.data.post.img}.webp`)
-        response.data.post.type === 1 && setUploadedVideo(`${import.meta.env.VITE_VIDEO_PATH}${response.data.post.img}`)
       } catch (error) {
         console.error(error)
       }finally{
@@ -134,7 +129,7 @@ console.log(postValue);
       }
       dispatch(
         setAddPostModal({
-          defaultPost: true,
+          defaultPost: false,
           pollPost: false,
           showPostButtons: false,
         })
@@ -192,29 +187,31 @@ console.log(postValue);
   return (
       <div style={{ width: "100%" }} className="edit_post">
         <BackDrop funcName={closeEditPostModal} />
-        <div className="AddPostPopUp">
-          <CreateTitle
-            title={"Edit Post"}
-            funcName={closeEditPostModal}
-          />
-          <div className="post_body">
-            <PostAuthor />
-            <PostTextarea
-              postValieProp={postValue.text}
-              handleChangeProp={handleChange}
-              uploadedImageProp={uploadedImage ? uploadedImage : ''}
-              fileInputRefProp={fileInputRef}
-              handleFileChangeProp={handleFileChange}
-              uploadedVideoProp={uploadedVideo}
-              clearMediaProp={clearMedia} 
-              textareaRefProp={textareaRef}            
-              />
+        <div className="AddPostPopUp_parent">
+          <div className="AddPostPopUp">
+            <CreateTitle
+              title={"Edit Post"}
+              funcName={closeEditPostModal}
+            />
+            <div className="post_body">
+              <PostAuthor />
+              <PostTextarea
+                postValieProp={postValue.text}
+                handleChangeProp={handleChange}
+                uploadedImageProp={uploadedImage ? uploadedImage : ''}
+                fileInputRefProp={fileInputRef}
+                handleFileChangeProp={handleFileChange}
+                uploadedVideoProp={uploadedVideo}
+                clearMediaProp={clearMedia} 
+                textareaRefProp={textareaRef}            
+                />
 
-          </div>
-          <PostStyle styleName={"Photo/video"} styleIocn={addMediaIocn} funcName={click}/>
+            </div>
+            <PostStyle styleName={"Photo/video"} styleIocn={addMediaIocn} funcName={click}/>
 
-          <div className="add_post_popup_btn">
-            <LoginModalBtn title={"Update"} btnWidth="480px" funName={editPost} />
+            <div className="add_post_popup_btn">
+              <LoginModalBtn title={"Update"} btnWidth="480px" funName={editPost} />
+            </div>
           </div>
         </div>
       </div>

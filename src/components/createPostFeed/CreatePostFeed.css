@@ -94,8 +94,6 @@ add post
 */
 
 .AddPostPopUp_parent{
-  position: relative;
-  z-index: 111;
   width: 528px;
   max-height: 600px;
 

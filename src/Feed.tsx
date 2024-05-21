@@ -10,7 +10,7 @@ import Spinner from "./components/spinner/Spinner";
 
 interface dataProps {
   guls: number;
-  authGul: number;
+  myGul: number;
   id: number;
   text: string;
   img: string;
@@ -20,6 +20,7 @@ interface dataProps {
   authLike: string;
   updated_at: string;
   created_at: string;
+  myPoll:  number;
   status: number | string;
   comments:{
     length: number;
@@ -29,6 +30,8 @@ interface dataProps {
     name: string;
     avatar: string;
   };
+  pollAnswers:[]
+  polls:[]
 }
 
 const Feed = () => {
@@ -78,6 +81,7 @@ if(data){
             {page?.data?.posts?.data?.map((post: dataProps) => (
               
                 <SinglePostComp
+                  refetch={refetch}
                   key={post?.id}
                   authorName={post?.user.name}
                   authorAvatar={post?.user.avatar ? post?.user.avatar : noAvatar}
@@ -92,9 +96,10 @@ if(data){
                   postUserId={post?.user.id}
                   postStatus={post?.status}
                   commentLength={post?.comments.length} 
-                  authGul={post?.authGul} 
+                  authGul={post?.myGul} 
                   guls={post?.guls}   
-                               
+                  pollAnswers={post.polls}
+                  myPoll={post?.myPoll}
                 />
               
             ))}

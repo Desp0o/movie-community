@@ -11,10 +11,12 @@ import { useUserHook } from "../../hooks/useUserHook";
 import 'react-toastify/dist/ReactToastify.css';
 import EditPannel from "./EditPannel";
 import { Link } from "react-router-dom";
-import PostPollQuest from "./PostPollQuest";
+import Poll from "./Poll";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 
 
 interface SinglePostProps {
+  myPoll: number;
   authorName: string;
   authorAvatar: string;
   postTitle: string;
@@ -30,10 +32,16 @@ interface SinglePostProps {
   commentLength: number;
   authGul?: number;
   guls?: number;
+  data?: number;
+  pollAnswers:[]
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<any, unknown>>;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
   authorName,
+  myPoll,
   authorAvatar,
   postTitle,
   image,
@@ -47,7 +55,9 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   postStatus,
   commentLength,
   authGul,
-  guls
+  guls,
+  refetch,
+  pollAnswers
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -61,6 +71,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
       setUserLoged(false)
     }
   },[user, isUserLogged, postUserId])
+  
 
   return (
     <>
@@ -85,9 +96,10 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             : <></>
           }
           
+          {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
             </div>
 
-            {type === 3 && <PostPollQuest />}  
+
           <LikeDislikeComment type={type} likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={guls ? guls : 0} pathToSinglePost={postID} />
           
 
