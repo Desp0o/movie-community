@@ -13,6 +13,7 @@ import EditPannel from "./EditPannel";
 import { Link } from "react-router-dom";
 import Poll from "./Poll";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import AnswerQuizComp from "./AnswerQuizComp";
 
 
 interface SinglePostProps {
@@ -86,7 +87,9 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             </div>
             
             {/* title */}
-          <Link to={`/pages/Post/${postID}`} className="post_title"><PostTitle title={postTitle} postStatus={postStatus} /></Link>
+          <Link to={`/pages/Post/${postID}`} className="post_title">
+            <PostTitle title={postTitle} postStatus={postStatus} />
+          </Link>
          
          {/* picture or image */}
           {type !== 0
@@ -97,10 +100,21 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           }
           
           {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
-            </div>
+          {type === 4 && <AnswerQuizComp id={postID} />  }
+          </div>
 
 
-          <LikeDislikeComment type={type} likes={likes} dislikes={dislikes} postID={postID} authLike={authLike} commentLength={commentLength} authGul={authGul ? authGul : 0} gul={guls ? guls : 0} pathToSinglePost={postID} />
+          <LikeDislikeComment 
+            type={type} 
+            likes={likes} 
+            dislikes={dislikes} 
+            postID={postID} 
+            authLike={authLike} 
+            commentLength={commentLength} 
+            authGul={authGul ? authGul : 0} 
+            gul={guls ? guls : 0} 
+            pathToSinglePost={postID} 
+          />
           
 
         </div>
