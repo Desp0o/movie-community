@@ -85,8 +85,8 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
         onChange={(e) => setAnswerValue(e.target.value)}
       />
 
-      <div className="post_quiz_answer_text" onClick={sendAnswer}>
-        <p>Post</p>
+      <div className="post_quiz_answer_text">
+        <p onClick={sendAnswer}>Post</p>
       {
         fetchedMovieDb.length !== 0 ?
           <div className="move_db_dropdown answering">

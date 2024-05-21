@@ -22,6 +22,7 @@ interface dataProps {
   created_at: string;
   myPoll:  number;
   status: number | string;
+  myAnswer: number | null,
   comments:{
     length: number;
   };
@@ -99,6 +100,7 @@ if(data){
                   authGul={post?.myGul} 
                   guls={post?.guls}   
                   pollAnswers={post.polls}
+                  myAnswer={post.myAnswer}
                   myPoll={post?.myPoll}
                 />
               

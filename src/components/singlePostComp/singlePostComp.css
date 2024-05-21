@@ -13,7 +13,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .single_post_comp.dark {
@@ -315,6 +314,12 @@
 .post_media_conatiner{
   min-height: 425px;
 width: 100%;
+}
+
+.answering_single_post_component{
+  z-index: 2;
+  position: relative;
+  top: -100px;
 }
 
 @media (max-width: 430px) {

@@ -35,12 +35,14 @@ interface SinglePostProps {
   guls?: number;
   data?: number;
   pollAnswers:[]
+  myAnswer: number | null
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
   ) => Promise<QueryObserverResult<any, unknown>>;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({
+  myAnswer,
   authorName,
   myPoll,
   authorAvatar,
@@ -100,7 +102,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           }
           
           {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
-          {type === 4 && <AnswerQuizComp id={postID} />  }
+          {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
           </div>
 
 
