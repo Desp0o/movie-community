@@ -34,6 +34,7 @@ interface SinglePostProps {
   authGul?: number;
   guls?: number;
   data?: number;
+  mySave: number;
   pollAnswers:[]
   myAnswer: number | null
   refetch: <TPageData>(
@@ -60,7 +61,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   authGul,
   guls,
   refetch,
-  pollAnswers
+  pollAnswers,
+  mySave
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -116,6 +118,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             authGul={authGul ? authGul : 0} 
             gul={guls ? guls : 0} 
             pathToSinglePost={postID} 
+            mySave={mySave}
           />
           
 

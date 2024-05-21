@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUserHook } from "../../hooks/useUserHook";
 import noAvatar from "../../assets/noAvatar.jpeg"
 // import { deleteComment } from "./DELcomment";
@@ -6,6 +6,7 @@ import noAvatar from "../../assets/noAvatar.jpeg"
 import Author from "../singlePostComp/Author";
 import { heartIcon } from "../../assets/svg/heartIcon";
 import { dotsIcons } from "../../assets/svg/dotsIcons";
+import { deleteComment } from "./DELcomment";
 
 interface Comment {
   [x: string]: any;
@@ -21,10 +22,15 @@ interface ComProps {
 }
 
 // callback
-const CommentsSection: React.FC<ComProps> = ({ fetchedComments  }) => {
+const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback  }) => {
   // const imageStoragePath = import.meta.env.VITE_COMMENT_IMAGE;
   const {user} = useUserHook()
 
+  const [isSettingVisible, setSettingVisible] = useState(false)
+
+  const handleSetting = () => {
+    setSettingVisible(!isSettingVisible)
+  }
   
 
   return (
@@ -39,8 +45,14 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments  }) => {
             <Author name={item.user.name} date={item.created_at} />
             <p className="comment_text">{item.text}</p>
 
-            {Number(user.userID) === Number(item.user_id) && <span className="comment_dots">{dotsIcons}</span>}
+            {Number(user.userID) === Number(item.user_id) && <span onClick={handleSetting} className="comment_dots">{dotsIcons}</span>}
             
+            {
+              isSettingVisible && 
+              <div className="post_setting_pannel">
+                <p onClick={() => deleteComment(item.id, callback)}> delete </p>
+              </div>
+            }
 
             {/* comment likes */}
             <div className="like_comment_">

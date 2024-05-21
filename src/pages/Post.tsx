@@ -155,7 +155,8 @@ const Post = () => {
               commentLength={data?.post?.comments} 
               authGul={data?.post?.myGul} 
               gul={data?.post?.guls}  
-              type={data?.post?.type}            
+              type={data?.post?.type}
+              mySave={data?.post?.mySave}            
               />
 
             {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }

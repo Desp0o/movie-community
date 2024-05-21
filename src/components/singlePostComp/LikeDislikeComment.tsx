@@ -7,9 +7,10 @@ import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { activeHeartIcon, heartIcon } from "../../assets/svg/heartIcon";
 import { GulingFuction } from "./likeFunction/GulingFuction";
 import { shareIcon } from "../../assets/svg/shareIcon";
-import { saveIcon } from "../../assets/svg/saveIcon";
+import { filledSaveIcon, saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
 import { Link } from "react-router-dom";
+import { useSavePost } from "./likeFunction/SaveFunction";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -21,6 +22,7 @@ interface LikeDislikeCommentProps {
   gul: number;
   pathToSinglePost?: number;
   type?:number | string;
+  mySave: number;
 }
 
 const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
@@ -29,7 +31,8 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   authGul,
   gul,
   pathToSinglePost,
-  type
+  type,
+  mySave
 }) => {
   const dispatch = useDispatch();
   const { Guling } = GulingFuction();
@@ -40,6 +43,12 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   const [gulIcon, setGulIcon] = useState(
     authGul === 0 ? heartIcon : activeHeartIcon
   );
+
+  const { mutate } = useSavePost();
+
+  const handleSavePost = () => {
+    mutate(postID);
+};
 
   useEffect(() => {
     seteVotes(Number(gul));
@@ -123,7 +132,10 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 
       {/* save */}
       <div className="like_container">
-        <span className="icon_container_likeComp">{saveIcon}</span>
+        <span className="icon_container_likeComp" onClick={handleSavePost}>
+          {mySave === 0 ? saveIcon : filledSaveIcon}
+        </span>
+
       </div>
     </div>
   );

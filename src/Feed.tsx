@@ -23,6 +23,7 @@ interface dataProps {
   myPoll:  number;
   status: number | string;
   myAnswer: number | null,
+  mySave: number;
   comments:{
     length: number;
   };
@@ -102,6 +103,7 @@ const Feed = () => {
                   pollAnswers={post.polls}
                   myAnswer={post.myAnswer}
                   myPoll={post?.myPoll}
+                  mySave={post?.mySave}
                 />
               
             ))}
