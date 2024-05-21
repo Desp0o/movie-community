@@ -5,8 +5,21 @@ import './index.css'
 import { HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './Redux/store.ts'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      refetchOnMount: "always",
+      refetchOnWindowFocus: "always",
+      refetchOnReconnect: "always",
+      refetchIntervalInBackground: true,
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
+  <QueryClientProvider client={queryClient}>
   <HashRouter>
     <React.StrictMode>
       <Provider store={store}>
@@ -14,4 +27,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Provider>
     </React.StrictMode>
   </HashRouter>
+  </QueryClientProvider>
 )

@@ -13,7 +13,7 @@ import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
 import Post from "./pages/Post"
 import axios from "axios"
-import { QueryClient, QueryClientProvider } from "react-query"
+import { useQuery } from "react-query"
 import { ToastContainer } from "react-toastify"
 import Login from "./components/login/Login"
 import PageLayout from "./components/pageLayout/PageLayout"
@@ -23,16 +23,7 @@ import AddPoll from "./components/createPostFeed/AddPoll"
 import Spinner from "./components/spinner/Spinner"
 import { useSpinnerHook } from "./hooks/useSpinnerHook"
 
-const queryClient = new QueryClient({
-  defaultOptions:{
-    queries:{
-      refetchOnMount: "always",
-      refetchOnWindowFocus: "always",
-      refetchOnReconnect: "always",
-      refetchIntervalInBackground: true,
-    }
-  }
-})
+
 
 
 function App() {
@@ -56,9 +47,8 @@ function App() {
   }
 
 
-  useEffect(()=>{
-
-    const checkMe = async () => {
+  const {} = useQuery('checkUser', async ()=>{
+   
       try {
         const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
               headers: {
@@ -88,14 +78,49 @@ function App() {
         localStorage.removeItem('token')
         localStorage.removeItem('userID')
       }
-      finally{
+    
+  })
+
+  useEffect(()=>{
+
+    // const checkMe = async () => {
+    //   try {
+    //     const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
+    //           headers: {
+    //               Authorization: `Bearer ${token}`,
+    //               'Content-Type': 'application/json'
+    //           }
+    //       });
+
+    //       localStorage.setItem('userName', response.data.name)
+    //       localStorage.setItem('userID', response.data.id)
+    //       localStorage.setItem('avatar', response.data.avatar)
+          
+          
+    //       dispatch(
+    //         setUser({
+    //           name: response.data.name, 
+    //           userID: response.data.id, 
+    //           avatar: response.data.avatar,
+    //           score: response.data.point,
+    //           bells: response.data.bells
+    //         })
+    //       )
+          
+    //   } catch (error) {
+    //     console.error(error);
+    //     localStorage.removeItem('userName')
+    //     localStorage.removeItem('token')
+    //     localStorage.removeItem('userID')
+    //   }
+    //   finally{
         
-      }
-    }
+    //   }
+    // }
 
     if(token){
       googleUserCeck()
-      checkMe()
+      // checkMe()
     }
 
     if(!token){
@@ -112,7 +137,6 @@ function App() {
   },[isDark])
 
   return (
-    <QueryClientProvider client={queryClient}>
       <div className={isDark ? "app darkMode" : "app"}>
         {isSpinner && <Spinner />}
         <Login />
@@ -132,7 +156,6 @@ function App() {
             </Routes>
             </PageLayout>
       </div>
-    </QueryClientProvider>
   )
 }
 
