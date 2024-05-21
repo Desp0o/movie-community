@@ -14,9 +14,10 @@ import PostEditPopUp from '../createPostFeed/PostEditPopUp';
 interface EditPannelPros{
     postID: string | number;
     isInnerPage?: boolean;
+    type: number | string;
 }
 
-const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
+const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
     const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
     const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
     const token = localStorage.getItem('token')
@@ -111,10 +112,13 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage}) => {
                  Delete
                  </div>
 
-                 <div onClick={openEditPostModal} className='edit_delete'>
+                 {
+                  type !==4 &&
+                  <div onClick={openEditPostModal} className='edit_delete'>
                 <span style={{width:"20px", height:"20px"}}>{penIcon}</span>
                  Edit post
                  </div>
+                }
             </div>
             :
             <></>

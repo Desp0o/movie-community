@@ -105,7 +105,7 @@ const Post = () => {
                   date={data?.post?.created_at}
                 />
               </div>
-              <EditPannel postID={data?.post?.id} isInnerPage={true}/>
+              <EditPannel postID={data?.post?.id} isInnerPage={true} type={data?.post?.type}/>
             </div>
 
             <div className="single_page_title">

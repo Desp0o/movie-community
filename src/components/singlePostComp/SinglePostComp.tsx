@@ -85,7 +85,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
               {/* author name date paneledit */}
             <div className="author_pannel_container">
               <Author avatar={authorAvatar} name={authorName} date={date} />
-              {isUserLogged ? <EditPannel postID={postID}/> : <></>}
+              {isUserLogged ? <EditPannel postID={postID} type={type}/> : <></>}
             </div>
             
             {/* title */}
