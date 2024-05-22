@@ -37,13 +37,13 @@ const DateFormater: React.FC<DateFormaterProps> = ({ date }) => {
 
       interval = Math.floor(seconds / 3600);
       if (interval >= 1) {
-        setTimeAgo(`${interval} hr.ago`);
+        setTimeAgo(`${interval} hours ago`);
         return;
       }
 
       interval = Math.floor(seconds / 60);
       if (interval > 1) {
-        setTimeAgo(`${interval} min.ago`);
+        setTimeAgo(`${interval} minutes ago`);
         return;
       }
 
