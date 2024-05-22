@@ -47,7 +47,8 @@ function App() {
   }
 
 
-  const {} = useQuery('checkUser', async ()=>{
+  if(token){
+    const {} = useQuery('checkUser', async ()=>{
    
       try {
         const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
@@ -80,6 +81,7 @@ function App() {
       }
     
   })
+  }
 
   useEffect(()=>{
 
