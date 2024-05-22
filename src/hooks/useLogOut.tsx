@@ -22,6 +22,7 @@ export const useLogOut = () => {
       localStorage.removeItem('token_death')
       localStorage.removeItem('userID')
       localStorage.removeItem('score')
+      localStorage.removeItem('bells')
     } catch (error) {
       console.error("Logout Error:", error);
     }

@@ -7,8 +7,8 @@ const userSlicer = createSlice({
             name: '' || localStorage.getItem('userName'),
             userID: 0 || localStorage.getItem('userID'),
             avatar: '' ||localStorage.getItem('avatar'),
-            score: 0,
-            bells: 0,
+            score: 0 || localStorage.getItem('score'),
+            bells: 0 || localStorage.getItem('bells'),
         }
     },
     reducers:{

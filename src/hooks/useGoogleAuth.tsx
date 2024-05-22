@@ -39,11 +39,13 @@ export const useGoogleLogIn = () => {
               'Content-Type': 'application/json'
             }
           })
+          console.log(res);
           
-          
+          localStorage.setItem('token',res.data?.token)
+          localStorage.setItem('userID', res.data?.user_id)
+          localStorage.setItem("score", res.data?.user?.point);
+          localStorage.setItem("bells", res.data?.user?.bells);
 
-          localStorage.setItem('token',res.data.token)
-          localStorage.setItem('userID', res.data.user_id)
           dispatch(setUser({
             name: signIn.user.displayName, 
             avatar: signIn.user.photoURL, 

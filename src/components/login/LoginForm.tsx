@@ -55,6 +55,10 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
       localStorage.setItem("token_death", response?.data?.token_death);
       localStorage.setItem("userID", response.data?.user?.id);
       localStorage.setItem("userName", response.data?.user?.name);
+      localStorage.setItem("score", response.data?.user?.point);
+      localStorage.setItem("bells", response.data?.user?.bells);
+
+
       dispatch(setRefetch(!requestRefetch));
       dispatch(setModalVisible(false));
       dispatch(
@@ -62,6 +66,8 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
           name: response?.data?.user?.name,
           avatar: response?.data?.user?.avatar,
           userID: response?.data?.user?.id,
+          bells: response?.data?.user?.bells,
+          score: response?.data?.user?.score,
         })
       );
 

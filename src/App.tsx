@@ -42,8 +42,7 @@ function App() {
 
   const googleUserCeck = () => {
     const auth = getAuth(app);
-    const unsubscribe = onAuthStateChanged(auth, ()=>{})
-
+    const unsubscribe = onAuthStateChanged(auth, ()=>{})    
 
     return () => unsubscribe();
   }
@@ -64,7 +63,8 @@ function App() {
             localStorage.setItem('userName', response.data.name)
             localStorage.setItem('userID', response.data.id)
             localStorage.setItem('avatar', response.data.avatar)
-            
+            localStorage.setItem("score", response.data?.point);
+            localStorage.setItem("bells", response.data?.bells);
             
             dispatch(
               setUser({
@@ -81,6 +81,8 @@ function App() {
           localStorage.removeItem('userName')
           localStorage.removeItem('token')
           localStorage.removeItem('userID')
+          localStorage.removeItem('bells')
+          localStorage.removeItem('score')
         }
       }
     
