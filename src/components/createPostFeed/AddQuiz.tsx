@@ -158,11 +158,6 @@ const AddQuiz = () => {
     setQuizAnswers({...quizAnswers, type: event.target.value});
   }
 
-  //კითხვის ფორმის დროპდაუის არჩევის შედეგად იცვლება ინფო
-  useEffect(()=>{
-    console.log(quizAnswers);
-  },[quizAnswers])
-
   const sendQuizQuestion = async () => {
     const token = localStorage.getItem('token')
 
@@ -175,7 +170,6 @@ const AddQuiz = () => {
         }
       })
       dispatch(setRefetch(!requestRefetch));
-      console.log(response.data);
       closeDefaultPostAddModal()
     } catch (error) {
       console.error(error)

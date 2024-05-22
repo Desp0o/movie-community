@@ -71,9 +71,7 @@ const Post = () => {
 
   
   useEffect(()=>{
-    refetch()
-    console.log(requestRefetch);
-    
+    refetch()    
   },[requestRefetch])
 
   if(isError){
@@ -82,7 +80,6 @@ const Post = () => {
 
   console.log(data);
   
-  console.log(commData);
   
   if(isLoading){
     return <Spinner />

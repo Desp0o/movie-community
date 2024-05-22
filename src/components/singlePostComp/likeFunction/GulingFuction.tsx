@@ -10,12 +10,11 @@ export const GulingFuction = () => {
     const token = localStorage.getItem('token')
     
         try {
-          const response = await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
+          await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
             headers:{
               Authorization:`Bearer ${token}`
             }
           })
-          console.log(response.status + " გულინგ");
           setGulingError(false)
         } catch (error:any) {
           console.error(error);

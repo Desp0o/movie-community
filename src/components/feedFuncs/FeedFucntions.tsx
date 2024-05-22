@@ -55,7 +55,7 @@ export const FeedFunctions = () => {
       refetch();
 
       
-    },[user.userID])
+    },[user, token])
 
     const {
         data,

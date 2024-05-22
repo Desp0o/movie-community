@@ -63,7 +63,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
             }
           )
           
-          console.log(response);
+          // console.log(response);
           notify()
           dispatch(setRefetch(!requestRefetch))
           if(isInnerPage){

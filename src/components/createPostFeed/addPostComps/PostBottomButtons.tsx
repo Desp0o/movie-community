@@ -31,10 +31,7 @@ const PostBottomButtons = () => {
 
   const openQuizPost = () => {
     document.body.style.overflow='hidden'
-
-    
     dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false, showPostButtons: true}))
-    console.log(addPostModalStates);
   }
 
 

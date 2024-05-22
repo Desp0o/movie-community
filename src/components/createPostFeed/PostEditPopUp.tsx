@@ -58,9 +58,7 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
           headers:{
             Authorization: `Bearer ${token}`
           }
-        })
-        console.log(response.data);
-  
+        })  
         setPostValue(
           {
             ...postValue, 
@@ -81,7 +79,7 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
 const editPost = async () => {
   const token = localStorage.getItem('token')
   dispatch(setSpinnerState(true))
-console.log(postValue);
+// console.log(postValue);
 
   try {
     await axios.post(`${import.meta.env.VITE_POST_EDIT}${postID}`,postValue, {

@@ -33,11 +33,6 @@ const Navbar = () => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
 
-  useEffect(()=>{
-    console.log(user);
-    
-  },[])
-
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       if (

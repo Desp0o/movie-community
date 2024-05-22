@@ -42,7 +42,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.get(
+      await axios.get(
         `https://api.pinky.ge/api/pollAnswering/${id}`,
         {
           headers: {
@@ -51,10 +51,8 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
         }
       );
 
-      console.log(res);
-      dispatch(setRefetch(!requestRefetch))
-      console.log(requestRefetch + " refetching");
-      
+      // console.log(res);
+      dispatch(setRefetch(!requestRefetch))      
       refetch();
     } catch (error) {
       console.error(error);
