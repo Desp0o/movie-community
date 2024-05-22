@@ -29,14 +29,23 @@
 }
 
 .post_title {
+  width: 602px;
   color: currentColor;
   align-self: flex-start;
   font-family: "Inter";
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 00;
+  font-weight: 400;
   line-height: 20px; /* 142.857% */
   word-break: break-all;
+}
+
+.see_more_title{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--purple);
 }
 
 .author_pannel_container {

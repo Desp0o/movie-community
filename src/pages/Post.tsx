@@ -106,7 +106,7 @@ const Post = () => {
             </div>
 
             <div className="single_page_title">
-              <PostTitle title={data?.post?.text} postStatus={data?.post?.status} />
+              <PostTitle title={data?.post?.text} postStatus={data?.post?.status} page="inner" />
             </div>
 
             <div className="single_post_image">
