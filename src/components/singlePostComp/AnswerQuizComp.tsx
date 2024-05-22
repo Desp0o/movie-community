@@ -3,6 +3,9 @@ import InputComponent from "../inputComponent/InputComponent";
 import axios from "axios";
 import limitedIMG from "../../assets/limited.webp"
 import { movieDataBase } from "../createPostFeed/functions/fetchDB";
+import { useUserHook } from "../../hooks/useUserHook";
+import { useDispatch } from "react-redux";
+import { setModalVisible } from "../../Redux/loginModalSlicer";
 
 interface AnswerQuizCompProps {
   id: number;
@@ -15,7 +18,9 @@ interface fetchedDataBaseProps {
 }
 
 const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
+  const dispatch = useDispatch()
   const { requestMovieDB } = movieDataBase()
+  const { user } = useUserHook()
   const [answerValue, setAnswerValue] = useState("");
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
   const [stopFunc, setStopFunc] = useState(false)
@@ -59,16 +64,20 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
   const sendAnswer = async () => {
     const token = localStorage.getItem('token')
 
-    try {
-       await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, { answer: answerValue }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      // console.log(response);
-
-    } catch (error) {
-      console.error(error)
+    if(user.name && user.userID){
+      try {
+        await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, { answer: answerValue }, {
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+       })
+       // console.log(response);
+ 
+     } catch (error) {
+       console.error(error)
+     }
+    }else{
+      dispatch(setModalVisible(true))
     }
   }
 

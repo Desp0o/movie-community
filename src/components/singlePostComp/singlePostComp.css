@@ -2,7 +2,7 @@
   position: relative;
   width: 637px;
   max-width: 637px;
-  padding: 12px 8px 8px 8px;
+  padding: 12px 8px 12px 8px;
   flex-direction: column;
   align-items: center;
   border-radius: 6px;
@@ -293,7 +293,7 @@
   align-items: center;
   gap: 10px;
   width: 603px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .post_quiz_answer_text {
@@ -350,7 +350,7 @@ width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 343px;
   }
   .video_container {
     margin: 0 auto;

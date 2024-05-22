@@ -104,11 +104,14 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
           }
           
           {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
-          {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
           </div>
 
+          {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
 
-          <LikeDislikeComment 
+          {
+            type !== 4 
+            &&
+            <LikeDislikeComment 
             type={type} 
             likes={likes} 
             dislikes={dislikes} 
@@ -120,6 +123,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             pathToSinglePost={postID} 
             mySave={mySave}
           />
+          }
           
 
         </div>
