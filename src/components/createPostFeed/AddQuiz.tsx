@@ -162,7 +162,7 @@ const AddQuiz = () => {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await axios.post('https://api.pinky.ge/api/questionAdding', quizAnswers,{
+      await axios.post('https://api.pinky.ge/api/questionAdding', quizAnswers,{
         headers:{
           Authorization: `Bearer ${token}`,
           "Content-Type":

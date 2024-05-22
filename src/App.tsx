@@ -22,12 +22,14 @@ import AddQuiz from "./components/createPostFeed/AddQuiz"
 import AddPoll from "./components/createPostFeed/AddPoll"
 import Spinner from "./components/spinner/Spinner"
 import { useSpinnerHook } from "./hooks/useSpinnerHook"
+import { useLogOut } from "./hooks/useLogOut"
 
 
 
 
 function App() {
   const token = localStorage.getItem('token')
+  const { handleLogout } = useLogOut()
   const {isSpinner} = useSpinnerHook()
   const {isDark} = useDarkModeHook()
   // const {user} = useUserHook()
@@ -47,89 +49,53 @@ function App() {
   }
 
 
-  if(token){
+  
     const {} = useQuery('checkUser', async ()=>{
    
-      try {
-        const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-                  'Content-Type': 'application/json'
-              }
-          });
-
-          localStorage.setItem('userName', response.data.name)
-          localStorage.setItem('userID', response.data.id)
-          localStorage.setItem('avatar', response.data.avatar)
-          
-          
-          dispatch(
-            setUser({
-              name: response.data.name, 
-              userID: response.data.id, 
-              avatar: response.data.avatar,
-              score: response.data.point,
-              bells: response.data.bells
-            })
-          )
-          
-      } catch (error) {
-        console.error(error);
-        localStorage.removeItem('userName')
-        localStorage.removeItem('token')
-        localStorage.removeItem('userID')
+      if(token){
+        try {
+          const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            localStorage.setItem('userName', response.data.name)
+            localStorage.setItem('userID', response.data.id)
+            localStorage.setItem('avatar', response.data.avatar)
+            
+            
+            dispatch(
+              setUser({
+                name: response.data.name, 
+                userID: response.data.id, 
+                avatar: response.data.avatar,
+                score: response.data.point,
+                bells: response.data.bells
+              })
+            )
+            
+        } catch (error) {
+          console.error(error);
+          localStorage.removeItem('userName')
+          localStorage.removeItem('token')
+          localStorage.removeItem('userID')
+        }
       }
     
   })
-  }
 
   useEffect(()=>{
-
-    // const checkMe = async () => {
-    //   try {
-    //     const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
-    //           headers: {
-    //               Authorization: `Bearer ${token}`,
-    //               'Content-Type': 'application/json'
-    //           }
-    //       });
-
-    //       localStorage.setItem('userName', response.data.name)
-    //       localStorage.setItem('userID', response.data.id)
-    //       localStorage.setItem('avatar', response.data.avatar)
-          
-          
-    //       dispatch(
-    //         setUser({
-    //           name: response.data.name, 
-    //           userID: response.data.id, 
-    //           avatar: response.data.avatar,
-    //           score: response.data.point,
-    //           bells: response.data.bells
-    //         })
-    //       )
-          
-    //   } catch (error) {
-    //     console.error(error);
-    //     localStorage.removeItem('userName')
-    //     localStorage.removeItem('token')
-    //     localStorage.removeItem('userID')
-    //   }
-    //   finally{
-        
-    //   }
-    // }
-
     if(token){
       googleUserCeck()
-      // checkMe()
     }
 
     if(!token){
-     
+      handleLogout()
     }
 
-  },[dispatch, token])
+  },[dispatch])
 
   useEffect(()=>{
     isDark ?

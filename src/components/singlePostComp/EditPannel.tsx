@@ -55,7 +55,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
     const deletePost = async () => {
       dispatch(setSpinnerState(true))
         try {
-          const response = await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
+           await axios.get(`${import.meta.env.VITE_POST_DELETE}${postID}`,
             {
               headers:{
                 Authorization: `Bearer ${token}`

@@ -8,10 +8,11 @@ import noAvatar from "../../assets/noAvatar.jpeg"
 
 const CreatePostFeed = () => {
     const { user } = useUserHook();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     
     const openDefaultPostModal = () => {
         dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, showPostButtons: true}))
+
       }    
 
     return (
@@ -29,7 +30,6 @@ const CreatePostFeed = () => {
                     className="feed_input"
                     placeholder="Create post"
                     onClick={openDefaultPostModal}
-                    value={''}
                 />
             </div>
 

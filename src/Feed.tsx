@@ -74,12 +74,12 @@ const Feed = () => {
 // }
 
   return (
-    <div style={{marginTop:"-20px"}}>
-      {user.name && user.userID ? <CreatePostFeed /> : <></>}
+    <>
       {isLoading && <Spinner />}
       <div>
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
+            {user.name && user.userID ? <CreatePostFeed /> : <></>}
             {page?.data?.posts?.data?.map((post: dataProps) => (
               
                 <SinglePostComp
@@ -111,7 +111,7 @@ const Feed = () => {
         ))}
       </div>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
-    </div>
+    </>
   );
 };
 
