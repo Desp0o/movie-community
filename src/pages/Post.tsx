@@ -67,7 +67,6 @@ const Post = () => {
     }
   );  
 
-  console.log(data);
 
   
   useEffect(()=>{
@@ -78,7 +77,6 @@ const Post = () => {
     console.error(error)
   }
 
-  console.log(data);
   
   
   if(isLoading){

@@ -21,7 +21,6 @@ const Login = () => {
   };
 
   useEffect(()=>{
-console.log(openForgetPWD);
 
   },[openForgetPWD])
 

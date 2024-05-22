@@ -39,7 +39,6 @@ export const useGoogleLogIn = () => {
               'Content-Type': 'application/json'
             }
           })
-          console.log(res);
           
           localStorage.setItem('token',res.data?.token)
           localStorage.setItem('userID', res.data?.user_id)
