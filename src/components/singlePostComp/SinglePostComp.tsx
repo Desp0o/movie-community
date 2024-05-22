@@ -92,7 +92,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             
             {/* title */}
           <Link to={`/pages/Post/${postID}`} className="post_title">
-            <PostTitle title={postTitle} postStatus={postStatus} />
+            <PostTitle title={postTitle} postStatus={postStatus} image={image}/>
           </Link>
          
          {/* picture or image */}
