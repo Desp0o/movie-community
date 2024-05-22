@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useUserHook } from '../../hooks/useUserHook';
+import { useRefetchHook } from '../../hooks/useRefetchHook';
 // declare global {
 //     interface Window {
 //         Echo: Echo;
@@ -27,6 +28,7 @@ import { useUserHook } from '../../hooks/useUserHook';
 // });
 
 export const FeedFunctions = () => {
+    const {requestRefetch} = useRefetchHook()
     const { user } = useUserHook();
     const [token, setToken] = useState(localStorage.getItem("token")) //set state to avoid error in path changing
     const [lastPage, setLastPage] = useState(() => {
@@ -67,7 +69,7 @@ export const FeedFunctions = () => {
         refetch,
         isFetched,
     } = useInfiniteQuery(
-        ["feed-query",path],
+        ["feed-query",{path, requestRefetch}],
         async ({ pageParam = 1 }) => {
             try {
                 const response = await axios.get(`${path}${pageParam}`,

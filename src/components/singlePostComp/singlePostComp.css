@@ -32,7 +32,7 @@
   width: 602px;
   color: currentColor;
   align-self: flex-start;
-  font-family: "Inter";
+  
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -69,7 +69,7 @@
 
 .author_credentials p {
   color: #131518;
-  font-family: "Inter";
+  
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -102,7 +102,7 @@
 .elapsed_time {
   color: var(--dark-grey);
   /* H1/regular */
-  font-family: "Inter";
+  
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -118,7 +118,7 @@
   overflow: hidden;
   width: 602px;
   height: 425px;
-  border-top-left-radius: 12px;
+  border-radius: 12px;
 }
 
 .single_post_cover {
@@ -126,8 +126,9 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(20%) blur(1px);
+  filter: brightness(50%) blur(24px);
   border-radius: 10px;
+  transform: scale(1.2);
 }
 .single_post_img {
   position: absolute;
@@ -313,7 +314,7 @@
 .post_quiz_answer_text p {
   width: 35px;
   color: var(--black);
-  font-family: "Inter";
+  
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

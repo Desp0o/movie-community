@@ -42,7 +42,6 @@
   border: 1px solid #ccd0d6;
 
   color: var(--dark-grey);
-  font-family: "Inter";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -70,7 +69,6 @@
 
 .postStyle_container p {
   color: currentColor;
-  font-family: "Inter";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -124,7 +122,6 @@ add post
 
 .create_title p {
   color: currentColor;
-  font-family: "Inter";
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -148,7 +145,6 @@ add post
 
 .popup_author p {
   color: currentColor;
-  font-family: "Inter";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -161,7 +157,6 @@ add post
   width: 100%;
   height: 120px;
   color: currentColor;
-  font-family: "Inter";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -257,7 +252,6 @@ add post
 
 .your_question {
   color: var(--black);
-  font-family: "Inter";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -272,7 +266,6 @@ add post
 
 .answer_desc {
   color: var(--dark-grey);
-  font-family: "Inter";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -280,7 +273,6 @@ add post
 }
 
 .question_textarea {
-  font-family: "Inter";
   width: 100%;
   height: 72px;
   border-radius: 8px;
@@ -297,7 +289,6 @@ line-height: 24px;
 
 .Correct_answer {
   color: var(--black);
-  font-family: "Inter";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -370,7 +361,6 @@ border: 1px solid var(--light-grey);
 }
 .add_option p {
   color: var(--secondary);
-  font-family: "Inter";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
