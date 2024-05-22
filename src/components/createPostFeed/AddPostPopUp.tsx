@@ -147,7 +147,7 @@ const AddPostPopUp = () => {
         text: "",
         title: "",
         img: undefined,
-        type: 0,
+        type: 1,
       });
     } catch (error: unknown) {
       console.error(error)
