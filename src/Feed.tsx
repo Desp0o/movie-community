@@ -77,9 +77,9 @@ const Feed = () => {
     <>
       {isLoading && <Spinner />}
       <div>
+        {user.name && user.userID ? <CreatePostFeed /> : <></>}
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
-            {user.name && user.userID ? <CreatePostFeed /> : <></>}
             {page?.data?.posts?.data?.map((post: dataProps) => (
               
                 <SinglePostComp

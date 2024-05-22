@@ -304,6 +304,10 @@ line-height: 20px; /* 142.857% */
     .single_page_title{
         width: 343px;
     }
+
+    .comment_container{
+        width: 343px;
+    }
 }
 
 @media (max-width:376px) {

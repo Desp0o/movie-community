@@ -332,6 +332,11 @@ width: 100%;
   top: -100px;
 }
 
+.for_border_single_page{
+  border-bottom: 1px solid #e5e8ee;
+  width: 602px;
+}
+
 @media (max-width: 430px) {
   .single_post_comp {
     width: 375px;
@@ -370,6 +375,14 @@ width: 100%;
   }
   .post_title{
     width: 343px;
+  }
+  .for_border_single_page{
+    width: 343px;
+  }
+
+  .for_border_divide_post_comments{
+    width: 100%;
+    border-bottom: 1px solid #d5dae3;
   }
 }
 

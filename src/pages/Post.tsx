@@ -107,7 +107,10 @@ const Post = () => {
               <PostTitle title={data?.post?.text} postStatus={data?.post?.status} page="inner" />
             </div>
 
-            <div className="single_post_image">
+            {
+              data?.post?.img && 
+              
+              <div className="single_post_image">
               {isFullScreenImage ? (
                 <div className="full_screen_img">
                   <span
@@ -137,10 +140,13 @@ const Post = () => {
 
 
             </div>
+            }
 
             {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data?.post?.myPoll} refetch={refetch}/> }
             {data?.post?.type === 4 && <AnswerQuizComp id={data?.question?.feed_id} /> }
 
+              {/* ეს არის ჩასმული ბორდერისთვის */}
+              <div className="for_border_single_page" />
 
             <LikeDislikeComment
               likes={data?.post?.like}
@@ -154,6 +160,8 @@ const Post = () => {
               mySave={data?.post?.mySave}            
               />
 
+            {/* ხაზი პოსტსა და კომენტარის ინპუტს შორის */}
+            <div className="for_border_divide_post_comments" />
             {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }
             
 
@@ -169,3 +177,5 @@ const Post = () => {
 };
 
 export default Post;
+
+
