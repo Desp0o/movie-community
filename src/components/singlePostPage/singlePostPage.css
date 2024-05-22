@@ -290,4 +290,8 @@ line-height: 20px; /* 142.857% */
     .single_posted_comment{
         width: 355px;
     }
+
+    .poll_item{
+        width: 343px;
+    }
 }

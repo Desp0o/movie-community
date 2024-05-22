@@ -132,8 +132,7 @@
 }
 
 .likeDislikeComment_container {
-  padding-left: 2px;
-  width: 624px;
+  width: 621px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -146,8 +145,10 @@
 }
 
 .like_container {
+  width: 59px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .icon_container_likeComp {
@@ -201,12 +202,12 @@
 
 .video_container {
   margin: 0 auto;
-  width: fit-content;
+  width: 602px;
 }
 
 .video_container video {
   border-radius: 12px;
-  width: 603px;
+  width: 602px;
   max-height: 425px;
   margin: 0 auto;
 }
@@ -339,24 +340,17 @@ width: 100%;
 
   .likeDislikeComment_container {
     display: flex;
-    width: 365px;
-    padding-left: 0;
-    margin: 0 auto;
-    margin-left: -2.5px;
+    width: 357px;
+    margin: 0 auto; 
     justify-content: space-between;
     align-items: center;
-  }
-
-  .icon_container_likeComp {
-    padding: 0;
-    align-items: flex-start;
   }
 
   .quiz_answer_input_container {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 357px;
+    width: 100%;
   }
   .video_container {
     margin: 0 auto;

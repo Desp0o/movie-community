@@ -60,7 +60,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, { answer: answerValue }, {
+       await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, { answer: answerValue }, {
         headers: {
           Authorization: `Bearer ${token}`
         }

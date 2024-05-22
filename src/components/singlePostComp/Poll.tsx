@@ -8,6 +8,8 @@ import {
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { useDispatch } from "react-redux";
+import { useUserHook } from "../../hooks/useUserHook";
+import { setModalVisible } from "../../Redux/loginModalSlicer";
 
 interface PollProps {
   id: number;
@@ -25,6 +27,7 @@ interface PollPropsMain {
 
 const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
   const { requestRefetch } = useRefetchHook()
+  const { user } = useUserHook()
   const dispatch = useDispatch()
   const [answersSum, setAnswersSum] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(data);
@@ -72,6 +75,15 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
     }
   };
 
+  const pollHanlderFuncs = (id: number, index: number) => {
+    if(user.name && user.userID){
+      sendPollAnswer(id)
+      setActivePollItem(index)
+    }else{
+      dispatch(setModalVisible(true))
+    }
+  }
+
   return (
     <>
       <div className="poll_container">
@@ -79,7 +91,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
         return (
           <div
             key={index}
-            onClick={() => (sendPollAnswer(poll.id), setActivePollItem(index))}
+            onClick={() => pollHanlderFuncs(poll.id, index)}
             className="poll_item"
           >
             <span className="poll_item_bg"
