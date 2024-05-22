@@ -29,6 +29,7 @@ const CreatePostFeed = () => {
                     className="feed_input"
                     placeholder="Create post"
                     onClick={openDefaultPostModal}
+                    value={''}
                 />
             </div>
 
