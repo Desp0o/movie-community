@@ -86,7 +86,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
           >
             <span className="poll_item_bg"
               style={{
-                width: poll.sum === 0 ? '10px' : `${Math.round((100 / answersSum) * poll.sum)}%`,
+                width: `${Math.round((100 / answersSum) * poll.sum)}%`,
                 backgroundColor:
                   poll.id === activeIndex || activeIndex === index
                     ? "var(--purple)"
