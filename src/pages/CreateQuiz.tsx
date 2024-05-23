@@ -1,36 +1,58 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import InputComponent from "../components/inputComponent/InputComponent";
 import "./CreateQuiz.css";
 import axios from 'axios';
 
+interface QuestionProps {
+    questionText: string;
+    answer1: string;
+    answer2: string;
+    answer3: string;
+    answer4: string;
+}
+
+interface QuizDataProps {
+    mainTitle: string;
+    questions: QuestionProps[];
+}
+
 const CreateQuiz = () => {
-  const [quizData, setQuizData] = useState({
+  const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
     questions: [
-      { questionText: '', answers: ['', '', '', ''] }
+      {
+        questionText: '',
+        answer1: '',
+        answer2: '',
+        answer3: '',
+        answer4: ''
+      }
     ]
   });
 
-  const handleMainTitleChange = (e:any) => {
+  const handleMainTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuizData({ ...quizData, mainTitle: e.target.value });
   };
 
-  const handleQuestionChange = (index: number, e:any) => {
+  const handleQuestionTextChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const newQuestions = [...quizData.questions];
     newQuestions[index].questionText = e.target.value;
     setQuizData({ ...quizData, questions: newQuestions });
   };
 
-  const handleAnswerChange = (qIndex: number, aIndex: number, e:any) => {
+  const handleAnswerChange = (index: number, answerKey: keyof QuestionProps, e: ChangeEvent<HTMLInputElement>) => {
     const newQuestions = [...quizData.questions];
-    newQuestions[qIndex].answers[aIndex] = e.target.value;
+    newQuestions[index][answerKey] = e.target.value;
     setQuizData({ ...quizData, questions: newQuestions });
   };
 
   const addQuestion = () => {
     setQuizData({
       ...quizData,
-      questions: [...quizData.questions, { questionText: '', answers: ['', '', '', ''] }]
+      questions: [
+        ...quizData.questions,
+        { questionText: '', answer1: '', answer2: '', answer3: '', answer4: '' }
+      ]
     });
   };
 
@@ -39,11 +61,11 @@ const CreateQuiz = () => {
     setQuizData({ ...quizData, questions: newQuestions });
   };
 
-  useEffect(()=>{
-    console.log(JSON.stringify(quizData));
+  useEffect(() => {
+    console.log(quizData);
   }, [quizData]);
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       const response = await axios.post('/your-backend-endpoint', quizData);
@@ -57,36 +79,57 @@ const CreateQuiz = () => {
     <div style={{ paddingTop: "100px" }}>
       <div className="main_c">
         <InputComponent
-          type={"text"}
-          placeholder={"main title"}
+          type="text"
+          placeholder="main title"
           value={quizData.mainTitle}
           isError={false}
-          nameProp={"main title"}
+          nameProp="main title"
           onChange={handleMainTitleChange}
         />
 
         {quizData.questions.map((question, qIndex) => (
           <div className="q_question" key={qIndex} style={{ position: 'relative' }}>
             <InputComponent
-              type={"text"}
-              placeholder={"quiz single question"}
+              type="text"
+              placeholder="quiz single question"
               value={question.questionText}
               isError={false}
               nameProp={`question ${qIndex + 1}`}
-              onChange={(e) => handleQuestionChange(qIndex, e)}
+              onChange={(e) => handleQuestionTextChange(qIndex, e)}
             />
             <br />
-            {question.answers.map((answer, aIndex) => (
-              <InputComponent
-                key={aIndex}
-                type={"text"}
-                placeholder={`answer ${aIndex + 1}`}
-                value={answer}
-                isError={false}
-                nameProp={`answer ${aIndex + 1}`}
-                onChange={(e) => handleAnswerChange(qIndex, aIndex, e)}
-              />
-            ))}
+            <InputComponent
+              type="text"
+              placeholder="answer 1"
+              value={question.answer1}
+              isError={false}
+              nameProp={`answer 1`}
+              onChange={(e) => handleAnswerChange(qIndex, 'answer1', e)}
+            />
+            <InputComponent
+              type="text"
+              placeholder="answer 2"
+              value={question.answer2}
+              isError={false}
+              nameProp={`answer 2`}
+              onChange={(e) => handleAnswerChange(qIndex, 'answer2', e)}
+            />
+            <InputComponent
+              type="text"
+              placeholder="answer 3"
+              value={question.answer3}
+              isError={false}
+              nameProp={`answer 3`}
+              onChange={(e) => handleAnswerChange(qIndex, 'answer3', e)}
+            />
+            <InputComponent
+              type="text"
+              placeholder="answer 4"
+              value={question.answer4}
+              isError={false}
+              nameProp={`answer 4`}
+              onChange={(e) => handleAnswerChange(qIndex, 'answer4', e)}
+            />
             <button 
               onClick={() => removeQuestion(qIndex)} 
               style={{ position: 'absolute', top: 0, right: 0 }}
