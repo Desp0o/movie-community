@@ -123,8 +123,8 @@ function App() {
               <Route path="/pages/Post/:id" element={<Post />} />
               <Route element={<RequireAuth />}>
                 <Route path="/pages/Profile" element={<Profile />} />
+                <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
               </Route>
-              <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
             </Routes>
             </PageLayout>
       </div>

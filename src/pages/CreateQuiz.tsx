@@ -5,6 +5,7 @@ import axios from 'axios';
 
 interface QuestionProps {
     questionText: string;
+    questionImg: string;
     answer1: string;
     answer2: string;
     answer3: string;
@@ -13,15 +14,18 @@ interface QuestionProps {
 
 interface QuizDataProps {
     mainTitle: string;
+    mainImg: string;
     questions: QuestionProps[];
 }
 
 const CreateQuiz = () => {
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
+    mainImg: '',
     questions: [
       {
         questionText: '',
+        questionImg: '',
         answer1: '',
         answer2: '',
         answer3: '',
@@ -51,7 +55,7 @@ const CreateQuiz = () => {
       ...quizData,
       questions: [
         ...quizData.questions,
-        { questionText: '', answer1: '', answer2: '', answer3: '', answer4: '' }
+        { questionText: '', answer1: '', answer2: '', answer3: '', answer4: '', questionImg: '' }
       ]
     });
   };
@@ -66,14 +70,23 @@ const CreateQuiz = () => {
   }, [quizData]);
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const token = localStorage.getItem('token')
     e.preventDefault();
     try {
-      const response = await axios.post('/your-backend-endpoint', quizData);
+      const response = await axios.post('https://api.pinky.ge/api/quizAdding', quizData, {
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+      });
       console.log('Quiz data submitted:', response.data);
     } catch (error) {
       console.error('Error submitting quiz data:', error);
     }
   };
+
+//   const fileHandler = (e) =>{
+
+//   }
 
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -86,6 +99,8 @@ const CreateQuiz = () => {
           nameProp="main title"
           onChange={handleMainTitleChange}
         />
+
+        {/* <input type='file' onChange={fileHandler}/> */}
 
         {quizData.questions.map((question, qIndex) => (
           <div className="q_question" key={qIndex} style={{ position: 'relative' }}>
