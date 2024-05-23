@@ -23,6 +23,7 @@ import AddPoll from "./components/createPostFeed/AddPoll"
 import Spinner from "./components/spinner/Spinner"
 import { useSpinnerHook } from "./hooks/useSpinnerHook"
 import { useLogOut } from "./hooks/useLogOut"
+import CreateQuiz from "./pages/CreateQuiz"
 
 
 
@@ -123,6 +124,7 @@ function App() {
               <Route element={<RequireAuth />}>
                 <Route path="/pages/Profile" element={<Profile />} />
               </Route>
+              <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
             </Routes>
             </PageLayout>
       </div>

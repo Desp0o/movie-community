@@ -1,0 +1,10 @@
+.main_c{
+    display: flex;
+    flex-direction: column;
+}
+
+.q_question{
+    border-top: 2px solid violet;
+    margin-top: 20px;
+    padding-top: 10px;
+}

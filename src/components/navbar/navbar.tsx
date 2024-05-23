@@ -75,6 +75,7 @@ const Navbar = () => {
         <div className="logo_burger_menu">
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
           <Link to='/'><p>LOGO</p></Link>
+          <Link to='/pages/CreateQuiz' style={{color:'var(--purple)', fontWeight:"600"}}> Create Quiz</Link>
         </div>
         <div className="nav_search">
           <div className="nav_search_icon">{searchIcon}</div>
