@@ -1,0 +1,25 @@
+.answers {
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    gap: 10px;
+}
+
+
+.quiz_single_answer{
+    font-size: 12px;
+
+    height: 40px;
+    width: 100px;
+
+    border: 1px solid var(--purple);
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quizz_list{
+    display: flex;
+    flex-direction: column;
+}

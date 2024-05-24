@@ -24,6 +24,8 @@ import Spinner from "./components/spinner/Spinner"
 import { useSpinnerHook } from "./hooks/useSpinnerHook"
 import { useLogOut } from "./hooks/useLogOut"
 import CreateQuiz from "./pages/CreateQuiz"
+import Quizzes from "./pages/Quizzes"
+import Quiz from "./pages/Quiz"
 
 
 
@@ -125,6 +127,8 @@ function App() {
                 <Route path="/pages/Profile" element={<Profile />} />
                 <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
               </Route>
+              <Route path="/pages/Quizzes" element={<Quizzes />} />
+              <Route path="/pages/Quiz/:id" element={<Quiz />} />
             </Routes>
             </PageLayout>
       </div>

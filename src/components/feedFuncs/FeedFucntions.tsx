@@ -3,29 +3,6 @@ import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useUserHook } from '../../hooks/useUserHook';
 import { useRefetchHook } from '../../hooks/useRefetchHook';
-// declare global {
-//     interface Window {
-//         Echo: Echo;
-//     }
-// }
-
-
-// import Echo from 'laravel-echo';
-// import Pusher from 'pusher-js';
-// window.Pusher = Pusher;
- 
-// window.Echo = new Echo({
-//     broadcaster: "pusher",
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? "mt1",
-//     wsHost: import.meta.env.VITE_PUSHER_HOST
-//         ? import.meta.env.VITE_PUSHER_HOST
-//         : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? "https") === "https",
-//     enabledTransports: ["ws", "wss"],
-// });
 
 export const FeedFunctions = () => {
     const {requestRefetch} = useRefetchHook()
@@ -95,19 +72,6 @@ export const FeedFunctions = () => {
         },
     );
 
-    // useEffect(() => {
-    //     window.Echo.channel('posts') // Replace 'posts' with your channel name
-    //         .listen('.post.created', (event) => { // Replace '.post.created' with your event name
-    //             // Handle the received event, e.g., update the state or trigger a refetch
-    //             console.log('New post created:', event.post);
-    //             refetch(); // Refetch data to update the feed
-    //         });
-
-    //     return () => {
-    //         // Unsubscribe from the channel when the component unmounts
-    //         window.Echo.leave('posts');
-    //     };
-    // }, []);
 
     return { data,isFetched, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching };
 };

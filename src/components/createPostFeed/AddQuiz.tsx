@@ -14,6 +14,7 @@ import limitedIMG from "../../assets/limited.webp"
 import { setRefetch } from "../../Redux/RefetchSlicer";
 import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { movieDataBase } from "./functions/fetchDB";
+import { dropDownArrow } from "../../assets/svg/dropDownArrow";
 
 interface fetchedDataBaseProps {
     id: number;
@@ -35,6 +36,7 @@ const AddQuiz = () => {
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
   const [newMovie, setNewMovie] = useState('') //ფილმების ბაზის ფეჩინგის შესამომწებლად
   const [stopFunc, setStopFunc] = useState(false)
+  const [selectedValue, setSelectedValue] = useState('Choose Question')
   const [quizAnswers, setQuizAnswers] = useState<{
     img: File | undefined;
     question: string;
@@ -153,10 +155,6 @@ const AddQuiz = () => {
     }
   },[quizAnswers.answer])
 
-  //კითხვის ფორმის დროპდაუნის ჰენდლერი
-  const handleSelectedDropwdonValue = (event:any) => {
-    setQuizAnswers({...quizAnswers, type: event.target.value});
-  }
 
   const sendQuizQuestion = async () => {
     const token = localStorage.getItem('token')
@@ -176,6 +174,11 @@ const AddQuiz = () => {
     }
   }
 
+  const handleDropDownValues = (event: any) => {
+    setSelectedValue(event.target.textContent)
+    // setQuizAnswers({...quizAnswers, question: selectedValue})
+  }
+
   return (
     addPostModalStates.quizPost && (
       <div style={{ width: "100%" }}>
@@ -188,6 +191,18 @@ const AddQuiz = () => {
             />
 
             <div className="quiz_quest_title">
+
+              <div className="dropdwon_seclect_question">
+                <span className="selec_arrow">{dropDownArrow}</span>
+                <p className="question_value">{selectedValue}</p>
+
+                <div className="for_select">
+                  <span onClick={(e) => handleDropDownValues(e)}>გამოიცანი ფილმი</span>
+                  <span onClick={(e) => handleDropDownValues(e)}>გამოიცანი მსახიობი</span>
+                  <span onClick={(e) => handleDropDownValues(e)}>შენი კითხვა</span>
+                </div>
+              </div>
+
               <p className="your_question">Your question</p>
               <div ref={areaContainerRef} className="quiz_txtArea_container">
                 {uploadedImage === "" && uploadedVideo === "" && (
@@ -261,15 +276,6 @@ const AddQuiz = () => {
                   <></>
                 )}
               </div>
-            </div>
-
-            <div className="select_dropdown">
-              <select className="" onChange={handleSelectedDropwdonValue} value={quizAnswers.type}>
-                <option value='12'>აირჩიე კითხვია</option>
-                <option value='1'>გამოიცანი ფილმი</option>
-                <option value='2'>გამოიცანი სტარი</option>
-                <option value='0'>საკუთარი კითხვა</option>
-              </select>
             </div>
 
             <div className="quiz_answ_block">

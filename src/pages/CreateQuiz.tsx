@@ -50,6 +50,7 @@ const CreateQuiz = () => {
     setQuizData({ ...quizData, questions: newQuestions });
   };
 
+
   const addQuestion = () => {
     setQuizData({
       ...quizData,
@@ -65,9 +66,6 @@ const CreateQuiz = () => {
     setQuizData({ ...quizData, questions: newQuestions });
   };
 
-  useEffect(() => {
-    console.log(quizData);
-  }, [quizData]);
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     const token = localStorage.getItem('token')
@@ -83,6 +81,12 @@ const CreateQuiz = () => {
       console.error('Error submitting quiz data:', error);
     }
   };
+
+
+
+  
+
+ 
 
 //   const fileHandler = (e) =>{
 

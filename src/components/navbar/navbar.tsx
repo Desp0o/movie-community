@@ -87,7 +87,11 @@ const Navbar = () => {
           />
         </div>
 
+        
+
         <div className="nav_profile">
+        <Link to='/pages/Quizzes' style={{color:'var(--purple)', fontWeight:"600"}}>Quizzes</Link>
+
           {window.innerWidth < 601 && !user.name ? (
             <div className="responsive_search">{searchIconResposnive}</div>
           ) : (
@@ -147,3 +151,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
