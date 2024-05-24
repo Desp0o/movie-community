@@ -5,6 +5,7 @@
 }
 
 
+
 .quiz_single_answer{
     font-size: 12px;
 
@@ -17,6 +18,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.quiz_single_answer.no_bg{
+    background-color: transparent;
+}
+
+.quiz_single_answer.correct{
+    background-color: green;
 }
 
 .quizz_list{

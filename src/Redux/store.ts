@@ -7,6 +7,7 @@ import leftMenuSlicer from "./leftMenuSlicer";
 import spinnerSlicer from "./spinnerSlicer";
 import RefetchSlicer from "./RefetchSlicer";
 import postModalSclier from "./postModal"
+import gulsSlicer from "./gulsSlicer";
 
 const store = configureStore({
     reducer:{
@@ -18,6 +19,7 @@ const store = configureStore({
         spinnerSote: spinnerSlicer,
         refetchStore: RefetchSlicer,
         addPostModalStore: postModalSclier,
+        gulStore: gulsSlicer
     }
 })
 

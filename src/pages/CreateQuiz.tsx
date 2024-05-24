@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import InputComponent from "../components/inputComponent/InputComponent";
 import "./CreateQuiz.css";
 import axios from 'axios';
