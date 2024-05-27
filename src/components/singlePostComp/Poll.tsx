@@ -16,10 +16,10 @@ interface PollProps {
 }
 
 interface PollPropsMain {
-  pollAnswers: any[];
+  pollAnswers: PollProps[];
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<any, unknown>>;
+  ) => Promise<QueryObserverResult<unknown, unknown>>;
   data: number;
 }
 

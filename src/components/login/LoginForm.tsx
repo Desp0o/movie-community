@@ -14,7 +14,6 @@ interface LoginProps{
 
 const LoginForm:React.FC<LoginProps> = ({funcName}) => {
   const dispatch = useDispatch();
-  const [_isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const [errMessage, setErrMessage] = useState({
@@ -35,7 +34,6 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
   const LogInFunction = async () => {
     setError(false);
     setErrMessage({ ...errMessage, emailErr: "", passwordErr: "" });
-    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -79,9 +77,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
         passwordErr: error?.response?.data?.errors?.password,
         normalErr: error?.response?.data?.message
       });
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   return (

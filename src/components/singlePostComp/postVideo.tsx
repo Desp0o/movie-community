@@ -24,6 +24,8 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
   const videoRef: LegacyRef<any> | undefined = useRef()
 
   useEffect(() => {
+    const currentVideoRef = videoRef.current;
+  
     const observer = new IntersectionObserver(
       ([entry]) => {
         // If the element is intersecting the viewport
@@ -40,17 +42,18 @@ const PostVideo: React.FC<PostVideoProps> = ({ image }) => {
         threshold: 0.5 
       }
     );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
+  
+    if (currentVideoRef) {
+      observer.observe(currentVideoRef);
     }
-
+  
     return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current);
+      if (currentVideoRef) {
+        observer.unobserve(currentVideoRef);
       }
     };
   }, [hasPlayed]);
+  
 
   return (
     <div className="video_container" ref={videoRef} onMouseEnter={showControlers} onMouseLeave={hideControlers}>

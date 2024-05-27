@@ -38,7 +38,7 @@ interface SinglePostProps {
   myAnswer: number | null
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<any, unknown>>;
+  ) => Promise<QueryObserverResult<unknown, unknown>>;
 }
 
 const SinglePostComp: React.FC<SinglePostProps> = ({

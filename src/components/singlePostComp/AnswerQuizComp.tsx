@@ -32,7 +32,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
       requestMovieDB(setFetchedMovieDb, answerValue)
     }
 
-  }, [answerValue, stopFunc])
+  }, [answerValue, stopFunc, requestMovieDB])
 
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
       setNewMovie('')
       setStopFunc(true)
     }
-  }, [answerValue])
+  }, [answerValue, newMovie])
 
   //ფილმების ბაზიდან ფილმების არჩევა და მოქმედებები
   const chooseMovieName = (movieName: string) => {

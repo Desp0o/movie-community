@@ -28,10 +28,6 @@ const Quiz = () => {
         correctAnswersSum: 0
     })
 
-    // get quiz onload
-    useEffect(() => {
-        getSingleQuiz();
-    }, []);
 
     const getSingleQuiz = async () => {
         const token = localStorage.getItem('token');
@@ -67,14 +63,23 @@ const Quiz = () => {
             //clear pointer event prevent and background on answers
             if (answerDivRef.current) {
                 answerDivRef.current.style.pointerEvents = "unset";
-                Array.from(answerDivRef.current.children).forEach((item:any) => {
-                    item.style.backgroundColor = "unset";
+                Array.from(answerDivRef.current.children).forEach((item) => {
+                    if (item instanceof HTMLElement) {
+                        item.style.backgroundColor = "unset";
+                      }
                 });
             }
         } catch (error) {
             console.error("Error fetching quiz:", error);
         }
     };
+
+    // get quiz onload
+    useEffect(() => {
+        getSingleQuiz();
+    }, []);
+
+    
 
     //თუ კითხვის ინდექსი უნდრის სიგრძეს მაშინ
     //მაშინ ბოლო კითხვას ვაგზავნით

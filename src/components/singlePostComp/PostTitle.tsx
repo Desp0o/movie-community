@@ -30,7 +30,7 @@ const PostTitle:React.FC<PostTitleProps> = ({title,postStatus, page, image}) => 
         setFetchedTitle(`${formatedText}.....`)
       }
     }
-  },[title])
+  },[title, fetchedTitle,image, shortDefault, shortWithImage])
 
   return (
     <div>

@@ -26,7 +26,7 @@ export const FeedFunctions = () => {
         }else{
             dispatch(setFeedPath('https://api.pinky.ge/api/guestFeed?page='))
         }
-    },[user])
+    },[user, dispatch])
 
 
     useEffect(() => {

@@ -46,7 +46,7 @@ function App() {
   }
 
   
-    const {} = useQuery('checkUser', async ()=>{
+    useQuery('checkUser', async ()=>{
       if(token){
         try {
           const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
@@ -91,7 +91,7 @@ function App() {
     if(!token){
       handleLogout()
     }
-  },[dispatch])
+  },[dispatch, handleLogout, token])
 
 
   return (

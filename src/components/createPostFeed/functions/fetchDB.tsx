@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const movieDataBase = () => {
-    const requestMovieDB = async (setter: (arg0: any) => void, answer: string) => {
+    const requestMovieDB = async (setter: (arg0: []) => void, answer: string) => {
         const token = localStorage.getItem('token')
     
         try {

@@ -16,7 +16,7 @@ export const GulingFuction = () => {
             }
           })
           setGulingError(false)
-        } catch (error:any) {
+        } catch (error) {
           console.error(error);
           setGulingError(true)
         }

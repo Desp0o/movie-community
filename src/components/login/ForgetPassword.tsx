@@ -4,9 +4,12 @@ import LoginModalBtn from "./LoginModalBtn";
 
 const ForgetPassword = () => {
   const [emailInput, setEmailInput] = useState("");
-  const pwdRecovery = async () => {
+  const pwdRecovery = async () => {    
     try {
-    } catch (error) {}
+      console.log("here we need pwd recovery");
+    } catch (error) {
+      console.error(error)
+    }
   };
   return (
     <div className="container_forget_pwd">
