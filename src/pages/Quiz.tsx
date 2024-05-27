@@ -87,7 +87,7 @@ const Quiz = () => {
 
         if(quizData.correctAnswer === event.currentTarget.textContent){
             setCorrect(1)
-            alert('correct')
+            //update correct answers sum
             setQuizData({...quizData, correctAnswersSum: quizData.correctAnswersSum + 1})
             event.currentTarget.style.backgroundColor = "green"
         }else{
@@ -111,7 +111,12 @@ const Quiz = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            getSingleQuiz()
+
+            if(isLastQuest === 0){
+                getSingleQuiz()
+            }else{
+                alert('was last questuin')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -128,6 +133,7 @@ const Quiz = () => {
             <div className=''>
                 {/* quzi numeric */}
                 <p> {quizData.questionIndex} / {quizData.quizLength}</p>
+                <p>correct answers: {quizData.correctAnswersSum}</p>
                 <h4 style={{ color: 'purple', fontWeight: "bolder" }}>{questions.name}</h4>
                 <div className='answers' ref={answerDivRef}>
                     {answers.map((item, index) => (
