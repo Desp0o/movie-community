@@ -97,9 +97,6 @@ const Quiz = () => {
    
     const sendAnswer = async () => {
         const token = localStorage.getItem('token')
-        if (answerDivRef.current) {
-            answerDivRef.current.style.pointerEvents = "unset";
-          }
         
         try {
             await axios.post(`https://api.pinky.ge/api/quizAnswering/${quizData.questionID}`,{

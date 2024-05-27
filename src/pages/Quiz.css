@@ -21,8 +21,8 @@
     cursor: pointer;
 }
 
-.quiz_single_answer.no_bg{
-    background-color: transparent;
+.no_bg{
+    background-color: yellow;
 }
 
 .quiz_single_answer.correct{

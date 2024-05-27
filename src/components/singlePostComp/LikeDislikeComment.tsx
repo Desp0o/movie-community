@@ -11,6 +11,7 @@ import { filledSaveIcon, saveIcon } from "../../assets/svg/saveIcon";
 import IconContainer from "./IconContainer";
 import { Link } from "react-router-dom";
 import { useSavePost } from "./likeFunction/SaveFunction";
+// import { setLikeRedux, setRemovedLikeRedux } from "../../Redux/gulsSlicer";
 
 interface LikeDislikeCommentProps {
   likes: number;
@@ -36,16 +37,17 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { Guling } = GulingFuction();
-  // const { Guling, ungGulingError, gulingError } = GulingFuction();
   const { user } = useUserHook();
   const [votes, seteVotes] = useState(Number(gul));
-  const [isHeart, setHeart] = useState(authGul === 0 ? false : true);
+
+  const [isLiked, setLiked] = useState(authGul === 0 ? false : true);
   const [saveIconState, setSaveIconState] = useState(mySave ? (mySave === 0 ? false : true) : false)
   const [gulIcon, setGulIcon] = useState(
     authGul === 0 ? heartIcon : activeHeartIcon
   );
 
   const { mutate } = useSavePost();
+
 
   const handleSavePost = () => {
     if(user.name && user.userID){
@@ -69,28 +71,22 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   useEffect(() => {
     // if not user deactivate
     if (!user.userID) {
-      setHeart(false);
+      setLiked(false);
       setGulIcon(heartIcon);
     }
-  }, [user.userID]);
+  }, [user]);
 
   useEffect(() => {
-    if (authGul === 0 && user.userID) {
-      setHeart(false);
+    if (authGul === 0) {
+      setLiked(false);
       setGulIcon(heartIcon);
     }
 
-    if (authGul === 1 && user.userID) {
-      setHeart(true);
+    if (authGul === 1) {
+      setLiked(true);
       setGulIcon(activeHeartIcon);
     }
-
-    if (!user.userID) {
-      setHeart(false);
-      setGulIcon(heartIcon);
-    }
-  }, [user.userID, authGul]);
-
+  }, [authGul]);
 
 
   const sendHeart = () => {
@@ -99,24 +95,20 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
       return;
     }
 
-    // if(ungGulingError || gulingError){
-    //   // window.location.reload();
-      
-    //   return
-    // }
-
-    if (!isHeart) {
+    if (!isLiked) {
       seteVotes((prevVotes) => prevVotes + 1);
-      setHeart(true);
+      setLiked(true);
       setGulIcon(activeHeartIcon);
       Guling(postID);
+      // dispatch(setLikeRedux(postID))
     }
 
-    if (isHeart) {
+    if (isLiked) {
       seteVotes((prevVotes) => prevVotes - 1);
-      setHeart(false);
+      setLiked(false);
       setGulIcon(heartIcon);
       Guling(postID);
+      // dispatch(setRemovedLikeRedux(postID))
     }
 
   };
@@ -153,4 +145,5 @@ const LikeDislikeComment: React.FC<LikeDislikeCommentProps> = ({
   );
 };
 
-export default LikeDislikeComment;
+
+export default LikeDislikeComment
