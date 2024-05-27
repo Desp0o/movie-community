@@ -24,7 +24,8 @@ const Quiz = () => {
         quizLength: 0,
         questionID: 0,
         correctAnswer: '',
-        questionIndex: 0
+        questionIndex: 0,
+        correctAnswersSum: 0
     })
 
     const getSingleQuiz = async () => {
@@ -54,7 +55,8 @@ const Quiz = () => {
                 quizLength: resQuizData.quiz?.questions,
                 questionID: resQuizData.question?.id,
                 correctAnswer: resQuizData.question?.var,
-                questionIndex: resQuizData.question?.question_index
+                questionIndex: resQuizData.question?.question_index,
+                correctAnswersSum: 0
             })
         } catch (error) {
             console.error("Error fetching quiz:", error);
@@ -80,11 +82,13 @@ const Quiz = () => {
     //handle correct answer
     const handleAnswer = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
         if (answerDivRef.current) {
-            answerDivRef.current.style.pointerEvents = "none";
+            // answerDivRef.current.style.pointerEvents = "none";
           }
 
         if(quizData.correctAnswer === event.currentTarget.textContent){
             setCorrect(1)
+            alert('correct')
+            setQuizData({...quizData, correctAnswersSum: quizData.correctAnswersSum + 1})
             event.currentTarget.style.backgroundColor = "green"
         }else{
             setCorrect(0)
@@ -122,6 +126,8 @@ const Quiz = () => {
         <div>
             <h3>{quizData.name}</h3>
             <div className=''>
+                {/* quzi numeric */}
+                <p> {quizData.questionIndex} / {quizData.quizLength}</p>
                 <h4 style={{ color: 'purple', fontWeight: "bolder" }}>{questions.name}</h4>
                 <div className='answers' ref={answerDivRef}>
                     {answers.map((item, index) => (
