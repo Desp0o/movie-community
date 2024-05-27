@@ -12,6 +12,8 @@ import { useUserHook } from "../../hooks/useUserHook";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
+import { useRefetchHook } from "../../hooks/useFeedRefetch";
+import { setFeedRefetch } from "../../Redux/feedRefetchSlicer";
 
 const AddPostPopUp = () => {
   const notify = () =>
@@ -24,6 +26,7 @@ const AddPostPopUp = () => {
   const dispatch = useDispatch();
   const { user } = useUserHook();
   const { addPostModalStates } = usePostAddModalHook();
+  const { useFeedRefetch } = useRefetchHook()
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [uploadedImage, setUploadedImage] = useState<string>("");
@@ -145,6 +148,7 @@ const AddPostPopUp = () => {
         img: undefined,
         type: 1,
       });
+      dispatch(setFeedRefetch(!useFeedRefetch))
     } catch (error: unknown) {
       console.error(error)
       notifyError();

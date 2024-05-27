@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { penIcon } from '../../assets/svg/penIcon';
 import { setSpinnerState } from '../../Redux/spinnerSlicer';
 import PostEditPopUp from '../createPostFeed/PostEditPopUp';
+import { setFeedRefetch } from '../../Redux/feedRefetchSlicer';
+import { useRefetchHook } from '../../hooks/useFeedRefetch';
 
 interface EditPannelPros{
     postID: string | number;
@@ -19,6 +21,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
     const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
     const token = localStorage.getItem('token')
     const [isActive, setActive] = useState(false)
+    const { useFeedRefetch } = useRefetchHook()
     const [openEditModal, setOpenEditModal] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -63,6 +66,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
           if(isInnerPage){
             navigate('/')
           }
+          dispatch(setFeedRefetch(!useFeedRefetch))
         } catch (error) {
           console.error(error);
           notifyError()

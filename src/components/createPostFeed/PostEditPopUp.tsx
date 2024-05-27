@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
 import PostStyle from "./addPostComps/PostStyle";
 import { addMediaIocn } from "../../assets/svg/addMediaIcon";
+import { useRefetchHook } from "../../hooks/useFeedRefetch";
+import { setFeedRefetch } from "../../Redux/feedRefetchSlicer";
 
 interface PostEditPopUpProps{
   closeEditPostModal: () => void;
@@ -30,6 +32,7 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
   const { user } = useUserHook();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const { useFeedRefetch } = useRefetchHook()
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [uploadedVideo, setUploadedVideo] = useState("");
   const [postValue, setPostValue] = useState<{
@@ -62,6 +65,7 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
             text: response.data.post.text ? response.data.post.text : '',
           }
         )
+        dispatch(setFeedRefetch(!useFeedRefetch))
       } catch (error) {
         console.error(error)
       }finally{

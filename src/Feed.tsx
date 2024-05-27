@@ -6,6 +6,7 @@ import "./Feed.css";
 import noAvatar from "./assets/noAvatar.jpeg"
 import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 import Spinner from "./components/spinner/Spinner";
+import { useRefetchHook } from "./hooks/useFeedRefetch";
 
 interface dataProps {
   guls: number;
@@ -38,6 +39,7 @@ interface dataProps {
 const Feed = () => {
   const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
+  const { useFeedRefetch } = useRefetchHook()
 
   const loadNextPage = () => {
     if (!isFetchingNextPage && hasNextPage) {
@@ -47,7 +49,7 @@ const Feed = () => {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [useFeedRefetch]);
 
   useEffect(()=>{
     const handleScroll = () => {

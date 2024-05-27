@@ -12,12 +12,15 @@ import BackDrop from "../backDrop/BackDrop";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
 import { toast } from "react-toastify";
 import { closePoll } from "../../assets/svg/closePoll";
+import { useRefetchHook } from "../../hooks/useFeedRefetch";
+import { setFeedRefetch } from "../../Redux/feedRefetchSlicer";
 
 const AddPoll = () => {
   const token = localStorage.getItem("token");
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const optionsContainerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch();
+  const { useFeedRefetch } = useRefetchHook()
   const { addPostModalStates } = usePostAddModalHook();
   const [pollQuestion, setPollQuestion] = useState("");
   const [pollOptions, setPollOptions] = useState(["", ""]);
@@ -81,6 +84,7 @@ const AddPoll = () => {
         );
         closeDefaultPostAddModal()
         console.log(response.data);
+        dispatch(setFeedRefetch(!useFeedRefetch))
       } catch (error) {
         console.error(error);      
       }finally{

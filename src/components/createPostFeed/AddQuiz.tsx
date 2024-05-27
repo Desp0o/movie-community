@@ -13,6 +13,8 @@ import { xIcon } from "../../assets/svg/Xicon";
 import limitedIMG from "../../assets/limited.webp"
 import { movieDataBase } from "./functions/fetchDB";
 import { dropDownArrow } from "../../assets/svg/dropDownArrow";
+import { useRefetchHook } from "../../hooks/useFeedRefetch";
+import { setFeedRefetch } from "../../Redux/feedRefetchSlicer";
 
 interface fetchedDataBaseProps {
     id: number;
@@ -29,6 +31,7 @@ const AddQuiz = () => {
   const dispatch = useDispatch();
   const quizFileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedImage, setUploadedImage] = useState("");
+  const { useFeedRefetch } = useRefetchHook()
   const [uploadedVideo, setUploadedVideo] = useState("");
   const [fetchedMovieDb, setFetchedMovieDb] = useState([])
   const [newMovie, setNewMovie] = useState('') //ფილმების ბაზის ფეჩინგის შესამომწებლად
@@ -164,6 +167,7 @@ const AddQuiz = () => {
           "multipart/form-data, application/json, text/plain, */*",
         }
       })
+      dispatch(setFeedRefetch(!useFeedRefetch))
       closeDefaultPostAddModal()
     } catch (error) {
       console.error(error)
