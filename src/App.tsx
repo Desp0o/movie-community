@@ -1,6 +1,5 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import Feed from "./Feed"
-import { useDarkModeHook } from "./hooks/useDarkModeHook"
 import "./index.css"
 import { useEffect } from "react"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
@@ -27,14 +26,10 @@ import CreateQuiz from "./pages/CreateQuiz"
 import Quizzes from "./pages/Quizzes"
 import Quiz from "./pages/Quiz"
 
-
-
-
 function App() {
   const token = localStorage.getItem('token')
   const { handleLogout } = useLogOut()
   const {isSpinner} = useSpinnerHook()
-  const {isDark} = useDarkModeHook()
   // const {user} = useUserHook()
   const dispatch = useDispatch()
 
@@ -50,10 +45,8 @@ function App() {
     return () => unsubscribe();
   }
 
-
   
     const {} = useQuery('checkUser', async ()=>{
-   
       if(token){
         try {
           const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
@@ -95,22 +88,14 @@ function App() {
     if(token){
       googleUserCeck()
     }
-
     if(!token){
       handleLogout()
     }
-
   },[dispatch])
 
-  useEffect(()=>{
-    isDark ?
-            document.documentElement.style.backgroundColor = '#0B1416'
-           :
-            document.documentElement.style.backgroundColor = '#fff'
-  },[isDark])
 
   return (
-      <div className={isDark ? "app darkMode" : "app"}>
+      <div className="app">
         {isSpinner && <Spinner />}
         <Login />
         <ToastContainer closeOnClick={true}/>

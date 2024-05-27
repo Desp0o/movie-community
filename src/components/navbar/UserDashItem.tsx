@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { Link } from "react-router-dom";
 
 interface UserDashItemProps {
@@ -12,12 +11,11 @@ interface UserDashItemProps {
 }
 
 const UserDashItem: React.FC<UserDashItemProps> = ({pathName, icon, text, toggler, funName, closer }) => {
-  const { isDark } = useDarkModeHook()
 
   return (
     pathName ? 
     <Link to={pathName}>
-    <div className={isDark ? "user_dash_item dark" : "user_dash_item"} onClick={() => { closer && closer(); funName && funName(); }}>
+    <div className="user_dash_item" onClick={() => { closer && closer(); funName && funName(); }}>
       {icon}
       <p>{text}</p>
 
@@ -27,7 +25,7 @@ const UserDashItem: React.FC<UserDashItemProps> = ({pathName, icon, text, toggle
     </div>
     </Link>
     :
-    <div className={isDark ? "user_dash_item dark" : "user_dash_item"} onClick={() => { closer && closer(); funName && funName(); }}>
+    <div className="user_dash_item" onClick={() => { closer && closer(); funName && funName(); }}>
       {icon}
       <p>{text}</p>
 

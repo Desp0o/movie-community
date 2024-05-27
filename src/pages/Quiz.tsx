@@ -28,6 +28,11 @@ const Quiz = () => {
         correctAnswersSum: 0
     })
 
+    // get quiz onload
+    useEffect(() => {
+        getSingleQuiz();
+    }, []);
+
     const getSingleQuiz = async () => {
         const token = localStorage.getItem('token');
 
@@ -70,12 +75,6 @@ const Quiz = () => {
             console.error("Error fetching quiz:", error);
         }
     };
-
-    // get quiz onload
-    useEffect(() => {
-        getSingleQuiz();
-    }, []);
-
 
     //თუ კითხვის ინდექსი უნდრის სიგრძეს მაშინ
     //მაშინ ბოლო კითხვას ვაგზავნით
@@ -157,3 +156,4 @@ const Quiz = () => {
 };
 
 export default Quiz;
+

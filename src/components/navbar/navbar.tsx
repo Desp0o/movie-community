@@ -4,7 +4,6 @@ import { useUserHook } from "../../hooks/useUserHook";
 import { bellPasiveIcon } from "../../assets/svg/bell";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 import { useEffect, useRef, useState } from "react";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +22,6 @@ interface RootState {
 
 const Navbar = () => {
   const { user } = useUserHook();
-  const { isDark } = useDarkModeHook();
   const { userDashState } = useUserDashHook();
   const { handleVisibility } = useLoginModal();
   const [isOpen, setOpen] = useState(false)
@@ -71,7 +69,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={isDark ? "navbar dark" : "navbar"}>
+      <nav className="navbar">
         <div className="logo_burger_menu">
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
           <Link to='/'><p>LOGO</p></Link>
@@ -82,7 +80,7 @@ const Navbar = () => {
           <input
             name="search"
             type="text"
-            className={isDark ? "nav_search_input dark" : "nav_search_input"}
+            className="nav_search_input"
             placeholder="search..."
           />
         </div>
@@ -101,24 +99,13 @@ const Navbar = () => {
             <div className="nav_profile_items">
                 <p style={{color:"blue", fontWeight:"900"}}>{user?.bells}</p>
 
-              <div
-                className={
-                  isDark
-                    ? "nav_profile_item_parent dark responsive_hidden"
-                    : "nav_profile_item_parent responsive_hidden "
-                }
-              >
+              <div className="nav_profile_item_parent  responsive_hidden">
                 {bellPasiveIcon}
               </div>
 
               <div
                 ref={avatarRef}
-                className={
-                  isDark
-                    ? "nav_profile_item_parent dark"
-                    : "nav_profile_item_parent"
-                }
-              >
+                className="nav_profile_item_parent">
                 
                 <img
                   src={user.avatar ? user.avatar : noAvatar}

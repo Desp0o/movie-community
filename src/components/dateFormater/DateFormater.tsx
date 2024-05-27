@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDarkModeHook } from "../../hooks/useDarkModeHook";
 
 interface DateFormaterProps {
   date: string;
 }
 
 const DateFormater: React.FC<DateFormaterProps> = ({ date }) => {
-  const { isDark } = useDarkModeHook();
 
   const [timeAgo, setTimeAgo] = useState("");
 
@@ -57,7 +55,7 @@ const DateFormater: React.FC<DateFormaterProps> = ({ date }) => {
     return () => clearInterval(intervalId);
   }, [date]);
   return (
-    <p className={isDark ? "elapsed_time dark" : "elapsed_time"}>{timeAgo}</p>
+    <p className="elapsed_time">{timeAgo}</p>
   );
 };
 

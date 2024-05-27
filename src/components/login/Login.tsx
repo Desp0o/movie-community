@@ -13,7 +13,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const {isModalVisible} = useLoginModal()
   const [openForgetPWD, setOpenForgetPWD] = useState(false)
-  // const { isDark } = useDarkModeHook();
 
   const modalCloser = () => {
     dispatch(setModalVisible(false));

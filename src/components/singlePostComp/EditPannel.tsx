@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDarkModeHook } from '../../hooks/useDarkModeHook'
 import { canIcon } from '../../assets/svg/canIcon'
 import axios from 'axios';
 import { setRefetch } from '../../Redux/RefetchSlicer';
@@ -21,7 +20,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
     const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
     const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
     const token = localStorage.getItem('token')
-    const {isDark} = useDarkModeHook()
     const {requestRefetch} = useRefetchHook()
     const [isActive, setActive] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
@@ -106,7 +104,7 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
         {
             isActive 
             ?
-            <div className={isDark ? "post_setting_pannel dark" : "post_setting_pannel"}>
+            <div className="post_setting_pannel">
               <div onClick={deletePost} className='post_delete'>
                 <span style={{width:"20px", height:"20px"}}>{canIcon}</span>
                  Delete
