@@ -10,8 +10,6 @@ import { usePostAddModalHook } from "../../hooks/usePostAddModalHook";
 import { useEffect, useRef, useState } from "react";
 import { useUserHook } from "../../hooks/useUserHook";
 import axios from "axios";
-import { setRefetch } from "../../Redux/RefetchSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
 
@@ -25,7 +23,6 @@ const AddPostPopUp = () => {
     toast.error("Error", { autoClose: 1000, theme: "colored" });
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const { requestRefetch } = useRefetchHook();
   const { addPostModalStates } = usePostAddModalHook();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -140,7 +137,6 @@ const AddPostPopUp = () => {
       });
       notify();
       closeDefaultPostAddModal();
-      dispatch(setRefetch(!requestRefetch));
       setUploadedImage("");
       setPostValue({
         ...postValue,

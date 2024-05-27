@@ -118,6 +118,7 @@
   overflow: hidden;
   width: 602px;
   height: 425px;
+  min-height: 425px;
   border-radius: 12px;
 }
 

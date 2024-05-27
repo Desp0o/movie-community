@@ -3,8 +3,8 @@ import userSlicer from "./userSlicer";
 import userDahsSlicer from "./userDahsSlicer";
 import loginModalSlicer from "./loginModalSlicer";
 import spinnerSlicer from "./spinnerSlicer";
-import RefetchSlicer from "./RefetchSlicer";
 import postModalSclier from "./postModal"
+import feedPathRedux from "./pagePath";
 
 const store = configureStore({
     reducer:{
@@ -12,8 +12,8 @@ const store = configureStore({
         userDashStore: userDahsSlicer,
         loginModalStore: loginModalSlicer,
         spinnerSote: spinnerSlicer,
-        refetchStore: RefetchSlicer,
         addPostModalStore: postModalSclier,
+        feedStore: feedPathRedux
     }
 })
 

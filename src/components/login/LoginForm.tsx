@@ -3,8 +3,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
 import { setUser } from "../../Redux/userSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
-import { setRefetch } from "../../Redux/RefetchSlicer";
 import { eyeClose, eyeIcon } from "../../assets/svg/eyeIco";
 import InputComponent from "../inputComponent/InputComponent";
 import LoginButtons from "./SocialLogins";
@@ -16,7 +14,6 @@ interface LoginProps{
 
 const LoginForm:React.FC<LoginProps> = ({funcName}) => {
   const dispatch = useDispatch();
-  const { requestRefetch } = useRefetchHook();
   const [_isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
@@ -58,8 +55,6 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
       localStorage.setItem("score", response.data?.user?.point);
       localStorage.setItem("bells", response.data?.user?.bells);
 
-
-      dispatch(setRefetch(!requestRefetch));
       dispatch(setModalVisible(false));
       dispatch(
         setUser({

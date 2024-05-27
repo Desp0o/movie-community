@@ -1,6 +1,5 @@
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
-import { useRefetchHook } from "./hooks/useRefetchHook";
 import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
@@ -37,7 +36,6 @@ interface dataProps {
 }
 
 const Feed = () => {
-  const { requestRefetch } = useRefetchHook();
   const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
 
@@ -49,7 +47,7 @@ const Feed = () => {
 
   useEffect(() => {
     refetch();
-  }, [requestRefetch, user]);
+  }, []);
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -68,10 +66,10 @@ const Feed = () => {
   
 
 
-if(data){
-  console.log(data);
+// if(data){
+//   console.log(data);
   
-}
+// }
 
   return (
     <>

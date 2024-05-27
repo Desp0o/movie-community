@@ -5,8 +5,6 @@ import {
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
-import { setRefetch } from "../../Redux/RefetchSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { useDispatch } from "react-redux";
 import { useUserHook } from "../../hooks/useUserHook";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
@@ -26,7 +24,6 @@ interface PollPropsMain {
 }
 
 const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
-  const { requestRefetch } = useRefetchHook()
   const { user } = useUserHook()
   const dispatch = useDispatch()
   const [answersSum, setAnswersSum] = useState(0);
@@ -55,7 +52,6 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
       );
 
       // console.log(res);
-      dispatch(setRefetch(!requestRefetch))      
       refetch();
     } catch (error) {
       console.error(error);

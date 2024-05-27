@@ -1,32 +1,38 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
+import { useDispatch, useSelector } from 'react-redux';
 import { useUserHook } from '../../hooks/useUserHook';
-import { useRefetchHook } from '../../hooks/useRefetchHook';
+import { setFeedPath } from '../../Redux/pagePath';
 
-export const FeedFunctions = () => {
-    const {requestRefetch} = useRefetchHook()
-    const { user } = useUserHook();
-    const [token, setToken] = useState(localStorage.getItem("token")) //set state to avoid error in path changing
-    const [lastPage, setLastPage] = useState(0)
+interface RootState {
+    feedStore:{
+        feedPathStatus: string;
+    }
+}
 
+export const FeedFunctions = () => {    
+    const feedPathReduxStore = useSelector((state:RootState) => state.feedStore.feedPathStatus)
+    const [lastPage, setLastPage] = useState(() => {
+        const storedLastPage = localStorage.getItem('lastPage');
+        return storedLastPage ? parseInt(storedLastPage) : 1;
+    });
+    const { user } = useUserHook()
+    const dispatch = useDispatch()
 
-    const [path, setPath] = useState('https://api.pinky.ge/api/guestFeed?page=')
     useEffect(()=>{
+        if(user.userID && user.name){
+            dispatch(setFeedPath('https://api.pinky.ge/api/authFeed?page='))
+        }else{
+            dispatch(setFeedPath('https://api.pinky.ge/api/guestFeed?page='))
+        }
+    },[user])
 
-      if(!user.name){
-        setPath('https://api.pinky.ge/api/guestFeed?page=')
-        setToken(token)
-      }
-      if(user.userID){
-        setPath('https://api.pinky.ge/api/authFeed?page=')
-        setToken(localStorage.getItem("token"))
-      }
-      
-      refetch();
 
-      
-    },[user, token])
+    useEffect(() => {
+        localStorage.setItem('lastPage', lastPage?.toString());
+    }, [lastPage]);
+
 
     const {
         data,
@@ -38,10 +44,12 @@ export const FeedFunctions = () => {
         refetch,
         isFetched,
     } = useInfiniteQuery(
-        ["feed-query",{path, requestRefetch}],
+        ["feed-query",{feedPathReduxStore}],
         async ({ pageParam = 1 }) => {
+            const token = localStorage.getItem("token")
+
             try {
-                const response = await axios.get(`${path}${pageParam}`,
+                const response = await axios.get(`${feedPathReduxStore}${pageParam}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -55,11 +63,11 @@ export const FeedFunctions = () => {
             }
         },
         {
-            getNextPageParam: (_lastPage, pages) => {
-                if (pages.length >= lastPage) {
+            getNextPageParam: (_lastPage, allPages) => {
+                if (allPages.length >= lastPage) {
                     return;
                 }
-                return pages.length + 1;
+                return allPages.length + 1;
             },
         },
     );

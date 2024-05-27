@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { canIcon } from '../../assets/svg/canIcon'
 import axios from 'axios';
-import { setRefetch } from '../../Redux/RefetchSlicer';
 import { useDispatch } from 'react-redux';
-import { useRefetchHook } from '../../hooks/useRefetchHook';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { penIcon } from '../../assets/svg/penIcon';
@@ -20,7 +18,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
     const notify = () => toast.success('Post deleted Successfully !',{ autoClose: 1000, theme: "colored" });
     const notifyError = () => toast.error('Error',{ autoClose: 1000, theme: "colored" });
     const token = localStorage.getItem('token')
-    const {requestRefetch} = useRefetchHook()
     const [isActive, setActive] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const dispatch = useDispatch()
@@ -63,7 +60,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
           
           // console.log(response);
           notify()
-          dispatch(setRefetch(!requestRefetch))
           if(isInnerPage){
             navigate('/')
           }

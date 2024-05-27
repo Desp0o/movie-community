@@ -4,12 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/userSlicer';
 import { setModalVisible } from '../Redux/loginModalSlicer';
 import axios from 'axios';
-import { setRefetch } from '../Redux/RefetchSlicer';
-import { useRefetchHook } from './useRefetchHook';
-
 
 export const useGoogleLogIn = () => {
-    const {requestRefetch} = useRefetchHook()
     const dispatch = useDispatch()
 
     const googleLogIn = async () => {
@@ -52,7 +48,6 @@ export const useGoogleLogIn = () => {
             points: res.data.point,
             bells: res.data.bells
           }))
-          dispatch(setRefetch(!requestRefetch))
           return signIn;
         } catch (error) {
           console.error(error);

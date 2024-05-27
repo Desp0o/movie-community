@@ -17,14 +17,12 @@ import { useUserHook } from "../hooks/useUserHook";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 import Spinner from "../components/spinner/Spinner";
 import Poll from "../components/singlePostComp/Poll";
-import { useRefetchHook } from "../hooks/useRefetchHook";
 import AnswerQuizComp from "../components/singlePostComp/AnswerQuizComp";
 
 
 const Post = () => {
   const token = localStorage.getItem('token')
   const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
-  const { requestRefetch } = useRefetchHook();
 
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
@@ -69,9 +67,9 @@ const Post = () => {
 
 
   
-  useEffect(()=>{
-    refetch()    
-  },[requestRefetch])
+  // useEffect(()=>{
+  //   refetch()    
+  // },[requestRefetch])
 
   if(isError){
     console.error(error)

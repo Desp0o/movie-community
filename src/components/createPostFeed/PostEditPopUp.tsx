@@ -8,8 +8,6 @@ import { setAddPostModal } from "../../Redux/postModal";
 import React, { useEffect, useRef, useState } from "react";
 import { useUserHook } from "../../hooks/useUserHook";
 import axios from "axios";
-import { setRefetch } from "../../Redux/RefetchSlicer";
-import { useRefetchHook } from "../../hooks/useRefetchHook";
 import { toast } from "react-toastify";
 import { setSpinnerState } from "../../Redux/spinnerSlicer";
 import PostStyle from "./addPostComps/PostStyle";
@@ -30,7 +28,6 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
     toast.error("Error", { autoClose: 1000, theme: "colored" });
   const dispatch = useDispatch();
   const { user } = useUserHook();
-  const { requestRefetch } = useRefetchHook();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [uploadedImage, setUploadedImage] = useState<string>("");
@@ -87,7 +84,6 @@ const editPost = async () => {
         Authorization:  `Bearer ${token}`
       }
     })
-    dispatch(setRefetch(!requestRefetch))
     closeEditPostModal()    
     notify()
   } catch (error) {
