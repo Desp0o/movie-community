@@ -48,7 +48,7 @@ const Quiz = () => {
             ];
             setAnswers(fetchedAnswer);
             console.log(res.data);
-            
+
             setQuizData({
                 ...quizData,
                 name: resQuizData.quiz?.name,
@@ -58,6 +58,14 @@ const Quiz = () => {
                 questionIndex: resQuizData.question?.question_index,
                 correctAnswersSum: 0
             })
+
+            //clear pointer event prevent and background on answers
+            if (answerDivRef.current) {
+                answerDivRef.current.style.pointerEvents = "unset";
+                Array.from(answerDivRef.current.children).forEach((item:any) => {
+                    item.style.backgroundColor = "unset";
+                });
+            }
         } catch (error) {
             console.error("Error fetching quiz:", error);
         }
@@ -74,7 +82,7 @@ const Quiz = () => {
     useEffect(() => {
         if (quizData.questionIndex === quizData.quizLength) {
             setIsLastQuest(1);
-        }else{
+        } else {
             setIsLastQuest(0);
         }
     }, [quizData.questionIndex, quizData.quizLength]);
@@ -82,47 +90,49 @@ const Quiz = () => {
     //handle correct answer
     const handleAnswer = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
         if (answerDivRef.current) {
-            // answerDivRef.current.style.pointerEvents = "none";
-          }
+            answerDivRef.current.classList.add("no-cursor")
+            answerDivRef.current.style.pointerEvents = "none"
+        }
 
-        if(quizData.correctAnswer === event.currentTarget.textContent){
+        if (quizData.correctAnswer === event.currentTarget.textContent) {
             setCorrect(1)
             //update correct answers sum
-            setQuizData({...quizData, correctAnswersSum: quizData.correctAnswersSum + 1})
+            setQuizData({ ...quizData, correctAnswersSum: quizData.correctAnswersSum + 1 })
             event.currentTarget.style.backgroundColor = "green"
-        }else{
+        } else {
             setCorrect(0)
         }
 
-        if(quizData.correctAnswer !== event.currentTarget.textContent){
+        if (quizData.correctAnswer !== event.currentTarget.textContent) {
             event.currentTarget.style.backgroundColor = "red"
         }
     }
-   
+
     const sendAnswer = async () => {
         const token = localStorage.getItem('token')
-        
+
         try {
-            await axios.post(`https://api.pinky.ge/api/quizAnswering/${quizData.questionID}`,{
+            await axios.post(`https://api.pinky.ge/api/quizAnswering/${quizData.questionID}`, {
                 status: isLastQuest,
                 result: isCorrect
-            },{
-                headers:{
+            }, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
 
-            if(isLastQuest === 0){
+            if (isLastQuest === 0) {
                 getSingleQuiz()
-            }else{
+            } else {
                 alert('was last questuin')
             }
+
         } catch (error) {
             console.log(error)
         }
     };
 
-    
+
     if (!questions) {
         return <div>Loading...</div>;
     }
