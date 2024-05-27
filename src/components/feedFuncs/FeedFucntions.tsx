@@ -8,15 +8,7 @@ export const FeedFunctions = () => {
     const {requestRefetch} = useRefetchHook()
     const { user } = useUserHook();
     const [token, setToken] = useState(localStorage.getItem("token")) //set state to avoid error in path changing
-    const [lastPage, setLastPage] = useState(() => {
-        // Retrieve lastPage from localStorage or set it to 1 if not present
-        const storedLastPage = localStorage.getItem('lastPage');
-        return storedLastPage ? parseInt(storedLastPage) : 1;
-    });
-
-    useEffect(() => {
-        localStorage.setItem('lastPage', lastPage?.toString());
-    }, [lastPage]);
+    const [lastPage, setLastPage] = useState(0)
 
 
     const [path, setPath] = useState('https://api.pinky.ge/api/guestFeed?page=')
@@ -63,11 +55,11 @@ export const FeedFunctions = () => {
             }
         },
         {
-            getNextPageParam: (_lastPage, allPages) => {
-                if (allPages.length >= lastPage) {
+            getNextPageParam: (_lastPage, pages) => {
+                if (pages.length >= lastPage) {
                     return;
                 }
-                return allPages.length + 1;
+                return pages.length + 1;
             },
         },
     );

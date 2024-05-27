@@ -6,19 +6,12 @@ import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useEffect, useRef, useState } from "react";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
-import { setLeftMenuState } from "../../Redux/leftMenuSlicer";
 import noAvatar from "../../assets/noAvatar.jpeg"
 import { Link } from "react-router-dom";
 
-
-interface RootState {
-  leftMenuStore:{
-    isLeftMenuOpen: boolean
-  }
-}
 
 const Navbar = () => {
   const { user } = useUserHook();
@@ -26,7 +19,6 @@ const Navbar = () => {
   const { handleVisibility } = useLoginModal();
   const [isOpen, setOpen] = useState(false)
   const dispatch = useDispatch();
-  const isLeftMenuOpen = useSelector((state: RootState) => state.leftMenuStore.isLeftMenuOpen)
 
   const avatarRef = useRef<HTMLDivElement>(null);
   const userDashRef = useRef<HTMLDivElement>(null);
@@ -59,12 +51,6 @@ const Navbar = () => {
 
   const handleBurgerMenuEvent = () => {
     setOpen(!isOpen)    
-
-    if(isLeftMenuOpen === true){
-      dispatch(setLeftMenuState(false))
-    }else if(isLeftMenuOpen === false){
-      dispatch(setLeftMenuState(true))
-    }
   }
 
   return (
