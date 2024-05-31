@@ -57,6 +57,7 @@
   --BG-color: #070316;
   --Secondary-400: #309782;
   --Primary-600: #210F60;
+  --Card-background: #0E052D;
 }
 
 .backdropFilter{
@@ -89,7 +90,7 @@ body {
 
 .app{
   width: 100%;
-  color: var(--black);
+  color: #F7FFFB;
   
   font-family: "Noto Sans Georgian";
 }

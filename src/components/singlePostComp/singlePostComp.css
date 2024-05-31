@@ -6,9 +6,9 @@
   flex-direction: column;
   align-items: center;
   border-radius: 6px;
-  border: 1px solid #d5dae3;
-
-  background-color: var(--post-bg-light);
+  
+  border: 1px solid #1A453C;
+  background: var(--Card-background, #0E052D);
 
   display: flex;
   align-items: center;

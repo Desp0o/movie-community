@@ -30,7 +30,3 @@
     line-height: 20px;
     color: var(--dark-grey);
 }
-
-.poll_item{
-    overflow: hidden;
-}

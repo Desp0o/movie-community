@@ -7,8 +7,8 @@
   gap: 10px;
 
   border-radius: 6px;
-  border: 1px solid #d5dae3;
-  background: #fff;
+  border: 1px solid #1A453C;
+  background: var(--Card-background, #0E052D);
 }
 
 .user_avatar_input {
