@@ -43,44 +43,43 @@ function App() {
     return () => unsubscribe();
   }
 
-  
-  useQuery('checkUser', async ()=>{
-      if(token){
-        try {
-          const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-  
-            localStorage.setItem('userName', response.data.name)
-            localStorage.setItem('userID', response.data.id)
-            localStorage.setItem('avatar', response.data.avatar)
-            localStorage.setItem("score", response.data?.point);
-            localStorage.setItem("bells", response.data?.bells);
-            
-            dispatch(
-              setUser({
-                name: response.data.name, 
-                userID: response.data.id, 
-                avatar: response.data.avatar,
-                score: response.data.point,
-                bells: response.data.bells
-              })
-            )
-            
-        } catch (error) {
-          console.error(error);
-          localStorage.removeItem('userName')
-          localStorage.removeItem('token')
-          localStorage.removeItem('userID')
-          localStorage.removeItem('bells')
-          localStorage.removeItem('score')
-        }
-      }
+  if(token){
+    useQuery('checkUser', async ()=>{
+        
+          try {
+            const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                      'Content-Type': 'application/json'
+                  }
+              });
     
-  })
+              localStorage.setItem('userName', response.data.name)
+              localStorage.setItem('userID', response.data.id)
+              localStorage.setItem('avatar', response.data.avatar)
+              localStorage.setItem("score", response.data?.point);
+              localStorage.setItem("bells", response.data?.bells);
+              
+              dispatch(
+                setUser({
+                  name: response.data.name, 
+                  userID: response.data.id, 
+                  avatar: response.data.avatar,
+                  score: response.data.point,
+                  bells: response.data.bells
+                })
+              )
+              
+          } catch (error) {
+            console.error(error);
+            localStorage.removeItem('userName')
+            localStorage.removeItem('token')
+            localStorage.removeItem('userID')
+            localStorage.removeItem('bells')
+            localStorage.removeItem('score')
+          }
+    })
+  }
 
   useEffect(()=>{
     if(token){
