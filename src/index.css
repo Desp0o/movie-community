@@ -95,10 +95,6 @@ body {
   font-family: "Noto Sans Georgian";
 }
 
-.darkMode{
-  background-color: var(--dark-mode);
-  color: var(--dark-mode-txt);
-}
 
 .button{
   cursor: pointer;

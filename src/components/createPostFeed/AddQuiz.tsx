@@ -41,10 +41,10 @@ const AddQuiz = () => {
     img: File | undefined;
     question: string;
     answer: string;
-    type: string;
+    type: number;
   }>({
     img: undefined,
-    type: "12",
+    type: 0,
     question: "",
     answer: "",
   });
@@ -160,7 +160,7 @@ const AddQuiz = () => {
     const token = localStorage.getItem('token')
 
     try {
-      await axios.post(import.meta.env.VITE_QUESTION_ADD, quizAnswers,{
+      const res = await axios.post(import.meta.env.VITE_QUESTION_ADD, quizAnswers,{
         headers:{
           Authorization: `Bearer ${token}`,
           "Content-Type":
@@ -169,6 +169,8 @@ const AddQuiz = () => {
       })
       dispatch(setFeedRefetch(!useFeedRefetch))
       closeDefaultPostAddModal()
+      console.log(res);
+      
     } catch (error) {
       console.error(error)
     }
@@ -307,6 +309,7 @@ const AddQuiz = () => {
 
             <input
               type="file"
+              accept="image/*"
               style={{ display: "none" }}
               ref={quizFileInputRef}
               onChange={handleQuizFileChange}

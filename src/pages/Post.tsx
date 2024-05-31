@@ -65,6 +65,7 @@ const Post = () => {
     }
   );  
 
+console.log(data);
 
   
   // useEffect(()=>{

@@ -72,6 +72,7 @@ const PostTextarea: React.FC<PostTextareaProps> = ({
       <input
         ref={fileInputRefProp}
         type="file"
+        accept="image/*,video/*"
         onChange={handleFileChangeProp}
         style={{ display: "none" }}
       />

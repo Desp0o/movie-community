@@ -9,7 +9,7 @@
   border-radius: 6px;
   border: 1px solid #D5DAE3;
 
-  background-color: var(--post-bg-light);
+  background-color: var(--Card-background);
 }
 
 .like_comment_{

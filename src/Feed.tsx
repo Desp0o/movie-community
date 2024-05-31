@@ -68,10 +68,10 @@ const Feed = () => {
   
 
 
-// if(data){
-//   console.log(data);
+if(data){
+  console.log(data);
   
-// }
+}
 
   return (
     <>
