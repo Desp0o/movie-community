@@ -5,7 +5,7 @@ export const movieDataBase = () => {
         const token = localStorage.getItem('token')
     
         try {
-          const response = await axios.post('https://api.pinky.ge/api/movieDB', {movie:answer}, {
+          const response = await axios.post(import.meta.env.VITE_MOVIE_DB, {movie:answer}, {
             headers: {
               Authorization: `Bearer ${token}`
             }

@@ -71,7 +71,7 @@ const CreateQuiz = () => {
     const token = localStorage.getItem('token')
     e.preventDefault();
     try {
-      const response = await axios.post('https://api.pinky.ge/api/quizAdding', quizData, {
+      const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers:{
             Authorization: `Bearer ${token}`
         }

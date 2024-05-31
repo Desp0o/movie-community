@@ -5,7 +5,7 @@ const useSavePost = () => {
     return useMutation(async (postID:number) => {
         const token = localStorage.getItem('token');
         
-        const response = await axios.get(`https://api.pinky.ge/api/saving/${postID}`, {
+        const response = await axios.get(`${import.meta.env.VITE_POST_SAVING}${postID}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

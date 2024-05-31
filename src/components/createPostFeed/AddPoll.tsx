@@ -71,7 +71,7 @@ const AddPoll = () => {
       dispatch(setSpinnerState(true))
       try {
         const response = await axios.post(
-          "https://api.pinky.ge/api/pollAdding",
+          import.meta.env.VITE_POLL_ADD,
           {
             text: pollQuestion,
             pollAnswers: pollOptions,

@@ -9,7 +9,7 @@ interface quizProps {
 
 
 const fetchQuizzes = async ({ pageParam = 1 }) => {
-  const res = await axios.get(`https://api.pinky.ge/api/guestQuizzes?page=${pageParam}`);
+  const res = await axios.get(`${import.meta.env.VITE_FETCH_QUIZZES}${pageParam}`);
   return res.data;
 };
 

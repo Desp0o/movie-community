@@ -44,7 +44,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
 
     try {
       await axios.get(
-        `https://api.pinky.ge/api/pollAnswering/${id}`,
+        `${import.meta.env.VITE_POLL_ANSWERING}${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

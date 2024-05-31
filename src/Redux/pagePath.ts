@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const feedPathRedux = createSlice({
     name:"pageParamsSlicer",
     initialState:{
-        feedPathStatus: 'https://api.pinky.ge/api/guestFeed?page='
+        feedPathStatus: import.meta.env.VITE_GUEST_FEED
     },
     reducers:{
         setFeedPath(state, action){

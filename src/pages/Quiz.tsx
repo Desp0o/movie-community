@@ -33,7 +33,7 @@ const Quiz = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const res = await axios.get(`https://api.pinky.ge/api/quiz/${id}`, {
+            const res = await axios.get(`${import.meta.env.VITE_SINGLE_QUIZ}${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -116,7 +116,7 @@ const Quiz = () => {
         const token = localStorage.getItem('token')
 
         try {
-            await axios.post(`https://api.pinky.ge/api/quizAnswering/${quizData.questionID}`, {
+            await axios.post(`${import.meta.env.VITE_QUIZ_ANSWERING}${quizData.questionID}`, {
                 status: isLastQuest,
                 result: isCorrect
             }, {

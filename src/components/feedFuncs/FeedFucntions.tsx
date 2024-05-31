@@ -22,9 +22,9 @@ export const FeedFunctions = () => {
 
     useEffect(()=>{
         if(user.userID && user.name){
-            dispatch(setFeedPath('https://api.pinky.ge/api/authFeed?page='))
+            dispatch(setFeedPath(import.meta.env.VITE_AUTH_FEED))
         }else{
-            dispatch(setFeedPath('https://api.pinky.ge/api/guestFeed?page='))
+            dispatch(setFeedPath(import.meta.env.VITE_GUEST_FEED))
         }
     },[user, dispatch])
 

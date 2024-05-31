@@ -10,7 +10,7 @@ export const GulingFuction = () => {
     const token = localStorage.getItem('token')
     
         try {
-          await axios.get(`https://api.pinky.ge/api/guling/${postID}`,{
+          await axios.get(`${import.meta.env.VITE_GULING}${postID}`,{
             headers:{
               Authorization:`Bearer ${token}`
             }
