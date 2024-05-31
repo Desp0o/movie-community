@@ -47,7 +47,25 @@ const Quiz = () => {
                 res.data?.question?.var2,
                 res.data?.question?.var3
             ];
-            setAnswers(fetchedAnswer);
+
+            const shuffleAnswers = (array: string[]): string[] => {
+                let shuffleArray: string[] = []
+                let usedIndexes: number[] = []
+        
+                let i = 0;
+        
+                while(i < array.length){
+                    let randomNumber = Math.floor(Math.random() * array.length)
+                    if(!usedIndexes.includes(randomNumber)){
+                        shuffleArray.push(array[randomNumber])
+                        usedIndexes.push(randomNumber)
+                        i++;
+                    }
+                }                
+                return shuffleArray;
+            }
+
+            setAnswers(shuffleAnswers(fetchedAnswer)) //set randomized array to answers
             console.log(res.data);
 
             setQuizData({
@@ -79,7 +97,6 @@ const Quiz = () => {
         getSingleQuiz();
     }, []);
 
-    
 
     //თუ კითხვის ინდექსი უნდრის სიგრძეს მაშინ
     //მაშინ ბოლო კითხვას ვაგზავნით
