@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./postPollStyles.css"
 import React, { useEffect, useState } from "react";
 import {
   QueryObserverResult,

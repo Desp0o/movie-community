@@ -31,17 +31,6 @@
     color: var(--dark-grey);
 }
 
-.votes_undo span{
-    width: 4px;
-    height: 4px;
-    background-color: var(--dark-grey);
-    border-radius: 50%;
-}
-
-.poll_undo{
-font-size: 14px;
-line-height: 20px;
-font-weight: 600;
-color: var(--secondary);
-cursor: pointer;
+.poll_item{
+    overflow: hidden;
 }
