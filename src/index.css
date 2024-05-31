@@ -36,7 +36,12 @@
   --orange-sec:#EA5651;
   --post-bg-dark:#1C1F24;
   --post-bg-light:#FFFFFF;
-  --poll-item: #DADCE2
+  --poll-item: #DADCE2;
+
+
+  --BG-color: #070316;
+  --Secondary-400: #309782;
+  --Primary-600: #210F60;
 }
 
 .backdropFilter{
@@ -55,7 +60,9 @@ a{
   height: fit-content;
 }
 
-
+html{
+  background: var(--BG-color);
+}
 
 button{
   border: none;
@@ -69,13 +76,14 @@ body {
   overflow-x: hidden;
   background-color: unset;
   overscroll-behavior: none;
+  
 }
 
 .app{
   width: 100%;
   min-height: 100vh;
   color: var(--black);
-  background-color: var(--light-mode);
+  
   font-family: "Noto Sans Georgian";
 }
 
