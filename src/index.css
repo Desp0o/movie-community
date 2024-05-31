@@ -8,7 +8,22 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 10px;  
+  height: 12px; 
+}
+
+::-webkit-scrollbar-track {
+  background: var(--BG-color); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--Secondary-400); 
+  border-radius: 6px;
+}
+
 :root {
+  background: var(--BG-color);
   font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -60,10 +75,6 @@ a{
   height: fit-content;
 }
 
-html{
-  background: var(--BG-color);
-}
-
 button{
   border: none;
 }
@@ -71,17 +82,13 @@ button{
 body {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
   overflow-x: hidden;
   background-color: unset;
   overscroll-behavior: none;
-  
 }
 
 .app{
   width: 100%;
-  min-height: 100vh;
   color: var(--black);
   
   font-family: "Noto Sans Georgian";
@@ -112,6 +119,60 @@ body {
 
 textarea{
   font-family: inherit;
+}
+
+.eclipse-bg-top{
+  width: 400px;
+  height: 400px;
+
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-radius: 400px;
+  background: var(--Secondary-400);
+  filter: blur(250px);
+}
+
+.eclipse-bg-right{
+  width: 400px;
+  height: 400px;
+
+  position: fixed;
+  top: 444px;
+  right: -200px;
+
+  border-radius: 400px;
+  background: var(--Primary-600);
+  filter: blur(250px);
+}
+
+.eclipse-bg-left{
+  width: 400px;
+  height: 400px;
+
+  position: fixed;
+  top: 444px;
+  left: -200px;
+
+  border-radius: 400px;
+  background: var(--Primary-600);
+  filter: blur(250px);
+}
+
+.eclipse-bg-bottom{
+  width: 400px;
+  height: 400px;
+
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-radius: 400px;
+  background: var(--Secondary-400);
+  filter: blur(250px);
 }
 
 @media (max-width:600px) {

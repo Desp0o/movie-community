@@ -6,7 +6,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebaseConfig"
 import { setUser } from "./Redux/userSlicer"
 import { useDispatch } from "react-redux"
-// import { useUserHook } from "./hooks/useUserHook"
 import Privacy from "./pages/privacy"
 import Profile from "./pages/Profile"
 import RequireAuth from "./components/RequireAuth/RequireAuth"
@@ -37,7 +36,6 @@ function App() {
     Boolean(localStorage.getItem('darkMode'))    
   },[])
 
-
   const googleUserCeck = () => {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, ()=>{})    
@@ -46,7 +44,7 @@ function App() {
   }
 
   
-    useQuery('checkUser', async ()=>{
+  useQuery('checkUser', async ()=>{
       if(token){
         try {
           const response = await axios.get(import.meta.env.VITE_CHECK_USER, {
@@ -96,13 +94,18 @@ function App() {
 
   return (
       <div className="app">
+        <div className='eclipse-bg-top'/>
+        <div className='eclipse-bg-right'/>
+        <div className='eclipse-bg-left'/>
+        <div className='eclipse-bg-bottom'/>
+
         {isSpinner && <Spinner />}
         <Login />
         <ToastContainer closeOnClick={true}/>
         <AddPostPopUp />
         <AddQuiz />
         <AddPoll />
-        <PageLayout>
+          <PageLayout>
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
@@ -115,7 +118,7 @@ function App() {
               <Route path="/pages/Quizzes" element={<Quizzes />} />
               <Route path="/pages/Quiz/:id" element={<Quiz />} />
             </Routes>
-            </PageLayout>
+          </PageLayout>
       </div>
   )
 }
