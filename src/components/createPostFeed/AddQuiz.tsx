@@ -44,7 +44,7 @@ const AddQuiz = () => {
     type: number;
   }>({
     img: undefined,
-    type: 0,
+    type: 1,
     question: "",
     answer: "",
   });
