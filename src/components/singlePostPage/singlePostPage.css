@@ -319,3 +319,7 @@ line-height: 20px; /* 142.857% */
       border-radius: 0px;
     }
 }
+
+.replayed_comments{
+    margin-left: 50px;
+}
