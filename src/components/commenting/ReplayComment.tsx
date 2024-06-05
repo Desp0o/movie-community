@@ -1,32 +1,32 @@
-// import axios from 'axios';
-// import React from 'react'
+import axios from 'axios';
+import React from 'react'
 
-// interface ReplayCommentProps {
-//     commentID: number;
-// }
+interface ReplayCommentProps {
+    commentID: number;
+}
 
-// const ReplayComment: React.FC<ReplayCommentProps> = ({commentID}) => {
+const ReplayComment: React.FC<ReplayCommentProps> = ({commentID}) => {
 
-//   const sendReplay = async () => {
-//     const token = localStorage.getItem('token')
+  const sendReplay = async () => {
+    const token = localStorage.getItem('token')
 
-//     try {
-//         const res = await axios.post('','',{
-//             headers:{
-//                 Authorization: `Bearer ${token}`
-//             }
-//         })
+    try {
+        const res = await axios.post('','',{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
 
-//         console.log(res);
+        console.log(res);
         
-//     } catch (error) {
-//         console.error(error)
-//     }
-//   }
+    } catch (error) {
+        console.error(error)
+    }
+  }
 
-//   return (
-//     <div>ReplayComment</div>
-//   )
-// }
+  return (
+    <div>ReplayComment</div>
+  )
+}
 
-// export default ReplayComment
+export default ReplayComment

@@ -7,6 +7,8 @@ import Author from "../singlePostComp/Author";
 import { heartIcon } from "../../assets/svg/heartIcon";
 import { dotsIcons } from "../../assets/svg/dotsIcons";
 import { deleteComment } from "./DELcomment";
+import axios from "axios";
+import ReplayComment from "./ReplayComment";
 
 interface Comment {
   [x: string]: any;
@@ -44,6 +46,24 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback  }) => 
     }
   }
 
+  const likeComment = async (id: number) => {
+    const token = localStorage.getItem('token')
+
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_COMMENT_LIKING}${id}`,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+        console.log(id);
+        
+        console.log(response.data);
+        
+      } catch (error) {
+        console.error(error)
+      }
+  }
+
   return (
     <div style={{display:"flex" , flexDirection:"column", gap:"30px"}}>
       {fetchedComments?.map((item, index) => (
@@ -67,10 +87,10 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback  }) => 
 
             {/* comment likes */}
             <div className="like_comment_">
-                <span className="comment_heart_icon">{heartIcon}</span>
+                <span className="comment_heart_icon" onClick={()=>likeComment(item.id)}>{heartIcon}</span>
                 <span style={{height:"14px", borderRight:"1px solid #CCD4DE"}}/>
                 <p className="replay" onClick={()=>replay(index)}>Replay</p>
-                {index === clickedIndex ? "pot" : <></>}
+                {index === clickedIndex ? <ReplayComment commentID={item.id}/> : <></>}
             </div>
 
           </div>
