@@ -1,0 +1,15 @@
+.StandartQuizComponent {
+
+    display: flex;
+    width: 600px;
+    height: 388px;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    border-radius: 8px;
+    border: 0.775px solid #1A453C;
+
+    background: var(--Card-background);
+}

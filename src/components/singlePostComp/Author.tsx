@@ -23,10 +23,6 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
         <p>{name}</p>
       </div>
 
-      <div className="author_header_dot">
-        <span className="span_dot" />
-      </div>
-
       <DateFormater date={date} />
     </div>
   );

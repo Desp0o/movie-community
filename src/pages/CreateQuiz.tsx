@@ -15,12 +15,14 @@ interface QuestionProps {
 interface QuizDataProps {
     mainTitle: string;
     mainImg: string;
+    type: number;
     questions: QuestionProps[];
 }
 
 const CreateQuiz = () => {
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
+    type: 5,
     mainImg: '',
     questions: [
       {

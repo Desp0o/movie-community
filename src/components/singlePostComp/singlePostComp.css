@@ -1,43 +1,58 @@
 .single_post_comp {
   position: relative;
-  width: 637px;
-  max-width: 637px;
-  padding: 12px 8px 12px 8px;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 6px;
-  
-  border: 1px solid #1A453C;
-  background: var(--Card-background, #0E052D);
+
+  padding: 16px 24px 24px 24px;
+  width: 600px;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-}
+  gap: 16px;
 
-.single_post_comp.dark {
-  background-color: var(--post-bg-dark);
-}
-
-.autor_title_image_ {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  border-bottom: 1px solid #e5e8ee;
-  padding-bottom: 10px;
+  border-radius: 8px;
+  border: 0.775px solid var(--Secondary-400);
+  background: var(--Card-background);
 }
 
 .post_title {
-  width: 602px;
-  color: currentColor;
-  align-self: flex-start;
-  
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
+  color: #FFF;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 27px */
+
   word-break: break-all;
+  background-color: red;
+}
+
+.IconBlock{
+  display: flex;
+  height: 30px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  background: var(--Primary-600);
+}
+
+.author_pannel_container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconBlock_icon{
+  cursor: pointer;
+  height: fit-content;
+}
+
+.iconBlock_number{
+  color: var(--Secondary-400);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 18px */
 }
 
 .see_more_title{
@@ -48,32 +63,27 @@
   color: var(--secondary);
 }
 
-.author_pannel_container {
-  width: 603px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
 .author {
   display: flex;
   align-items: center;
+  gap: 31px;
 }
 
 .author_credentials {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
+  background-color: red;
 }
 
 .author_credentials p {
-  color: #131518;
+  color: var(--white);
   
   font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 18px; /* 150% */
+font-style: normal;
+font-weight: 500;
+line-height: 150%;
 }
 
 .author_avatar {
@@ -82,31 +92,14 @@
   border-radius: 50%;
 }
 
-.author_header_dot {
-  display: flex;
-  height: 18px;
-  padding: 0px 6px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  
-}
 
-.span_dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: currentColor;
-}
 
 .elapsed_time {
-  color: var(--dark-grey);
-  /* H1/regular */
-  
-  font-size: 12px;
+  color: var(--Secondary-600);
+  font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 150% */
+  line-height: 150%; /* 15px */
 }
 
 .elapsed_time.dark {
@@ -280,23 +273,22 @@
 }
 
 .pannel_dots {
+background-color: red;
   cursor: pointer;
   user-select: none;
 
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
-
-  height: 32px;
-  width: 32px;
+  gap: 3px;
 }
 
 .panel_single_dot{
-  width: 4px;
-  height: 4px;
-  background-color: currentColor;
-  border-radius: 50%;
+  width: 6px;
+height: 6px;
+transform: rotate(42.024deg);
+border-radius: 0.775px;
+background: var(--Secondary-400);
 }
 
 .quiz_answer_input_container {
@@ -314,7 +306,7 @@
 
 .post_quiz_answer_text p {
   width: 35px;
-  color: var(--black);
+  color: var(--Secondary-400);
   
   font-size: 16px;
   font-style: normal;
@@ -337,59 +329,4 @@ width: 100%;
 .for_border_single_page{
   border-bottom: 1px solid #e5e8ee;
   width: 602px;
-}
-
-@media (max-width: 430px) {
-  .single_post_comp {
-    width: 375px;
-  }
-
-  .single_post_image_container {
-    width: 343px;
-    height: 425px;
-    overflow: hidden;
-  }
-
-  .author_pannel_container {
-    width: 343px;
-  }
-
-  .likeDislikeComment_container {
-    display: flex;
-    width: 357px;
-    margin: 0 auto; 
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .quiz_answer_input_container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 343px;
-  }
-  .video_container {
-    margin: 0 auto;
-    width: 343px;
-  }
-  .pannel_dots{
-    width: 17px;
-  }
-  .post_title{
-    width: 343px;
-  }
-  .for_border_single_page{
-    width: 343px;
-  }
-
-  .for_border_divide_post_comments{
-    width: 100%;
-    border-bottom: 1px solid #d5dae3;
-  }
-}
-
-@media (max-width:376px) {
-  .single_post_comp {
-    border-radius: 0;
-  }
 }

@@ -13,6 +13,9 @@ import { Link } from "react-router-dom";
 import Poll from "./Poll";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import AnswerQuizComp from "./AnswerQuizComp";
+import StandartQuizComponent from "./StandartQuizComponent";
+import IconBlock from "./IconBlock";
+import { likeIcon } from "../../assets/newSvg/likeIcon";
 
 
 interface SinglePostProps {
@@ -79,52 +82,59 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   return (
     <>
         
-        <div className="single_post_comp">
+        {
+          type !== 5 
+          ?
+          //აქ არის ყველა პოსტი ქვიზის გარდა
+            <div className="single_post_comp">
 
-            <div className="autor_title_image_">
-              {/* author name date paneledit */}
-            <div className="author_pannel_container">
-              <Author avatar={authorAvatar} name={authorName} date={date} />
-              {isUserLogged ? <EditPannel postID={postID} type={type}/> : <></>}
-            </div>
+                  {isUserLogged ? <EditPannel postID={postID} type={type}/> : <></>}
+
+                <div className="author_pannel_container">
+                  <Author avatar={authorAvatar} name={authorName} date={date} />
+                  <div className="like_post_icon">
+                    <IconBlock icon={likeIcon} quantity={guls ? guls : 0} width={48}/>  
+                  </div>             
+                </div>
+                
+                {/* title */}
+              <Link to={`/pages/Post/${postID}`} className="post_title">
+                <PostTitle title={postTitle} postStatus={postStatus} image={image}/>
+              </Link>
             
-            {/* title */}
-          <Link to={`/pages/Post/${postID}`} className="post_title">
-            <PostTitle title={postTitle} postStatus={postStatus} image={image}/>
-          </Link>
-         
-         {/* picture or image */}
-          {type !== 0
-            ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage type={type} image={image} /></Link> : <></>)
-            : type === 0 ?
-            (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
-            : <></>
-          }
-          
-          {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
-          </div>
+            {/* picture or image */}
+              {type !== 0
+                ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage type={type} image={image} /></Link> : <></>)
+                : type === 0 ?
+                (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
+                : <></>
+              }
+              
+              {type === 3 && <Poll pollAnswers={pollAnswers} refetch={refetch} data={myPoll} />  }
 
-          {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
+              {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
 
-          {
-            type !== 4 
-            &&
-            <LikeDislikeComment 
-            type={type} 
-            likes={likes} 
-            dislikes={dislikes} 
-            postID={postID} 
-            authLike={authLike} 
-            commentLength={commentLength} 
-            authGul={authGul ? authGul : 0} 
-            gul={guls ? guls : 0} 
-            pathToSinglePost={postID} 
-            mySave={mySave}
-          />
-          }
-          
-
-        </div>
+              {
+                type !== 4 
+                &&
+                <LikeDislikeComment 
+                type={type} 
+                likes={likes} 
+                dislikes={dislikes} 
+                postID={postID} 
+                authLike={authLike} 
+                commentLength={commentLength} 
+                authGul={authGul ? authGul : 0} 
+                gul={guls ? guls : 0} 
+                pathToSinglePost={postID} 
+                mySave={mySave}
+              />
+              }
+            </div>
+          :
+          //ქვიზის პოსტი
+            <StandartQuizComponent />
+        }
         
     </>
     
