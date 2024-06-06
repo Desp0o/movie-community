@@ -4,6 +4,7 @@ import Author from "./Author";
 import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
 import LikeDislikeComment from "./LikeDislikeComment";
+import { shareIcon } from "../../assets/newSvg/shareIcon";
 import "./singlePostComp.css"
 import PostVideo from "./postVideo";
 import { useUserHook } from "../../hooks/useUserHook";
@@ -16,6 +17,9 @@ import AnswerQuizComp from "./AnswerQuizComp";
 import StandartQuizComponent from "./StandartQuizComponent";
 import IconBlock from "./IconBlock";
 import { likeIcon } from "../../assets/newSvg/likeIcon";
+import { commentsIcon } from "../../assets/newSvg/commentsIcon";
+import { bookmarkIcon } from "../../assets/newSvg/bookmarkIcon";
+// import { shareIcon } from "../../assets/svg/shareIcon";
 
 
 interface SinglePostProps {
@@ -117,18 +121,27 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
               {
                 type !== 4 
                 &&
-                <LikeDislikeComment 
-                type={type} 
-                likes={likes} 
-                dislikes={dislikes} 
-                postID={postID} 
-                authLike={authLike} 
-                commentLength={commentLength} 
-                authGul={authGul ? authGul : 0} 
-                gul={guls ? guls : 0} 
-                pathToSinglePost={postID} 
-                mySave={mySave}
-              />
+              //   <LikeDislikeComment 
+              //   type={type} 
+              //   likes={likes} 
+              //   dislikes={dislikes} 
+              //   postID={postID} 
+              //   authLike={authLike} 
+              //   commentLength={commentLength} 
+              //   authGul={authGul ? authGul : 0} 
+              //   gul={guls ? guls : 0} 
+              //   pathToSinglePost={postID} 
+              //   mySave={mySave}
+              // />
+              <div className="post_bottom_icons">
+                  <div className="post_commens_share_icons">
+                    <IconBlock icon={commentsIcon} quantity={commentLength} width={48} />
+                    <IconBlock icon={shareIcon} />
+                  </div> 
+
+                  <IconBlock icon={bookmarkIcon} />
+              </div>
+              
               }
             </div>
           :
