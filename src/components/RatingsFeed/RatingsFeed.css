@@ -37,18 +37,16 @@
 
 .rating_circle{
     display: flex;
-width: 18px;
-height: 18px;
+    width: 37px;
+    height: 24px;
 justify-content: center;
 align-items: center;
-border-radius: 24px;
-border: 2px solid #309782;
 }
 
 .rating_circle p{
     color: #FDC201;
 text-align: center;
-font-size: 12px;
+font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: 150%; /* 18px */

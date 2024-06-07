@@ -12,13 +12,13 @@ export const useLogOut = () => {
       signOut(auth);
     try {
       dispatch(setUser({name: '', avatar: '', userID: '', score: 0, bells: 0}))
-      localStorage.removeItem('token')
-      localStorage.removeItem('avatar')
-      localStorage.removeItem('userName')
-      localStorage.removeItem('token_death')
-      localStorage.removeItem('userID')
-      localStorage.removeItem('score')
-      localStorage.removeItem('bells')
+      localStorage?.removeItem('token')
+      localStorage?.removeItem('avatar')
+      localStorage?.removeItem('userName')
+      localStorage?.removeItem('token_death')
+      localStorage?.removeItem('userID')
+      localStorage?.removeItem('score')
+      localStorage?.removeItem('bells')
     } catch (error) {
       console.error("Logout Error:", error);
     }

@@ -171,9 +171,10 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
                 <div className="author_pannel_container">
                   <Author avatar={authorAvatar} name={authorName} date={date} />
-                  <div className="like_post_icon">
-                    <span onClick={likingPost}><IconBlock icon={heartIcon} quantity={likeCount} width={48}/></span>  
-                  </div>             
+                  <span onClick={saveInBookMark}>
+                    <IconBlock icon={saveIcon} />
+                  </span>
+                              
                 </div>
                 
                 {/* title */}
@@ -198,13 +199,13 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
                 &&
               <div className="post_bottom_icons">
                   <div className="post_commens_share_icons">
+                  <span onClick={likingPost}><IconBlock icon={heartIcon} quantity={likeCount} width={48}/></span>  
                     <Link to={`/pages/Post/${postID}`}><IconBlock icon={commentIcon} quantity={commentLength} width={48} /></Link>
-                    <IconBlock icon={shareIcon} />
                   </div> 
 
-                  <span onClick={saveInBookMark}>
-                    <IconBlock icon={saveIcon} />
-                  </span>
+                  <div className="like_post_icon">
+                  <IconBlock icon={shareIcon} />
+                  </div> 
               </div>
               
               }
