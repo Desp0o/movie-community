@@ -103,14 +103,13 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
             <p className="poll_item_text"> {poll.title} </p>
             <p className="poll_item_text">
               {/* {answersSum > 0 ? Math.round((100 / answersSum) * poll.sum) : 0}% */}
-              {poll.sum} votes
+              {poll.sum ===0 ? 'vote' : poll.sum} {poll.sum !== 0 ? 'votes' : null}
             </p>
           </div>
         );
       })}
       </div>
 
-      <p className="poll_answer_sum_txt">{answersSum} votes</p>
     </>
   )
 };

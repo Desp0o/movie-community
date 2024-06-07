@@ -85,7 +85,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
     <div className="quiz_answer_input_container">
       <InputComponent
         nameProp="correctAnswerquiz"
-        widthProp={window.innerWidth > 430 ? "538px" : "280px"}
+        widthProp={window.innerWidth > 430 ? "100%" : "280px"}
         heightProp={"44px"}
         type={"text"}
         placeholder={"Enter the correct answer"}

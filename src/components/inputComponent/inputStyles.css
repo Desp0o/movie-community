@@ -12,7 +12,7 @@ input{
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--Secondary-400);
   }
 
   .input_style.error{

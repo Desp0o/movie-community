@@ -4,7 +4,6 @@ import Author from "../components/singlePostComp/Author";
 import PostTitle from "../components/singlePostComp/PostTitle";
 import PostImage from "../components/singlePostComp/postImage";
 import "../components/singlePostPage/singlePostPage.css";
-import LikeDislikeComment from "../components/singlePostComp/LikeDislikeComment";
 import { useEffect, useState } from "react";
 import { xIcon } from "../assets/svg/Xicon";
 import AddComment from "../components/commenting/AddComment";
@@ -67,10 +66,6 @@ const Post = () => {
 
 console.log(data);
 
-  
-  // useEffect(()=>{
-  //   refetch()    
-  // },[requestRefetch])
 
   if(isError){
     console.error(error)
@@ -144,20 +139,7 @@ console.log(data);
             {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data?.post?.myPoll} refetch={refetch}/> }
             {data?.post?.type === 4 && <AnswerQuizComp id={data?.question?.feed_id} /> }
 
-              {/* ეს არის ჩასმული ბორდერისთვის */}
-              <div className="for_border_single_page" />
 
-            <LikeDislikeComment
-              likes={data?.post?.like}
-              dislikes={data?.post?.dislike}
-              postID={data?.post?.id}
-              authLike={data?.post?.authLike}
-              commentLength={data?.post?.comments} 
-              authGul={data?.post?.myGul} 
-              gul={data?.post?.guls}  
-              type={data?.post?.type}
-              mySave={data?.post?.mySave}            
-              />
 
             {/* ხაზი პოსტსა და კომენტარის ინპუტს შორის */}
             <div className="for_border_divide_post_comments" />
