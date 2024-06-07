@@ -1,7 +1,8 @@
 .RatingsFeed {
     position: fixed;
     width: 300px;
-    right: 80px;
+    margin-left: calc(1440px - 460px);
+    /* right: 80px; */
 
     display: flex;
     flex-direction: column;

@@ -106,7 +106,7 @@ function App() {
         <AddQuiz />
         <AddPoll />
           <PageLayout>
-            <RatingsFeed />
+            {/* <RatingsFeed /> */}
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
