@@ -211,6 +211,7 @@ line-height: 150%;
   max-height: 263px;
   margin: 0 auto;
   object-fit: cover;
+  border: 1px solid var(--Secondary-400);
 }
 
 .delete_btn {

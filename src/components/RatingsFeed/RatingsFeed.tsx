@@ -8,6 +8,15 @@ const RatingsFeed = () => {
 
         <div className="user_ratings_block">
             <UserRatingItem />
+            <UserRatingItem />
+            <UserRatingItem />
+            <UserRatingItem />
+            <div className="view_more_ratings">
+              <p>View more</p>
+              <span className="view_more_dot_rating" />
+              <span className="view_more_dot_rating" />
+              <span className="view_more_dot_rating" />
+            </div>
         </div>
     </div>
   )

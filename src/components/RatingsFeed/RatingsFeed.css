@@ -1,7 +1,7 @@
 .RatingsFeed {
     position: fixed;
     width: 300px;
-    right: 100px;
+    right: 80px;
 
     display: flex;
     flex-direction: column;
@@ -14,6 +14,7 @@
     padding: 1px;
     border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .UserRatingItem_inner {
@@ -25,4 +26,98 @@
     border-radius: 8px;
 
     background-color: var(--Card-background);
+}
+
+.user_ratings_block{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rating_circle{
+    display: flex;
+width: 18px;
+height: 18px;
+padding: 10px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border-radius: 24px;
+border: 2px solid #309782;
+}
+
+.rating_circle p{
+    color: #FDC201;
+text-align: center;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 18px */
+}
+
+.userName_userPos{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user_rating{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.user_avatar_ratings{
+    width: 24px;
+height: 24px;
+border-radius: 24px;
+}
+
+.user_rating p{
+    color: var(--white);
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 18px */
+}
+
+.ratings_points{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ratings_points p{
+color: var(--Secondary-400);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+}
+
+.view_more_ratings{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 3px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.view_more_dot_rating{
+    width: 3.1px;
+height: 3.487px;
+transform: rotate(42.024deg);
+border-radius: 0.775px;
+background: var(--Secondary-400);
+margin-top: 7px;
+
+}
+
+.view_more_dot_rating p{
+    color: var(--white);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 15px */
 }
