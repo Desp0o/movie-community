@@ -33,6 +33,7 @@ line-height: 150%; /* 27px */
   gap: 4px;
   border-radius: 6px;
   background: var(--Primary-600);
+  cursor: pointer;
 }
 
 .author_pannel_container{
