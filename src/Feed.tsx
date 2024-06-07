@@ -14,10 +14,7 @@ interface dataProps {
   id: number;
   text: string;
   img: string;
-  like: number;
-  dislike: number;
   type: number;
-  authLike: string;
   updated_at: string;
   created_at: string;
   myPoll:  number;
@@ -90,10 +87,7 @@ if(data){
                   postTitle={post?.text}
                   postID={post?.id}
                   image={post?.img}
-                  likes={post?.like}
-                  dislikes={post?.dislike}
                   type={post?.type}
-                  authLike={post?.authLike}
                   date={post?.created_at}
                   postUserId={post?.user.id}
                   postStatus={post?.status}

@@ -134,6 +134,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
   //save in bookmark function
   const saveInBookMark =() => {
+   if(user.userID && user.name){
     mutate(postID)
     setBookmarkActive(!bookmarkActive)
 
@@ -142,6 +143,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }else{
       setSaveIcon(bookmarkIconFilled)
     }
+   }
   }
 
   //update bookmark icon change
@@ -209,7 +211,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             </div>
           :
           //ქვიზის პოსტი
-            <StandartQuizComponent />
+            <StandartQuizComponent postUserId={postUserId} postID={postID} image={image} />
         }
         
     </>

@@ -2,14 +2,25 @@
 
     display: flex;
     width: 600px;
-    height: 388px;
     padding: 24px;
     flex-direction: column;
-    align-items: center;
     gap: 16px;
 
     border-radius: 8px;
     border: 0.775px solid #1A453C;
 
     background: var(--Card-background);
+}
+
+.quiz_cover_container{
+    height: 265px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.quiz_cover_img{
+    margin-top: -30px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
