@@ -88,7 +88,7 @@ function App() {
     if(!token){
       handleLogout()
     }
-  },[dispatch, handleLogout, token])
+  },[])
 
 
   return (

@@ -88,7 +88,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
         widthProp={"100%"}
         heightProp={"40px"}
         type={"text"}
-        placeholder={"Enter the correct answer"}
+        placeholder={"Type answer..."}
         value={answerValue}
         isError={false}
         onChange={(e) => setAnswerValue(e.target.value)}

@@ -94,7 +94,7 @@ body {
   width: 100%;
   color: #F7FFFB;
   
-  font-family: "Noto Sans Georgian";
+  font-family: "Roboto";
 }
 
 
@@ -172,6 +172,14 @@ textarea{
   border-radius: 400px;
   background: var(--Secondary-400);
   filter: blur(250px);
+}
+
+input::placeholder{
+  color: var(--white);
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 21px */
 }
 
 @media (max-width:600px) {
