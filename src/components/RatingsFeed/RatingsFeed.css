@@ -1,0 +1,28 @@
+.RatingsFeed {
+    position: fixed;
+    width: 300px;
+    right: 100px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.UserRatingItem {
+    width: 100%;
+    background: linear-gradient(180deg, hsla(167, 45%, 19%, 1) 0%, hsla(168, 52%, 39%, 1) 100%);
+    padding: 1px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.UserRatingItem_inner {
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+
+    background-color: var(--Card-background);
+}

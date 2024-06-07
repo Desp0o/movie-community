@@ -24,6 +24,7 @@ import { useLogOut } from "./hooks/useLogOut"
 import CreateQuiz from "./pages/CreateQuiz"
 import Quizzes from "./pages/Quizzes"
 import Quiz from "./pages/Quiz"
+import RatingsFeed from "./components/RatingsFeed/RatingsFeed"
 
 function App() {
   const token = localStorage.getItem('token')
@@ -105,6 +106,7 @@ function App() {
         <AddQuiz />
         <AddPoll />
           <PageLayout>
+            <RatingsFeed />
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
