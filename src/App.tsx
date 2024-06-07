@@ -24,6 +24,7 @@ import CreateQuiz from "./pages/CreateQuiz"
 import Quizzes from "./pages/Quizzes"
 import Quiz from "./pages/Quiz"
 import RatingsFeed from "./components/RatingsFeed/RatingsFeed"
+import Slider from "./components/slider/Slider"
 
 function App() {
   const token = localStorage.getItem('token')
@@ -105,6 +106,7 @@ function App() {
         <AddPoll />
           <PageLayout>
             <RatingsFeed />
+            <Slider />
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />

@@ -2,6 +2,7 @@
     position: fixed;
     width: 300px;
     margin-left: calc(1440px - 460px);
+    top: 228px;
     /* right: 80px; */
 
     display: flex;
