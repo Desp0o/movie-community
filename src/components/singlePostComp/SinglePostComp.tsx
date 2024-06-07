@@ -211,7 +211,14 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
             </div>
           :
           //ქვიზის პოსტი
-            <StandartQuizComponent postUserId={postUserId} postID={postID} image={image} />
+            <StandartQuizComponent 
+              postUserId={postUserId} 
+              postID={postID} 
+              image={image} 
+              authorName={authorName} 
+              date={date}
+              postTitle={postTitle}
+            />
         }
         
     </>
