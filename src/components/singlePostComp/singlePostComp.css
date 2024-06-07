@@ -288,6 +288,7 @@ background: var(--Secondary-400);
 }
 
 .quiz_answer_input_container {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -296,8 +297,17 @@ background: var(--Secondary-400);
 }
 
 .post_quiz_answer_text {
-  padding: 10px 0px 10px 16px;
-  text-align: center;
+  display: flex;
+width: 120px;
+height: 30px;
+justify-content: center;
+align-items: center;
+gap: 6px;
+border-radius: 4px;
+background: var(--Primary-600);
+
+position: absolute;
+right: 4px;
 }
 
 .post_quiz_answer_text p {
