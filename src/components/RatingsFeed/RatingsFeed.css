@@ -38,8 +38,6 @@
     display: flex;
 width: 18px;
 height: 18px;
-padding: 10px;
-flex-direction: column;
 justify-content: center;
 align-items: center;
 border-radius: 24px;

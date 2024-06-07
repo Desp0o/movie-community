@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InputComponent from "../inputComponent/InputComponent";
 import axios from "axios";
-import limitedIMG from "../../assets/limited.webp"
 import { movieDataBase } from "../createPostFeed/functions/fetchDB";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDispatch } from "react-redux";
@@ -102,7 +101,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
             {fetchedMovieDb?.map((movie: fetchedDataBaseProps) => {
               return (
                 <div className="dropdown_item" key={movie.id} onClick={() => chooseMovieName(movie.eng)}>
-                  <img src={limitedIMG} alt="/" className="movie_dropdown_image" />
+                  <img src={''} alt="/" className="movie_dropdown_image" />
                   <p>{movie.eng}</p>
                 </div>
               )

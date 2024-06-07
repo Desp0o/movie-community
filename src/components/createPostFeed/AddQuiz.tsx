@@ -10,7 +10,6 @@ import axios from "axios";
 import { quizImgAddIcon } from "../../assets/svg/quizImgAddIcon";
 import ReactPlayer from "react-player";
 import { xIcon } from "../../assets/svg/Xicon";
-import limitedIMG from "../../assets/limited.webp"
 import { movieDataBase } from "./functions/fetchDB";
 import { dropDownArrow } from "../../assets/svg/dropDownArrow";
 import { useRefetchHook } from "../../hooks/useFeedRefetch";
@@ -322,7 +321,7 @@ const AddQuiz = () => {
             {fetchedMovieDb?.map((movie:fetchedDataBaseProps)=>{
               return(
                 <div className="dropdown_item" key={movie.id} onClick={()=> chooseMovieName(movie.eng)}>
-                  <img src={limitedIMG} alt="/" className="movie_dropdown_image" />
+                  <img src={''} alt="/" className="movie_dropdown_image" />
                   <p>{movie.eng}</p>
                 </div>
               )
