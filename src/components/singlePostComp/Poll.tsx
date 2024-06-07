@@ -91,20 +91,22 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
             onClick={() => pollHanlderFuncs(poll.id, index)}
             className="poll_item"
           >
-            <span className="poll_item_bg"
+            <span className="poll_item_bg vote_txt"
               style={{
-                width:`${Math.round((100 / answersSum) * poll.sum)}%`,
+                width: poll.sum !== 0 ? `${Math.round((100 / answersSum) * poll.sum)}%` : '68px',
                 backgroundColor:
                   poll.id === activeIndex || activeIndex === index
                     ? "var(--Secondary-400)"
                     : "var(--Primary-600)",
               }}
-            />
+            ><p className="poll_item_text">
+            {/* {answersSum > 0 ? Math.round((100 / answersSum) * poll.sum) : 0}% */}
+            {poll.sum ===0 ? 'vote' : poll.sum} {poll.sum !== 0 ? 'votes' : null}
+          </p></span>
             <p className="poll_item_text"> {poll.title} </p>
-            <p className="poll_item_text">
-              {/* {answersSum > 0 ? Math.round((100 / answersSum) * poll.sum) : 0}% */}
-              {poll.sum ===0 ? 'vote' : poll.sum} {poll.sum !== 0 ? 'votes' : null}
-            </p>
+            
+            
+
           </div>
         );
       })}
