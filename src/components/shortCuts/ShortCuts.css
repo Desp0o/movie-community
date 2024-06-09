@@ -1,0 +1,43 @@
+.shortcuts{
+    position: absolute;
+    left: 120px;
+    top: 124px;
+
+    display: flex;
+    gap: 28px;
+}
+
+.SingleShortCut{
+width: 96px;
+height: 64px;
+padding: 0px 16px;
+
+border-radius: 8px;
+border: 1px solid var(--stroke);
+background: var(--Card-background);
+cursor: pointer;
+transition: all 0.3s ease;
+overflow: hidden;
+}
+
+.SingleShortCut span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+}
+
+.SingleShortCut p{
+text-align: center;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 27px */
+}
+
+@media (hover :hover) {
+    .SingleShortCut:hover{
+        height: 127px;
+        transition: all 0.3s ease;
+    }
+}
