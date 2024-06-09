@@ -1,5 +1,7 @@
 import { QUIZ } from "../assets/newSvg/QUIZ"
 import "./Quiz_.css"
+import ButtonFilled from "../components/buttonFIlled/ButtonFilled"
+import ButtonOutlined from "../components/buttonFIlled/ButtonOutlined"
 
 
 const Quiz_ = () => {
@@ -16,15 +18,23 @@ const Quiz_ = () => {
 
         {/* text */}
         <p className="quiz_add_rules_text">
-        Welcome to the ... Quiz Creator! Here are the only rules you need to follow:<br/><br/>
+          Welcome to the ... Quiz Creator! Here are the only rules you need to follow:<br /><br />
 
-All questions must be about movies.<br/>
-Each question should have four possible answers, but only one of them is the right one.<br/>
-Feel free to add photos to your questions, or skip them entirely. It’s your call!<br/><br/>
+          All questions must be about movies.<br />
+          Each question should have four possible answers, but only one of them is the right one.<br />
+          Feel free to add photos to your questions, or skip them entirely. It’s your call!<br /><br />
 
-Get creative and have fun crafting your ultimate movie quiz!
+          Get creative and have fun crafting your ultimate movie quiz!
         </p>
+
+        {/* buttons */}
+        <div className="Quiz_btns">
+          <ButtonFilled text={"Get started!"} link={""} />
+          <ButtonOutlined text={"Check out Quizzes"} link={""} />
       </div>
+      </div>
+
+      
 
     </div>
   )

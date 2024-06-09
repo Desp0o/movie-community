@@ -1,0 +1,31 @@
+.ButtonFIlled{
+    display: flex;
+width: 140px;
+height: 44px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 6px;
+background: var(--Primary-600);
+}
+
+.ButtonFIlled p, .ButtonOutlined p{
+text-align: center;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 18px */
+}
+
+
+.ButtonOutlined{
+    display: flex;
+width: 140px;
+height: 44px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+border-radius: 6px;
+border: 2px solid #5EFFDE;
+}
