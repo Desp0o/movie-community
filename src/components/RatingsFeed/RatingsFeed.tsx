@@ -4,7 +4,7 @@ import UserRatingItem from "./UserRatingItem"
 const RatingsFeed = () => {
   return (
     <div className="RatingsFeed">
-        <p>Ratings</p>
+        <p className="RatingsFeed_title">Ratings</p>
 
         <div className="user_ratings_block">
             <UserRatingItem />

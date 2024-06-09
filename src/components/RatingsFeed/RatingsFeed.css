@@ -2,12 +2,19 @@
     position: fixed;
     width: 300px;
     margin-left: calc(1440px - 460px);
-    top: 228px;
-    /* right: 80px; */
+    top: 268px;
 
     display: flex;
     flex-direction: column;
     gap: 24px;
+    overflow: hidden;
+}
+
+.RatingsFeed_title{
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 27px */
 }
 
 .UserRatingItem {

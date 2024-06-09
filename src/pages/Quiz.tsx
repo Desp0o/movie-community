@@ -49,13 +49,13 @@ const Quiz = () => {
             ];
 
             const shuffleAnswers = (array: string[]): string[] => {
-                let shuffleArray: string[] = []
-                let usedIndexes: number[] = []
+                const shuffleArray: string[] = []
+                const usedIndexes: number[] = []
         
                 let i = 0;
         
                 while(i < array.length){
-                    let randomNumber = Math.floor(Math.random() * array.length)
+                    const randomNumber = Math.floor(Math.random() * array.length)
                     if(!usedIndexes.includes(randomNumber)){
                         shuffleArray.push(array[randomNumber])
                         usedIndexes.push(randomNumber)

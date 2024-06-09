@@ -1,6 +1,19 @@
-import { useState } from "react"
-import SliderCard from "./SliderCard"
-import "./slider.css"
+import { useEffect, useRef, useState } from "react";
+import SliderCard from "./SliderCard";
+import "./slider.css";
+import "./styles.css";
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+
+// Make sure you import the correct type from Swiper
 
 const cardArray = [
     {
@@ -13,38 +26,83 @@ const cardArray = [
     },
     {
         author: "vajika",
-        title: "card 4"
+        title: "card 3"
+    },
+    {
+        author: "despo",
+        title: "card 1"
+    },
+    {
+        author: "koka",
+        title: "card 2"
+    },
+    {
+        author: "vajika",
+        title: "card 3"
+    },
+    {
+        author: "despo",
+        title: "card 1"
+    },
+    {
+        author: "koka",
+        title: "card 2"
+    },
+    {
+        author: "vajika",
+        title: "card 3"
     }
-]
-
+];
 
 const Slider = () => {
-    
-    const [activeIndex, setActiveIndex] = useState(0)
-    
- 
+    const [activeIndex, setActiveIndex] = useState(3);
+    const swiperRef = useRef<any>(null);
+
+    const goToSlide = (index: number) => {
+        setActiveIndex(index);
+    };
+
+    useEffect(() => {
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.slideTo(activeIndex);
+        }
+    }, [activeIndex]);
+
     return (
         <div className="Slider">
-                <div className="cards_flex">
-
-                
-            {
-                cardArray.map((card, index) => {
-                    return (
-                        <div className={activeIndex === index ? "slider_card_active" : "slider_card_active inactive"}>
-                            <SliderCard key={index} authorName={card.author} title={card.title} />
-                        </div>
-                    )
-                })
-            }
-            </div>
+            <p className="Slider_title">Popular quizzes</p>
+            <Swiper
+                ref={swiperRef}
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
+                loop={true}
+                initialSlide={activeIndex}
+                coverflowEffect={{
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: false,
+                }}
+                pagination={false}
+                modules={[EffectCoverflow, Pagination]}
+                className="mySwiper"
+            >
+                {cardArray.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        <SliderCard authorName={item.author} title={item.title} heightProp={""} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
             <div className="slider_dots">
-                <span className="sliderDot_single" onClick={()=> setActiveIndex(1)}/>
-                <span className="sliderDot_single" onClick={()=> setActiveIndex(0)}/>
-                <span className="sliderDot_single" onClick={()=> setActiveIndex(2)}/>
+                <span className={activeIndex === 3 ? "sliderDot_single activeDot" : "sliderDot_single"} onClick={() => goToSlide(3)} />
+                <span className={activeIndex === 4 ? "sliderDot_single activeDot" : "sliderDot_single"} onClick={() => goToSlide(4)} />
+                <span className={activeIndex === 5 ? "sliderDot_single activeDot" : "sliderDot_single"} onClick={() => goToSlide(5)} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Slider
+export default Slider;

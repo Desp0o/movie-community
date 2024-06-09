@@ -6,11 +6,12 @@ import avatar from "../../assets/Creatorphoto.png"
 interface SliderCardProps {
     authorName: string;
     title: string;
+    heightProp: string;
 }
 
-const SliderCard:React.FC<SliderCardProps> = ({authorName, title}) => {
+const SliderCard:React.FC<SliderCardProps> = ({authorName, title, heightProp}) => {
   return (
-    <div className='SliderCard'>
+    <div className='SliderCard' style={{height: heightProp ? heightProp : ""}}>
         <img src={cover} alt='sliderCard cover' className='slider_card_img' />
         
         <div className='card_bttom_body'>
