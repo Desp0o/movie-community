@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "./ButtonStyles.css"
 
 interface ButtonOutlinedProps {
     text: string;
@@ -9,7 +10,9 @@ interface ButtonOutlinedProps {
 const ButtonOutlined: React.FC<ButtonOutlinedProps> = ({ text, link }) => {
     return (
         <Link to={link}>
-            <div className='ButtonOutlined'>{text}</div>
+            <div className='ButtonOutlined'>
+                <p>{text}</p>
+            </div>
         </Link>
     )
 }

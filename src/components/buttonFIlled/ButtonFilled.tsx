@@ -10,7 +10,9 @@ interface ButtonFIlledProps {
 const ButtonFIlled: React.FC<ButtonFIlledProps> = ({text, link}) => {
   return (
     <Link to={link}>
-        <div className='ButtonFIlled'>{text}</div>
+        <div className='ButtonFIlled'>
+          <p>{text}</p>
+        </div>
     </Link>
   )
 }

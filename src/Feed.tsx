@@ -74,7 +74,7 @@ const Feed = () => {
       <RatingsFeed />
       <ShortCuts />
       {isLoading && <Spinner />}
-      <div>
+      <div className="feed_page">
         {user.name && user.userID ? <CreatePostFeed /> : <></>}
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>

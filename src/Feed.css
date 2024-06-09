@@ -1,3 +1,7 @@
+.feed_page{
+    padding-top: 124px;
+}
+
 .feed{
     display: flex;
     flex-direction: column;
