@@ -3,12 +3,14 @@
     height: 100vh;
 
     padding-left: 116px;
-
+    
     display: flex;
     align-items: center;
+    gap: 98px;
 }
 
 .quiz_add_rules{
+    width: 577px;
 }
 
 .quiz_add_rules_title{
@@ -38,4 +40,67 @@ margin-top: 18px;
     display: flex;
     gap: 18px;
     margin-top: 48px;
+}
+
+.QUIZ_card{
+    width: 237.938px;
+height: 333.703px;
+border-radius: 16px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+
+position: relative;
+}
+
+
+.QUIZ_card_footer{
+    position: absolute;
+    bottom: 0;
+    height: 86px;
+    width: 100%;
+    background-color: var(--Card-background);
+}
+
+.guess_info_cards{
+    height: 100%;
+    position: relative;
+}
+
+
+.gc1{
+    position: absolute;
+    top: 252px;
+}
+
+.gc2{
+    position: absolute;
+    top: 332px;
+    left: 190px;
+    z-index: 2;
+}
+
+.gc3{
+    position: absolute;
+    top: 191px;
+    left: 335px;
+}
+
+
+.QUIZ_card_footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.matrix-txt{
+    font-size: 28px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 300;
+
+    text-shadow: 0 0 1px #ffffff, 0 0 5px #ffffff, 0 0 5px #ffffff;
+
 }

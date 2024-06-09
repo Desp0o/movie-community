@@ -2,6 +2,12 @@ import { QUIZ } from "../assets/newSvg/QUIZ"
 import "./Quiz_.css"
 import ButtonFilled from "../components/buttonFIlled/ButtonFilled"
 import ButtonOutlined from "../components/buttonFIlled/ButtonOutlined"
+import matrix from "../assets/matrix.webp"
+import bacToFuture from "../assets/bacToFuture.webp"
+import et from "../assets/e.t.webp"
+import { inTheMovie } from "../assets/newSvg/inTheMovie"
+import QUIZ_card from "../components/QUIZ_card/QUIZ_card"
+import { canYouName } from "../assets/newSvg/canYouName"
 
 
 const Quiz_ = () => {
@@ -34,9 +40,33 @@ const Quiz_ = () => {
       </div>
       </div>
 
+      <div className="guess_info_cards">
+      
+        <div className="gc1">
+          <QUIZ_card image={matrix}>
+            <p className="matrix-txt">Who is the main character</p>
+            {inTheMovie}
+          </QUIZ_card>
+        </div>
+
+        <div className="gc2">
+          <QUIZ_card image={bacToFuture}>
+            <p className="matrix-txt">Who is the main character</p>
+            {canYouName}
+          </QUIZ_card>
+        </div>
+
+        <div className="gc3">
+          <QUIZ_card image={et}>
+            <p className="matrix-txt">Who is the main character</p>
+            {canYouName}
+          </QUIZ_card>
+        </div>
+      </div>
       
 
     </div>
+    
   )
 }
 
