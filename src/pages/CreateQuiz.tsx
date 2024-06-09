@@ -95,7 +95,7 @@ const CreateQuiz = () => {
 //   }
 
   return (
-    <div style={{ paddingTop: "100px" }}>
+    <div>
       <div className="main_c">
         <InputComponent
           type="text"

@@ -7,6 +7,9 @@ import noAvatar from "./assets/noAvatar.jpeg"
 import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 import Spinner from "./components/spinner/Spinner";
 import { useRefetchHook } from "./hooks/useFeedRefetch";
+import Slider from "./components/slider/Slider";
+import RatingsFeed from "./components/RatingsFeed/RatingsFeed";
+import ShortCuts from "./components/shortCuts/ShortCuts";
 
 interface dataProps {
   guls: number;
@@ -67,6 +70,9 @@ const Feed = () => {
 
   return (
     <>
+      <Slider />
+      <RatingsFeed />
+      <ShortCuts />
       {isLoading && <Spinner />}
       <div>
         {user.name && user.userID ? <CreatePostFeed /> : <></>}

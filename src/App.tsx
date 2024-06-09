@@ -26,6 +26,7 @@ import Quiz from "./pages/Quiz"
 import RatingsFeed from "./components/RatingsFeed/RatingsFeed"
 import Slider from "./components/slider/Slider"
 import ShortCuts from "./components/shortCuts/ShortCuts"
+import Navbar from "./components/navbar/navbar"
 
 function App() {
   const token = localStorage.getItem('token')
@@ -105,10 +106,8 @@ function App() {
         <AddPostPopUp />
         <AddQuiz />
         <AddPoll />
+        <Navbar />
           <PageLayout>
-            <ShortCuts />
-            <RatingsFeed />
-            <Slider />
 
             <Routes>
               <Route path="/" element={<Outlet />} />

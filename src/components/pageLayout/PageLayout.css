@@ -3,18 +3,15 @@
     width: 100%;
     min-height: 100vh;
     padding-top: 124px;
-}
 
-.page_layout_inner{
-    width: 100%;
     max-width: 1440px;
     margin: 0 auto;
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    position: relative;
 }
+
 
 
 
