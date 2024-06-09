@@ -1,0 +1,29 @@
+.Quiz_{
+    width: 100%;
+
+    display: flex;
+
+}
+
+.quiz_add_rules_title{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.quiz_add_rules_title p{
+font-size: 46px;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 59.8px */
+}
+
+.quiz_add_rules_text{
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+margin-top: 18px;
+}
