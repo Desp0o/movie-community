@@ -23,10 +23,8 @@ import { useLogOut } from "./hooks/useLogOut"
 import CreateQuiz from "./pages/CreateQuiz"
 import Quizzes from "./pages/Quizzes"
 import Quiz from "./pages/Quiz"
-import RatingsFeed from "./components/RatingsFeed/RatingsFeed"
-import Slider from "./components/slider/Slider"
-import ShortCuts from "./components/shortCuts/ShortCuts"
 import Navbar from "./components/navbar/navbar"
+import Quiz_ from "./pages/Quiz_"
 
 function App() {
   const token = localStorage.getItem('token')
@@ -114,6 +112,7 @@ function App() {
               <Route index element={<Feed />} />
               <Route path="/pages/privacy" element={<Privacy />} />
               <Route path="/pages/Post/:id" element={<Post />} />
+              <Route path="/pages/Quiz_" element={<Quiz_ />} />
               <Route element={<RequireAuth />}>
                 <Route path="/pages/Profile" element={<Profile />} />
                 <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
