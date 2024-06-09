@@ -1,7 +1,7 @@
 .shortcuts{
     position: absolute;
     left: 120px;
-    top: 124px;
+    top: 0px;
 
     display: flex;
     gap: 28px;
