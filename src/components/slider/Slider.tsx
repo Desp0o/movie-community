@@ -74,11 +74,12 @@ const Slider = () => {
             <Swiper
                 ref={swiperRef}
                 effect={'coverflow'}
-                grabCursor={true}
+                grabCursor={false}
                 centeredSlides={true}
                 slidesPerView={'auto'}
                 loop={true}
                 initialSlide={activeIndex}
+                allowTouchMove={false}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
