@@ -106,6 +106,9 @@ line-height: 130%; /* 28.6px */
 
 .cr_quiz_card_questionNum_dots {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .cr_quiz_card_questionNum_dots p {

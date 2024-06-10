@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import "./CreateQuiz.css";
 import axios from 'axios';
 import { QUIZ } from '../assets/newSvg/QUIZ';
@@ -150,7 +150,25 @@ useEffect(()=>{
 },[singleQuiz])
 
 
-  
+  const editQuizCard = (index:number) =>{
+
+    const foundIndex = quizData.questions[index]
+    console.log(foundIndex);
+    
+
+    setSingleQuiz({
+      questionImg: foundIndex.questionImg,
+      questionText: foundIndex.questionText,
+      answer1: foundIndex.answer1,
+      answer2: foundIndex.answer2,
+      answer3: foundIndex.answer3,
+      answer4: foundIndex.answer4
+    })
+
+    console.log(index);
+    
+  }  
+
   return (
     <div className='create_quiz'>
 
@@ -221,15 +239,16 @@ useEffect(()=>{
         {quizData?.questions?.map((item, index)=>{
           return(
             <QuizCard 
-              key={index} 
-              index={index + 1} 
-              length={quizData?.questions?.length} 
-              title={item.questionText} 
-              image={item.questionImg} 
-              answ1={item.answer1} 
-              answ2={item.answer2} 
-              answ3={item.answer3} 
+              key={index}
+              index={index + 1}
+              length={quizData?.questions?.length}
+              title={item.questionText}
+              image={item.questionImg}
+              answ1={item.answer1}
+              answ2={item.answer2}
+              answ3={item.answer3}
               answ4={item.answer4} 
+              callBack={()=>editQuizCard(index)}            
             />
           )
         })}
@@ -284,14 +303,21 @@ interface QuizCardProps{
   answ2: string;
   answ3: string;
   answ4: string;
+  callBack: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({index, length, title, image, answ1, answ2, answ3, answ4}) =>{
+const QuizCard: React.FC<QuizCardProps> = ({index, length, callBack, title, image, answ1, answ2, answ3, answ4}) =>{
   return(
     <div className='cr_quiz_card'>
       
       <div className='cr_quiz_card_questionNum_dots'>
         <p>Question {index}/{length}</p>
+
+        <div className='pannel_dots' onClick={callBack}>
+          <span className='panel_single_dot' />
+          <span className='panel_single_dot' />
+          <span className='panel_single_dot' />
+        </div>
       </div>
 
       {/* title */}
