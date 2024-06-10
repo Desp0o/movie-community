@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import "./CreateQuiz.css";
 import axios from 'axios';
 import { QUIZ } from '../assets/newSvg/QUIZ';
@@ -8,21 +8,24 @@ import ButtonOutlined from '../components/buttonFIlled/ButtonOutlined';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import PageLayout from '../components/pageLayout/PageLayout';
+import { useDropzone } from 'react-dropzone'
+import dropIcon from "../assets/dropIcon.webp"
+
 
 interface QuestionProps {
-    questionText: string;
-    questionImg: string;
-    answer1: string;
-    answer2: string;
-    answer3: string;
-    answer4: string;
+  questionText: string;
+  questionImg: any;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
 }
 
 interface QuizDataProps {
-    mainTitle: string;
-    mainImg: string;
-    type: number;
-    questions: QuestionProps[];
+  mainTitle: string;
+  mainImg: string;
+  type: number;
+  questions: QuestionProps[];
 }
 
 const CreateQuiz = () => {
@@ -36,136 +39,147 @@ const CreateQuiz = () => {
     type: 5,
     mainImg: '',
     questions: [
-      
+
     ]
   });
-
-
-  const [singleQuiz, setSingleQuiz] = useState({
+  const [singleQuiz, setSingleQuiz] = useState<QuestionProps>({
     questionText: '',
-        questionImg: '',
-        answer1: '',
-        answer2: '',
-        answer3: '',
-        answer4: ''
-})
+    questionImg: '',
+    answer1: '',
+    answer2: '',
+    answer3: '',
+    answer4: ''
+  })
 
-// make buttons active/inactive
-useEffect(()=>{
-  if(
-    singleQuiz.questionText !== '' &&
-    singleQuiz.answer1 !== '' &&
-    singleQuiz.answer2 !== '' &&
-    singleQuiz.answer3 !== '' &&
-    singleQuiz.answer4 !== ''
-  ){
-    setFaded(false)
-  }else(
-    setFaded(true)
-  )
-},[singleQuiz])
 
-//fade or not restart question button
-useEffect(()=>{
-  if(
-    singleQuiz.questionText !== '' ||
-    singleQuiz.questionImg !== '' ||
-    singleQuiz.answer1 !== '' ||
-    singleQuiz.answer2 !== '' ||
-    singleQuiz.answer3 !== '' ||
-    singleQuiz.answer4 !== ''
-  ){
-    setRestartQuestion(false)
-  }else{
-    setRestartQuestion(true)
-  }
-},[singleQuiz])
+  // drag n drop func
+  const onDrop = useCallback((acceptedFiles: any) => {
+    // Do something with the files
+    setSingleQuiz({ ...singleQuiz, questionImg: acceptedFiles[0] })
 
-  //add more question
-  const addQuestion = () => {
-    if(
+  }, [singleQuiz])
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+  useEffect(() => {
+    console.log(quizData);
+
+  }, [quizData])
+
+
+  // make buttons active/inactive
+  useEffect(() => {
+    if (
       singleQuiz.questionText !== '' &&
       singleQuiz.answer1 !== '' &&
       singleQuiz.answer2 !== '' &&
       singleQuiz.answer3 !== '' &&
       singleQuiz.answer4 !== ''
-    ){
-      setQuizData({
-        ...quizData,
-        questions: [
-          ...quizData.questions,
-          { 
-            questionText: singleQuiz.questionText, 
-            answer1: singleQuiz.answer1, 
-            answer2: singleQuiz.answer2, 
-            answer3: singleQuiz.answer3, 
-            answer4: singleQuiz.answer4, 
-            questionImg: '' 
-          }
-        ]
-      });
-  
-      setSingleQuiz({
-        ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3:'', answer4:''
-      })
-    }
-    
+    ) {
+      setFaded(false)
+    } else (
+      setFaded(true)
+    )
+  }, [singleQuiz])
 
-    console.log(quizData);
-    
-  };
-
-  //reset question
-  const resetQuestion = () => {
-    if(
+  //fade or not restart question button
+  useEffect(() => {
+    if (
       singleQuiz.questionText !== '' ||
       singleQuiz.questionImg !== '' ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
       singleQuiz.answer4 !== ''
-    ){
-    setSingleQuiz({
-      ...singleQuiz,
-      questionImg: '',
-      questionText: '',
-      answer1: '',
-      answer2: '',
-      answer3: '',
-      answer4: ''
-    })
-  }
+    ) {
+      setRestartQuestion(false)
+    } else {
+      setRestartQuestion(true)
+    }
+  }, [singleQuiz])
+
+  //add more question
+  const addQuestion = () => {
+    if (
+      singleQuiz.questionText !== '' &&
+      singleQuiz.answer1 !== '' &&
+      singleQuiz.answer2 !== '' &&
+      singleQuiz.answer3 !== '' &&
+      singleQuiz.answer4 !== ''
+    ) {
+      setQuizData({
+        ...quizData,
+        questions: [
+          ...quizData.questions,
+          {
+            questionText: singleQuiz.questionText,
+            answer1: singleQuiz.answer1,
+            answer2: singleQuiz.answer2,
+            answer3: singleQuiz.answer3,
+            answer4: singleQuiz.answer4,
+            questionImg: singleQuiz.questionImg
+          }
+        ]
+      });
+
+      setSingleQuiz({
+        ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
+      })
+    }
+
+  };
+
+  //reset question
+  const resetQuestion = () => {
+
+    if (
+      singleQuiz.questionText !== '' ||
+      singleQuiz.questionImg !== '' ||
+      singleQuiz.answer1 !== '' ||
+      singleQuiz.answer2 !== '' ||
+      singleQuiz.answer3 !== '' ||
+      singleQuiz.answer4 !== ''
+    ) {
+      setSingleQuiz({
+        ...singleQuiz,
+        questionImg: '',
+        questionText: '',
+        answer1: '',
+        answer2: '',
+        answer3: '',
+        answer4: ''
+      })
+    }
   }
 
   //clear quizData
   const startOver = () => {
     setQuizData({
       mainTitle: '',
-    type: 5,
-    mainImg: '',
-    questions: [
-      
-    ]
+      type: 5,
+      mainImg: '',
+      questions: [
+
+      ]
     })
   }
 
   // const removeQuizCard = (index: number) => {
   //   const updatedQuestions = quizData.questions.filter((_, i) => i !== index);
-    
+
   //   setQuizData({
   //     ...quizData,
   //     questions: updatedQuestions
   //   });
-  
+
   //   console.log(index);
   // };
 
-  const getQuizForEdit = (index:number) =>{
+  const getQuizForEdit = (index: number) => {
     // find current element in index
-    const foundIndex = quizData.questions[index]    
+    const foundIndex = quizData.questions[index]
 
     setSingleQuiz({
-      questionImg: foundIndex.questionImg,
+      questionImg: URL.createObjectURL(foundIndex.questionImg),
       questionText: foundIndex.questionText,
       answer1: foundIndex.answer1,
       answer2: foundIndex.answer2,
@@ -175,23 +189,23 @@ useEffect(()=>{
 
     setEditBtn(true)
     setSavedQuizIndex(index)
-    
-  }  
+
+  }
 
   const editQuizCard = () => {
     // create new copy
     const updatedQuestions = [...quizData.questions];
-    
+
     // update on index
     updatedQuestions[savedQuizIndex] = singleQuiz;
-    
+
     setQuizData({
       ...quizData,
       questions: updatedQuestions
     });
-  
+
     setSingleQuiz({
-      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3:'', answer4:''
+      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
     })
     setEditBtn(false)
   };
@@ -200,8 +214,8 @@ useEffect(()=>{
     const token = localStorage.getItem('token')
     try {
       const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
-        headers:{
-            Authorization: `Bearer ${token}`
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       });
       console.log('Quiz data submitted:', response.data);
@@ -209,86 +223,114 @@ useEffect(()=>{
     } catch (error) {
       console.error('Error submitting quiz data:', error);
     }
-    
+
   };
-  
+
 
   return (
     <>
       <PageLayout>
         <div className='create_quiz'>
-            <div className="margin_top_cr_quiz">
-              <p>Create a </p>
-              {QUIZ}
+          <div className="margin_top_cr_quiz">
+            <p>Create a </p>
+            {QUIZ}
+          </div>
+
+          <div className='cr_quiz_table'>
+
+            {/* question section */}
+            <div className='cr_quiz_question'>
+              <p>Question 1/1 <span className='important_star'>*</span></p>
+
+              <input
+                type='text'
+                name='question'
+                placeholder='Question...'
+                className='cr_quiz_question1'
+                value={singleQuiz.questionText}
+                onChange={(e) => setSingleQuiz({ ...singleQuiz, questionText: e.target.value })}
+              />
             </div>
 
-            <div className='cr_quiz_table'>
-              
-              {/* question section */}
-              <div className='cr_quiz_question'>
-                <p>Question 1/1 <span className='important_star'>*</span></p>
+            {/* answers section */}
+            <div className='cr_quiz_answers'>
+              <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
+              <div className='cr_quiz_answers_inner'>
+                <QuizAnwersComp
+                  name={'answ1'}
+                  value={singleQuiz.answer1}
+                  placeholder={'Answer 1'}
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
+                />
 
-                <input 
-                  type='text' 
-                  name='question' 
-                  placeholder='Question...' 
-                  className='cr_quiz_question1'
-                  value={singleQuiz.questionText}
-                  onChange={(e)=>setSingleQuiz({...singleQuiz, questionText: e.target.value})}
+                <QuizAnwersComp
+                  name={'answ2'}
+                  value={singleQuiz.answer2}
+                  placeholder={'Answer 2'}
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
+                />
+
+                <QuizAnwersComp
+                  name={'answ3'}
+                  value={singleQuiz.answer3}
+                  placeholder={'Answer 3'}
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
+                />
+
+                <QuizAnwersComp
+                  name={'answ1'}
+                  value={singleQuiz.answer4}
+                  placeholder={'Answer 4'}
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
                 />
               </div>
+            </div>
 
-              {/* answers section */}
-              <div className='cr_quiz_answers'>
-                <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
-                <div className='cr_quiz_answers_inner'>
-                <QuizAnwersComp 
-                  name={'answ1'} 
-                  value={singleQuiz.answer1}
-                  placeholder={'Answer 1'} 
-                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
-                /> 
-
-                <QuizAnwersComp 
-                  name={'answ2'} 
-                  value={singleQuiz.answer2}
-                  placeholder={'Answer 2'} 
-                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
-                /> 
-
-                <QuizAnwersComp 
-                  name={'answ3'} 
-                  value={singleQuiz.answer3}
-                  placeholder={'Answer 3'} 
-                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
-                /> 
-
-                <QuizAnwersComp 
-                  name={'answ1'} 
-                  value={singleQuiz.answer4}
-                  placeholder={'Answer 4'} 
-                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
-                /> 
-                </div>
-              </div>
-
-              {/* buttons */}
-              <div className='cr_quiz_buttons'>
+            {/* upload image with drag n drop */}
+            <div className='cr_quiz_upload_image'>
+              <p>Add image</p>
+              <div {...getRootProps()} className='dragNdrop'>
+                <input {...getInputProps()} />
                 {
-                  isEditBtn 
-                    ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded}/></span>
-                    : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
+                  isDragActive ?
+                    <></>
+                    :
+                    <div className='dragNdrop_block'>
+                      <div className='dragNdrop_block1'>
+                        <img src={dropIcon} className='dropIcon' alt='dropIcon' />
+                        <p>Drag and drop here</p>
+                      </div>
+                      <p>or</p>
+
+                      <div className='dragNdrop_block2'>
+                        <p>Select file</p>
+                      </div>
+                    </div>
                 }
-                <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion}/></span>
               </div>
             </div>
+
+
+
+            {/* buttons */}
+            <div className='cr_quiz_buttons'>
+              {
+                isEditBtn
+                  ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded} /></span>
+                  : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded} /></span>
+              }
+              <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion} /></span>
+            </div>
+          </div>
+
+
 
           {/* quiz cards and buttons */}
           <div className='cr_quiz_bottom'>
             <div className='mapping_quizData'>
-              {quizData?.questions?.map((item, index)=>{
-                return(
-                  <QuizCard 
+              {quizData?.questions?.map((item, index) => {
+                return (
+                  <QuizCard
                     key={index}
                     index={index + 1}
                     length={quizData?.questions?.length}
@@ -297,20 +339,20 @@ useEffect(()=>{
                     answ1={item.answer1}
                     answ2={item.answer2}
                     answ3={item.answer3}
-                    answ4={item.answer4} 
-                    callBack={()=>getQuizForEdit(index)}            
+                    answ4={item.answer4}
+                    callBack={() => getQuizForEdit(index)}
                   />
                 )
               })}
             </div>
 
-              {
-                quizData?.questions.length > 0 
-                && <div className='apply_reset_btns'>
-                    <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
-                    <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
-                  </div>
-              }
+            {
+              quizData?.questions.length > 0
+              && <div className='apply_reset_btns'>
+                <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
+                <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
+              </div>
+            }
           </div>
         </div>
       </PageLayout>
@@ -332,24 +374,24 @@ interface quizAnwersCompProps {
 
 const QuizAnwersComp: React.FC<quizAnwersCompProps> = ({ name, value, placeholder, setter }) => {
   return (
-    <input 
-      type='text' 
+    <input
+      type='text'
       name={name}
-      value={value}  
-      onChange={(e) => setter(e.target.value)} 
-      placeholder={placeholder} 
-      className='cr_quiz_answer_input' 
+      value={value}
+      onChange={(e) => setter(e.target.value)}
+      placeholder={placeholder}
+      className='cr_quiz_answer_input'
     />
   );
 };
 
 
 //Quiz card component
-interface QuizCardProps{
+interface QuizCardProps {
   index: number;
   length: number;
   title: string;
-  image: string;
+  image: any;
   answ1: string;
   answ2: string;
   answ3: string;
@@ -357,10 +399,10 @@ interface QuizCardProps{
   callBack: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({index, length, callBack, title, image, answ1, answ2, answ3, answ4}) =>{
-  return(
+const QuizCard: React.FC<QuizCardProps> = ({ index, length, callBack, title, image, answ1, answ2, answ3, answ4 }) => {
+  return (
     <div className='cr_quiz_card'>
-      
+
       <div className='cr_quiz_card_questionNum_dots'>
         <p>Question {index}/{length}</p>
 
@@ -374,10 +416,10 @@ const QuizCard: React.FC<QuizCardProps> = ({index, length, callBack, title, imag
       {/* title */}
       <p className='cr_quiz_card_title'>{title}</p>
 
-      
+
       <div className='cr_quiz_image_answers'>
         {/* quiz question image */}
-        <img src={image ? image : cover} className='cr_quiz_card_cover' alt='quiz card cover'/>
+        <img src={image ? URL.createObjectURL(image) : cover} className='cr_quiz_card_cover' alt='quiz card cover' />
 
         {/* quiz answers */}
         <div className='cr_quiz_answers_arr'>

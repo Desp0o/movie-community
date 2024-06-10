@@ -89,6 +89,7 @@ const AddPostPopUp = () => {
     if (file) {
       if (file.type.includes("image")) {
         setUploadedImage(URL.createObjectURL(file));
+        
       }
 
       if (file.type.includes("video")) {
@@ -105,6 +106,11 @@ const AddPostPopUp = () => {
 
     setPostValue({ ...postValue, img: file });
   };
+
+  useEffect(()=>{
+    console.log(uploadedImage);
+    
+  },[uploadedImage])
 
   const handleChange = (event: {
     target: {
