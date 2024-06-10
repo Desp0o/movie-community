@@ -237,7 +237,7 @@ const CreateQuiz = () => {
           </div>
 
           <div className='cr_quiz_table'>
-
+            {/* <input className='cr_quiz_question1' type='text' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} /> */}
             {/* question section */}
             <div className='cr_quiz_question'>
               <p>Question 1/1 <span className='important_star'>*</span></p>

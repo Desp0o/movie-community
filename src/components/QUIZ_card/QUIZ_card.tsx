@@ -1,18 +1,20 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import "../../pages/Quiz_.css"
 
 interface QUIZ_cardProps{
     image: string;
-    children: ReactNode;
+    txt1: string;
+    txt2: string;
 }
 
-const QUIZ_card:React.FC<QUIZ_cardProps> = ({children, image}) => {
+const QUIZ_card:React.FC<QUIZ_cardProps> = ({txt1, txt2, image}) => {
   return (
     <div className="QUIZ_card">
         <img src={image} alt="QUIZ_card" />
 
         <div className="QUIZ_card_footer" >
-         {children}
+          <p className="matrix-txt">{txt1}</p>
+          <p className='green-matrix'>{txt2}</p>
         </div>
       </div>
   )

@@ -5,9 +5,7 @@ import ButtonOutlined from "../components/buttonFIlled/ButtonOutlined"
 import matrix from "../assets/matrix.webp"
 import bacToFuture from "../assets/bacToFuture.webp"
 import et from "../assets/e.t.webp"
-import { inTheMovie } from "../assets/newSvg/inTheMovie"
 import QUIZ_card from "../components/QUIZ_card/QUIZ_card"
-import { canYouName } from "../assets/newSvg/canYouName"
 import Footer from "../components/footer/Footer"
 import PageLayout from "../components/pageLayout/PageLayout"
 
@@ -48,24 +46,15 @@ const Quiz_ = () => {
             <div className="guess_info_cards">
 
               <div className="gc1">
-                <QUIZ_card image={matrix}>
-                  <p className="matrix-txt">Who is the main character</p>
-                  {inTheMovie}
-                </QUIZ_card>
+                <QUIZ_card image={matrix} txt1={"Who is the main character"} txt2={"IN THIS MOVIE"} />
               </div>
 
               <div className="gc2">
-                <QUIZ_card image={bacToFuture}>
-                  <p className="matrix-txt">Who is the main character</p>
-                  {canYouName}
-                </QUIZ_card>
+                <QUIZ_card image={bacToFuture} txt1={"Can you name"} txt2={"THIS 80’S MOVIE"} />
               </div>
 
               <div className="gc3">
-                <QUIZ_card image={et}>
-                  <p className="matrix-txt">Who is the main character</p>
-                  {canYouName}
-                </QUIZ_card>
+                <QUIZ_card image={et} txt1={"Can you name this movie"} txt2={"FROM ONE SCREENSHOT"} />
               </div>
             </div>
           </div>
