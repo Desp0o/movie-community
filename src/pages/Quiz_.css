@@ -1,12 +1,15 @@
 .Quiz_{
     width: 100%;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 126px;
 } 
 
 .Quiz_inner{
     display: flex;
     gap: 98px;
     padding-left: 116px;
+    padding-bottom: 80px;
 }
 
 .quiz_add_rules{
