@@ -7,6 +7,7 @@ import ButtonFIlled from '../components/buttonFIlled/ButtonFilled';
 import ButtonOutlined from '../components/buttonFIlled/ButtonOutlined';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
+import PageLayout from '../components/pageLayout/PageLayout';
 
 interface QuestionProps {
     questionText: string;
@@ -214,7 +215,8 @@ useEffect(()=>{
 
   return (
     <>
-      <div className='create_quiz'>
+      <PageLayout>
+        <div className='create_quiz'>
             <div className="margin_top_cr_quiz">
               <p>Create a </p>
               {QUIZ}
@@ -281,36 +283,37 @@ useEffect(()=>{
               </div>
             </div>
 
-        {/* quiz cards and buttons */}
-        <div className='cr_quiz_bottom'>
-          <div className='mapping_quizData'>
-            {quizData?.questions?.map((item, index)=>{
-              return(
-                <QuizCard 
-                  key={index}
-                  index={index + 1}
-                  length={quizData?.questions?.length}
-                  title={item.questionText}
-                  image={item.questionImg}
-                  answ1={item.answer1}
-                  answ2={item.answer2}
-                  answ3={item.answer3}
-                  answ4={item.answer4} 
-                  callBack={()=>getQuizForEdit(index)}            
-                />
-              )
-            })}
-          </div>
+          {/* quiz cards and buttons */}
+          <div className='cr_quiz_bottom'>
+            <div className='mapping_quizData'>
+              {quizData?.questions?.map((item, index)=>{
+                return(
+                  <QuizCard 
+                    key={index}
+                    index={index + 1}
+                    length={quizData?.questions?.length}
+                    title={item.questionText}
+                    image={item.questionImg}
+                    answ1={item.answer1}
+                    answ2={item.answer2}
+                    answ3={item.answer3}
+                    answ4={item.answer4} 
+                    callBack={()=>getQuizForEdit(index)}            
+                  />
+                )
+              })}
+            </div>
 
-            {
-              quizData?.questions.length > 0 
-              && <div className='apply_reset_btns'>
-                  <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
-                  <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
-                </div>
-            }
+              {
+                quizData?.questions.length > 0 
+                && <div className='apply_reset_btns'>
+                    <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
+                    <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
+                  </div>
+              }
+          </div>
         </div>
-      </div>
+      </PageLayout>
       <Footer />
     </>
   );

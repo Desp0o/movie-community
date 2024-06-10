@@ -2,7 +2,7 @@
     position: fixed;
     margin-right: calc(1440px - 460px);
     width: 350px;
-    top: 270px;
+    top: 265px;
 
     z-index: 2;
 }

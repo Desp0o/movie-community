@@ -10,6 +10,7 @@ import { useRefetchHook } from "./hooks/useFeedRefetch";
 import Slider from "./components/slider/Slider";
 import RatingsFeed from "./components/RatingsFeed/RatingsFeed";
 import ShortCuts from "./components/shortCuts/ShortCuts";
+import PageLayout from "./components/pageLayout/PageLayout";
 
 interface dataProps {
   guls: number;
@@ -69,7 +70,8 @@ const Feed = () => {
 
 
   return (
-    <>
+    <PageLayout>
+    
       <Slider />
       <RatingsFeed />
       <ShortCuts />
@@ -106,7 +108,7 @@ const Feed = () => {
         ))}
       </div>
       {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
-    </>
+    </PageLayout>
   );
 };
 

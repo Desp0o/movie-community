@@ -2,7 +2,7 @@
     position: fixed;
     width: 300px;
     margin-left: calc(1440px - 460px);
-    top: 268px;
+    top: 265px;
 
     display: flex;
     flex-direction: column;

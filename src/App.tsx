@@ -105,7 +105,6 @@ function App() {
         <AddQuiz />
         <AddPoll />
         <Navbar />
-          <PageLayout>
 
             <Routes>
               <Route path="/" element={<Outlet />} />
@@ -120,7 +119,6 @@ function App() {
               <Route path="/pages/Quizzes" element={<Quizzes />} />
               <Route path="/pages/Quiz/:id" element={<Quiz />} />
             </Routes>
-          </PageLayout>
       </div>
   )
 }
