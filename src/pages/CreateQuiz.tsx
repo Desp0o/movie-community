@@ -206,9 +206,8 @@ useEffect(()=>{
     setEditBtn(false)
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async () => {
     const token = localStorage.getItem('token')
-    e.preventDefault();
     try {
       const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers:{
@@ -216,6 +215,7 @@ useEffect(()=>{
         }
       });
       console.log('Quiz data submitted:', response.data);
+      navigate('/')
     } catch (error) {
       console.error('Error submitting quiz data:', error);
     }
@@ -316,20 +316,10 @@ useEffect(()=>{
           {
             quizData?.questions.length > 0 
             && <div className='apply_reset_btns'>
-                <span onClick={''}><ButtonFIlled text={'Save and close'} link={''} /></span>
+                <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
                 <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
               </div>
           }
-      </div>
-
-      <div className="main_c">
-        
-
-        {/* <input type='file' onChange={fileHandler}/> */}
-
-     
-
-        <button onClick={handleSubmit}>Submit Quiz</button>
       </div>
     </div>
   );
