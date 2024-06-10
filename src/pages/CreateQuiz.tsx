@@ -27,7 +27,6 @@ interface QuizDataProps {
 const CreateQuiz = () => {
   const navigate = useNavigate()
   const [isFaded, setFaded] = useState(true) //nex button active/inactive trigger
-  const [isFadeOverButton, setFadeOverButton] = useState(true) //startover button active/inactive trigger
   const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
   const [savedQuizIndex, setSavedQuizIndex] = useState(0) //save index fro array fro later update array
   const [restartQuestion, setRestartQuestion] = useState(true)
@@ -64,17 +63,6 @@ useEffect(()=>{
     setFaded(true)
   )
 },[singleQuiz])
-
-//fade or not start over btn
-useEffect(()=>{
-  
-    if(quizData.questions.length === 0){
-      setFadeOverButton(true)
-    }else{
-      setFadeOverButton(false)
-    }
-  
-},[quizData.questions])
 
 //fade or not restart question button
 useEffect(()=>{
