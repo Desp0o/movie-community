@@ -6,6 +6,7 @@ import cover from "../assets/bacToFuture.webp"
 import ButtonFIlled from '../components/buttonFIlled/ButtonFilled';
 import ButtonOutlined from '../components/buttonFIlled/ButtonOutlined';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/footer/Footer';
 
 interface QuestionProps {
     questionText: string;
@@ -224,104 +225,106 @@ useEffect(()=>{
   
 
   return (
-    <div className='create_quiz'>
-
-          <div className="margin_top_cr_quiz">
-            <p>Create a </p>
-            {QUIZ}
-          </div>
-
-          <div className='cr_quiz_table'>
-            
-            {/* question section */}
-            <div className='cr_quiz_question'>
-              <p>Question 1/1 <span className='important_star'>*</span></p>
-
-              <input 
-                type='text' 
-                name='question' 
-                placeholder='Question...' 
-                className='cr_quiz_question1'
-                value={singleQuiz.questionText}
-                onChange={(e)=>setSingleQuiz({...singleQuiz, questionText: e.target.value})}
-              />
+    <>
+      <div className='create_quiz'>
+            <div className="margin_top_cr_quiz">
+              <p>Create a </p>
+              {QUIZ}
             </div>
 
-            {/* answers section */}
-            <div className='cr_quiz_answers'>
-              <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
-              <div className='cr_quiz_answers_inner'>
-              <QuizAnwersComp 
-                name={'answ1'} 
-                value={singleQuiz.answer1}
-                placeholder={'Answer 1'} 
-                setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
-              /> 
+            <div className='cr_quiz_table'>
+              
+              {/* question section */}
+              <div className='cr_quiz_question'>
+                <p>Question 1/1 <span className='important_star'>*</span></p>
 
-              <QuizAnwersComp 
-                name={'answ2'} 
-                value={singleQuiz.answer2}
-                placeholder={'Answer 2'} 
-                setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
-              /> 
+                <input 
+                  type='text' 
+                  name='question' 
+                  placeholder='Question...' 
+                  className='cr_quiz_question1'
+                  value={singleQuiz.questionText}
+                  onChange={(e)=>setSingleQuiz({...singleQuiz, questionText: e.target.value})}
+                />
+              </div>
 
-              <QuizAnwersComp 
-                name={'answ3'} 
-                value={singleQuiz.answer3}
-                placeholder={'Answer 3'} 
-                setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
-              /> 
+              {/* answers section */}
+              <div className='cr_quiz_answers'>
+                <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
+                <div className='cr_quiz_answers_inner'>
+                <QuizAnwersComp 
+                  name={'answ1'} 
+                  value={singleQuiz.answer1}
+                  placeholder={'Answer 1'} 
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
+                /> 
 
-              <QuizAnwersComp 
-                name={'answ1'} 
-                value={singleQuiz.answer4}
-                placeholder={'Answer 4'} 
-                setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
-              /> 
+                <QuizAnwersComp 
+                  name={'answ2'} 
+                  value={singleQuiz.answer2}
+                  placeholder={'Answer 2'} 
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
+                /> 
+
+                <QuizAnwersComp 
+                  name={'answ3'} 
+                  value={singleQuiz.answer3}
+                  placeholder={'Answer 3'} 
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
+                /> 
+
+                <QuizAnwersComp 
+                  name={'answ1'} 
+                  value={singleQuiz.answer4}
+                  placeholder={'Answer 4'} 
+                  setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
+                /> 
+                </div>
+              </div>
+
+              {/* buttons */}
+              <div className='cr_quiz_buttons'>
+                {
+                  isEditBtn 
+                    ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded}/></span>
+                    : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
+                }
+                <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion}/></span>
               </div>
             </div>
 
-            {/* buttons */}
-            <div className='cr_quiz_buttons'>
-              {
-                isEditBtn 
-                  ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded}/></span>
-                  : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
-              }
-              <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion}/></span>
-            </div>
+        {/* quiz cards and buttons */}
+        <div className='cr_quiz_bottom'>
+          <div className='mapping_quizData'>
+            {quizData?.questions?.map((item, index)=>{
+              return(
+                <QuizCard 
+                  key={index}
+                  index={index + 1}
+                  length={quizData?.questions?.length}
+                  title={item.questionText}
+                  image={item.questionImg}
+                  answ1={item.answer1}
+                  answ2={item.answer2}
+                  answ3={item.answer3}
+                  answ4={item.answer4} 
+                  callBack={()=>getQuizForEdit(index)}            
+                />
+              )
+            })}
           </div>
 
-      {/* quiz cards and buttons */}
-      <div className='cr_quiz_bottom'>
-        <div className='mapping_quizData'>
-          {quizData?.questions?.map((item, index)=>{
-            return(
-              <QuizCard 
-                key={index}
-                index={index + 1}
-                length={quizData?.questions?.length}
-                title={item.questionText}
-                image={item.questionImg}
-                answ1={item.answer1}
-                answ2={item.answer2}
-                answ3={item.answer3}
-                answ4={item.answer4} 
-                callBack={()=>getQuizForEdit(index)}            
-              />
-            )
-          })}
+            {
+              quizData?.questions.length > 0 
+              && <div className='apply_reset_btns'>
+                  <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
+                  <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
+                </div>
+            }
         </div>
-
-          {
-            quizData?.questions.length > 0 
-            && <div className='apply_reset_btns'>
-                <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
-                <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
-              </div>
-          }
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
