@@ -7,7 +7,7 @@ import SingleShortCut from "./SingleShortCut"
 const ShortCuts = () => {
   return (
     <div className="shortcuts">
-      <Link to="/pages/CreateQuiz">
+      <Link to="pages/Quiz_">
         <SingleShortCut icon={quizShortCut} text={"Create quiz"} />
       </Link>
         <SingleShortCut icon={pollShortCut} text={"Create poll"} />

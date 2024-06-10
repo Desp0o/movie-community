@@ -13,7 +13,6 @@ import Post from "./pages/Post"
 import axios from "axios"
 import { ToastContainer } from "react-toastify"
 import Login from "./components/login/Login"
-import PageLayout from "./components/pageLayout/PageLayout"
 import AddPostPopUp from "./components/createPostFeed/AddPostPopUp"
 import AddQuiz from "./components/createPostFeed/AddQuiz"
 import AddPoll from "./components/createPostFeed/AddPoll"
@@ -105,7 +104,6 @@ function App() {
         <AddQuiz />
         <AddPoll />
         <Navbar />
-
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
