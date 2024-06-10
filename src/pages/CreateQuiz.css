@@ -185,3 +185,10 @@ line-height: 130%; /* 28.6px */
     justify-content: center;
     gap: 26px;
 }
+
+.apply_reset_btns{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
