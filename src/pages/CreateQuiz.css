@@ -61,12 +61,13 @@
     width: 182px;
     height: 77px;
     padding: 0px 4px 0px 16px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     border-radius: 14px;
     border: 1px solid var(--Secondary-400);
 }
+
 
 .cr_quiz_answers{
     margin-top: 40px;

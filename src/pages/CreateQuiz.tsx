@@ -27,6 +27,7 @@ const CreateQuiz = () => {
   const [isFadeOverButton, setFadeOverButton] = useState(true) //startover button active/inactive trigger
   const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
   const [savedQuizIndex, setSavedQuizIndex] = useState(0) //save index fro array fro later update array
+  const [restartQuestion, setRestartQuestion] = useState(true)
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
     type: 5,
@@ -72,6 +73,21 @@ useEffect(()=>{
   
 },[quizData.questions])
 
+//fade or not restart question button
+useEffect(()=>{
+  if(
+    singleQuiz.questionText !== '' ||
+    singleQuiz.questionImg !== '' ||
+    singleQuiz.answer1 !== '' ||
+    singleQuiz.answer2 !== '' ||
+    singleQuiz.answer3 !== '' ||
+    singleQuiz.answer4 !== ''
+  ){
+    setRestartQuestion(false)
+  }else{
+    setRestartQuestion(true)
+  }
+},[singleQuiz])
 
   //add more question
   const addQuestion = () => {
@@ -107,6 +123,28 @@ useEffect(()=>{
     
   };
 
+  //reset question
+  const resetQuestion = () => {
+    if(
+      singleQuiz.questionText !== '' ||
+      singleQuiz.questionImg !== '' ||
+      singleQuiz.answer1 !== '' ||
+      singleQuiz.answer2 !== '' ||
+      singleQuiz.answer3 !== '' ||
+      singleQuiz.answer4 !== ''
+    ){
+    setSingleQuiz({
+      ...singleQuiz,
+      questionImg: '',
+      questionText: '',
+      answer1: '',
+      answer2: '',
+      answer3: '',
+      answer4: ''
+    })
+  }
+  }
+
   //clear quizData
   const startOver = () => {
     setQuizData({
@@ -119,44 +157,20 @@ useEffect(()=>{
     })
   }
 
-  const removeQuestion = (index: number) => {
-    const newQuestions = quizData.questions.filter((_, qIndex) => qIndex !== index);
-    setQuizData({ ...quizData, questions: newQuestions });
-  };
-
-
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    const token = localStorage.getItem('token')
-    e.preventDefault();
-    try {
-      const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
-        headers:{
-            Authorization: `Bearer ${token}`
-        }
-      });
-      console.log('Quiz data submitted:', response.data);
-    } catch (error) {
-      console.error('Error submitting quiz data:', error);
-    }
+  // const removeQuizCard = (index: number) => {
+  //   const updatedQuestions = quizData.questions.filter((_, i) => i !== index);
     
-  };
-
-
-
+  //   setQuizData({
+  //     ...quizData,
+  //     questions: updatedQuestions
+  //   });
   
-
-
-useEffect(()=>{
-  console.log(singleQuiz);
-  
-},[singleQuiz])
-
+  //   console.log(index);
+  // };
 
   const getQuizForEdit = (index:number) =>{
-
-    const foundIndex = quizData.questions[index]
-    console.log(foundIndex);
-    
+    // find current element in index
+    const foundIndex = quizData.questions[index]    
 
     setSingleQuiz({
       questionImg: foundIndex.questionImg,
@@ -188,6 +202,22 @@ useEffect(()=>{
       ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3:'', answer4:''
     })
     setEditBtn(false)
+  };
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const token = localStorage.getItem('token')
+    e.preventDefault();
+    try {
+      const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+      });
+      console.log('Quiz data submitted:', response.data);
+    } catch (error) {
+      console.error('Error submitting quiz data:', error);
+    }
+    
   };
   
 
@@ -256,7 +286,7 @@ useEffect(()=>{
                   ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded}/></span>
                   : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
               }
-              <span onClick={startOver}><ButtonOutlined text={'start over'} link={''} faded={isFadeOverButton}/></span>
+              <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion}/></span>
             </div>
           </div>
 
@@ -297,7 +327,7 @@ useEffect(()=>{
 export default CreateQuiz;
 
 
-
+//Quiz answer component
 interface quizAnwersCompProps {
   name: string;
   placeholder: string;
@@ -319,7 +349,7 @@ const QuizAnwersComp: React.FC<quizAnwersCompProps> = ({ name, value, placeholde
 };
 
 
-
+//Quiz card component
 interface QuizCardProps{
   index: number;
   length: number;
