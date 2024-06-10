@@ -9,6 +9,11 @@ border-radius: 6px;
 background: var(--Primary-600);
 }
 
+.ButtonFIlled.faded{
+    background: rgba(33, 15, 96, 0.50);
+    color: var(--Secondary-600) !important;
+}
+
 .ButtonFIlled p{
 text-align: center;
 font-size: 12px;
@@ -28,6 +33,11 @@ gap: 10px;
 
 border-radius: 6px;
 border: 2px solid #5EFFDE;
+}
+
+.ButtonOutlined.faded{
+border: 2px solid rgba(94, 255, 222, 0.50);
+color: rgba(255, 255, 255, 0.40);
 }
 
 .ButtonOutlined p{

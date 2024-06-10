@@ -37,7 +37,7 @@ const Quiz_ = () => {
 
           {/* buttons */}
           <div className="Quiz_btns">
-            <ButtonFilled text={"Get started!"} link={""} />
+            <ButtonFilled text={"Get started!"} link={"/pages/CreateQuiz"} />
             <ButtonOutlined text={"Check out Quizzes"} link={""} />
           </div>
         </div>
