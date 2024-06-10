@@ -23,8 +23,10 @@ interface QuizDataProps {
 }
 
 const CreateQuiz = () => {
-  const [isFaded, setFaded] = useState(true) //nex button active/inactive indicator
-  const [isFadeOverButton, setFadeOverButton] = useState(true)
+  const [isFaded, setFaded] = useState(true) //nex button active/inactive trigger
+  const [isFadeOverButton, setFadeOverButton] = useState(true) //startover button active/inactive trigger
+  const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
+  const [savedQuizIndex, setSavedQuizIndex] = useState(0) //save index fro array fro later update array
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
     type: 5,
@@ -150,7 +152,7 @@ useEffect(()=>{
 },[singleQuiz])
 
 
-  const editQuizCard = (index:number) =>{
+  const getQuizForEdit = (index:number) =>{
 
     const foundIndex = quizData.questions[index]
     console.log(foundIndex);
@@ -165,9 +167,29 @@ useEffect(()=>{
       answer4: foundIndex.answer4
     })
 
-    console.log(index);
+    setEditBtn(true)
+    setSavedQuizIndex(index)
     
   }  
+
+  const editQuizCard = () => {
+    // create new copy
+    const updatedQuestions = [...quizData.questions];
+    
+    // update on index
+    updatedQuestions[savedQuizIndex] = singleQuiz;
+    
+    setQuizData({
+      ...quizData,
+      questions: updatedQuestions
+    });
+  
+    setSingleQuiz({
+      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3:'', answer4:''
+    })
+    setEditBtn(false)
+  };
+  
 
   return (
     <div className='create_quiz'>
@@ -195,7 +217,7 @@ useEffect(()=>{
 
             {/* answers section */}
             <div className='cr_quiz_answers'>
-              <p className='answer_options'>4 answer options<span className='important_star'>*</span></p>
+              <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
               <div className='cr_quiz_answers_inner'>
               <QuizAnwersComp 
                 name={'answ1'} 
@@ -229,7 +251,11 @@ useEffect(()=>{
 
             {/* buttons */}
             <div className='cr_quiz_buttons'>
-              <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
+              {
+                isEditBtn 
+                  ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded}/></span>
+                  : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded}/></span>
+              }
               <span onClick={startOver}><ButtonOutlined text={'start over'} link={''} faded={isFadeOverButton}/></span>
             </div>
           </div>
@@ -248,7 +274,7 @@ useEffect(()=>{
               answ2={item.answer2}
               answ3={item.answer3}
               answ4={item.answer4} 
-              callBack={()=>editQuizCard(index)}            
+              callBack={()=>getQuizForEdit(index)}            
             />
           )
         })}
