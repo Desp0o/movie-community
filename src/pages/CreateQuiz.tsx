@@ -10,6 +10,7 @@ import Footer from '../components/footer/Footer';
 import PageLayout from '../components/pageLayout/PageLayout';
 import { useDropzone } from 'react-dropzone'
 import dropIcon from "../assets/dropIcon.webp"
+import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 
 
 interface QuestionProps {
@@ -163,29 +164,32 @@ const CreateQuiz = () => {
     })
   }
 
-  // const removeQuizCard = (index: number) => {
-  //   const updatedQuestions = quizData.questions.filter((_, i) => i !== index);
+  const removeQuizCard = (index: number) => {
+    const updatedQuestions = quizData.questions.filter((_, i) => i !== index);
 
-  //   setQuizData({
-  //     ...quizData,
-  //     questions: updatedQuestions
-  //   });
+    setQuizData({
+      ...quizData,
+      questions: updatedQuestions
+    });
 
-  //   console.log(index);
-  // };
+    console.log(index);
+  };
 
   const getQuizForEdit = (index: number) => {
     // find current element in index
     const foundIndex = quizData.questions[index]
 
-    setSingleQuiz({
-      questionImg: URL.createObjectURL(foundIndex.questionImg),
-      questionText: foundIndex.questionText,
-      answer1: foundIndex.answer1,
-      answer2: foundIndex.answer2,
-      answer3: foundIndex.answer3,
-      answer4: foundIndex.answer4
-    })
+    if(foundIndex){
+
+      setSingleQuiz({
+        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : undefined,
+        questionText: foundIndex.questionText,
+        answer1: foundIndex.answer1,
+        answer2: foundIndex.answer2,
+        answer3: foundIndex.answer3,
+        answer4: foundIndex.answer4
+      })
+    }
 
     setEditBtn(true)
     setSavedQuizIndex(index)
@@ -340,7 +344,8 @@ const CreateQuiz = () => {
                     answ2={item.answer2}
                     answ3={item.answer3}
                     answ4={item.answer4}
-                    callBack={() => getQuizForEdit(index)}
+                    editCallBack={() => getQuizForEdit(index)}
+                    deleteCallback={() => removeQuizCard(index)}
                   />
                 )
               })}
@@ -396,20 +401,39 @@ interface QuizCardProps {
   answ2: string;
   answ3: string;
   answ4: string;
-  callBack: MouseEventHandler<HTMLDivElement> | undefined;
+  editCallBack: MouseEventHandler<HTMLDivElement> | undefined;
+  deleteCallback:MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({ index, length, callBack, title, image, answ1, answ2, answ3, answ4 }) => {
+const QuizCard: React.FC<QuizCardProps> = ({ 
+  index, 
+  length, 
+  editCallBack, 
+  deleteCallback, 
+  title, 
+  image, 
+  answ1, 
+  answ2, 
+  answ3, 
+  answ4 
+}) => {
   return (
     <div className='cr_quiz_card'>
 
       <div className='cr_quiz_card_questionNum_dots'>
         <p>Question {index}/{length}</p>
 
-        <div className='pannel_dots' onClick={callBack}>
+        <div className='pannel_dots'>
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
+        </div>
+
+        <div className='cr_quiz_card_editPanel'>
+          <span>{closeSquareIcon}</span>
+
+          <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>Delete question</p>
+          <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>Edit question</p>
         </div>
       </div>
 
