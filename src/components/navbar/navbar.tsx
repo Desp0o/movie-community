@@ -1,7 +1,6 @@
 import "./navbar.css";
 import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
-import { bellPasiveIcon } from "../../assets/svg/bell";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useEffect, useRef, useState } from "react";
@@ -74,7 +73,6 @@ const Navbar = () => {
         
 
         <div className="nav_profile">
-        <Link to='/pages/Quizzes' style={{color:'var(--purple)', fontWeight:"600"}}>Quizzes</Link>
 
           {window.innerWidth < 601 && !user.name ? (
             <div className="responsive_search">{searchIconResposnive}</div>
@@ -84,10 +82,6 @@ const Navbar = () => {
           {user.name ? (
             <div className="nav_profile_items">
                 <p style={{color:"blue", fontWeight:"900"}}>{user?.bells}</p>
-
-              <div className="nav_profile_item_parent  responsive_hidden">
-                {bellPasiveIcon}
-              </div>
 
               <div
                 ref={avatarRef}

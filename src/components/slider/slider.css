@@ -1,5 +1,5 @@
 .Slider {
-    position: fixed;
+    position: absolute;
     margin-right: calc(1440px - 460px);
     width: 350px;
     top: 265px;

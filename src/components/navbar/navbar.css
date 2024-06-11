@@ -47,19 +47,15 @@
 }
 
 .nav_search_input {
-  width: 100%;
-  height: 40px;
-  border-radius: 30px;
+  display: flex;
+width: 600px;
+height: 40px;
+padding: 0px 4px 0px 16px;
+justify-content: space-between;
+align-items: center;
 
-  background-color: #eaedf0;
-  box-sizing: border-box;
-  padding-left: 32px;
-  transition: all 0.3s ease;
-}
-
-.nav_search_input.dark {
-  background-color: var(--active-page-dark);
-  transition: all 0.3s ease;
+border-radius: 8px;
+border: 1px solid var(--Secondary-400);
 }
 
 .nav_login_btn {

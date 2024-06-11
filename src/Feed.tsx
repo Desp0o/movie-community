@@ -1,6 +1,5 @@
 import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
-import { useUserHook } from "./hooks/useUserHook";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
 import noAvatar from "./assets/noAvatar.jpeg"
@@ -38,7 +37,6 @@ interface dataProps {
 }
 
 const Feed = () => {
-  const {user} = useUserHook()
   const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
   const { useFeedRefetch } = useRefetchHook()
 
@@ -77,7 +75,7 @@ const Feed = () => {
       <ShortCuts />
       {isLoading && <Spinner />}
       <div className="feed_page">
-        {user.name && user.userID ? <CreatePostFeed /> : <></>}
+        <CreatePostFeed /> 
         {data?.pages?.map((page: any, pageIndex: number) => (
           <div className="feed" key={pageIndex}>
             {page?.data?.posts?.data?.map((post: dataProps) => (

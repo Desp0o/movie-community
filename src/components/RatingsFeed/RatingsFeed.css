@@ -1,5 +1,5 @@
 .RatingsFeed {
-    position: fixed;
+    position: absolute;
     width: 300px;
     margin-left: calc(1440px - 460px);
     top: 265px;
