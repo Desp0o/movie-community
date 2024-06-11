@@ -180,8 +180,12 @@ const CreateQuiz = () => {
     const foundIndex = quizData.questions[index]
 
     if(foundIndex){
-
-      setSingleQuiz({
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth' // for smooth scrolling
+        });
+        
+        setSingleQuiz({
         questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : undefined,
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
