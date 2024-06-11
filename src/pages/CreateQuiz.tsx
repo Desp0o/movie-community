@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useCallback, useEffect, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import "./CreateQuiz.css";
 import axios from 'axios';
 import { QUIZ } from '../assets/newSvg/QUIZ';
@@ -418,11 +418,32 @@ const QuizCard: React.FC<QuizCardProps> = ({
   answ4 
 }) => {
 
+  const editPanelRef = useRef<HTMLDivElement>(null)
   const [isOpened, setOpen] = useState(false)
 
   const editPannelHandler = () => {
     setOpen(!isOpened)
   }
+  
+
+  //close editpanel when is clicked out of box
+  useEffect(() => {
+    const editPanelOutsideClick = (event: MouseEvent) => {
+      if (
+        editPanelRef.current &&
+        event.target instanceof Node &&
+        !editPanelRef.current.contains(event.target)
+    ) {
+      setOpen(false);
+    }
+    }
+
+    document.addEventListener("click", editPanelOutsideClick);
+
+    return () => {
+        document.removeEventListener("click", editPanelOutsideClick);
+    };
+}, [isOpened]);
 
   return (
     <div className='cr_quiz_card'>
@@ -430,7 +451,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
       <div className='cr_quiz_card_questionNum_dots'>
         <p>Question {index}/{length}</p>
 
-        <div className='pannel_dots' onClick={editPannelHandler}>
+        <div className='pannel_dots' onClick={editPannelHandler} ref={editPanelRef}>
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
