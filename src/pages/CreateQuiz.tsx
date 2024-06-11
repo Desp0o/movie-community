@@ -417,24 +417,35 @@ const QuizCard: React.FC<QuizCardProps> = ({
   answ3, 
   answ4 
 }) => {
+
+  const [isOpened, setOpen] = useState(false)
+
+  const editPannelHandler = () => {
+    setOpen(!isOpened)
+  }
+
   return (
     <div className='cr_quiz_card'>
 
       <div className='cr_quiz_card_questionNum_dots'>
         <p>Question {index}/{length}</p>
 
-        <div className='pannel_dots'>
+        <div className='pannel_dots' onClick={editPannelHandler}>
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />
         </div>
 
-        <div className='cr_quiz_card_editPanel'>
-          <span>{closeSquareIcon}</span>
-
-          <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>Delete question</p>
-          <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>Edit question</p>
-        </div>
+        {
+          isOpened 
+            && <div className='cr_quiz_card_editPanel'>
+                 <span onClick={editPannelHandler}>{closeSquareIcon}</span>
+  
+                 <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>Delete question</p>
+                  <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>Edit question</p>
+               </div>
+          
+        }
       </div>
 
       {/* title */}
