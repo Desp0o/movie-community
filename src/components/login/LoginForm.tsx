@@ -52,6 +52,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
       localStorage.setItem("userName", response.data?.user?.name);
       localStorage.setItem("score", response.data?.user?.point);
       localStorage.setItem("bells", response.data?.user?.bells);
+      localStorage.setItem("avatar", response.data?.user?.avatar)
 
       dispatch(setModalVisible(false));
       dispatch(

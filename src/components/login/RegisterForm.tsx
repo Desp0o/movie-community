@@ -39,58 +39,65 @@ const RegisterForm = () => {
 
   const regUser = async () => {
     setErrMsg('')
-   
-      if(isChecked){
-        setLoading(true);
-        setPwdEqual(false);
-        try {
-          const res = await axios.post(regPath, regInputs, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-  
-          if (res.data.message === "User registered by Mail") {
-            const res = await axios.post(
-              loginPath,
-              { email: regInputs.email, password: regInputs.password },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-  
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("token_death", res.data.token_death);
-            localStorage.setItem("userID", res.data.user.id);
-            dispatch(setModalVisible(false));
-            dispatch(
-              setUser({
-                name: res.data.user.email,
-                avatar: res.data.user.avatar,
-                userID: res.data.user.id,
-              })
-            );
-          }
-        } catch (error:any) {
-  
-          for (const key in error.response.data.errors) {
-            // Check if the errors array for the current key is not empty
-            if (error.response.data.errors[key].length > 0) {
-                // Log the first error message for the current key
-                setErrMsg(error.response.data.errors[key][0].substring(0, error.response.data.errors[key][0].length - 1));
-                
-                // Exit the loop after logging the first error
-                break;
+
+    if (isChecked) {
+      setLoading(true);
+      setPwdEqual(false);
+      try {
+        const res = await axios.post(regPath, regInputs, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (res.data.message === "User registered by Mail") {
+          const res = await axios.post(
+            loginPath,
+            { email: regInputs.email, password: regInputs.password },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
             }
+          );
+
+          localStorage.setItem("avatar", res?.data?.user?.avatar)
+          localStorage.setItem("token", res?.data?.token);
+          localStorage.setItem("token_death", res?.data?.token_death);
+          localStorage.setItem("userID", res.data?.user?.id);
+          localStorage.setItem("userName", res.data?.user?.name);
+          localStorage.setItem("score", res.data?.user?.point);
+          localStorage.setItem("bells", res.data?.user?.bells);
+
+          dispatch(setModalVisible(false));
+          dispatch(
+            setUser({
+              name: res?.data?.user?.name,
+              avatar: res?.data?.user?.avatar,
+              userID: res?.data?.user?.id,
+              bells: res?.data?.user?.bells,
+              score: res?.data?.user?.score,
+            })
+          );
         }
-          
-        } finally {
-          setLoading(false);
+      } catch (error: any) {
+
+        for (const key in error.response.data.errors) {
+          // Check if the errors array for the current key is not empty
+          if (error.response.data.errors[key].length > 0) {
+            // Log the first error message for the current key
+            setErrMsg(error.response.data.errors[key][0].substring(0, error.response.data.errors[key][0].length - 1));
+
+            // Exit the loop after logging the first error
+            break;
+          }
         }
+
+      } finally {
+        setLoading(false);
       }
-      
+    }
+
     if (regInputs.password_confirmation !== regInputs.password) {
       setPwdEqual(true);
       setErrMsg('Passwords do not match')
@@ -103,7 +110,7 @@ const RegisterForm = () => {
       <form className="reg_form" onSubmit={regUser}>
 
         {/* სახელის ინპუტი და ერორი */}
-        {errMsg === 'The name field is required' && <RegErrMsg message={errMsg}/>}
+        {errMsg === 'The name field is required' && <RegErrMsg message={errMsg} />}
         <InputComponent
           type="text"
           autoComplete="name"
@@ -115,7 +122,7 @@ const RegisterForm = () => {
         />
 
         {/* იმეილის ინპუტი და ერორი */}
-        {errMsg === 'The email field is required' || errMsg === 'The email field must be a valid email address' && <RegErrMsg message={errMsg}/>}
+        {errMsg === 'The email field is required' || errMsg === 'The email field must be a valid email address' && <RegErrMsg message={errMsg} />}
         <InputComponent
           type="email"
           autoComplete="current-email"
@@ -127,7 +134,7 @@ const RegisterForm = () => {
         />
 
         {/* პაროლი და ერორი */}
-        {errMsg === 'The password field is required' && <RegErrMsg message={errMsg}/>}
+        {errMsg === 'The password field is required' && <RegErrMsg message={errMsg} />}
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setShowPwd(!showPwd)}>
             {eyeIcon}
@@ -145,7 +152,7 @@ const RegisterForm = () => {
           />
         </div>
 
-        {errorHandlers.passwordError && <RegErrMsg message={errMsg}/>}
+        {errorHandlers.passwordError && <RegErrMsg message={errMsg} />}
         <div className="pasword_input_container">
           <span className="eye_icon" onClick={() => setReShowPwd(!showRePwd)}>
             {eyeIcon}
@@ -165,14 +172,14 @@ const RegisterForm = () => {
             }
           />
         </div>
-  
+
         <div className="checkbox_reg">
-          <span style={{cursor:"pointer"}} onClick={()=>setChecked(!isChecked)}> {isChecked ? checked : unchecked} </span>
+          <span style={{ cursor: "pointer" }} onClick={() => setChecked(!isChecked)}> {isChecked ? checked : unchecked} </span>
           <p className="checkbox_text">I agree with the <span className="checkbox_span">Terms</span> and <span className="checkbox_span">Privacy policy</span></p>
         </div>
 
-            <span style={{marginTop:"-12px"}}><SocialLogins funName={regUser} buttonName={"Create accaunt"} /></span>
-            
+        <span style={{ marginTop: "-12px" }}><SocialLogins funName={regUser} buttonName={"Create accaunt"} /></span>
+
       </form>
 
     </>
