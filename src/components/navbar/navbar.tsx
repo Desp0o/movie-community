@@ -10,10 +10,12 @@ import { useLoginModal } from "../../hooks/useLoginModal";
 import noAvatar from "../../assets/noAvatar.jpeg"
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import { useLanguage } from "../../hooks/useLanguage";
 
 
 const Navbar = () => {
   const { user } = useUserHook();
+  const { languageHandler } = useLanguage()
   const { userDashState } = useUserDashHook();
   const { handleVisibility } = useLoginModal();
   const [isOpen, setOpen] = useState(false)
@@ -69,7 +71,7 @@ const Navbar = () => {
           
           {user.name ? (
             <div className="nav_profile_items">
-                <p style={{color:"blue", fontWeight:"900"}}>{user?.bells}</p>
+                <p style={{color:"blue", fontWeight:"900"}} onClick={languageHandler}>{user?.bells}</p>
 
               <div
                 ref={avatarRef}
