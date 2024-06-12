@@ -40,6 +40,10 @@
     /* 21px */
 }
 
+.cr_quiz_question1::placeholder{
+    color: rgba(255, 255, 255, 0.40);
+}
+
 .cr_quiz_question p {
     color: #F7FFFB;
     font-size: 22px;
@@ -62,13 +66,18 @@
     display: flex;
     width: 182px;
     height: 77px;
-    padding: 0px 4px 0px 16px;
+    padding: 0px 4px 0px 4px;
     justify-content: center;
     align-items: center;
 
     border-radius: 14px;
     border: 1px solid var(--Secondary-400);
     color: var(--white);
+    text-align: center;
+}
+
+.cr_quiz_answer_input::placeholder{
+    color: rgba(255, 255, 255, 0.40);
 }
 
 .cr_quiz_answer_input.correct{
