@@ -98,7 +98,7 @@ body {
 
 .app{
   width: 100%;
-  color: #F7FFFB;
+  color: var(--white);
   
   font-family: "Roboto";
 }
