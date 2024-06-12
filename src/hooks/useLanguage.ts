@@ -1,19 +1,30 @@
-import { useEffect, useState } from 'react'
-import geoLang from "../languages/geoLanguage.json"
-import engLang from "../languages/engLanguage.json"
+import { useEffect, useState } from 'react';
+import geoLang from '../languages/geoLanguage.json';
+import engLang from '../languages/engLanguage.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLanguage } from '../Redux/languageSlicer';
+
+interface RootState {
+    languageStore:{
+        language: string
+    }
+}
 
 export const useLanguage = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem("language") === 'geo' ? geoLang : engLang);
+  const dispatch = useDispatch()
 
-    const [selecetedLanguage, setSelectedLanguage] = useState(localStorage.getItem("language") || geoLang)
-    const [isEng, setEng] = useState(false)
+  
+  const isGeo = useSelector((state: RootState) => state.languageStore.language)
 
-    const languageHandler = () => {
-        setEng(!isEng)
-    }
+  const languageHandler = () => {
+    dispatch(setLanguage(!isGeo))
+  };
 
-    useEffect(()=>{
-        setSelectedLanguage(!isEng ? geoLang : engLang)
-    },[isEng])
+  useEffect(()=>{
+    setSelectedLanguage(isGeo ? geoLang : engLang)
+    localStorage.setItem("language", isGeo ? "geo" : "eng")
+},[isGeo])
 
-  return { languageHandler, selecetedLanguage}
-}
+  return { languageHandler, selectedLanguage };
+};

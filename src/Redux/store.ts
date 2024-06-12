@@ -6,6 +6,7 @@ import spinnerSlicer from "./spinnerSlicer";
 import postModalSclier from "./postModal"
 import feedPathRedux from "./pagePath";
 import feedRefetchSlicer from "./feedRefetchSlicer";
+import languageSlicer from "./languageSlicer";
 
 const store = configureStore({
     reducer:{
@@ -15,7 +16,8 @@ const store = configureStore({
         spinnerSote: spinnerSlicer,
         addPostModalStore: postModalSclier,
         feedStore: feedPathRedux,
-        feedRefetchStore:feedRefetchSlicer
+        feedRefetchStore:feedRefetchSlicer,
+        languageStore: languageSlicer
     }
 })
 

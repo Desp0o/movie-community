@@ -11,7 +11,7 @@ import PageLayout from '../components/pageLayout/PageLayout';
 import { useDropzone } from 'react-dropzone'
 import dropIcon from "../assets/dropIcon.webp"
 import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
-
+import { useLanguage } from '../hooks/useLanguage';
 
 interface QuestionProps {
   questionText: string;
@@ -30,6 +30,7 @@ interface QuizDataProps {
 }
 
 const CreateQuiz = () => {
+  const { selectedLanguage } = useLanguage()
   const navigate = useNavigate()
   const [isFaded, setFaded] = useState(true) //nex button active/inactive trigger
   const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
@@ -67,6 +68,7 @@ const CreateQuiz = () => {
     
 
   }, [quizData])
+
 
 
   // make buttons active/inactive
@@ -242,7 +244,7 @@ const CreateQuiz = () => {
       <PageLayout>
         <div className='create_quiz'>
           <div className="margin_top_cr_quiz">
-            <p>Create a </p>
+            <p>{selectedLanguage.createQuiz_page.createQuiz_page_title}</p>
             {QUIZ}
           </div>
 
