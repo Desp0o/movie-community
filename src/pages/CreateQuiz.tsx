@@ -244,7 +244,7 @@ const CreateQuiz = () => {
       <PageLayout>
         <div className='create_quiz'>
           <div className="margin_top_cr_quiz">
-            <p>{selectedLanguage.createQuiz_page.createQuiz_page_title}</p>
+            <p>{selectedLanguage.createQuiz_page.title}</p>
             {QUIZ}
           </div>
 
@@ -252,12 +252,12 @@ const CreateQuiz = () => {
             <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
             {/* question section */}
             <div className='cr_quiz_question'>
-              <p>Question 1/1 <span className='important_star'>*</span></p>
+              <p>{selectedLanguage.createQuiz_page.questionNum} 1/1 <span className='important_star'>*</span></p>
 
               <input
                 type='text'
                 name='question'
-                placeholder='Question...'
+                placeholder={selectedLanguage.createQuiz_page.questionPlaceholder}
                 className='cr_quiz_question1'
                 value={singleQuiz.questionText}
                 onChange={(e) => setSingleQuiz({ ...singleQuiz, questionText: e.target.value })}
@@ -266,12 +266,12 @@ const CreateQuiz = () => {
 
             {/* answers section */}
             <div className='cr_quiz_answers'>
-              <p className='answer_options'>4 answer options <span className='important_star'>*</span></p>
+              <p className='answer_options'>{selectedLanguage.createQuiz_page.answers} <span className='important_star'>*</span></p>
               <div className='cr_quiz_answers_inner'>
                 <QuizAnwersComp
                   name={'answ1'}
                   value={singleQuiz.answer1}
-                  placeholder={'Correct answer'}
+                  placeholder={selectedLanguage.createQuiz_page.correct_answer}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
                   isCorrect={true}
                 />
@@ -279,21 +279,21 @@ const CreateQuiz = () => {
                 <QuizAnwersComp
                   name={'answ2'}
                   value={singleQuiz.answer2}
-                  placeholder={'Type answer 2'}
+                  placeholder={selectedLanguage.createQuiz_page.answ2}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
                 />
 
                 <QuizAnwersComp
                   name={'answ3'}
                   value={singleQuiz.answer3}
-                  placeholder={'Type answer 3'}
+                  placeholder={selectedLanguage.createQuiz_page.answ3}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
                 />
 
                 <QuizAnwersComp
                   name={'answ1'}
                   value={singleQuiz.answer4}
-                  placeholder={'Type answer 4'}
+                  placeholder={selectedLanguage.createQuiz_page.answ4}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
                 />
               </div>
@@ -301,7 +301,7 @@ const CreateQuiz = () => {
 
             {/* upload image with drag n drop */}
             <div className='cr_quiz_upload_image'>
-              <p>Add image</p>
+              <p>{selectedLanguage.createQuiz_page.addImage}</p>
               <div {...getRootProps()} className='dragNdrop'>
                 <input {...getInputProps()} />
                 {
@@ -311,12 +311,12 @@ const CreateQuiz = () => {
                     <div className='dragNdrop_block'>
                       <div className='dragNdrop_block1'>
                         <img src={dropIcon} className='dropIcon' alt='dropIcon' />
-                        <p>Drag and drop here</p>
+                        <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
                       </div>
-                      <p>or</p>
+                      <p>{selectedLanguage.createQuiz_page.or}</p>
 
                       <div className='dragNdrop_block2'>
-                        <p>Select file</p>
+                        <p>{selectedLanguage.createQuiz_page.selectFile}</p>
                       </div>
                     </div>
                 }
@@ -329,10 +329,10 @@ const CreateQuiz = () => {
             <div className='cr_quiz_buttons'>
               {
                 isEditBtn
-                  ? <span onClick={editQuizCard}><ButtonFIlled text={'Edit'} link={''} faded={isFaded} /></span>
-                  : <span onClick={addQuestion}><ButtonFIlled text={'Next'} link={''} faded={isFaded} /></span>
+                  ? <span onClick={editQuizCard}><ButtonFIlled text={selectedLanguage.createQuiz_page.editBtn} link={''} faded={isFaded} /></span>
+                  : <span onClick={addQuestion}><ButtonFIlled text={selectedLanguage.createQuiz_page.nextBtn} link={''} faded={isFaded} /></span>
               }
-              <span onClick={resetQuestion}><ButtonOutlined text={'Start question over'} link={''} faded={restartQuestion} /></span>
+              <span onClick={resetQuestion}><ButtonOutlined text={selectedLanguage.createQuiz_page.startOverQuestion} link={''} faded={restartQuestion} /></span>
             </div>
           </div>
 
@@ -363,8 +363,8 @@ const CreateQuiz = () => {
             {
               quizData?.questions.length > 0
               && <div className='apply_reset_btns'>
-                <span onClick={handleSubmit}><ButtonFIlled text={'Save and close'} link={''} /></span>
-                <span onClick={startOver}><ButtonOutlined text={'Delete and start over'} link={''} /></span>
+                <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
+                <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
               </div>
             }
           </div>
@@ -427,7 +427,8 @@ const QuizCard: React.FC<QuizCardProps> = ({
   answ3, 
   answ4 
 }) => {
-
+  
+  const { selectedLanguage } = useLanguage()
   const editPanelRef = useRef<HTMLDivElement>(null)
   const [isOpened, setOpen] = useState(false)
 
@@ -459,7 +460,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
     <div className='cr_quiz_card'>
 
       <div className='cr_quiz_card_questionNum_dots'>
-        <p>Question {index}/{length}</p>
+        <p>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
 
         <div className='pannel_dots' onClick={editPannelHandler} ref={editPanelRef}>
           <span className='panel_single_dot' />
@@ -472,8 +473,8 @@ const QuizCard: React.FC<QuizCardProps> = ({
             && <div className='cr_quiz_card_editPanel'>
                  <span onClick={editPannelHandler}>{closeSquareIcon}</span>
   
-                 <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>Delete question</p>
-                  <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>Edit question</p>
+                 <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>{selectedLanguage.createQuiz_page.deleteQuestion}</p>
+                  <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>{selectedLanguage.createQuiz_page.editQuestion}</p>
                </div>
           
         }
