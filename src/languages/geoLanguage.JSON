@@ -1,4 +1,10 @@
 {
+    "quiz_":{
+        "title":"",
+        "rules":"",
+        "nextBtn":"",
+        "checkQuizzes":""
+    },
     "createQuiz_page":{
         "title":"",
         "questionNum":"",

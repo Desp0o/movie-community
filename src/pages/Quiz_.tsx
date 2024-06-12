@@ -8,9 +8,15 @@ import et from "../assets/e.t.webp"
 import QUIZ_card from "../components/QUIZ_card/QUIZ_card"
 import Footer from "../components/footer/Footer"
 import PageLayout from "../components/pageLayout/PageLayout"
+import { useLanguage } from "../hooks/useLanguage"
+import DOMPurify from 'dompurify';
 
 
 const Quiz_ = () => {
+
+  const { selectedLanguage } = useLanguage()
+  const sanitizedHTML = DOMPurify.sanitize(selectedLanguage.quiz_.rules);
+
   return (
     <>
       <PageLayout>
@@ -21,20 +27,12 @@ const Quiz_ = () => {
 
               {/* title */}
               <div className="quiz_add_rules_title">
-                <p>Create a </p>
+                <p>{selectedLanguage.quiz_.title} </p>
                 {QUIZ}
               </div>
 
               {/* text */}
-              <p className="quiz_add_rules_text">
-                Welcome to the ... Quiz Creator! Here are the only rules you need to follow:<br /><br />
-
-                All questions must be about movies.<br />
-                Each question should have four possible answers, but only one of them is the right one.<br />
-                Feel free to add photos to your questions, or skip them entirely. It’s your call!<br /><br />
-
-                Get creative and have fun crafting your ultimate movie quiz!
-              </p>
+              <p className="quiz_add_rules_text" dangerouslySetInnerHTML={{__html: sanitizedHTML}}></p>
 
               {/* buttons */}
               <div className="Quiz_btns">
