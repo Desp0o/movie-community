@@ -86,6 +86,8 @@ const AddPostPopUp = () => {
   //სურათის ასატვირთი ფუნქცია
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    console.log(file);
+    
     if (file) {
       if (file.type.includes("image")) {
         setUploadedImage(URL.createObjectURL(file));
@@ -108,9 +110,9 @@ const AddPostPopUp = () => {
   };
 
   useEffect(()=>{
-    console.log(uploadedImage);
+    console.log(postValue);
     
-  },[uploadedImage])
+  },[postValue])
 
   const handleChange = (event: {
     target: {

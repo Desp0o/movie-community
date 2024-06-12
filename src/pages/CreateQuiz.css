@@ -301,10 +301,34 @@
 }
 
 .cr_quiz_card_editPanel_p{
+    position: relative;
     color: var(--Secondary-400) !important;
 font-size: 12px !important;
 font-style: normal !important;
 font-weight: 600 !important;
 line-height: 150% !important; /* 18px */
 cursor: pointer;
+}
+
+
+.cr_quiz_card_editPanel_p::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background-color: #00D18F;
+    transition: all 0.2s ease;
+}
+
+.cr_quiz_card_editPanel_p:hover:after{
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #00D18F;
+    transition: all 0.2s ease;
 }

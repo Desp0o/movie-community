@@ -65,7 +65,6 @@ const Feed = () => {
     // eslint-disable-next-line
   },[data])
   
-console.log(data);
 
 
   return (

@@ -15,7 +15,7 @@ import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 
 interface QuestionProps {
   questionText: string;
-  img: any;
+  questionImg: any;
   answer1: string;
   answer2: string;
   answer3: string;
@@ -45,7 +45,7 @@ const CreateQuiz = () => {
   });
   const [singleQuiz, setSingleQuiz] = useState<QuestionProps>({
     questionText: '',
-    img: '',
+    questionImg: undefined,
     answer1: '',
     answer2: '',
     answer3: '',
@@ -56,13 +56,15 @@ const CreateQuiz = () => {
   // drag n drop func
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
-    setSingleQuiz({ ...singleQuiz, img: acceptedFiles[0] })
+    setSingleQuiz({ ...singleQuiz, questionImg: acceptedFiles[0] })
 
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   useEffect(() => {
     console.log(quizData);
+    
+    
 
   }, [quizData])
 
@@ -86,7 +88,7 @@ const CreateQuiz = () => {
   useEffect(() => {
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.img !== '' ||
+      singleQuiz.questionImg !== undefined||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -117,13 +119,13 @@ const CreateQuiz = () => {
             answer2: singleQuiz.answer2,
             answer3: singleQuiz.answer3,
             answer4: singleQuiz.answer4,
-            img: singleQuiz.img
+            questionImg: singleQuiz.questionImg
           }
         ]
       });
 
       setSingleQuiz({
-        ...singleQuiz, questionText: '', img: '', answer1: '', answer2: '', answer3: '', answer4: ''
+        ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: ''
       })
     }
 
@@ -134,7 +136,7 @@ const CreateQuiz = () => {
 
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.img !== '' ||
+      singleQuiz.questionImg !== undefined ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -142,7 +144,7 @@ const CreateQuiz = () => {
     ) {
       setSingleQuiz({
         ...singleQuiz,
-        img: '',
+        questionImg: undefined,
         questionText: '',
         answer1: '',
         answer2: '',
@@ -186,7 +188,7 @@ const CreateQuiz = () => {
         });
 
         setSingleQuiz({
-        img: foundIndex.img ? URL.createObjectURL(foundIndex.img) : undefined,
+        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : undefined,
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
         answer2: foundIndex.answer2,
@@ -213,7 +215,7 @@ const CreateQuiz = () => {
     });
 
     setSingleQuiz({
-      ...singleQuiz, questionText: '', img: '', answer1: '', answer2: '', answer3: '', answer4: ''
+      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
     })
     setEditBtn(false)
   };
@@ -245,7 +247,7 @@ const CreateQuiz = () => {
           </div>
 
           <div className='cr_quiz_table'>
-            <input className='cr_quiz_question1' type='text' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
+            <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
             {/* question section */}
             <div className='cr_quiz_question'>
               <p>Question 1/1 <span className='important_star'>*</span></p>
@@ -344,7 +346,7 @@ const CreateQuiz = () => {
                     index={index + 1}
                     length={quizData?.questions?.length}
                     title={item.questionText}
-                    image={item.img}
+                    image={item.questionImg}
                     answ1={item.answer1}
                     answ2={item.answer2}
                     answ3={item.answer3}
@@ -505,3 +507,5 @@ const QuizCard: React.FC<QuizCardProps> = ({
     </div>
   )
 }
+
+
