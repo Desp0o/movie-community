@@ -15,7 +15,7 @@ import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 
 interface QuestionProps {
   questionText: string;
-  questionImg: any;
+  img: any;
   answer1: string;
   answer2: string;
   answer3: string;
@@ -45,7 +45,7 @@ const CreateQuiz = () => {
   });
   const [singleQuiz, setSingleQuiz] = useState<QuestionProps>({
     questionText: '',
-    questionImg: '',
+    img: '',
     answer1: '',
     answer2: '',
     answer3: '',
@@ -56,7 +56,7 @@ const CreateQuiz = () => {
   // drag n drop func
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
-    setSingleQuiz({ ...singleQuiz, questionImg: acceptedFiles[0] })
+    setSingleQuiz({ ...singleQuiz, img: acceptedFiles[0] })
 
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -86,7 +86,7 @@ const CreateQuiz = () => {
   useEffect(() => {
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== '' ||
+      singleQuiz.img !== '' ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -117,13 +117,13 @@ const CreateQuiz = () => {
             answer2: singleQuiz.answer2,
             answer3: singleQuiz.answer3,
             answer4: singleQuiz.answer4,
-            questionImg: singleQuiz.questionImg
+            img: singleQuiz.img
           }
         ]
       });
 
       setSingleQuiz({
-        ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
+        ...singleQuiz, questionText: '', img: '', answer1: '', answer2: '', answer3: '', answer4: ''
       })
     }
 
@@ -134,7 +134,7 @@ const CreateQuiz = () => {
 
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== '' ||
+      singleQuiz.img !== '' ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -142,7 +142,7 @@ const CreateQuiz = () => {
     ) {
       setSingleQuiz({
         ...singleQuiz,
-        questionImg: '',
+        img: '',
         questionText: '',
         answer1: '',
         answer2: '',
@@ -182,11 +182,11 @@ const CreateQuiz = () => {
     if(foundIndex){
         window.scrollTo({
           top: 0,
-          behavior: 'smooth' // for smooth scrolling
+          behavior: 'smooth'
         });
-        
+
         setSingleQuiz({
-        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : undefined,
+        img: foundIndex.img ? URL.createObjectURL(foundIndex.img) : undefined,
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
         answer2: foundIndex.answer2,
@@ -213,7 +213,7 @@ const CreateQuiz = () => {
     });
 
     setSingleQuiz({
-      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
+      ...singleQuiz, questionText: '', img: '', answer1: '', answer2: '', answer3: '', answer4: ''
     })
     setEditBtn(false)
   };
@@ -245,7 +245,7 @@ const CreateQuiz = () => {
           </div>
 
           <div className='cr_quiz_table'>
-            {/* <input className='cr_quiz_question1' type='text' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} /> */}
+            <input className='cr_quiz_question1' type='text' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
             {/* question section */}
             <div className='cr_quiz_question'>
               <p>Question 1/1 <span className='important_star'>*</span></p>
@@ -267,28 +267,29 @@ const CreateQuiz = () => {
                 <QuizAnwersComp
                   name={'answ1'}
                   value={singleQuiz.answer1}
-                  placeholder={'Answer 1'}
+                  placeholder={'Correct answer'}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer1: value })}
+                  isCorrect={true}
                 />
 
                 <QuizAnwersComp
                   name={'answ2'}
                   value={singleQuiz.answer2}
-                  placeholder={'Answer 2'}
+                  placeholder={'Type answer 2'}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer2: value })}
                 />
 
                 <QuizAnwersComp
                   name={'answ3'}
                   value={singleQuiz.answer3}
-                  placeholder={'Answer 3'}
+                  placeholder={'Type answer 3'}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer3: value })}
                 />
 
                 <QuizAnwersComp
                   name={'answ1'}
                   value={singleQuiz.answer4}
-                  placeholder={'Answer 4'}
+                  placeholder={'Type answer 4'}
                   setter={(value) => setSingleQuiz({ ...singleQuiz, answer4: value })}
                 />
               </div>
@@ -343,7 +344,7 @@ const CreateQuiz = () => {
                     index={index + 1}
                     length={quizData?.questions?.length}
                     title={item.questionText}
-                    image={item.questionImg}
+                    image={item.img}
                     answ1={item.answer1}
                     answ2={item.answer2}
                     answ3={item.answer3}
@@ -379,9 +380,10 @@ interface quizAnwersCompProps {
   placeholder: string;
   setter: (value: string) => void;
   value: string;
+  isCorrect?: boolean;
 }
 
-const QuizAnwersComp: React.FC<quizAnwersCompProps> = ({ name, value, placeholder, setter }) => {
+const QuizAnwersComp: React.FC<quizAnwersCompProps> = ({ name, value, placeholder, setter, isCorrect }) => {
   return (
     <input
       type='text'
@@ -389,7 +391,7 @@ const QuizAnwersComp: React.FC<quizAnwersCompProps> = ({ name, value, placeholde
       value={value}
       onChange={(e) => setter(e.target.value)}
       placeholder={placeholder}
-      className='cr_quiz_answer_input'
+      className={isCorrect ? "cr_quiz_answer_input correct" : "cr_quiz_answer_input"}
     />
   );
 };

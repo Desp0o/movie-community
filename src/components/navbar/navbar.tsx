@@ -1,5 +1,4 @@
 import "./navbar.css";
-import { searchIcon, searchIconResposnive } from "../../assets/svg/searchIcon";
 import { useUserHook } from "../../hooks/useUserHook";
 import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
@@ -10,6 +9,7 @@ import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
 import noAvatar from "../../assets/noAvatar.jpeg"
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 
 const Navbar = () => {
@@ -58,27 +58,15 @@ const Navbar = () => {
         <div className="logo_burger_menu">
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
           <Link to='/'><p>LOGO</p></Link>
-          <Link to='/pages/Quiz_' style={{color:'var(--purple)', fontWeight:"600"}}> Create Quiz</Link>
-        </div>
-        <div className="nav_search">
-          <div className="nav_search_icon">{searchIcon}</div>
-          <input
-            name="search"
-            type="text"
-            className="nav_search_input"
-            placeholder="search..."
-          />
         </div>
 
+       
+      <Search />
         
 
         <div className="nav_profile">
 
-          {window.innerWidth < 601 && !user.name ? (
-            <div className="responsive_search">{searchIconResposnive}</div>
-          ) : (
-            <></>
-          )}
+          
           {user.name ? (
             <div className="nav_profile_items">
                 <p style={{color:"blue", fontWeight:"900"}}>{user?.bells}</p>
