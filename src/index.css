@@ -5,6 +5,7 @@
 @font-face {
   font-family: "Rockwell";
   src: url("./assets/fonts/ROCK.TTF");
+  font-display: fallback;
 }
 
 *, *::after, *::before{

@@ -10,6 +10,7 @@ import Slider from "./components/slider/Slider";
 import RatingsFeed from "./components/RatingsFeed/RatingsFeed";
 import ShortCuts from "./components/shortCuts/ShortCuts";
 import PageLayout from "./components/pageLayout/PageLayout";
+import Footer from "./components/footer/Footer";
 
 interface dataProps {
   guls: number;
@@ -20,11 +21,11 @@ interface dataProps {
   type: number;
   updated_at: string;
   created_at: string;
-  myPoll:  number;
+  myPoll: number;
   status: number | string;
   myAnswer: number | null,
   mySave: number;
-  comments:{
+  comments: {
     length: number;
   };
   user: {
@@ -32,12 +33,12 @@ interface dataProps {
     name: string;
     avatar: string;
   };
-  pollAnswers:[]
-  polls:[]
+  pollAnswers: []
+  polls: []
 }
 
 const Feed = () => {
-  const {data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
+  const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
   const { useFeedRefetch } = useRefetchHook()
 
   const loadNextPage = () => {
@@ -50,36 +51,37 @@ const Feed = () => {
     refetch();
   }, [useFeedRefetch]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         loadNextPage()
       }
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
     // eslint-disable-next-line
-  },[data])
-  
+  }, [data])
+
 
 
   return (
-    <PageLayout>
-    
-      <Slider />
-      <RatingsFeed />
-      <ShortCuts />
-      {isLoading && <Spinner />}
-      <div className="feed_page">
-        <CreatePostFeed /> 
-        {data?.pages?.map((page: any, pageIndex: number) => (
-          <div className="feed" key={pageIndex}>
-            {page?.data?.posts?.data?.map((post: dataProps) => (
-              
+    <>
+      <PageLayout>
+
+        <Slider />
+        <RatingsFeed />
+        <ShortCuts />
+        {isLoading && <Spinner />}
+        <div className="feed_page">
+          <CreatePostFeed />
+          {data?.pages?.map((page: any, pageIndex: number) => (
+            <div className="feed" key={pageIndex}>
+              {page?.data?.posts?.data?.map((post: dataProps) => (
+
                 <SinglePostComp
                   refetch={refetch}
                   key={post?.id}
@@ -92,21 +94,23 @@ const Feed = () => {
                   date={post?.created_at}
                   postUserId={post?.user.id}
                   postStatus={post?.status}
-                  commentLength={post?.comments.length} 
-                  authGul={post?.myGul} 
-                  guls={post?.guls}   
+                  commentLength={post?.comments.length}
+                  authGul={post?.myGul}
+                  guls={post?.guls}
                   pollAnswers={post.polls}
                   myAnswer={post.myAnswer}
                   myPoll={post?.myPoll}
                   mySave={post?.mySave}
                 />
-              
-            ))}
-          </div>
-        ))}
-      </div>
-      {!hasNextPage && !isLoading && (<p style={{fontWeight:"900", color:"#BC53D9"}}>no more posts</p>)}
-    </PageLayout>
+
+              ))}
+            </div>
+          ))}
+          {!hasNextPage && !isLoading && (<p style={{ fontWeight: "900", color: "#BC53D9" }}>no more posts</p>)}
+        </div>
+      </PageLayout>
+      {!hasNextPage && !isLoading && <Footer />}
+    </>
   );
 };
 

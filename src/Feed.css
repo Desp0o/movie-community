@@ -1,11 +1,11 @@
 .feed_page{
     padding-top: 124px;
+    padding-bottom: 64px;
 }
 
 .feed{
     display: flex;
     flex-direction: column;
     gap: 20px;
-
     padding-top:20px;
 }

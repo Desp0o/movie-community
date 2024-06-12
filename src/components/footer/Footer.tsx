@@ -11,8 +11,8 @@ const Footer = () => {
         <p className="footer_p2">Contact us for any inquiries or collaborations regarding our movie community.</p>
 
         <div className="social_icons_footer">
-          <a href="/" target="blank" rel="noopener noreferrer">{facebookIcon}</a>
-          <a href="/" target="blank" rel="noopener noreferrer">{instagramIcon}</a>
+          <a href="/" target="blank" rel="noopener noreferrer" aria-label="visit webpages facebook">{facebookIcon}</a>
+          <a href="/" target="blank" rel="noopener noreferrer" aria-label="visit webpages instagram">{instagramIcon}</a>
         </div>
       </div>
 
