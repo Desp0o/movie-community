@@ -1,0 +1,22 @@
+{
+    "createQuiz_page":{
+        "createQuiz_page_title":"Create a",
+        "createQuiz_page_questionNum":"Question",
+        "createQuiz_page_questionPlaceholder":"Question...",
+        "createQuiz_page_answers":"4 answers options",
+        "createQuiz_page_correct_answer":"Correct answer",
+        "createQuiz_page_answ2":"Type answer 2",
+        "createQuiz_page_answ3":"Type answer 3",
+        "createQuiz_page_answ4":"Type answer 4",
+        "createQuiz_page_addImage":"Add image",
+        "createQuiz_page_dragNdrop":"Drag and drop here",
+        "createQuiz_page_or":"or",
+        "createQuiz_page_selectFile":"Select file",
+        "createQuiz_page_nextBtn":"Next",
+        "createQuiz_page_startOverQuestion":"Start question over",
+        "createQuiz_page_deleteQuestion":"Delete question",
+        "createQuiz_page_editQuestion":"Edit question",
+        "createQuiz_page_saveBtn":"Save and close",
+        "createQuiz_page_deleteBtn":"Delete and start over"
+    }
+}

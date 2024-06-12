@@ -1,0 +1,22 @@
+{
+    "createQuiz_page":{
+        "createQuiz_page_title":"",
+        "createQuiz_page_questionNum":"",
+        "createQuiz_page_questionPlaceholder":"",
+        "createQuiz_page_answers":"",
+        "createQuiz_page_correct_answer":"",
+        "createQuiz_page_answ2":"",
+        "createQuiz_page_answ3":"",
+        "createQuiz_page_answ4":"",
+        "createQuiz_page_addImage":"",
+        "createQuiz_page_dragNdrop":"",
+        "createQuiz_page_or":"",
+        "createQuiz_page_selectFile":"",
+        "createQuiz_page_nextBtn":"",
+        "createQuiz_page_startOverQuestion":"",
+        "createQuiz_page_deleteQuestion":"",
+        "createQuiz_page_editQuestion":"",
+        "createQuiz_page_saveBtn":"",
+        "createQuiz_page_deleteBtn":""
+    }
+}
