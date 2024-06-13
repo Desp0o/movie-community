@@ -70,7 +70,6 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
            Authorization: `Bearer ${token}`
          }
        })
-       // console.log(response);
  
      } catch (error) {
        console.error(error)

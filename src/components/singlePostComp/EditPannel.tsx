@@ -61,7 +61,6 @@ const EditPannel:React.FC<EditPannelPros> = ({postID,isInnerPage, type}) => {
             }
           )
           
-          // console.log(response);
           notify()
           if(isInnerPage){
             navigate('/')

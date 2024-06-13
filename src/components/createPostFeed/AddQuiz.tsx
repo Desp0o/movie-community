@@ -159,7 +159,7 @@ const AddQuiz = () => {
     const token = localStorage.getItem('token')
 
     try {
-      const res = await axios.post(import.meta.env.VITE_QUESTION_ADD, quizAnswers,{
+      await axios.post(import.meta.env.VITE_QUESTION_ADD, quizAnswers,{
         headers:{
           Authorization: `Bearer ${token}`,
           "Content-Type":
@@ -168,7 +168,6 @@ const AddQuiz = () => {
       })
       dispatch(setFeedRefetch(!useFeedRefetch))
       closeDefaultPostAddModal()
-      console.log(res);
       
     } catch (error) {
       console.error(error)

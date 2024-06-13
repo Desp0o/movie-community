@@ -66,7 +66,6 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
       );
 
       setError(false); //error panel hide
-      // console.log(response);
       
       //eslint-disable-next-line
     } catch (error: any) {

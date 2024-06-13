@@ -80,7 +80,6 @@ const PostEditPopUp:React.FC<PostEditPopUpProps> = ({closeEditPostModal, postID}
 const editPost = async () => {
   const token = localStorage.getItem('token')
   dispatch(setSpinnerState(true))
-// console.log(postValue);
 
   try {
     await axios.post(`${import.meta.env.VITE_POST_EDIT}${postID}`,postValue, {

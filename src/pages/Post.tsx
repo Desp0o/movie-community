@@ -64,7 +64,6 @@ const Post = () => {
     }
   );  
 
-console.log(data);
 
 
   if(isError){

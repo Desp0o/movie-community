@@ -28,7 +28,6 @@ transition-duration: 1s !important;
     width: 120px;
 height: 172px;
 transform: translate3d(-40px, 0px, -350px) !important; 
-transition-duration: 1s !important;
 }
 
 .swiper-slide-prev{

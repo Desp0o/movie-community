@@ -18,7 +18,7 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({commentID, feedID, setter,
     const token = localStorage.getItem('token')
 
     try {
-        const res = await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`,{
+        await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`,{
             text: replayValue,
             img: null,
             comment_id: id
@@ -28,7 +28,6 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({commentID, feedID, setter,
             }
         })
 
-        console.log(res);
         setter(null)
     } catch (error) {
         console.error(error)

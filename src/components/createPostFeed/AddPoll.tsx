@@ -58,11 +58,6 @@ const AddPoll = () => {
     setPollOptions(newOptions);
   };
 
-  useEffect(()=>{
-    console.log(pollOptions);
-    
-  },[pollOptions])
-
   const sendPoll = async () => {
 
     if(pollOptions[0] === '' && pollOptions[1] === '' && pollQuestion.length < 4){
@@ -70,7 +65,7 @@ const AddPoll = () => {
     }else{
       dispatch(setSpinnerState(true))
       try {
-        const response = await axios.post(
+        await axios.post(
           import.meta.env.VITE_POLL_ADD,
           {
             text: pollQuestion,
@@ -83,7 +78,6 @@ const AddPoll = () => {
           }
         );
         closeDefaultPostAddModal()
-        console.log(response.data);
         dispatch(setFeedRefetch(!useFeedRefetch))
       } catch (error) {
         console.error(error);      

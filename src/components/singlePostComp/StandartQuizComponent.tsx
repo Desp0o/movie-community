@@ -37,7 +37,7 @@ const StandartQuizComponent:React.FC<StandartQuizComponentProps> = ({postUserId,
                   {isUserLogged ? <EditPannel postID={postID} type={4}/> : <></>}
 
     <div className="quiz_cover_container">
-`     <img src={image ? image : quizDefaultCover} alt="quiz cover" className="quiz_cover_img"/>`
+`     <img src={image ? `${import.meta.env.VITE_EASY_QUIZ_IMG}${image}` : quizDefaultCover} alt="quiz cover" className="quiz_cover_img"/>`
     </div>
 
     <div className="quiz_details">

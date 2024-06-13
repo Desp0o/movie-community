@@ -8,13 +8,12 @@ const Profile = () => {
   const fetchUserPosts = async ()  => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.get('https://api.pinky.ge/api/user_posts',{
+      await axios.get('https://api.pinky.ge/api/user_posts',{
         headers:{
           Authorization: `Bearer ${token}`
         }
       })
 
-      console.log(response);
       
       
     } catch (error) {
@@ -25,13 +24,12 @@ const Profile = () => {
   const fetchUserGuls = async ()  => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.get('https://api.pinky.ge/api/user_guls',{
+      await axios.get('https://api.pinky.ge/api/user_guls',{
         headers:{
           Authorization: `Bearer ${token}`
         }
       })
 
-      console.log(response);
       
       
     } catch (error) {
@@ -42,13 +40,12 @@ const Profile = () => {
   const fetchUserComments = async ()  => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.get('https://api.pinky.ge/api/user_comments',{
+      await axios.get('https://api.pinky.ge/api/user_comments',{
         headers:{
           Authorization: `Bearer ${token}`
         }
       })
 
-      console.log(response);
       
       
     } catch (error) {
@@ -59,13 +56,12 @@ const Profile = () => {
   const fetchUserPoints = async ()  => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.get('https://api.pinky.ge/api/user_points',{
+      await axios.get('https://api.pinky.ge/api/user_points',{
         headers:{
           Authorization: `Bearer ${token}`
         }
       })
 
-      console.log(response);
       
       
     } catch (error) {
@@ -77,14 +73,13 @@ const Profile = () => {
   const key = 'f508fb1a2a7f9ba3291095bab851963a'
   const fetchMovie = async () => {
     try {
-        const response = await axios.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc", {
+        await axios.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc", {
           headers: {
             accept: 'application/json',
             Authorization: `Bearer ${key}`
           }
         })
 
-        console.log(response.data);
         
     } catch (error) {
       console.log(error);

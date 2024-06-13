@@ -10,7 +10,6 @@ export const movieDataBase = () => {
               Authorization: `Bearer ${token}`
             }
           })
-          console.log(response.data);
           setter(response.data)
         } catch (error) {
           console.error(error)

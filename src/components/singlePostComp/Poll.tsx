@@ -52,7 +52,6 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
         }
       );
 
-      // console.log(res);
       refetch();
     } catch (error) {
       console.error(error);

@@ -6,7 +6,6 @@ const ForgetPassword = () => {
   const [emailInput, setEmailInput] = useState("");
   const pwdRecovery = async () => {    
     try {
-      console.log("here we need pwd recovery");
     } catch (error) {
       console.error(error)
     }

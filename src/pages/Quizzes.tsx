@@ -33,7 +33,7 @@ const QuizComponent = () => {
 
 
   return (
-    <div>
+    <div style={{paddingTop:"100px"}}>
       {data?.pages?.map((page, index) => (
         <div className='quizz_list' key={index}>
           {page?.data?.map((quiz: quizProps) => (

@@ -25,7 +25,6 @@
 .user_avatar_feed {
   width: 32px;
   height: 32px;
-  flex-shrink: 0;
   border-radius: 32px;
 }
 
@@ -167,6 +166,7 @@ add post
   border: none;
   background-color: inherit;
   padding-top: 2px;
+  color: black;
 }
 
 .popup_textarea::placeholder {

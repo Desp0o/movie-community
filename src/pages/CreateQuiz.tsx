@@ -24,7 +24,7 @@ interface QuestionProps {
 
 interface QuizDataProps {
   mainTitle: string;
-  mainImg: string;
+  mainImg: File | undefined;
   type: number;
   questions: QuestionProps[];
 }
@@ -39,7 +39,7 @@ const CreateQuiz = () => {
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
     type: 5,
-    mainImg: '',
+    mainImg: undefined,
     questions: [
 
     ]
@@ -54,21 +54,23 @@ const CreateQuiz = () => {
   })
 
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+ 
+    setQuizData({ ...quizData, mainImg: file });
+  };
+
+
   // drag n drop func
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
-    setSingleQuiz({ ...singleQuiz, questionImg: acceptedFiles[0] })
+    const file = acceptedFiles[0]
+    console.log(file);
+    
+    setSingleQuiz({ ...singleQuiz, questionImg: file })
 
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
-  useEffect(() => {
-    console.log(quizData);
-    
-    
-
-  }, [quizData])
-
 
 
   // make buttons active/inactive
@@ -161,7 +163,7 @@ const CreateQuiz = () => {
     setQuizData({
       mainTitle: '',
       type: 5,
-      mainImg: '',
+      mainImg: undefined,
       questions: [
 
       ]
@@ -176,7 +178,6 @@ const CreateQuiz = () => {
       questions: updatedQuestions
     });
 
-    console.log(index);
   };
 
   const getQuizForEdit = (index: number) => {
@@ -227,10 +228,14 @@ const CreateQuiz = () => {
     try {
       const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type":
+            "multipart/form-data, application/json, text/plain, */*",
+        },
       });
-      console.log('Quiz data submitted:', response.data);
+      console.log("ქუი", response.data);
+      console.log( quizData.mainImg);
+      
       navigate('/')
     } catch (error) {
       console.error('Error submitting quiz data:', error);
@@ -238,6 +243,12 @@ const CreateQuiz = () => {
 
   };
 
+ 
+
+  useEffect(()=>{
+    console.log(quizData);
+    
+  },[quizData])
 
   return (
     <>
@@ -247,8 +258,16 @@ const CreateQuiz = () => {
             <p>{selectedLanguage.createQuiz_page.title}</p>
             {QUIZ}
           </div>
+         
+         
+          <input
+        type="file"
+        accept="image/*,video/*"
+        onChange={handleFileChange}
+      />
 
-          <div className='cr_quiz_table'>
+         
+                 <div className='cr_quiz_table'>
             <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
             {/* question section */}
             <div className='cr_quiz_question'>

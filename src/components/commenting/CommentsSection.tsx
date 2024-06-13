@@ -67,13 +67,12 @@ const CommentsSection: React.FC<ComProps> = ({ fetchedComments, callback }) => {
     }
 
     try {
-      const response = await axios.get(`${import.meta.env.VITE_COMMENT_LIKING}${id}`, {
+      await axios.get(`${import.meta.env.VITE_COMMENT_LIKING}${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      console.log(response.data);
     } catch (error) {
       console.error("Error liking comment:", error);
     } finally {
