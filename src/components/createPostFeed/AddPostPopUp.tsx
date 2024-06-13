@@ -109,11 +109,6 @@ const AddPostPopUp = () => {
     setPostValue({ ...postValue, img: file });
   };
 
-  useEffect(()=>{
-    console.log(postValue);
-    
-  },[postValue])
-
   const handleChange = (event: {
     target: {
       value: string;

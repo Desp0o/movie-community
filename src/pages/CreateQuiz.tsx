@@ -65,7 +65,6 @@ const CreateQuiz = () => {
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
     const file = acceptedFiles[0]
-    console.log(file);
     
     setSingleQuiz({ ...singleQuiz, questionImg: file })
 
@@ -226,15 +225,14 @@ const CreateQuiz = () => {
   const handleSubmit = async () => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
+       await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type":
             "multipart/form-data, application/json, text/plain, */*",
         },
       });
-      console.log("ქუი", response.data);
-      console.log( quizData.mainImg);
+      // console.log("ქუი", response.data);
       
       navigate('/')
     } catch (error) {
@@ -242,13 +240,6 @@ const CreateQuiz = () => {
     }
 
   };
-
- 
-
-  useEffect(()=>{
-    console.log(quizData);
-    
-  },[quizData])
 
   return (
     <>

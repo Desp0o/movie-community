@@ -1,15 +1,10 @@
-.footer{
+.footer {
     position: relative;
     width: 100%;
-
-    
-
     background-color: var(--BG-color);
-
-    
 }
 
-.footer_inner{
+.footer_inner {
     padding: 32px 80px;
     display: flex;
     align-items: center;
@@ -20,77 +15,77 @@
     margin: 0 auto;
 }
 
-.footer_l{
+.footer_l {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.Get_In_Touch{
+.Get_In_Touch {
     color: #F7FFFB;
-font-size: 22px;
-font-style: normal;
-font-weight: 400;
-line-height: 130%; /* 28.6px */
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
 }
 
-.footer_p2{
+.footer_p2 {
     margin-top: 24px;
     color: #D0DBD6;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
 }
 
-.footer_r_item{
+.footer_r_item {
     color: #F7FFFB;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; /* 24px */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
 }
 
-.social_icons_footer{
+.social_icons_footer {
     margin-top: 42px;
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.footer_r{
+.footer_r {
     display: flex;
     gap: 64px;
 }
 
-.features_block{
+.features_block {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.features_block_title{
+.features_block_title {
     text-transform: uppercase;
     text-align: center;
     color: var(--Secondary-400);
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 160%; /* 19.2px */
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
 }
 
-.footer_r_features{
+.footer_r_features {
     display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
-  grid-template-rows: 1fr 1fr 1fr; /* Three rows */
-  gap: 24px 64px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 24px 64px;
 }
 
-.contact_block_items{
+.contact_block_items {
     margin-top: 16px;
 }
 
-.contact_block_items{
+.contact_block_items {
     display: flex;
     flex-direction: column;
     gap: 24px;
