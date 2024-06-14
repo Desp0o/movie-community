@@ -38,6 +38,7 @@ interface SinglePostProps {
   guls?: number;
   data?: number;
   mySave: number;
+  quiz_id: number;
   pollAnswers:[]
   myAnswer: number | null
   refetch: <TPageData>(
@@ -62,7 +63,8 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   guls,
   refetch,
   pollAnswers,
-  mySave
+  mySave,
+  quiz_id
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
@@ -219,6 +221,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
               authorName={authorName} 
               date={date}
               postTitle={postTitle}
+              quiz_id={quiz_id}
             />
         }
         

@@ -16,9 +16,10 @@ interface StandartQuizComponentProps {
   authorName: string;
   date: string;
   postTitle: string;
+  quiz_id:number;
 }
 
-const StandartQuizComponent:React.FC<StandartQuizComponentProps> = ({postUserId, image, postID, authorName, date, postTitle}) => {
+const StandartQuizComponent:React.FC<StandartQuizComponentProps> = ({postUserId, image, postID, authorName, date, postTitle, quiz_id}) => {
   const { user } = useUserHook()
   const [isUserLogged, setUserLoged] = useState(false)
 
@@ -46,7 +47,7 @@ const StandartQuizComponent:React.FC<StandartQuizComponentProps> = ({postUserId,
       <p className="quiz_short_info">აქ უნდა იყოს რამე აღწერა და გვინდა ეს საერთოდ?</p>
     </div>
 
-    <Link to={''} className="quiz_btn_link">
+    <Link to={`/pages/Quiz/${quiz_id}`} className="quiz_btn_link">
       <div className="satrt_quiz_btn">
         <p>Get started!</p>
       </div>

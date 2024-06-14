@@ -25,6 +25,7 @@ interface dataProps {
   status: number | string;
   myAnswer: number | null,
   mySave: number;
+  quiz_id: number;
   comments: {
     length: number;
   };
@@ -66,6 +67,11 @@ const Feed = () => {
     // eslint-disable-next-line
   }, [data])
 
+  
+  useEffect(()=>{
+    console.log(data);
+
+  },[data])
 
 
   return (
@@ -101,6 +107,7 @@ const Feed = () => {
                   myAnswer={post.myAnswer}
                   myPoll={post?.myPoll}
                   mySave={post?.mySave}
+                  quiz_id={post?.quiz_id}
                 />
 
               ))}

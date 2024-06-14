@@ -46,7 +46,7 @@ const CreateQuiz = () => {
   });
   const [singleQuiz, setSingleQuiz] = useState<QuestionProps>({
     questionText: '',
-    questionImg: undefined,
+    questionImg: null,
     answer1: '',
     answer2: '',
     answer3: '',
@@ -91,7 +91,7 @@ const CreateQuiz = () => {
   useEffect(() => {
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== undefined||
+      singleQuiz.questionImg !== null||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -128,7 +128,7 @@ const CreateQuiz = () => {
       });
 
       setSingleQuiz({
-        ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: ''
+        ...singleQuiz, questionText: '', questionImg: null, answer1: '', answer2: '', answer3: '', answer4: ''
       })
     }
 
@@ -139,7 +139,7 @@ const CreateQuiz = () => {
 
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== undefined ||
+      singleQuiz.questionImg !== null || singleQuiz.questionImg !== null ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -147,7 +147,7 @@ const CreateQuiz = () => {
     ) {
       setSingleQuiz({
         ...singleQuiz,
-        questionImg: undefined,
+        questionImg: null,
         questionText: '',
         answer1: '',
         answer2: '',
@@ -190,7 +190,7 @@ const CreateQuiz = () => {
         });
 
         setSingleQuiz({
-        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : undefined,
+        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : null,
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
         answer2: foundIndex.answer2,
@@ -217,7 +217,7 @@ const CreateQuiz = () => {
     });
 
     setSingleQuiz({
-      ...singleQuiz, questionText: '', questionImg: '', answer1: '', answer2: '', answer3: '', answer4: ''
+      ...singleQuiz, questionText: '', questionImg: null, answer1: '', answer2: '', answer3: '', answer4: ''
     })
     setEditBtn(false)
   };
@@ -234,11 +234,12 @@ const CreateQuiz = () => {
       });
       // console.log("ქუი", response.data);
       
+      
       navigate('/')
     } catch (error) {
       console.error('Error submitting quiz data:', error);
     }
-
+    console.log(quizData);
   };
 
   return (
