@@ -93,7 +93,7 @@ const EditPannel: React.FC<EditPannelPros> = ({ postID, isInnerPage, type }) => 
           closeEditPostModal={closeEditPostModal}
         />
       }
-      <div ref={editPanelRef}>
+      <div style={{position:"relative"}} ref={editPanelRef}>
         <div className='pannel_dots' onClick={handlePannel}>
           <span className='panel_single_dot' />
           <span className='panel_single_dot' />

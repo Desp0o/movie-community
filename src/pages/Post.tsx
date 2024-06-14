@@ -1,27 +1,26 @@
 import { useParams } from "react-router-dom";
-import GoBack from "../components/singlePostPage/GoBack";
 import Author from "../components/singlePostComp/Author";
-import PostTitle from "../components/singlePostComp/PostTitle";
 import PostImage from "../components/singlePostComp/postImage";
-import "../components/singlePostPage/singlePostPage.css";
 import { useEffect, useState } from "react";
-import { xIcon } from "../assets/svg/Xicon";
-import AddComment from "../components/commenting/AddComment";
-import CommentsSection from "../components/commenting/CommentsSection";
 import axios from "axios";
 import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
 import { useQuery } from "react-query";
 import { useUserHook } from "../hooks/useUserHook";
-import ScrollToTop from "../components/scrollToTop/ScrollToTop";
+// import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 import Spinner from "../components/spinner/Spinner";
-import Poll from "../components/singlePostComp/Poll";
-import AnswerQuizComp from "../components/singlePostComp/AnswerQuizComp";
+// import Poll from "../components/singlePostComp/Poll";
+// import AnswerQuizComp from "../components/singlePostComp/AnswerQuizComp";
+import PageLayout from "../components/pageLayout/PageLayout";
+
+import "./post.css"
+import LikeCommentShare from "../components/singlePostComp/LikeCommentShare";
+import BookmarkPost from "../components/singlePostComp/BookmarkPost";
 
 
 const Post = () => {
   const token = localStorage.getItem('token')
-  const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
+  // const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
 
   const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
@@ -70,89 +69,49 @@ const Post = () => {
     console.error(error)
   }
 
+
+  if(data){
+    console.log(data.post);
+    
+  }
   
   
   if(isLoading){
     return <Spinner />
   }
 
+
   return (
-    <div style={{paddingBottom:"30px"}}>
-      
-      <ScrollToTop />
-      {data ? (
-        <>
-        <GoBack />
-          <div className="single_post_page">
-            <div className="goBack_authorInfo_container">
-              <div className="goBack_authorInfo">
-                
-                <Author
-                  avatar={data?.post?.user?.avatar}
-                  name={data?.post?.user?.name}
-                  date={data?.post?.created_at}
-                />
+    <PageLayout>
+      <div className="post_page">
+        <div className="post_page_inner">
+            <EditPannel postID={data?.post?.id} type={data?.post?.type} />
+
+            <div className="author_title_media">
+              <div className="post_page_inner_block1">
+                <Author avatar={user.avatar} name={user.name} date={data?.post?.created_at} />
+                <BookmarkPost mySave={data.post.mySave} postID={data.post.id} />
               </div>
-              <EditPannel postID={data?.post?.id} isInnerPage={true} type={data?.post?.type}/>
+
+              <p className="post_page_inner_block1_title">{data?.post.text}</p>
+
+              <div className="media_cont">
+                  {data.post.type === 1 && <PostImage image={data.post.img} type={data.post.type} />}
+                  {data.post.type === 0 && <PostVideo image={data.post.img} />}
+              </div>
+
+              <LikeCommentShare 
+                type={data.post.type} 
+                postID={data.post.id} 
+                commentLength={data.post.comments} 
+                refetchCallBack={refetch} 
+                guls={data.post.guls}
+                authGul={data.post.myGul}
+                />
             </div>
-
-            <div className="single_page_title">
-              <PostTitle title={data?.post?.text} postStatus={data?.post?.status} page="inner" />
-            </div>
-
-            {
-              data?.post?.img && 
-              
-              <div className="single_post_image">
-              {isFullScreenImage ? (
-                <div className="full_screen_img">
-                  <span
-                    className="close_full_screen_image"
-                    onClick={closeFullScreen}
-                  >
-                    {xIcon}
-                  </span>
-                  <div style={{backgroundColor:"black"}}
-                  />
-                  <img
-                    src={`${imageStoragePath}${data?.post?.img}.webp`}
-                    className="full_screen_photo"
-                    alt="full screen photo"
-                  />
-                </div>
-              ) : (
-                <></>
-              )}
-              {data?.post?.img && data?.post?.type !== 0 && (
-                <PostImage image={data?.post?.img} funName={openFullScreen} type={data?.post?.type} />
-              ) }
-
-              {data?.post?.img && data?.post?.type === 0 && (
-                <PostVideo image={data?.post?.img} />
-              ) }
-
-
-            </div>
-            }
-
-            {data?.post?.type === 3 && <Poll pollAnswers={pollAnswers} data={data?.post?.myPoll} refetch={refetch}/> }
-            {data?.post?.type === 4 && <AnswerQuizComp id={data?.question?.feed_id} /> }
-
-
-
-            {/* ხაზი პოსტსა და კომენტარის ინპუტს შორის */}
-            <div className="for_border_divide_post_comments" />
-            {data?.post?.type !== 4 && <AddComment postID={id} callBack={refetch}/> }
-            
-
-            {Number(data?.post?.comments) > 0 ? <CommentsSection fetchedComments={commData} callback={refetch}/> : <></>}
-            
-          </div>
-        </>
-      ) : (
-        <p>post not found</p>
-      )}
-    </div>
+        </div>
+      </div>
+    </PageLayout>
   );
 };
 

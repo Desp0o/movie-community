@@ -1,0 +1,43 @@
+.post_page {
+    padding-top: 124px;
+}
+
+
+.post_page_inner {
+    width: 600px;
+    padding: 16px 24px 24px 24px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+
+    border-radius: 8px;
+    border: 1px solid var(--stroke);
+    background: var(--Card-background);
+}
+
+.author_title_media{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.post_page_inner_block1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.post_page_inner_block1_title{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 27px */
+}
+
+.media_cont{
+    width: 552px;
+height: 265px;
+
+border-radius: 24px;
+border: 1px solid var(--stroke);
+}

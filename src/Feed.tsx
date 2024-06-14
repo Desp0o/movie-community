@@ -39,7 +39,7 @@ interface dataProps {
 }
 
 const Feed = () => {
-  const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch } = FeedFunctions()
+  const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching } = FeedFunctions()
   const { useFeedRefetch } = useRefetchHook()
 
   const loadNextPage = () => {
@@ -47,6 +47,11 @@ const Feed = () => {
       fetchNextPage();
     }
   };
+
+  if(isFetching){
+    console.log('isfetchig');
+    
+  }
 
   useEffect(() => {
     refetch();

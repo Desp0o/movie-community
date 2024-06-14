@@ -3,7 +3,6 @@ import "./singlePostComp.css";
 import Author from "./Author";
 import PostTitle from "./PostTitle";
 import PostImage from "./postImage";
-import { shareIcon } from "../../assets/newSvg/shareIcon";
 import "./singlePostComp.css"
 import PostVideo from "./postVideo";
 import { useUserHook } from "../../hooks/useUserHook";
@@ -14,12 +13,8 @@ import Poll from "./Poll";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import AnswerQuizComp from "./AnswerQuizComp";
 import StandartQuizComponent from "./StandartQuizComponent";
-import IconBlock from "./IconBlock";
-import { likeIcon, likeIconFilled } from "../../assets/newSvg/likeIcon";
-import { commentsIcon, commentsIconFilled } from "../../assets/newSvg/commentsIcon";
-import { bookmarkIcon, bookmarkIconFilled } from "../../assets/newSvg/bookmarkIcon";
-import { GulingFuction } from "./likeFunction/GulingFuction";
-import { useSavePost } from "./likeFunction/SaveFunction";
+import LikeCommentShare from "./LikeCommentShare";
+import BookmarkPost from "./BookmarkPost";
 
 
 interface SinglePostProps {
@@ -68,18 +63,9 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
-  const { Guling } = GulingFuction();
-  const { mutate } = useSavePost();
-  const [commentIcon, setCommentIcon] = useState(commentLength !== 0 ? commentsIconFilled : commentsIcon) //comments icon
 
-  //post like states
-  const [heartIcon, setHeartIcon] = useState(authGul === 1 ? likeIconFilled : likeIcon) //like icon
-  const [isHeartClicked, setHeartClicked] = useState(authGul === 1 ? true : false) //like icon active/inactvie indicator
-  const [likeCount, setLikeCount] = useState(guls ? guls : 0)
 
-  //bookmark states
-  const [saveIcon, setSaveIcon] = useState(mySave === 1 ? bookmarkIconFilled : bookmarkIcon)
-  const [bookmarkActive, setBookmarkActive] = useState(mySave === 1 ? true : false)
+
 
   //fot geth authGul is true or not
   useEffect(()=>{
@@ -90,74 +76,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
     }
   },[user, isUserLogged, postUserId])
   
-  //like post and set icon active/inactive incr/decr votes
-  const likingPost = () => {
-    if(user.userID && user.name){
-      Guling(postID)
-      setHeartClicked(!isHeartClicked)
 
-      if(isHeartClicked){
-        setHeartIcon(likeIcon)
-        setLikeCount((prev) => prev - 1)
-      }else{
-        setHeartIcon(likeIconFilled)
-        setLikeCount((prev) => prev + 1)
-      }
-    }
-  }
-
-  //update heart icon on authGul change
-  useEffect(()=>{
-    if (authGul === 0) {
-      setHeartIcon(likeIcon)
-      setHeartClicked(false)
-    }
-
-    if (authGul === 1) {
-      setHeartIcon(likeIconFilled)
-      setHeartClicked(true)
-    }
-  },[authGul])
-
-
-  //update comment icon on commentLength change
-  useEffect(()=>{
-    if (commentLength !== 0) {
-      setCommentIcon(commentsIconFilled)
-    }
-
-    if (commentLength === 0) {
-      setCommentIcon(commentsIcon)
-    }
-
-    refetch()
-  },[commentLength])
-
-
-  //save in bookmark function
-  const saveInBookMark =() => {
-   if(user.userID && user.name){
-    mutate(postID)
-    setBookmarkActive(!bookmarkActive)
-
-    if(bookmarkActive){
-      setSaveIcon(bookmarkIcon)
-    }else{
-      setSaveIcon(bookmarkIconFilled)
-    }
-   }
-  }
-
-  //update bookmark icon change
-  useEffect(()=>{
-    if(mySave === 1){
-      setSaveIcon(bookmarkIconFilled)
-      setBookmarkActive(true)
-    }else{
-      setSaveIcon(bookmarkIcon)
-      setBookmarkActive(false)
-    }
-  },[mySave])
 
 
   return (
@@ -173,9 +92,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
                 <div className="author_pannel_container">
                   <Author avatar={authorAvatar} name={authorName} date={date} />
-                  <span onClick={saveInBookMark}>
-                    <IconBlock icon={saveIcon} />
-                  </span>
+                  <BookmarkPost mySave={mySave} postID={postID} />
                               
                 </div>
                 
@@ -196,21 +113,14 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
               {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
 
-              {
-                type !== 4 
-                &&
-              <div className="post_bottom_icons">
-                  <div className="post_commens_share_icons">
-                  <span onClick={likingPost}><IconBlock icon={heartIcon} quantity={likeCount} width={48}/></span>  
-                    <Link to={`/pages/Post/${postID}`}><IconBlock icon={commentIcon} quantity={commentLength} width={48} /></Link>
-                  </div> 
-
-                  <div className="like_post_icon">
-                  <IconBlock icon={shareIcon} />
-                  </div> 
-              </div>
               
-              }
+              <LikeCommentShare 
+                type={type} 
+                authGul={authGul} 
+                guls={guls} 
+                postID={postID} 
+                commentLength={commentLength} 
+                refetchCallBack={refetch} />
             </div>
           :
           //ქვიზის პოსტი

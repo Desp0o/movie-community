@@ -1,0 +1,51 @@
+import React, { useEffect, useState } from 'react'
+import IconBlock from './IconBlock'
+import { bookmarkIcon, bookmarkIconFilled } from '../../assets/newSvg/bookmarkIcon'
+import { useUserHook } from '../../hooks/useUserHook'
+import { useSavePost } from './likeFunction/SaveFunction'
+
+interface BookmarkPostProps{
+    mySave: number;
+    postID: number;
+}
+
+const BookmarkPost:React.FC<BookmarkPostProps> = ({mySave, postID}) => {
+    const {user} = useUserHook()
+
+    const { mutate } = useSavePost();
+
+    const [saveIcon, setSaveIcon] = useState(mySave === 1 ? bookmarkIconFilled : bookmarkIcon)
+    const [bookmarkActive, setBookmarkActive] = useState(mySave === 1 ? true : false)
+
+    const saveInBookMark =() => {
+        if(user.userID && user.name){
+         mutate(postID)
+         setBookmarkActive(!bookmarkActive)
+     
+         if(bookmarkActive){
+           setSaveIcon(bookmarkIcon)
+         }else{
+           setSaveIcon(bookmarkIconFilled)
+         }
+        }
+       }
+     
+       //update bookmark icon change
+       useEffect(()=>{
+         if(mySave === 1){
+           setSaveIcon(bookmarkIconFilled)
+           setBookmarkActive(true)
+         }else{
+           setSaveIcon(bookmarkIcon)
+           setBookmarkActive(false)
+         }
+       },[mySave])
+
+  return (
+    <span onClick={saveInBookMark}>
+    <IconBlock icon={saveIcon} />
+  </span>
+  )
+}
+
+export default BookmarkPost

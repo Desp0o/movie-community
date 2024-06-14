@@ -75,7 +75,6 @@ const CreateQuiz = () => {
   // make buttons active/inactive
   useEffect(() => {
     if (
-      singleQuiz.questionText !== '' &&
       singleQuiz.answer1 !== '' &&
       singleQuiz.answer2 !== '' &&
       singleQuiz.answer3 !== '' &&
@@ -106,7 +105,6 @@ const CreateQuiz = () => {
   //add more question
   const addQuestion = () => {
     if (
-      singleQuiz.questionText !== '' &&
       singleQuiz.answer1 !== '' &&
       singleQuiz.answer2 !== '' &&
       singleQuiz.answer3 !== '' &&
