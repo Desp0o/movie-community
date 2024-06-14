@@ -137,8 +137,7 @@
 
     display: flex;
     width: 146px;
-    height: 70px;
-    padding: 8px 16px;
+    padding: 17px 16px 10px 16px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
