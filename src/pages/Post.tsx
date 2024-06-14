@@ -26,7 +26,7 @@ const Post = () => {
   const { id } = useParams();
   const [commData, setComData] = useState([])
   const [pollAnswers, setPollAnswer] = useState([])
-  const {user} = useUserHook()
+  const { user } = useUserHook()
 
   const openFullScreen = () => {
     setFullScreenImage(true);
@@ -39,44 +39,48 @@ const Post = () => {
   };
 
   const [path, setPath] = useState(import.meta.env.VITE_SINGLE_GUEST_POST)
-  useEffect(()=>{
-    if(user.userID){
+  useEffect(() => {
+    if (user.userID) {
       setPath(import.meta.env.VITE_SINGLE_AUTH_POST)
-    }else{
+    } else {
       setPath(import.meta.env.VITE_SINGLE_GUEST_POST)
     }
-  },[user])
+  }, [user])
 
-  const { data, isError, error, refetch, isLoading } = useQuery(
+  const { data, isError, error, refetch, isLoading, isRefetching } = useQuery(
     [`single-post`, path],
     async () => {
-      const response = await axios.get(`${path}${id}`,{
-        headers:{
+      const response = await axios.get(`${path}${id}`, {
+        headers: {
           Authorization: `Bearer ${token}`
         }
       });
       setComData(response.data.comments);
       setPollAnswer(response.data.polls)
-      return response.data; 
-    },{
-      cacheTime:0,
-    }
-  );  
+      return response.data;
+    }, {
+    cacheTime: 0,
+  }
+  );
 
 
 
-  if(isError){
+  if (isError) {
     console.error(error)
   }
 
 
-  if(data){
+  if (data) {
     console.log(data.post);
+
+  }
+
+  if(isRefetching){
+    console.log("reeee");
     
   }
-  
-  
-  if(isLoading){
+
+  if (isLoading) {
     return <Spinner />
   }
 
@@ -85,30 +89,33 @@ const Post = () => {
     <PageLayout>
       <div className="post_page">
         <div className="post_page_inner">
-            <EditPannel postID={data?.post?.id} type={data?.post?.type} />
+          <EditPannel postID={data?.post?.id} type={data?.post?.type} />
 
-            <div className="author_title_media">
-              <div className="post_page_inner_block1">
-                <Author avatar={user.avatar} name={user.name} date={data?.post?.created_at} />
-                <BookmarkPost mySave={data.post.mySave} postID={data.post.id} />
-              </div>
-
-              <p className="post_page_inner_block1_title">{data?.post.text}</p>
-
-              <div className="media_cont">
-                  {data.post.type === 1 && <PostImage image={data.post.img} type={data.post.type} />}
-                  {data.post.type === 0 && <PostVideo image={data.post.img} />}
-              </div>
-
-              <LikeCommentShare 
-                type={data.post.type} 
-                postID={data.post.id} 
-                commentLength={data.post.comments} 
-                refetchCallBack={refetch} 
-                guls={data.post.guls}
-                authGul={data.post.myGul}
-                />
+          <div className="author_title_media">
+            <div className="post_page_inner_block1">
+              <Author avatar={user.avatar} name={user.name} date={data?.post?.created_at} />
+              <BookmarkPost mySave={data.post.mySave} postID={data.post.id} />
             </div>
+
+            <p className="post_page_inner_block1_title">{data?.post.text}</p>
+
+            {
+              data?.post?.img &&
+              <div className="media_cont">
+                {data.post.type === 1 && <PostImage image={data.post.img} type={data.post.type} />}
+                {data.post.type === 0 && <PostVideo image={data.post.img} />}
+              </div>
+            }
+
+            <LikeCommentShare
+              type={data.post.type}
+              postID={data.post.id}
+              commentLength={data.post.comments}
+              refetchCallBack={refetch}
+              guls={data.post.guls}
+              authGul={data.post.myGul}
+            />
+          </div>
         </div>
       </div>
     </PageLayout>

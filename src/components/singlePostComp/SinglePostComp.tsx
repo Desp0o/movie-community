@@ -64,9 +64,6 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()
 
-
-
-
   //fot geth authGul is true or not
   useEffect(()=>{
     if(Number(user.userID) === postUserId){
@@ -75,8 +72,6 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
       setUserLoged(false)
     }
   },[user, isUserLogged, postUserId])
-  
-
 
 
   return (

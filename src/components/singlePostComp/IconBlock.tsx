@@ -10,7 +10,7 @@ const IconBlock: React.FC<IconBlockProps> = ({icon, quantity, width}) => {
   return (
     <div className='IconBlock' style={{minWidth:`${width}`}}>
         {icon}
-        {quantity !== undefined && <p className='iconBlock_number'>{quantity}</p>}
+         <p className='iconBlock_number'>{quantity}</p>
     </div>
   )
 }
