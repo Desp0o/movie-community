@@ -12,6 +12,7 @@ import { useDropzone } from 'react-dropzone'
 import dropIcon from "../assets/dropIcon.webp"
 import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 import { useLanguage } from '../hooks/useLanguage';
+import { useUserHook } from '../hooks/useUserHook';
 
 interface QuestionProps {
   questionText: string;
@@ -54,13 +55,9 @@ const CreateQuiz = () => {
     answer4: ''
   })
 
-
-  //checking if quiz title and cover
-  useEffect(()=>{
-    if(quizData.mainTitle !== '' && quizData.mainImg !== undefined){
-      setTitleCover(true)
-    }
-  },[quizData.mainTitle, quizData.mainImg])
+  const addCoverAndTitle = () => {
+    setTitleCover(true)
+  }
 
   // drag n drop func
   const onDrop = useCallback((acceptedFiles: any) => {
@@ -75,7 +72,7 @@ const CreateQuiz = () => {
   const onDropSecond = useCallback((acceptedFile: any) => {
     const file = acceptedFile[0];
     setQuizData({ ...quizData, mainImg: file });
-  }, []);
+  }, [quizData]);
   const { getRootProps: getRootPropsSecond, getInputProps: getInputPropsSecond  } = useDropzone({ onDrop: onDropSecond })
 
 
@@ -261,7 +258,7 @@ const CreateQuiz = () => {
           {/* title and cover image */}
           <div className='title_and_cover_image_cr_quiz'>
             {
-              !isTitleCover &&
+              !isTitleCover ?
               <>
                 <div>
               <p className='cr_quiz_question_titles'>Quiz Title <span className='important_star'>*</span></p>
@@ -291,6 +288,14 @@ const CreateQuiz = () => {
               </div>
             </div>
               </>
+              : 
+              <QuizMainCard img={quizData.mainImg} title={quizData.mainTitle} />
+            }
+
+            {
+              quizData.mainImg !== undefined && quizData.mainTitle !== "" && !isTitleCover &&
+              <span style={{margin:"0 auto"}} onClick={addCoverAndTitle}><ButtonFIlled text={'Add cover and title'} link={''} /></span>
+
             }
           </div>
 
@@ -350,22 +355,26 @@ const CreateQuiz = () => {
               <p>{selectedLanguage.createQuiz_page.addImage}</p>
               <div {...getRootProps()} className='dragNdrop'>
                 <input {...getInputProps()} />
-                {
-                  isDragActive ?
-                    <></>
-                    :
-                    <div className='dragNdrop_block'>
-                      <div className='dragNdrop_block1'>
-                        <img src={dropIcon} className='dropIcon' alt='dropIcon' />
-                        <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
+              {
+                singleQuiz.questionImg 
+                  ?  <img src={singleQuiz.questionImg ? URL.createObjectURL(singleQuiz.questionImg) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
+                  : (
+                    isDragActive ?
+                      <></>
+                      :
+                      <div className='dragNdrop_block'>
+                        <div className='dragNdrop_block1'>
+                          <img src={dropIcon} className='dropIcon' alt='dropIcon' />
+                          <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
+                        </div>
+                        <p>{selectedLanguage.createQuiz_page.or}</p>
+  
+                        <div className='dragNdrop_block2'>
+                          <p>{selectedLanguage.createQuiz_page.selectFile}</p>
+                        </div>
                       </div>
-                      <p>{selectedLanguage.createQuiz_page.or}</p>
-
-                      <div className='dragNdrop_block2'>
-                        <p>{selectedLanguage.createQuiz_page.selectFile}</p>
-                      </div>
-                    </div>
-                }
+                  )
+              }
               </div>
             </div>
 
@@ -555,4 +564,24 @@ const QuizCard: React.FC<QuizCardProps> = ({
   )
 }
 
+
+interface QuizMainCardProps{
+  img: any;
+  title: string;
+}
+const QuizMainCard:React.FC<QuizMainCardProps> = ({img, title})=>{
+  const { user } = useUserHook()
+
+  return(
+    <div className='quizMainCard'>
+    <img src={img ? URL.createObjectURL(img) : ""} className='quizMainCard_cover'/>
+
+    <div className='quizMainCard_bottom'>
+      <img src={user.avatar} alt='avatar'/>
+      <p>{user.name}</p>
+    </div>
+    <p className='quizMainCard_bottom_title'>{title}</p>
+  </div>
+  )
+}
 
