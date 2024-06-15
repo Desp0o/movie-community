@@ -28,7 +28,7 @@ const Quiz_ = () => {
     }else{
       setPath('')
     }
-  },[user.userID])
+  },[user])
 
   const handler = () => {
     if(!user.userID){

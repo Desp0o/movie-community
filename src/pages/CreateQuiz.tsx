@@ -194,7 +194,7 @@ const CreateQuiz = () => {
       });
 
       setSingleQuiz({
-        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : null,
+        questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : "",
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
         answer2: foundIndex.answer2,
@@ -577,7 +577,6 @@ const DroppedImage:React.FC<droppedImageProps> = ({img}) => {
     <img src={img ? URL.createObjectURL(img) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
   )
 }
-
 
 //drga and drop component's body
 const DragNdropComponent = ()=>{
