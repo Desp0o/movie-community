@@ -110,7 +110,6 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
               
               <LikeCommentShare 
-                type={type} 
                 authGul={authGul} 
                 guls={guls} 
                 postID={postID} 

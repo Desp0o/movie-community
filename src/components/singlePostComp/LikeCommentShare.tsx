@@ -9,7 +9,6 @@ import { commentsIcon, commentsIconFilled } from '../../assets/newSvg/commentsIc
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 
 interface LikeCommentShareProps {
-  type: number | string;
   authGul?: number;
   guls?: number;
   postID: number;
@@ -19,7 +18,7 @@ interface LikeCommentShareProps {
   ) => Promise<QueryObserverResult<unknown, unknown>>;
 }
 
-const LikeCommentShare: React.FC<LikeCommentShareProps> = ({ type, authGul = 0, guls = 0, postID, commentLength, refetchCallBack }) => {
+const LikeCommentShare: React.FC<LikeCommentShareProps> = ({ authGul = 0, guls = 0, postID, commentLength, refetchCallBack }) => {
   const { Guling } = GulingFuction();
   const { user } = useUserHook();
 

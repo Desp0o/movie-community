@@ -22,21 +22,21 @@ const Post = () => {
   const token = localStorage.getItem('token')
   // const imageStoragePath = import.meta.env.VITE_IMAGE_PATH;
 
-  const [isFullScreenImage, setFullScreenImage] = useState(false);
+  // const [isFullScreenImage, setFullScreenImage] = useState(false);
   const { id } = useParams();
-  const [commData, setComData] = useState([])
-  const [pollAnswers, setPollAnswer] = useState([])
+  // const [commData, setComData] = useState([])
+  // const [pollAnswers, setPollAnswer] = useState([])
   const { user } = useUserHook()
 
-  const openFullScreen = () => {
-    setFullScreenImage(true);
-    document.body.style.overflow = "hidden";
-  };
+  // const openFullScreen = () => {
+  //   setFullScreenImage(true);
+  //   document.body.style.overflow = "hidden";
+  // };
 
-  const closeFullScreen = () => {
-    setFullScreenImage(false);
-    document.body.style.overflow = "auto";
-  };
+  // const closeFullScreen = () => {
+  //   setFullScreenImage(false);
+  //   document.body.style.overflow = "auto";
+  // };
 
   const [path, setPath] = useState(import.meta.env.VITE_SINGLE_GUEST_POST)
   useEffect(() => {
@@ -55,8 +55,8 @@ const Post = () => {
           Authorization: `Bearer ${token}`
         }
       });
-      setComData(response.data.comments);
-      setPollAnswer(response.data.polls)
+      // setComData(response.data.comments);
+      // setPollAnswer(response.data.polls)
       return response.data;
     }, {
     cacheTime: 0,
@@ -108,7 +108,6 @@ const Post = () => {
             }
 
             <LikeCommentShare
-              type={data.post.type}
               postID={data.post.id}
               commentLength={data.post.comments}
               refetchCallBack={refetch}

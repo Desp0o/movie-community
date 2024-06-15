@@ -10,12 +10,31 @@ import Footer from "../components/footer/Footer"
 import PageLayout from "../components/pageLayout/PageLayout"
 import { useLanguage } from "../hooks/useLanguage"
 import DOMPurify from 'dompurify';
+import { useEffect, useState } from "react"
+import { useUserHook } from "../hooks/useUserHook"
+import { useLoginModal } from "../hooks/useLoginModal"
 
 
 const Quiz_ = () => {
-
+  const { handleVisibility } = useLoginModal();
   const { selectedLanguage } = useLanguage()
+  const { user } = useUserHook()
   const sanitizedHTML = DOMPurify.sanitize(selectedLanguage.quiz_.rules);
+  const [path, setPath] = useState('')
+
+  useEffect(()=>{
+    if(user.userID){
+      setPath("/pages/CreateQuiz")
+    }else{
+      setPath('')
+    }
+  },[user.userID])
+
+  const handler = () => {
+    if(!user.userID){
+      handleVisibility()
+    }
+  }
 
   return (
     <>
@@ -36,7 +55,7 @@ const Quiz_ = () => {
 
               {/* buttons */}
               <div className="Quiz_btns">
-                <ButtonFilled text={"Get started!"} link={"/pages/CreateQuiz"} />
+                <span onClick={handler}><ButtonFilled text={"Get started!"} link={path} /></span>
                 <ButtonOutlined text={"Check out Quizzes"} link={""} />
               </div>
             </div>
