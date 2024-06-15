@@ -273,6 +273,9 @@ const CreateQuiz = () => {
                 isDragActive ?
                   <></>
                   :
+                  quizData.mainImg !== undefined 
+                  ? <DroppedImage img={quizData.mainImg}/>
+                  :
                   <div className='dragNdrop_block'>
                     <div className='dragNdrop_block1'>
                       <img src={dropIcon} className='dropIcon' alt='dropIcon' />
@@ -357,7 +360,7 @@ const CreateQuiz = () => {
                 <input {...getInputProps()} />
               {
                 singleQuiz.questionImg 
-                  ?  <img src={singleQuiz.questionImg ? URL.createObjectURL(singleQuiz.questionImg) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
+                  ?  <DroppedImage img={singleQuiz.questionImg} />
                   : (
                     isDragActive ?
                       <></>
@@ -564,7 +567,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
   )
 }
 
-
+//quiz mainCard
 interface QuizMainCardProps{
   img: any;
   title: string;
@@ -585,3 +588,12 @@ const QuizMainCard:React.FC<QuizMainCardProps> = ({img, title})=>{
   )
 }
 
+//uploaded image or cover
+interface droppedImageProps{
+  img: any;
+}
+const DroppedImage:React.FC<droppedImageProps> = ({img}) => {
+  return(
+    <img src={img ? URL.createObjectURL(img) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
+  )
+}

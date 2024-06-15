@@ -75,9 +75,13 @@ line-height: 150%; /* 27px */
 }
 
 .title_and_cover_image_cr_quiz{
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 33px;
+    min-height: 200px;
+    width: 100%;
+    align-items: center;
 }
 
 .cr_quiz_table{
