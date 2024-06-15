@@ -36,6 +36,7 @@ const CreateQuiz = () => {
   const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
   const [savedQuizIndex, setSavedQuizIndex] = useState(0) //save index fro array fro later update array
   const [restartQuestion, setRestartQuestion] = useState(true)
+  const [isTitleCover, setTitleCover] = useState(false)
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
     type: 5,
@@ -54,22 +55,29 @@ const CreateQuiz = () => {
   })
 
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
- 
-    setQuizData({ ...quizData, mainImg: file });
-  };
-
+  //checking if quiz title and cover
+  useEffect(()=>{
+    if(quizData.mainTitle !== '' && quizData.mainImg !== undefined){
+      setTitleCover(true)
+    }
+  },[quizData.mainTitle, quizData.mainImg])
 
   // drag n drop func
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
     const file = acceptedFiles[0]
-    
+
     setSingleQuiz({ ...singleQuiz, questionImg: file })
 
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+  const onDropSecond = useCallback((acceptedFile: any) => {
+    const file = acceptedFile[0];
+    setQuizData({ ...quizData, mainImg: file });
+  }, []);
+  const { getRootProps: getRootPropsSecond, getInputProps: getInputPropsSecond  } = useDropzone({ onDrop: onDropSecond })
+
 
 
   // make buttons active/inactive
@@ -90,7 +98,7 @@ const CreateQuiz = () => {
   useEffect(() => {
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== null||
+      singleQuiz.questionImg !== null ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -181,13 +189,13 @@ const CreateQuiz = () => {
     // find current element in index
     const foundIndex = quizData.questions[index]
 
-    if(foundIndex){
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+    if (foundIndex) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
 
-        setSingleQuiz({
+      setSingleQuiz({
         questionImg: foundIndex.questionImg ? URL.createObjectURL(foundIndex.questionImg) : null,
         questionText: foundIndex.questionText,
         answer1: foundIndex.answer1,
@@ -223,7 +231,7 @@ const CreateQuiz = () => {
   const handleSubmit = async () => {
     const token = localStorage.getItem('token')
     try {
-       await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
+      await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type":
@@ -231,8 +239,8 @@ const CreateQuiz = () => {
         },
       });
       // console.log("ქუი", response.data);
-      
-      
+
+
       navigate('/')
     } catch (error) {
       console.error('Error submitting quiz data:', error);
@@ -248,17 +256,46 @@ const CreateQuiz = () => {
             <p>{selectedLanguage.createQuiz_page.title}</p>
             {QUIZ}
           </div>
-         
-         
-          <input
-        type="file"
-        accept="image/*,video/*"
-        onChange={handleFileChange}
-      />
 
-         
-                 <div className='cr_quiz_table'>
-            <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({...quizData, mainTitle: e.target.value})} />
+
+          {/* title and cover image */}
+          <div className='title_and_cover_image_cr_quiz'>
+            {
+              !isTitleCover &&
+              <>
+                <div>
+              <p className='cr_quiz_question_titles'>Quiz Title <span className='important_star'>*</span></p>
+              <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({ ...quizData, mainTitle: e.target.value })} />
+            </div>
+
+            <div>
+              <p className='cr_quiz_question_titles'>Add Cover image</p>
+              <div {...getRootPropsSecond()} className='dragNdrop'>
+              <input {...getInputPropsSecond()} />
+              {
+                isDragActive ?
+                  <></>
+                  :
+                  <div className='dragNdrop_block'>
+                    <div className='dragNdrop_block1'>
+                      <img src={dropIcon} className='dropIcon' alt='dropIcon' />
+                      <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
+                    </div>
+                    <p>{selectedLanguage.createQuiz_page.or}</p>
+
+                    <div className='dragNdrop_block2'>
+                      <p>{selectedLanguage.createQuiz_page.selectFile}</p>
+                    </div>
+                  </div>
+              }
+              </div>
+            </div>
+              </>
+            }
+          </div>
+
+          {/* quiz answers and questions */}
+          <div className='cr_quiz_table'>
             {/* question section */}
             <div className='cr_quiz_question'>
               <p>{selectedLanguage.createQuiz_page.questionNum} 1/1 <span className='important_star'>*</span></p>
@@ -345,8 +382,6 @@ const CreateQuiz = () => {
             </div>
           </div>
 
-
-
           {/* quiz cards and buttons */}
           <div className='cr_quiz_bottom'>
             <div className='mapping_quizData'>
@@ -421,22 +456,22 @@ interface QuizCardProps {
   answ3: string;
   answ4: string;
   editCallBack: MouseEventHandler<HTMLDivElement> | undefined;
-  deleteCallback:MouseEventHandler<HTMLDivElement> | undefined;
+  deleteCallback: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({ 
-  index, 
-  length, 
-  editCallBack, 
-  deleteCallback, 
-  title, 
-  image, 
-  answ1, 
-  answ2, 
-  answ3, 
-  answ4 
+const QuizCard: React.FC<QuizCardProps> = ({
+  index,
+  length,
+  editCallBack,
+  deleteCallback,
+  title,
+  image,
+  answ1,
+  answ2,
+  answ3,
+  answ4
 }) => {
-  
+
   const { selectedLanguage } = useLanguage()
   const editPanelRef = useRef<HTMLDivElement>(null)
   const [isOpened, setOpen] = useState(false)
@@ -444,7 +479,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
   const editPannelHandler = () => {
     setOpen(!isOpened)
   }
-  
+
 
   //close editpanel when is clicked out of box
   useEffect(() => {
@@ -453,17 +488,17 @@ const QuizCard: React.FC<QuizCardProps> = ({
         editPanelRef.current &&
         event.target instanceof Node &&
         !editPanelRef.current.contains(event.target)
-    ) {
-      setOpen(false);
-    }
+      ) {
+        setOpen(false);
+      }
     }
 
     document.addEventListener("click", editPanelOutsideClick);
 
     return () => {
-        document.removeEventListener("click", editPanelOutsideClick);
+      document.removeEventListener("click", editPanelOutsideClick);
     };
-}, [isOpened]);
+  }, [isOpened]);
 
   return (
     <div className='cr_quiz_card'>
@@ -478,14 +513,14 @@ const QuizCard: React.FC<QuizCardProps> = ({
         </div>
 
         {
-          isOpened 
-            && <div className='cr_quiz_card_editPanel'>
-                 <span onClick={editPannelHandler}>{closeSquareIcon}</span>
-  
-                 <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>{selectedLanguage.createQuiz_page.deleteQuestion}</p>
-                  <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>{selectedLanguage.createQuiz_page.editQuestion}</p>
-               </div>
-          
+          isOpened
+          && <div className='cr_quiz_card_editPanel'>
+            <span onClick={editPannelHandler}>{closeSquareIcon}</span>
+
+            <p className='cr_quiz_card_editPanel_p' onClick={deleteCallback}>{selectedLanguage.createQuiz_page.deleteQuestion}</p>
+            <p className='cr_quiz_card_editPanel_p' onClick={editCallBack}>{selectedLanguage.createQuiz_page.editQuestion}</p>
+          </div>
+
         }
       </div>
 

@@ -21,6 +21,16 @@
     /* 59.8px */
 }
 
+.title_and_cover_image_cr_quiz{
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+}
+
+.cr_quiz_table{
+    margin-top: 33px;
+}
+
 .cr_quiz_question1 {
     display: flex;
     width: 802px;
@@ -52,6 +62,15 @@
     line-height: 130%;
     padding-bottom: 8px;
     /* 28.6px */
+}
+
+.cr_quiz_question_titles{
+    color: #F7FFFB;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    padding-bottom: 8px;
 }
 
 .important_star {
