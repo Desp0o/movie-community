@@ -173,6 +173,10 @@ const CreateQuiz = () => {
     })
   }
 
+  const deteleCoverImage = () => {
+    setQuizData({...quizData, mainImg:  undefined})
+  }
+
   const removeQuizCard = (index: number) => {
     const updatedQuestions = quizData.questions.filter((_, i) => i !== index);
 
@@ -287,7 +291,10 @@ const CreateQuiz = () => {
 
             {
               quizData.mainTitle !== "" && !isTitleCover &&
-              <span style={{margin:"0 auto"}} onClick={addCoverAndTitle}><ButtonFIlled text={'Add cover and title'} link={''} /></span>
+              <div style={{margin:"0 auto", display:"flex", gap:"26px"}}>                
+                {quizData.mainImg ? <span onClick={deteleCoverImage}><ButtonOutlined text='Delete image' link={''} /></span> :  <ButtonOutlined text='Delete image' faded={true} link={''} />}
+                <span onClick={addCoverAndTitle}><ButtonFIlled text={'Add cover and title'} link={''} /></span>
+              </div>
 
             }
           </div>
