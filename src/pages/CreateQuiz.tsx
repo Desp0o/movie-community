@@ -14,6 +14,7 @@ import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 import { useLanguage } from '../hooks/useLanguage';
 import { useUserHook } from '../hooks/useUserHook';
 import quicDefaultCover from "../assets/quizDefaultCover.webp"
+import { smallXicon } from '../assets/newSvg/smallXicon';
 
 interface QuestionProps {
   questionText: string;
@@ -74,7 +75,7 @@ const CreateQuiz = () => {
     const file = acceptedFile[0];
     setQuizData({ ...quizData, mainImg: file });
   }, [quizData]);
-  const { getRootProps: getRootPropsSecond, getInputProps: getInputPropsSecond  } = useDropzone({ onDrop: onDropSecond })
+  const { getRootProps: getRootPropsSecond, getInputProps: getInputPropsSecond } = useDropzone({ onDrop: onDropSecond })
 
 
 
@@ -174,7 +175,12 @@ const CreateQuiz = () => {
   }
 
   const deteleCoverImage = () => {
-    setQuizData({...quizData, mainImg:  undefined})
+    setQuizData({ ...quizData, mainImg: undefined })
+  }
+
+  const clearTitleAndCover = () => {
+    setQuizData({ ...quizData, mainImg: undefined, mainTitle: "" })
+    setTitleCover(false)
   }
 
   const removeQuizCard = (index: number) => {
@@ -264,35 +270,35 @@ const CreateQuiz = () => {
           <div className='title_and_cover_image_cr_quiz'>
             {
               !isTitleCover ?
-              <>
-                <div>
-              <p className='cr_quiz_question_titles'>Quiz Title <span className='important_star'>*</span></p>
-              <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({ ...quizData, mainTitle: e.target.value })} />
-            </div>
+                <>
+                  <div>
+                    <p className='cr_quiz_question_titles'>Quiz Title <span className='important_star'>*</span></p>
+                    <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({ ...quizData, mainTitle: e.target.value })} />
+                  </div>
 
-            <div>
-              <p className='cr_quiz_question_titles'>Add Cover image <span style={{fontSize:"14px" ,color:"gray"}}>(optional)</span></p>
-              <div {...getRootPropsSecond()} className='dragNdrop'>
-              <input {...getInputPropsSecond()} />
-              {
-                isDragActive ?
-                  <></>
-                  :
-                  quizData.mainImg !== undefined 
-                  ? <DroppedImage img={quizData.mainImg}/>
-                  : <DragNdropComponent />
-              }
-              </div>
-            </div>
-              </>
-              : 
-              <QuizMainCard img={quizData.mainImg} title={quizData.mainTitle} />
+                  <div>
+                    <p className='cr_quiz_question_titles'>Add Cover image <span style={{ fontSize: "14px", color: "gray" }}>(optional)</span></p>
+                    <div {...getRootPropsSecond()} className='dragNdrop'>
+                      <input {...getInputPropsSecond()} />
+                      {
+                        isDragActive ?
+                          <></>
+                          :
+                          quizData.mainImg !== undefined
+                            ? <DroppedImage img={quizData.mainImg} />
+                            : <DragNdropComponent />
+                      }
+                    </div>
+                  </div>
+                </>
+                :
+                <QuizMainCard img={quizData.mainImg} title={quizData.mainTitle} clearTitleAndCover={clearTitleAndCover} />
             }
 
             {
               quizData.mainTitle !== "" && !isTitleCover &&
-              <div style={{margin:"0 auto", display:"flex", gap:"26px"}}>                
-                {quizData.mainImg ? <span onClick={deteleCoverImage}><ButtonOutlined text='Delete image' link={''} /></span> :  <ButtonOutlined text='Delete image' faded={true} link={''} />}
+              <div style={{ margin: "0 auto", display: "flex", gap: "26px" }}>
+                {quizData.mainImg ? <span onClick={deteleCoverImage}><ButtonOutlined text='Delete image' link={''} /></span> : <ButtonOutlined text='Delete image' faded={true} link={''} />}
                 <span onClick={addCoverAndTitle}><ButtonFIlled text={'Add cover and title'} link={''} /></span>
               </div>
 
@@ -352,19 +358,19 @@ const CreateQuiz = () => {
 
             {/* upload image with drag n drop */}
             <div className='cr_quiz_upload_image'>
-              <p>{selectedLanguage.createQuiz_page.addImage} <span style={{fontSize:"12px" ,color:"gray"}}>(optional)</span></p>
+              <p>{selectedLanguage.createQuiz_page.addImage} <span style={{ fontSize: "12px", color: "gray" }}>(optional)</span></p>
               <div {...getRootProps()} className='dragNdrop'>
                 <input {...getInputProps()} />
-              {
-                singleQuiz.questionImg 
-                  ?  <DroppedImage img={singleQuiz.questionImg} />
-                  : (
-                    isDragActive 
-                      ? <></>
-                      : <DragNdropComponent />
-                      
-                  )
-              }
+                {
+                  singleQuiz.questionImg
+                    ? <DroppedImage img={singleQuiz.questionImg} />
+                    : (
+                      isDragActive
+                        ? <></>
+                        : <DragNdropComponent />
+
+                    )
+                }
               </div>
             </div>
 
@@ -555,50 +561,52 @@ const QuizCard: React.FC<QuizCardProps> = ({
 }
 
 //quiz mainCard
-interface QuizMainCardProps{
+interface QuizMainCardProps {
   img: any;
   title: string;
+  clearTitleAndCover: () => void
 }
-const QuizMainCard:React.FC<QuizMainCardProps> = ({img, title})=>{
+const QuizMainCard: React.FC<QuizMainCardProps> = ({ img, title, clearTitleAndCover }) => {
   const { user } = useUserHook()
 
-  return(
+  return (
     <div className='quizMainCard'>
-    <img src={img ? URL.createObjectURL(img) : quicDefaultCover} className='quizMainCard_cover'/>
+      <div className='smallXicon' onClick={clearTitleAndCover}>{smallXicon}</div>
+      <img src={img ? URL.createObjectURL(img) : quicDefaultCover} className='quizMainCard_cover' />
 
-    <div className='quizMainCard_bottom'>
-      <img src={user.avatar} alt='avatar'/>
-      <p>{user.name}</p>
+      <div className='quizMainCard_bottom'>
+        <img src={user.avatar} alt='avatar' />
+        <p>{user.name}</p>
+      </div>
+      <p className='quizMainCard_bottom_title'>{title}</p>
     </div>
-    <p className='quizMainCard_bottom_title'>{title}</p>
-  </div>
   )
 }
 
 //uploaded image or cover
-interface droppedImageProps{
+interface droppedImageProps {
   img: any;
 }
-const DroppedImage:React.FC<droppedImageProps> = ({img}) => {
-  return(
+const DroppedImage: React.FC<droppedImageProps> = ({ img }) => {
+  return (
     <img src={img ? URL.createObjectURL(img) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
   )
 }
 
 //drga and drop component's body
-const DragNdropComponent = ()=>{
+const DragNdropComponent = () => {
   const { selectedLanguage } = useLanguage()
-  return(
+  return (
     <div className='dragNdrop_block'>
-    <div className='dragNdrop_block1'>
-      <img src={dropIcon} className='dropIcon' alt='dropIcon' />
-      <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
-    </div>
-    <p>{selectedLanguage.createQuiz_page.or}</p>
+      <div className='dragNdrop_block1'>
+        <img src={dropIcon} className='dropIcon' alt='dropIcon' />
+        <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
+      </div>
+      <p>{selectedLanguage.createQuiz_page.or}</p>
 
-    <div className='dragNdrop_block2'>
-      <p>{selectedLanguage.createQuiz_page.selectFile}</p>
+      <div className='dragNdrop_block2'>
+        <p>{selectedLanguage.createQuiz_page.selectFile}</p>
+      </div>
     </div>
-  </div>
   )
 }

@@ -121,6 +121,21 @@ line-height: 150%; /* 27px */
     /* 28.6px */
 }
 
+.smallXicon{
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--Card-background);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .cr_quiz_question_titles{
     color: #F7FFFB;
     font-size: 22px;
