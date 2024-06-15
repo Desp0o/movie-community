@@ -48,13 +48,6 @@ font-weight: 500;
 line-height: 150%; /* 27px */
 }
 
-.quiz_short_info{
-color: var(--Secondary-600);
-font-size: 12px;
-font-style: normal;
-font-weight: 300;
-line-height: 150%; /* 18px */
-}
 
 .satrt_quiz_btn{
     display: flex;

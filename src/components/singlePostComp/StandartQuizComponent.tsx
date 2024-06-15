@@ -45,7 +45,6 @@ const StandartQuizComponent:React.FC<StandartQuizComponentProps> = ({postUserId,
     <div className="quiz_details">
       <Author name={authorName} date={date} />
       <p className="quiz_title">{postTitle}</p>
-      <p className="quiz_short_info">აქ უნდა იყოს რამე აღწერა და გვინდა ეს საერთოდ?</p>
     </div>
 
     <Link to={`/pages/Quiz/${quiz_id}`} className="quiz_btn_link">
