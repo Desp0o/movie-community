@@ -13,6 +13,7 @@ import dropIcon from "../assets/dropIcon.webp"
 import { closeSquareIcon } from '../assets/newSvg/closeSquareIcon';
 import { useLanguage } from '../hooks/useLanguage';
 import { useUserHook } from '../hooks/useUserHook';
+import quicDefaultCover from "../assets/quizDefaultCover.webp"
 
 interface QuestionProps {
   questionText: string;
@@ -266,7 +267,7 @@ const CreateQuiz = () => {
             </div>
 
             <div>
-              <p className='cr_quiz_question_titles'>Add Cover image</p>
+              <p className='cr_quiz_question_titles'>Add Cover image <span style={{fontSize:"14px" ,color:"gray"}}>(optional)</span></p>
               <div {...getRootPropsSecond()} className='dragNdrop'>
               <input {...getInputPropsSecond()} />
               {
@@ -275,18 +276,7 @@ const CreateQuiz = () => {
                   :
                   quizData.mainImg !== undefined 
                   ? <DroppedImage img={quizData.mainImg}/>
-                  :
-                  <div className='dragNdrop_block'>
-                    <div className='dragNdrop_block1'>
-                      <img src={dropIcon} className='dropIcon' alt='dropIcon' />
-                      <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
-                    </div>
-                    <p>{selectedLanguage.createQuiz_page.or}</p>
-
-                    <div className='dragNdrop_block2'>
-                      <p>{selectedLanguage.createQuiz_page.selectFile}</p>
-                    </div>
-                  </div>
+                  : <DragNdropComponent />
               }
               </div>
             </div>
@@ -296,7 +286,7 @@ const CreateQuiz = () => {
             }
 
             {
-              quizData.mainImg !== undefined && quizData.mainTitle !== "" && !isTitleCover &&
+              quizData.mainTitle !== "" && !isTitleCover &&
               <span style={{margin:"0 auto"}} onClick={addCoverAndTitle}><ButtonFIlled text={'Add cover and title'} link={''} /></span>
 
             }
@@ -355,27 +345,17 @@ const CreateQuiz = () => {
 
             {/* upload image with drag n drop */}
             <div className='cr_quiz_upload_image'>
-              <p>{selectedLanguage.createQuiz_page.addImage}</p>
+              <p>{selectedLanguage.createQuiz_page.addImage} <span style={{fontSize:"12px" ,color:"gray"}}>(optional)</span></p>
               <div {...getRootProps()} className='dragNdrop'>
                 <input {...getInputProps()} />
               {
                 singleQuiz.questionImg 
                   ?  <DroppedImage img={singleQuiz.questionImg} />
                   : (
-                    isDragActive ?
-                      <></>
-                      :
-                      <div className='dragNdrop_block'>
-                        <div className='dragNdrop_block1'>
-                          <img src={dropIcon} className='dropIcon' alt='dropIcon' />
-                          <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
-                        </div>
-                        <p>{selectedLanguage.createQuiz_page.or}</p>
-  
-                        <div className='dragNdrop_block2'>
-                          <p>{selectedLanguage.createQuiz_page.selectFile}</p>
-                        </div>
-                      </div>
+                    isDragActive 
+                      ? <></>
+                      : <DragNdropComponent />
+                      
                   )
               }
               </div>
@@ -577,7 +557,7 @@ const QuizMainCard:React.FC<QuizMainCardProps> = ({img, title})=>{
 
   return(
     <div className='quizMainCard'>
-    <img src={img ? URL.createObjectURL(img) : ""} className='quizMainCard_cover'/>
+    <img src={img ? URL.createObjectURL(img) : quicDefaultCover} className='quizMainCard_cover'/>
 
     <div className='quizMainCard_bottom'>
       <img src={user.avatar} alt='avatar'/>
@@ -595,5 +575,24 @@ interface droppedImageProps{
 const DroppedImage:React.FC<droppedImageProps> = ({img}) => {
   return(
     <img src={img ? URL.createObjectURL(img) : ""} alt='quiz card cover' className='quzic_acrd_img_in_dropZone' />
+  )
+}
+
+
+//drga and drop component's body
+const DragNdropComponent = ()=>{
+  const { selectedLanguage } = useLanguage()
+  return(
+    <div className='dragNdrop_block'>
+    <div className='dragNdrop_block1'>
+      <img src={dropIcon} className='dropIcon' alt='dropIcon' />
+      <p>{selectedLanguage.createQuiz_page.dragNdrop}</p>
+    </div>
+    <p>{selectedLanguage.createQuiz_page.or}</p>
+
+    <div className='dragNdrop_block2'>
+      <p>{selectedLanguage.createQuiz_page.selectFile}</p>
+    </div>
+  </div>
   )
 }
