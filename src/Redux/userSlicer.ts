@@ -5,10 +5,10 @@ const userSlicer = createSlice({
     initialState:{
         user: {
             name: '' || localStorage.getItem('userName'),
-            userID: 0 || localStorage.getItem('userID'),
+            userID: null || localStorage.getItem('userID'),
             avatar: '' ||localStorage.getItem('avatar'),
-            score: 0 || localStorage.getItem('score'),
-            bells: 0 || localStorage.getItem('bells'),
+            score: null || localStorage.getItem('score'),
+            bells: null || localStorage.getItem('bells'),
         }
     },
     reducers:{
