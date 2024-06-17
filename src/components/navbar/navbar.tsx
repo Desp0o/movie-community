@@ -1,6 +1,5 @@
 import "./navbar.css";
 import { useUserHook } from "../../hooks/useUserHook";
-import { burgerMenu } from "../../assets/svg/burgerMenu";
 import UserDash from "./UserDash";
 import { useEffect, useRef, useState } from "react";
 import { useUserDashHook } from "../../hooks/useUserDashHook";
@@ -58,7 +57,7 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="logo_burger_menu">
-          <div className="burger_menu" onClick={handleBurgerMenuEvent}>{burgerMenu}</div>
+          <div className="burger_menu" onClick={handleBurgerMenuEvent}>{}</div>
           <Link to='/'><p>LOGO</p></Link>
         </div>
 

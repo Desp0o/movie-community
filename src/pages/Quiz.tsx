@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import "./Quiz.css";
 import PageLayout from '../components/pageLayout/PageLayout';
 import QuizCover from './singleQuizComponents/QuizCover';
+import QuizGameComp from './singleQuizComponents/QuizGameComp';
 
 interface QuestionsType {
     name: string;
@@ -11,6 +12,7 @@ interface QuestionsType {
     var1: string;
     var2: string;
     var3: string;
+    img: string;
 }
 
 const Quiz = () => {
@@ -21,6 +23,7 @@ const Quiz = () => {
     const [isCorrect, setCorrect] = useState(0);
     const [isLastQuest, setIsLastQuest] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
+    const [showMeQuiz, setShowMeQuiz] = useState(false)
     const [quizData, setQuizData] = useState({
         name: '',
         quizLength: 0,
@@ -121,13 +124,13 @@ const Quiz = () => {
             setCorrect(1)
             //update correct answers sum
             setQuizData({ ...quizData, correctAnswersSum: quizData.correctAnswersSum + 1 })
-            event.currentTarget.style.backgroundColor = "green"
+            event.currentTarget.classList.add('correct')
         } else {
             setCorrect(0)
         }
 
         if (quizData.correctAnswer !== event.currentTarget.textContent) {
-            event.currentTarget.style.backgroundColor = "red"
+            event.currentTarget.classList.add("incorrect")
         }
     }
 
@@ -155,6 +158,9 @@ const Quiz = () => {
         }
     };
 
+    const showMeQuizHandler = () => {
+        setShowMeQuiz(true)
+    }
 
     return (
         <PageLayout>
@@ -162,8 +168,22 @@ const Quiz = () => {
                 <div className='quiz_popUp'>
 
                     {/* quiz cover */}
-                    <div className='quiz_cover'>
-                        <QuizCover title={quizData.name} />
+                    <div className={showMeQuiz ? "quiz_cover display_none" : "quiz_cover"}>
+                        <QuizCover title={quizData.name} funcName={showMeQuizHandler} />
+                    </div>
+
+                    <div className={showMeQuiz ? "quiz_game_component active" : "quiz_game_component"}>
+                        <QuizGameComp 
+                            questionIndex={quizData.questionIndex}
+                            quizLength={quizData.quizLength}
+                            name={questions?.name}
+                            answers={answers}
+                            answerDivRef={answerDivRef}
+                            questionRef={questionRef}
+                            funcName={handleAnswer} 
+                            img={questions?.img} 
+                            sendAnswerFunc={sendAnswer}
+                            />
                     </div>
                 </div>
             </div>
@@ -181,8 +201,3 @@ export default Quiz;
 
 
 
-// <div className='answers' ref={answerDivRef}>
-//                     {answers.map((item, index) => (
-//                         <p ref={questionRef} key={index} className='quiz_single_answer' onClick={handleAnswer}>{item}</p>
-//                     ))}
-//                 </div>
