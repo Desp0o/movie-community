@@ -93,7 +93,7 @@ const Post = () => {
 
           <div className="author_title_media">
             <div className="post_page_inner_block1">
-              <Author avatar={user.avatar} name={user.name} date={data?.post?.created_at} />
+              <Author avatar={data?.post?.user?.avatar} name={data?.post?.user?.name} date={data?.post?.created_at} />
               <BookmarkPost mySave={data.post.mySave} postID={data.post.id} />
             </div>
 
