@@ -2,6 +2,7 @@ import React from 'react'
 import Author from '../../components/singlePostComp/Author'
 import { quizNeon } from '../../assets/newSvg/quizNeon'
 import { useUserHook } from '../../hooks/useUserHook';
+import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled';
 
 interface QuizCoverProps {
     title: string;
@@ -20,9 +21,9 @@ const QuizCover: React.FC<QuizCoverProps> = ({ title, funcName }) => {
                 <p className='quiz_creator_title_TITLE'>{title}</p>
             </div>
 
-            <div className='quiz_creator_title_BUTTON' onClick={funcName}>
-                <p>Get started!</p>
-            </div>
+            <span onClick={funcName}>
+                <ButtonFIlled text={'Get started!'} link={''} wProp='300px'/>
+            </span>
         </>
     )
 }
