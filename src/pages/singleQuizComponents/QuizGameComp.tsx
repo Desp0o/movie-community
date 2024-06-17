@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react'
+import React, { RefObject, useState } from 'react'
 import { quizBackButton } from '../../assets/newSvg/quizBackButton'
 import { smallQuizNeon } from '../../assets/newSvg/smallQuizNeon'
 import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
@@ -17,8 +17,20 @@ interface QuizGameCompProps {
 }
 
 const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, name, img, answerDivRef, questionRef, funcName, answers, sendAnswerFunc }) => {
+    const [isFullScreen, setFullScreen] = useState(false)
+
+    const openImage = () => {
+        setFullScreen(!isFullScreen)
+    }
+
     return (
         <>
+            {
+                isFullScreen
+                && <div className='fullScreenImage'>
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' onClick={()=>setFullScreen(false)} style={{cursor:"pointer"}}/>
+                </div>
+            }
             {/* quiz icon, back button, number */}
             <div className='quiz_game_component_top'>
                 <Link to='/'>{quizBackButton}</Link>
@@ -30,11 +42,11 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
             <div className='quiz_game_component_middle'>
                 <p>{name}</p>
 
-                {img ? <div className='single_quiz_question_image'>
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover'/>
+                {img ? <div className='single_quiz_question_image' onClick={openImage}>
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover' />
                     <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain'/>
                 </div>
-                : null}
+                    : null}
             </div>
 
 

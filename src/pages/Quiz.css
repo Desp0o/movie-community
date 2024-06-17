@@ -157,11 +157,12 @@
     height: 185.938px;
     justify-content: center;
     align-items: center;
-    gap: 4.58px;
-    flex-shrink: 0;
+    gap: 4.58px;    
 
     border-radius: 0.916px;
     border: 0.458px solid var(--stroke);
+
+    cursor: pointer;
 }
 
 .single_quiz_question_image_cover{

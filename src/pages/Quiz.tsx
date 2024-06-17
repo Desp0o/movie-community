@@ -83,7 +83,6 @@ const Quiz = () => {
                 questionID: resQuizData.question?.id,
                 correctAnswer: resQuizData.question?.var,
                 questionIndex: resQuizData.question?.question_index,
-                correctAnswersSum: 0
             })
 
             //clear pointer event prevent and background on answers
@@ -158,12 +157,6 @@ const Quiz = () => {
                 setShowMeFinal(true)
                 setShowMeQuiz(false)
             }
-
-            const correctElements = document.querySelectorAll('.correct');
-            correctElements.forEach(el => el.classList.remove('correct'));
-
-            const incorrectElements = document.querySelectorAll('.incorrect');
-            incorrectElements.forEach(el => el.classList.remove('incorrect'));
 
             if(answerDivRef.current){
                 Array.from(answerDivRef.current.children).forEach((item) => {
