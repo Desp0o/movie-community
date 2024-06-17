@@ -138,6 +138,8 @@
 }
 
 .single_quiz_question_image {
+    position: relative;
+    overflow: hidden;
     display: flex;
     width: 388.82px;
     height: 185.938px;
@@ -148,6 +150,26 @@
 
     border-radius: 0.916px;
     border: 0.458px solid var(--stroke);
+}
+
+.single_quiz_question_image_cover{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    filter: brightness(50%) blur(24px);
+  transform: scale(1.2);
+}
+
+.single_quiz_question_image_contain{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .quiz_game_component_answers {
@@ -180,10 +202,13 @@
 }
 
 .quiz_game_component_bottom {
-    margin-top: 18px;
+    
 
     display: flex;
     justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 18px;
 }
 
 .quiz_single_answer.correct {

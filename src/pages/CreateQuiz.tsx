@@ -23,6 +23,7 @@ interface QuestionProps {
   answer2: string;
   answer3: string;
   answer4: string;
+  check: number;
 }
 
 interface QuizDataProps {
@@ -50,11 +51,12 @@ const CreateQuiz = () => {
   });
   const [singleQuiz, setSingleQuiz] = useState<QuestionProps>({
     questionText: '',
-    questionImg: null,
+    questionImg: undefined,
     answer1: '',
     answer2: '',
     answer3: '',
-    answer4: ''
+    answer4: '',
+    check: 0,
   })
 
   const addCoverAndTitle = () => {
@@ -66,7 +68,7 @@ const CreateQuiz = () => {
     // Do something with the files
     const file = acceptedFiles[0]
 
-    setSingleQuiz({ ...singleQuiz, questionImg: file })
+    setSingleQuiz({ ...singleQuiz, questionImg: file, check: 1 })
 
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -97,7 +99,7 @@ const CreateQuiz = () => {
   useEffect(() => {
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== null ||
+      singleQuiz.questionImg !== undefined ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -127,13 +129,14 @@ const CreateQuiz = () => {
             answer2: singleQuiz.answer2,
             answer3: singleQuiz.answer3,
             answer4: singleQuiz.answer4,
-            questionImg: singleQuiz.questionImg
+            questionImg: singleQuiz.questionImg,
+            check: singleQuiz.questionImg ? 1 : 0
           }
         ]
       });
 
       setSingleQuiz({
-        ...singleQuiz, questionText: '', questionImg: null, answer1: '', answer2: '', answer3: '', answer4: ''
+        ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: '', check: 0
       })
     }
 
@@ -144,7 +147,7 @@ const CreateQuiz = () => {
 
     if (
       singleQuiz.questionText !== '' ||
-      singleQuiz.questionImg !== null || singleQuiz.questionImg !== null ||
+      singleQuiz.questionImg !== undefined || singleQuiz.questionImg !== undefined ||
       singleQuiz.answer1 !== '' ||
       singleQuiz.answer2 !== '' ||
       singleQuiz.answer3 !== '' ||
@@ -152,7 +155,7 @@ const CreateQuiz = () => {
     ) {
       setSingleQuiz({
         ...singleQuiz,
-        questionImg: null,
+        questionImg: undefined,
         questionText: '',
         answer1: '',
         answer2: '',
@@ -209,7 +212,8 @@ const CreateQuiz = () => {
         answer1: foundIndex.answer1,
         answer2: foundIndex.answer2,
         answer3: foundIndex.answer3,
-        answer4: foundIndex.answer4
+        answer4: foundIndex.answer4,
+        check: foundIndex.check
       })
     }
 
@@ -231,7 +235,7 @@ const CreateQuiz = () => {
     });
 
     setSingleQuiz({
-      ...singleQuiz, questionText: '', questionImg: null, answer1: '', answer2: '', answer3: '', answer4: ''
+      ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: ''
     })
     setEditBtn(false)
   };
@@ -239,23 +243,23 @@ const CreateQuiz = () => {
   const handleSubmit = async () => {
     const token = localStorage.getItem('token')
     try {
-      await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
+      const response = await axios.post(import.meta.env.VITE_QUIZ_ADD, quizData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type":
             "multipart/form-data, application/json, text/plain, */*",
         },
       });
-      // console.log("ქუი", response.data);
+      console.log(response.data);
 
+      
+      
 
       navigate('/')
     } catch (error) {
       console.error('Error submitting quiz data:', error);
     }
-    console.log(quizData);
   };
-
   return (
     <>
       <PageLayout>

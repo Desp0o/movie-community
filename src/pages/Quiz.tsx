@@ -134,6 +134,8 @@ const Quiz = () => {
         if (quizData.correctAnswer !== event.currentTarget.textContent) {
             event.currentTarget.classList.add("incorrect")
         }
+        console.log(quizData.correctAnswersSum);
+        
     }
 
     const sendAnswer = async () => {
@@ -196,7 +198,11 @@ const Quiz = () => {
                     </div>
 
                     <div className={showMeFinal ? "quiz_final active" : "quiz_final"}>
-                        <QuizFinalScoreBoard title={quizData.name} />
+                        <QuizFinalScoreBoard 
+                        title={quizData.name} 
+                        correctAnswers={quizData.correctAnswersSum} 
+                        questionSum={quizData.quizLength} 
+                        />
                     </div>
                 </div>
             </div>

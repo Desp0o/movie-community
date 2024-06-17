@@ -31,7 +31,8 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
                 <p>{name}</p>
 
                 {img ? <div className='single_quiz_question_image'>
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' />
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover'/>
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain'/>
                 </div>
                 : null}
             </div>

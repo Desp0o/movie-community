@@ -9,9 +9,11 @@ import { congratulateIcon } from '../../assets/newSvg/congratulateIcon'
 
 interface QuizFinalScoreBoardProps {
     title: string;
+    correctAnswers: number;
+    questionSum: number;
 }
 
-const QuizFinalScoreBoard:React.FC<QuizFinalScoreBoardProps> = ({title}) => {
+const QuizFinalScoreBoard: React.FC<QuizFinalScoreBoardProps> = ({ title, questionSum, correctAnswers }) => {
 
     const { user } = useUserHook()
 
@@ -30,8 +32,11 @@ const QuizFinalScoreBoard:React.FC<QuizFinalScoreBoardProps> = ({title}) => {
                     </div>
                     <Author name={user.name} avatar={user.avatar} />
                 </div>
-                <p className='Correct_Answers'>Correct Answers: <span>10/10</span></p>
-                <p className='Points_earned'>Points earned: <span>10</span>{starIcon}</p>
+                <p className='Correct_Answers'>Correct Answers: <span>{correctAnswers}/{questionSum}</span></p>
+                <p className='Points_earned'>
+                    Points earned: <span>{correctAnswers * 2}</span>
+                    {starIcon}
+                </p>
             </div>
 
             <div className='quiz_final_buttons'>
