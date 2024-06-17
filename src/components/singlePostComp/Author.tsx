@@ -15,11 +15,11 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
   return (
     <div className="author">
       <div className="author_credentials">
-       {avatar &&  <img
+       <img
           src={avatar ? avatar : noAvatar}
           alt="author avatar"
           className="author_avatar"
-        />}
+        />
         <p>{name}</p>
       </div>
 

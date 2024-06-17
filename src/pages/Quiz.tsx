@@ -6,6 +6,7 @@ import PageLayout from '../components/pageLayout/PageLayout';
 import QuizCover from './singleQuizComponents/QuizCover';
 import QuizGameComp from './singleQuizComponents/QuizGameComp';
 import QuizFinalScoreBoard from './singleQuizComponents/QuizFinalScoreBoard';
+import Footer from '../components/footer/Footer';
 
 interface QuestionsType {
     name: string;
@@ -163,6 +164,14 @@ const Quiz = () => {
 
             const incorrectElements = document.querySelectorAll('.incorrect');
             incorrectElements.forEach(el => el.classList.remove('incorrect'));
+
+            if(answerDivRef.current){
+                Array.from(answerDivRef.current.children).forEach((item) => {
+                    if (item instanceof HTMLElement) {
+                        item.classList.remove("incorrect", "correct");
+                    }
+                });
+            }
             
         } catch (error) {
             console.log(error)
@@ -174,6 +183,7 @@ const Quiz = () => {
     }
 
     return (
+        <>
         <PageLayout>
             <div className='single_quiz'>
                 <div className='quiz_popUp'>
@@ -208,6 +218,8 @@ const Quiz = () => {
             </div>
 
         </PageLayout>
+        <Footer />
+        </>
 
     );
 };
