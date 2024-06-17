@@ -3,6 +3,7 @@ import { quizBackButton } from '../../assets/newSvg/quizBackButton'
 import { smallQuizNeon } from '../../assets/newSvg/smallQuizNeon'
 import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
 
 interface QuizGameCompProps {
     img: string | undefined;
@@ -25,6 +26,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
     return (
         <>
+            <ScrollToTop />
             {
                 isFullScreen
                 && <div className='fullScreenImage'>
