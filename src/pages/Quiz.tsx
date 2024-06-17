@@ -32,6 +32,8 @@ const Quiz = () => {
         quizLength: 0,
         questionID: 0,
         correctAnswer: '',
+        userName: '',
+        userAvatar: '',
         questionIndex: 0,
         correctAnswersSum: 0
     })
@@ -83,6 +85,9 @@ const Quiz = () => {
                 questionID: resQuizData.question?.id,
                 correctAnswer: resQuizData.question?.var,
                 questionIndex: resQuizData.question?.question_index,
+                userName: res.data.quiz.user?.name,
+                userAvatar: res.data.quiz.user?.avatar,
+                correctAnswersSum: res.data.correct
             })
 
             //clear pointer event prevent and background on answers
@@ -183,7 +188,12 @@ const Quiz = () => {
 
                     {/* quiz cover */}
                     <div className={showMeQuiz || showMeFinal ? "quiz_cover display_none" : "quiz_cover"}>
-                        <QuizCover title={quizData.name} funcName={showMeQuizHandler} />
+                        <QuizCover 
+                            title={quizData.name} 
+                            funcName={showMeQuizHandler} 
+                            avatar={quizData.userAvatar}
+                            name={quizData.userName}
+                        />
                     </div>
 
                     <div className={showMeQuiz ? "quiz_game_component active" : "quiz_game_component"}>

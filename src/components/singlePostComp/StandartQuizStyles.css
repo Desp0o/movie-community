@@ -70,17 +70,17 @@ line-height: 150%; /* 18px */
 }
 
 .quiz_btn_link{
-    margin: 0 auto;
+    margin: 22px auto 0 auto;
 }
 
 .quiz_popcorn_icon{
     position: absolute;
-    bottom: 30px;
+    bottom: 0px;
     right: 84px;
 }
 
 .quiz_galss_icon{
     position: absolute;
-    bottom: 50px;
+    bottom: 25px;
     right: 24px;
 }
