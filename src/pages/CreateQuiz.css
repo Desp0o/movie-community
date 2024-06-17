@@ -226,6 +226,7 @@ line-height: 150%; /* 27px */
 
 .cr_quiz_card_editPanel{
     position: absolute;
+    z-index: 3;
     top: 7px;
     right: 7px;
 
