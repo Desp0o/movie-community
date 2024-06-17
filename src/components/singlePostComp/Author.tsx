@@ -6,7 +6,7 @@ import DateFormater from "../dateFormater/DateFormater";
 interface AuthorProps {
   avatar?: string;
   name: string;
-  date: string;
+  date?: string;
 }
 
 const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
@@ -23,7 +23,7 @@ const Author: React.FC<AuthorProps> = ({ avatar, name, date }) => {
         <p>{name}</p>
       </div>
 
-      <DateFormater date={date} />
+      {date && <DateFormater date={date} />}
     </div>
   );
 };

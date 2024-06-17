@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Quiz.css";
+import PageLayout from '../components/pageLayout/PageLayout';
+import QuizCover from './singleQuizComponents/QuizCover';
 
 interface QuestionsType {
     name: string;
@@ -51,17 +53,17 @@ const Quiz = () => {
             const shuffleAnswers = (array: string[]): string[] => {
                 const shuffleArray: string[] = []
                 const usedIndexes: number[] = []
-        
+
                 let i = 0;
-        
-                while(i < array.length){
+
+                while (i < array.length) {
                     const randomNumber = Math.floor(Math.random() * array.length)
-                    if(!usedIndexes.includes(randomNumber)){
+                    if (!usedIndexes.includes(randomNumber)) {
                         shuffleArray.push(array[randomNumber])
                         usedIndexes.push(randomNumber)
                         i++;
                     }
-                }                
+                }
                 return shuffleArray;
             }
 
@@ -84,7 +86,7 @@ const Quiz = () => {
                 Array.from(answerDivRef.current.children).forEach((item) => {
                     if (item instanceof HTMLElement) {
                         item.style.backgroundColor = "unset";
-                      }
+                    }
                 });
             }
         } catch (error) {
@@ -154,28 +156,33 @@ const Quiz = () => {
     };
 
 
-    if (!questions) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <div>
-            <h3>{quizData.name}</h3>
-            <div className=''>
-                {/* quzi numeric */}
-                <p> {quizData.questionIndex} / {quizData.quizLength}</p>
-                <p>correct answers: {quizData.correctAnswersSum}</p>
-                <h4 style={{ color: 'purple', fontWeight: "bolder" }}>{questions.name}</h4>
-                <div className='answers' ref={answerDivRef}>
-                    {answers.map((item, index) => (
-                        <p ref={questionRef} key={index} className='quiz_single_answer' onClick={handleAnswer}>{item}</p>
-                    ))}
+        <PageLayout>
+            <div className='single_quiz'>
+                <div className='quiz_popUp'>
+
+                    {/* quiz cover */}
+                    <div className='quiz_cover'>
+                        <QuizCover title={quizData.name} />
+                    </div>
                 </div>
             </div>
-            <button onClick={sendAnswer}>NEXT</button>
-        </div>
+
+        </PageLayout>
+
     );
 };
 
 export default Quiz;
 
+
+
+
+
+
+
+// <div className='answers' ref={answerDivRef}>
+//                     {answers.map((item, index) => (
+//                         <p ref={questionRef} key={index} className='quiz_single_answer' onClick={handleAnswer}>{item}</p>
+//                     ))}
+//                 </div>
