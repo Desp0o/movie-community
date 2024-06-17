@@ -3,12 +3,18 @@ import { quizNeon } from '../../assets/newSvg/quizNeon'
 import { starIcon } from '../../assets/newSvg/starIcon'
 import ButtonOutlined from '../../components/buttonFIlled/ButtonOutlined'
 import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
+import Author from '../../components/singlePostComp/Author'
+import { useUserHook } from '../../hooks/useUserHook'
+import { congratulateIcon } from '../../assets/newSvg/congratulateIcon'
 
 interface QuizFinalScoreBoardProps {
     title: string;
 }
 
 const QuizFinalScoreBoard:React.FC<QuizFinalScoreBoardProps> = ({title}) => {
+
+    const { user } = useUserHook()
+
     return (
         <>
             <div className='quiz_final_top'>
@@ -17,6 +23,13 @@ const QuizFinalScoreBoard:React.FC<QuizFinalScoreBoardProps> = ({title}) => {
             </div>
 
             <div className='quiz_final_scores'>
+                <div className='congrats'>
+                    <div className='congrats_block1'>
+                        <p className='congrats'>Congratulations</p>
+                        {congratulateIcon}
+                    </div>
+                    <Author name={user.name} avatar={user.avatar} />
+                </div>
                 <p className='Correct_Answers'>Correct Answers: <span>10/10</span></p>
                 <p className='Points_earned'>Points earned: <span>10</span>{starIcon}</p>
             </div>

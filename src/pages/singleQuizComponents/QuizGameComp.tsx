@@ -2,6 +2,7 @@ import React, { RefObject } from 'react'
 import { quizBackButton } from '../../assets/newSvg/quizBackButton'
 import { smallQuizNeon } from '../../assets/newSvg/smallQuizNeon'
 import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
+import { Link } from 'react-router-dom';
 
 interface QuizGameCompProps {
     img: string | undefined;
@@ -20,7 +21,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
         <>
             {/* quiz icon, back button, number */}
             <div className='quiz_game_component_top'>
-                <span>{quizBackButton}</span>
+                <Link to='/'>{quizBackButton}</Link>
                 <span>{smallQuizNeon}</span>
                 <p className='quiz_game_component_top_p'>{questionIndex}/{quizLength}</p>
             </div>
