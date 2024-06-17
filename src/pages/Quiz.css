@@ -208,3 +208,72 @@
 .quiz_single_answer.incorrect {
     border: 2px solid #ff0000;
 }
+
+.quiz_final{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 46px;
+}
+
+.quiz_final.active{
+    display: flex;
+}
+
+.quiz_final_top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Points_earned{
+    display: flex;
+    align-items: center;
+}
+
+.Points_earned{
+    color: var(--white);
+font-size: 26px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 39px */
+}
+
+.Points_earned span{
+    color: #FDC201;
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 48px */
+
+margin-left: 16px;
+margin-right: 4px;
+}
+
+.Correct_Answers{
+    color: var(--white);
+font-size: 26px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 39px */
+
+display: flex;
+align-items: center;
+gap: 16px;
+}
+
+.Correct_Answers span{
+    color: var(--Secondary-400);
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 48px */
+}
+
+.quiz_final_buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}

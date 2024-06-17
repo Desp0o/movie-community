@@ -6,12 +6,13 @@ interface ButtonOutlinedProps {
     text: string;
     link: string;
     faded?: boolean;
+    wProp?: string;
 }
 
-const ButtonOutlined: React.FC<ButtonOutlinedProps> = ({ text, link, faded }) => {
+const ButtonOutlined: React.FC<ButtonOutlinedProps> = ({ text, link, faded, wProp }) => {
     return (
         <Link to={link}>
-            <div className={faded ? "ButtonOutlined faded" : "ButtonOutlined"}>
+            <div className={faded ? "ButtonOutlined faded" : "ButtonOutlined"} style={{width: wProp ? wProp : ""}}>
                 <p>{text}</p>
             </div>
         </Link>

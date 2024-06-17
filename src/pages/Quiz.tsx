@@ -5,6 +5,7 @@ import "./Quiz.css";
 import PageLayout from '../components/pageLayout/PageLayout';
 import QuizCover from './singleQuizComponents/QuizCover';
 import QuizGameComp from './singleQuizComponents/QuizGameComp';
+import QuizFinalScoreBoard from './singleQuizComponents/QuizFinalScoreBoard';
 
 interface QuestionsType {
     name: string;
@@ -24,6 +25,7 @@ const Quiz = () => {
     const [isLastQuest, setIsLastQuest] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
     const [showMeQuiz, setShowMeQuiz] = useState(false)
+    const [showMeFinal, setShowMeFinal] = useState(false)
     const [quizData, setQuizData] = useState({
         name: '',
         quizLength: 0,
@@ -150,7 +152,8 @@ const Quiz = () => {
             if (isLastQuest === 0) {
                 getSingleQuiz()
             } else {
-                alert('was last questuin')
+                setShowMeFinal(true)
+                setShowMeQuiz(false)
             }
 
             const correctElements = document.querySelectorAll('.correct');
@@ -174,7 +177,7 @@ const Quiz = () => {
                 <div className='quiz_popUp'>
 
                     {/* quiz cover */}
-                    <div className={showMeQuiz ? "quiz_cover display_none" : "quiz_cover"}>
+                    <div className={showMeQuiz || showMeFinal ? "quiz_cover display_none" : "quiz_cover"}>
                         <QuizCover title={quizData.name} funcName={showMeQuizHandler} />
                     </div>
 
@@ -190,6 +193,10 @@ const Quiz = () => {
                             img={questions?.img} 
                             sendAnswerFunc={sendAnswer}
                             />
+                    </div>
+
+                    <div className={showMeFinal ? "quiz_final active" : "quiz_final"}>
+                        <QuizFinalScoreBoard title={quizData.name} />
                     </div>
                 </div>
             </div>
