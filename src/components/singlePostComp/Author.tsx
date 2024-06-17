@@ -5,7 +5,7 @@ import DateFormater from "../dateFormater/DateFormater";
 
 interface AuthorProps {
   avatar?: string;
-  name: string;
+  name?: string;
   date?: string;
 }
 

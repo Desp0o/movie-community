@@ -66,6 +66,7 @@
   --stroke: #1A453C;
   --Primary-600: #210F60;
   --Card-background: #0E052D;
+  --Type-inactive:#808080;
   --Linear-stroke:linear-gradient(90deg, hsla(167, 45%, 19%, 1) 0%, hsla(168, 52%, 39%, 1) 100%);
 }
 
