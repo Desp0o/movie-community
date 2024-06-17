@@ -153,6 +153,12 @@ const Quiz = () => {
                 alert('was last questuin')
             }
 
+            const correctElements = document.querySelectorAll('.correct');
+            correctElements.forEach(el => el.classList.remove('correct'));
+
+            const incorrectElements = document.querySelectorAll('.incorrect');
+            incorrectElements.forEach(el => el.classList.remove('incorrect'));
+            
         } catch (error) {
             console.log(error)
         }
