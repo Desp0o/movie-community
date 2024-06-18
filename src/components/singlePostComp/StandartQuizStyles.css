@@ -85,13 +85,13 @@ line-height: 150%; /* 18px */
 
 .quiz_popcorn_icon{
     position: absolute;
-    bottom: 62px;
+    bottom: 20px;
     right: 84px;
     z-index: 0;
 }
 
 .quiz_galss_icon{
     position: absolute;
-    bottom: 80px;
+    bottom: 40px;
     right: 24px;
 }
