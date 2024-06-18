@@ -1,12 +1,18 @@
-.navbar {
+.navbar_parent{
   position: fixed;
+  width: 100%;
   z-index: 110;
   box-sizing: border-box;
+  left: 0;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  background-color: var(--Card-background);
+
+}
+
+.navbar {
   width: 100%;
   max-width: 1440px;
+  margin: 0 auto;
   
   height: 76px;
   padding: 0 80px;
@@ -16,7 +22,6 @@
   justify-content: space-between;
   gap: 20px;
 
-  background-color: var(--Card-background);
 }
 
 .logo_burger_menu {

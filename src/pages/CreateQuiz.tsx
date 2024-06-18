@@ -15,6 +15,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { useUserHook } from '../hooks/useUserHook';
 import quicDefaultCover from "../assets/quizDefaultCover.webp"
 import { smallXicon } from '../assets/newSvg/smallXicon';
+import Author from '../components/singlePostComp/Author';
 
 interface QuestionProps {
   questionText: string;
@@ -40,6 +41,7 @@ const CreateQuiz = () => {
   const [isEditBtn, setEditBtn] = useState(false) //swap next and edit buttons trigger
   const [savedQuizIndex, setSavedQuizIndex] = useState(0) //save index fro array fro later update array
   const [restartQuestion, setRestartQuestion] = useState(true)
+  const [showQuizTable, setShowQuizTable] = useState(false)
   const [isTitleCover, setTitleCover] = useState(false)
   const [quizData, setQuizData] = useState<QuizDataProps>({
     mainTitle: '',
@@ -61,6 +63,7 @@ const CreateQuiz = () => {
 
   const addCoverAndTitle = () => {
     setTitleCover(true)
+    setShowQuizTable(true)
   }
 
   // drag n drop func
@@ -184,6 +187,7 @@ const CreateQuiz = () => {
   const clearTitleAndCover = () => {
     setQuizData({ ...quizData, mainImg: undefined, mainTitle: "" })
     setTitleCover(false)
+    setShowQuizTable(false)
   }
 
   const removeQuizCard = (index: number) => {
@@ -310,7 +314,7 @@ const CreateQuiz = () => {
           </div>
 
           {/* quiz answers and questions */}
-          <div className='cr_quiz_table'>
+          <div className={showQuizTable ? "cr_quiz_table" : "cr_quiz_table displayNone"}>
             {/* question section */}
             <div className='cr_quiz_question'>
               <p>{selectedLanguage.createQuiz_page.questionNum} 1/1 <span className='important_star'>*</span></p>
@@ -378,8 +382,6 @@ const CreateQuiz = () => {
               </div>
             </div>
 
-
-
             {/* buttons */}
             <div className='cr_quiz_buttons'>
               {
@@ -393,7 +395,8 @@ const CreateQuiz = () => {
 
           {/* quiz cards and buttons */}
           <div className='cr_quiz_bottom'>
-            <div className='mapping_quizData'>
+            <div className={quizData?.questions.length > 0 ? "mapping_quizData" : "mapping_quizData hidden"}>
+              <div className='mapping_quizData_inner'>
               {quizData?.questions?.map((item, index) => {
                 return (
                   <QuizCard
@@ -411,15 +414,19 @@ const CreateQuiz = () => {
                   />
                 )
               })}
-            </div>
 
-            {
+            
+              {
               quizData?.questions.length > 0
               && <div className='apply_reset_btns'>
                 <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
                 <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
               </div>
             }
+              </div>
+            </div>
+
+            
           </div>
         </div>
       </PageLayout>
@@ -475,10 +482,6 @@ const QuizCard: React.FC<QuizCardProps> = ({
   deleteCallback,
   title,
   image,
-  answ1,
-  answ2,
-  answ3,
-  answ4
 }) => {
 
   const { selectedLanguage } = useLanguage()
@@ -513,7 +516,6 @@ const QuizCard: React.FC<QuizCardProps> = ({
     <div className='cr_quiz_card'>
 
       <div className='cr_quiz_card_questionNum_dots'>
-        <p>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
 
         <div className='pannel_dots' onClick={editPannelHandler} ref={editPanelRef}>
           <span className='panel_single_dot' />
@@ -533,33 +535,16 @@ const QuizCard: React.FC<QuizCardProps> = ({
         }
       </div>
 
-      {/* title */}
-      <p className='cr_quiz_card_title'>{title}</p>
+    
+      <div className='cr_quiz_length_answers'>
+      <p className='answers_length'>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
 
-
-      <div className='cr_quiz_image_answers'>
         {/* quiz question image */}
         <img src={image ? URL.createObjectURL(image) : cover} className='cr_quiz_card_cover' alt='quiz card cover' />
-
-        {/* quiz answers */}
-        <div className='cr_quiz_answers_arr'>
-          <div className='cr_quiz_single_answers'>
-            <p>{answ1}</p>
-          </div>
-
-          <div className='cr_quiz_single_answers'>
-            <p>{answ2}</p>
-          </div>
-
-          <div className='cr_quiz_single_answers'>
-            <p>{answ3}</p>
-          </div>
-
-          <div className='cr_quiz_single_answers'>
-            <p>{answ4}</p>
-          </div>
-        </div>
+       
       </div>
+
+      <p className='cr_quiz_card_title'>{title.length > 34 ? title.substring(0,34)+'...' : title}</p>
     </div>
   )
 }
@@ -579,7 +564,7 @@ const QuizMainCard: React.FC<QuizMainCardProps> = ({ img, title, clearTitleAndCo
       <img src={img ? URL.createObjectURL(img) : quicDefaultCover} className='quizMainCard_cover' />
 
       <div className='quizMainCard_bottom'>
-        <img src={user.avatar} alt='avatar' />
+        <Author avatar={user.avatar} />
         <p>{user.name}</p>
       </div>
       <p className='quizMainCard_bottom_title'>{title}</p>

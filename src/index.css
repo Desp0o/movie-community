@@ -202,6 +202,10 @@ line-height: 150%; /* 21px */
   background-color: #000;
 }
 
+.displayNone{
+  display: none;
+}
+
 @media (max-width:600px) {
   .responsive_hidden{
     display: none;

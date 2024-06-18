@@ -54,7 +54,7 @@ const Navbar = () => {
   }
 
   return (
-    <>
+    <div className="navbar_parent">
       <nav className="navbar">
         <div className="logo_burger_menu">
           <div className="burger_menu" onClick={handleBurgerMenuEvent}>{}</div>
@@ -104,7 +104,7 @@ const Navbar = () => {
       </div>
 
       
-    </>
+    </div>
   );
 };
 
