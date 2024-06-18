@@ -6,10 +6,10 @@ import { useUserDashHook } from "../../hooks/useUserDashHook";
 import { useDispatch } from "react-redux";
 import { setDashVisible } from "../../Redux/userDahsSlicer";
 import { useLoginModal } from "../../hooks/useLoginModal";
-import noAvatar from "../../assets/noAvatar.jpeg"
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { useLanguage } from "../../hooks/useLanguage";
+import { noAvatar } from "../../assets/newSvg/noAvatar";
 
 
 const Navbar = () => {
@@ -76,11 +76,14 @@ const Navbar = () => {
                 ref={avatarRef}
                 className="nav_profile_item_parent">
                 
-                <img
-                  src={user.avatar ? user.avatar : noAvatar}
+                {
+                  user.avatar ?  <img
+                  src={user.avatar}
                   alt="user avatr"
                   className="nav_user_avatar"
-                />
+                /> : noAvatar
+                }
+               
               </div>
             </div>
           ) : (
