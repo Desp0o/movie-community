@@ -41,11 +41,19 @@
 }
 
 .quiz_title{
+    position: relative;
+    z-index: 3;
 color: var(--white);
 font-size: 18px;
 font-style: normal;
 font-weight: 500;
 line-height: 150%; /* 27px */
+}
+
+.quiz_details{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 
@@ -61,6 +69,8 @@ background: var(--Primary-600);
 }
 
 .satrt_quiz_btn p{
+    position: relative;
+    z-index: 3;
     color: var(--white);
 text-align: center;
 font-size: 12px;
@@ -70,17 +80,18 @@ line-height: 150%; /* 18px */
 }
 
 .quiz_btn_link{
-    margin: 22px auto 0 auto;
+    margin: 0px auto 0 auto;
 }
 
 .quiz_popcorn_icon{
     position: absolute;
-    bottom: 0px;
+    bottom: 62px;
     right: 84px;
+    z-index: 0;
 }
 
 .quiz_galss_icon{
     position: absolute;
-    bottom: 25px;
+    bottom: 80px;
     right: 24px;
 }

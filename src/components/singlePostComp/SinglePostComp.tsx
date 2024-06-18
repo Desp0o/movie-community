@@ -126,6 +126,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
               date={date}
               postTitle={postTitle}
               quiz_id={quiz_id}
+              avatar={authorAvatar}
             />
         }
         

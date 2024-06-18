@@ -87,7 +87,7 @@
 .author_credentials {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 10px;
 }
 
 .author_credentials p {

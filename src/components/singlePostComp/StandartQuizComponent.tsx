@@ -17,9 +17,10 @@ interface StandartQuizComponentProps {
   date: string;
   postTitle: string;
   quiz_id: number;
+  avatar: string;
 }
 
-const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({ postUserId, image, postID, authorName, date, postTitle, quiz_id }) => {
+const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({avatar, postUserId, image, postID, authorName, date, postTitle, quiz_id }) => {
   const { user } = useUserHook()
   const [isUserLogged, setUserLoged] = useState(false)
 
@@ -51,7 +52,7 @@ const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({ postUserI
       </div>
 
       <div className="quiz_details">
-        <Author name={authorName} date={date} />
+        <Author name={authorName} date={date} avatar={avatar}/>
         <p className="quiz_title">{postTitle}</p>
       </div>
 
