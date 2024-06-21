@@ -317,7 +317,7 @@ const CreateQuiz = () => {
           <div className={showQuizTable ? "cr_quiz_table" : "cr_quiz_table displayNone"}>
             {/* question section */}
             <div className='cr_quiz_question'>
-              <p>{selectedLanguage.createQuiz_page.questionNum} 1/1 <span className='important_star'>*</span></p>
+              <p>{selectedLanguage.createQuiz_page.questionNum} {quizData?.questions.length}/{quizData?.questions.length} <span className='important_star'>*</span></p>
 
               <input
                 type='text'

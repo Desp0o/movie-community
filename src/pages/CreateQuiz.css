@@ -261,7 +261,7 @@ background: var(--Card-background);
 
 .cr_quiz_card_title {
     width: 244px;
-
+    height: 18px;
 font-size: 12px;
 font-style: normal;
 font-weight: 500;

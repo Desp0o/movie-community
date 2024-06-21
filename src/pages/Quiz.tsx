@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Quiz.css";
 import PageLayout from '../components/pageLayout/PageLayout';
-import QuizCover from './singleQuizComponents/QuizCover';
 import QuizGameComp from './singleQuizComponents/QuizGameComp';
 import QuizFinalScoreBoard from './singleQuizComponents/QuizFinalScoreBoard';
 import Footer from '../components/footer/Footer';
@@ -25,7 +24,7 @@ const Quiz = () => {
     const [isCorrect, setCorrect] = useState(0);
     const [isLastQuest, setIsLastQuest] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
-    const [showMeQuiz, setShowMeQuiz] = useState(false)
+    const [showMeQuiz, setShowMeQuiz] = useState(true)
     const [showMeFinal, setShowMeFinal] = useState(false)
     const [quizData, setQuizData] = useState({
         name: '',
@@ -176,25 +175,11 @@ const Quiz = () => {
         }
     };
 
-    const showMeQuizHandler = () => {
-        setShowMeQuiz(true)
-    }
-
     return (
         <>
         <PageLayout>
             <div className='single_quiz'>
                 <div className='quiz_popUp'>
-
-                    {/* quiz cover */}
-                    <div className={showMeQuiz || showMeFinal ? "quiz_cover display_none" : "quiz_cover"}>
-                        <QuizCover 
-                            title={quizData.name} 
-                            funcName={showMeQuizHandler} 
-                            avatar={quizData.userAvatar}
-                            name={quizData.userName}
-                        />
-                    </div>
 
                     <div className={showMeQuiz ? "quiz_game_component active" : "quiz_game_component"}>
                         <QuizGameComp 
