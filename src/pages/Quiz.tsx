@@ -21,6 +21,7 @@ const Quiz = () => {
     const answerDivRef = useRef<HTMLDivElement>(null)
     const questionRef = useRef<HTMLParagraphElement>(null)
     const [questions, setQuestions] = useState<QuestionsType | null>(null);
+    const [isAnswered, setIsAnswered] = useState(false)
     const [isCorrect, setCorrect] = useState(0);
     const [isLastQuest, setIsLastQuest] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
@@ -121,6 +122,7 @@ const Quiz = () => {
 
     //handle correct answer
     const handleAnswer = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+        setIsAnswered(true)
         if (answerDivRef.current) {
             answerDivRef.current.classList.add("no-cursor")
             answerDivRef.current.style.pointerEvents = "none"
@@ -139,40 +141,42 @@ const Quiz = () => {
             event.currentTarget.classList.add("incorrect")
         }
         console.log(quizData.correctAnswersSum);
-        
     }
 
     const sendAnswer = async () => {
         const token = localStorage.getItem('token')
 
-        try {
-            await axios.post(`${import.meta.env.VITE_QUIZ_ANSWERING}${quizData.questionID}`, {
-                status: isLastQuest,
-                result: isCorrect
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            if (isLastQuest === 0) {
-                getSingleQuiz()
-            } else {
-                setShowMeFinal(true)
-                setShowMeQuiz(false)
-            }
-
-            if(answerDivRef.current){
-                Array.from(answerDivRef.current.children).forEach((item) => {
-                    if (item instanceof HTMLElement) {
-                        item.classList.remove("incorrect", "correct");
+        if(isAnswered){
+            try {
+                await axios.post(`${import.meta.env.VITE_QUIZ_ANSWERING}${quizData.questionID}`, {
+                    status: isLastQuest,
+                    result: isCorrect
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
-                });
+                })
+    
+                if (isLastQuest === 0) {
+                    getSingleQuiz()
+                } else {
+                    setShowMeFinal(true)
+                    setShowMeQuiz(false)
+                }
+    
+                if(answerDivRef.current){
+                    Array.from(answerDivRef.current.children).forEach((item) => {
+                        if (item instanceof HTMLElement) {
+                            item.classList.remove("incorrect", "correct");
+                        }
+                    });
+                }
+                setIsAnswered(false)
+            } catch (error) {
+                console.log(error)
             }
-            
-        } catch (error) {
-            console.log(error)
         }
+        
     };
 
     return (

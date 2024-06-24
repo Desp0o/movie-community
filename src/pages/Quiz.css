@@ -50,7 +50,6 @@
     padding: 32px;
     justify-content: center;
     align-items: center;
-    gap: 48px;
 
     border-radius: 8px;
     border: 1px solid var(--stroke);
@@ -129,12 +128,11 @@
 
 .quiz_game_component_middle {
     width: 100%;
-    height: 324px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .quiz_game_component_middle p {
@@ -189,7 +187,7 @@
     justify-content: space-between;
     gap: 16px;
 
-    margin-top: 40px;
+    margin-top: 24px;
 }
 
 .quiz_single_answer {
@@ -219,7 +217,7 @@
     border: 1px solid transparent;
 }
 
-.test{
+.quiz_p_parent{
     height: 48px;
     overflow: hidden;
     display: flex;
@@ -274,8 +272,6 @@
 
 
 .quiz_game_component_bottom {
-
-
     display: flex;
     justify-content: center;
     width: fit-content;

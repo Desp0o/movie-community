@@ -66,7 +66,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
             <div className='quiz_game_component_answers' ref={answerDivRef}>
                 {answers.map((item, index) => (
                     <div ref={questionRef} key={index} className='quiz_single_answer' onClick={funcName}>
-                        <div className='test'>
+                        <div className='quiz_p_parent'>
                         <p className='quiz_single_answer_paragraph'>{item.length > 43 ? item.substring(0, 43) : item}</p>
 
                             </div>
