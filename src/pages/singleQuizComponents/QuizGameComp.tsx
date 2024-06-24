@@ -5,6 +5,7 @@ import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
 import { Link } from 'react-router-dom';
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
 import { quizAnswersDots } from '../../assets/newSvg/quizAnswersDots';
+import { ButtonArrow } from '../../components/buttonFIlled/ButtonArrow';
 
 interface QuizGameCompProps {
     img: string | undefined;
@@ -53,8 +54,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
             {/* title and image */}
             <div className='quiz_game_component_middle'>
-                <p>{name}</p>
-
+            <p className='quiz_inner_name'>{name}</p>
                 {img ? <div className='single_quiz_question_image' onClick={openImage}>
                     <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover' />
                     <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' />
@@ -78,6 +78,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
             <div className='quiz_game_component_bottom' onClick={sendAnswerFunc}>
                 <ButtonFIlled text='Next' link={''} />
+                <ButtonArrow link={''} />
             </div>
         </>
     )

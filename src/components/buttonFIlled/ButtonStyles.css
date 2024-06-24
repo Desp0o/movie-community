@@ -47,3 +47,14 @@ font-style: normal;
 font-weight: 400;
 line-height: 150%; /* 18px */
 }
+
+.ButtonArrow{
+    display: flex;
+width: 140px;
+height: 44px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 6px;
+background: var(--Secondary-400);
+}
