@@ -21,6 +21,16 @@ interface QuizGameCompProps {
 const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, name, img, answerDivRef, questionRef, funcName, answers, sendAnswerFunc }) => {
     const [isFullScreen, setFullScreen] = useState(false)
 
+    const [isHover, setIsHover] = useState<number | null>(null)
+
+    const mouseIn = (index: number) => {
+        setIsHover(index)
+    }
+
+    const mouseOut = () => {
+        setIsHover(null)
+    }
+
     const openImage = () => {
         setFullScreen(!isFullScreen)
     }
@@ -31,7 +41,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
             {
                 isFullScreen
                 && <div className='fullScreenImage'>
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' onClick={()=>setFullScreen(false)} style={{cursor:"pointer"}}/>
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' onClick={() => setFullScreen(false)} style={{ cursor: "pointer" }} />
                 </div>
             }
             {/* quiz icon, back button, number */}
@@ -47,7 +57,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
                 {img ? <div className='single_quiz_question_image' onClick={openImage}>
                     <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover' />
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain'/>
+                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' />
                 </div>
                     : null}
             </div>
@@ -56,8 +66,12 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
             <div className='quiz_game_component_answers' ref={answerDivRef}>
                 {answers.map((item, index) => (
                     <div ref={questionRef} key={index} className='quiz_single_answer' onClick={funcName}>
-                        <p>{item}</p>
-                        <span>{item.length > 45 ? quizAnswersDots : null}</span>
+                        <div className='test'>
+                        <p className='quiz_single_answer_paragraph'>{item.length > 43 ? item.substring(0, 43) : item}</p>
+
+                            </div>
+                        <span className='quizAnswersDots' onMouseLeave={mouseOut} onMouseOver={() => mouseIn(index)}>{item.length > 43 ? quizAnswersDots : null}</span>
+                        <p className={isHover === index ? "hover_text active" : "hover_text"} onMouseLeave={mouseOut} onMouseOver={() => mouseIn(index)}>{item}</p>
                     </div>
                 ))}
             </div>
