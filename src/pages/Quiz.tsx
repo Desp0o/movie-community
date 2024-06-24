@@ -109,7 +109,6 @@ const Quiz = () => {
         getSingleQuiz();
     }, []);
 
-
     //თუ კითხვის ინდექსი უნდრის სიგრძეს მაშინ
     //მაშინ ბოლო კითხვას ვაგზავნით
     useEffect(() => {
@@ -127,8 +126,10 @@ const Quiz = () => {
             answerDivRef.current.classList.add("no-cursor")
             answerDivRef.current.style.pointerEvents = "none"
         }
+        
+        if (quizData.correctAnswer === event?.currentTarget?.lastChild?.textContent) {
+            console.log(event.currentTarget.lastChild.textContent);
 
-        if (quizData.correctAnswer === event.currentTarget.textContent) {
             setCorrect(1)
             //update correct answers sum
             setQuizData({ ...quizData, correctAnswersSum: quizData.correctAnswersSum + 1 })
@@ -137,10 +138,9 @@ const Quiz = () => {
             setCorrect(0)
         }
 
-        if (quizData.correctAnswer !== event.currentTarget.textContent) {
+        if (quizData.correctAnswer !== event?.currentTarget?.lastChild?.textContent) {
             event.currentTarget.classList.add("incorrect")
         }
-        console.log(quizData.correctAnswersSum);
     }
 
     const sendAnswer = async () => {
