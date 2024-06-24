@@ -2,7 +2,6 @@ import React, { MouseEventHandler, useCallback, useEffect, useRef, useState } fr
 import "./CreateQuiz.css";
 import axios from 'axios';
 import { QUIZ } from '../assets/newSvg/QUIZ';
-import cover from "../assets/bacToFuture.webp"
 import ButtonFIlled from '../components/buttonFIlled/ButtonFilled';
 import ButtonOutlined from '../components/buttonFIlled/ButtonOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +15,7 @@ import { useUserHook } from '../hooks/useUserHook';
 import quicDefaultCover from "../assets/quizDefaultCover.webp"
 import { smallXicon } from '../assets/newSvg/smallXicon';
 import Author from '../components/singlePostComp/Author';
+import { noQuizImage } from '../assets/newSvg/noQuizImage';
 
 interface QuestionProps {
   questionText: string;
@@ -578,7 +578,11 @@ const QuizCard: React.FC<QuizCardProps> = ({
       <p className='answers_length'>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
 
         {/* quiz question image */}
-        <img src={image ? URL.createObjectURL(image) : cover} className='cr_quiz_card_cover' alt='quiz card cover' />
+        {
+          image 
+            ? <img src={URL.createObjectURL(image)} className='cr_quiz_card_cover' alt='quiz card cover' />
+            : noQuizImage
+        }
        
       </div>
 
