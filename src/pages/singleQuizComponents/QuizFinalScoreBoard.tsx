@@ -32,11 +32,14 @@ const QuizFinalScoreBoard: React.FC<QuizFinalScoreBoardProps> = ({ title, questi
                     </div>
                     <Author name={user.name} avatar={user.avatar} />
                 </div>
-                <p className='Correct_Answers'>Correct Answers: <span>{correctAnswers}/{questionSum}</span></p>
-                <p className='Points_earned'>
-                    Points earned: <span>{correctAnswers * 2}</span>
-                    {starIcon}
-                </p>
+
+                <div className='quiz_final_stat_txts'>
+                    <p className='Correct_Answers'>Correct Answers: <span>{correctAnswers}/{questionSum}</span></p>
+                    <p className='Points_earned'>
+                        Points earned: <span>{correctAnswers * 2}</span>
+                        {starIcon}
+                    </p>
+                </div>
             </div>
 
             <div className='quiz_final_buttons'>
