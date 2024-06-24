@@ -94,7 +94,7 @@ const Quiz = () => {
                 answerDivRef.current.style.pointerEvents = "unset";
                 Array.from(answerDivRef.current.children).forEach((item) => {
                     if (item instanceof HTMLElement) {
-                        item.style.backgroundColor = "unset";
+                        item.style.backgroundColor = "inherit";
                     }
                 });
             }
