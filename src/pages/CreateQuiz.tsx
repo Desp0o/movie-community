@@ -264,6 +264,41 @@ const CreateQuiz = () => {
       console.error('Error submitting quiz data:', error);
     }
   };
+
+
+  //scrolling with mouse drag
+  const itemsRef = useRef<HTMLDivElement>(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+    const handleMouseDown = (e: { preventDefault: () => void; pageX: number; }) => {
+      e.preventDefault();
+
+      if(itemsRef.current){
+
+        setIsMouseDown(true);
+        setStartX(e.pageX - itemsRef.current.offsetLeft);
+        setScrollLeft(itemsRef.current.scrollLeft);
+      }
+  };
+
+  const handleMouseLeaveOrUp = (e: { preventDefault: () => void; }) => {
+      e.preventDefault();
+      setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e: { preventDefault: () => void; pageX: number; }) => {
+      if (!isMouseDown) return;
+      e.preventDefault();
+      if(itemsRef.current){
+
+        const x = e.pageX - itemsRef.current.offsetLeft / 2;
+        const walk = (x - startX) * 1; // Adjust scroll speed as needed
+        itemsRef.current.scrollLeft = scrollLeft - walk;
+      }
+  };
+
   return (
     <>
       <PageLayout>
@@ -396,7 +431,10 @@ const CreateQuiz = () => {
           {/* quiz cards and buttons */}
           <div className='cr_quiz_bottom'>
             <div className={quizData?.questions.length > 0 ? "mapping_quizData" : "mapping_quizData hidden"}>
-              <div className='mapping_quizData_inner'>
+              <div className='mapping_quizData_inner' ref={itemsRef} onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeaveOrUp}
+            onMouseUp={handleMouseLeaveOrUp}>
               {quizData?.questions?.map((item, index) => {
                 return (
                   <QuizCard
