@@ -8,6 +8,7 @@ import { quizAnswersDots } from '../../assets/newSvg/quizAnswersDots';
 import { ButtonArrow } from '../../components/buttonFIlled/ButtonArrow';
 
 interface QuizGameCompProps {
+    isAnswered: boolean;
     img: string | undefined;
     questionIndex: number;
     quizLength: number;
@@ -19,10 +20,11 @@ interface QuizGameCompProps {
     sendAnswerFunc: () => void
 }
 
-const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, name, img, answerDivRef, questionRef, funcName, answers, sendAnswerFunc }) => {
+const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, quizLength, name, img, answerDivRef, questionRef, funcName, answers, sendAnswerFunc }) => {
     const [isFullScreen, setFullScreen] = useState(false)
 
     const [isHover, setIsHover] = useState<number | null>(null)
+    const [swapButton, setSwapButtons] = useState(false)
 
     const mouseIn = (index: number) => {
         setIsHover(index)
@@ -34,6 +36,16 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
     const openImage = () => {
         setFullScreen(!isFullScreen)
+    }
+
+    const swapBtnhandler = () => {
+        if(isAnswered){
+            setSwapButtons(true)
+        }
+    }
+
+    const recoverBtn = () => {
+        setSwapButtons(false)
     }
 
     return (
@@ -76,9 +88,8 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
                 ))}
             </div>
 
-            <div className='quiz_game_component_bottom' onClick={sendAnswerFunc}>
-                <ButtonFIlled text='Next' link={''} />
-                <ButtonArrow link={''} />
+            <div className='quiz_game_component_bottom' onClick={sendAnswerFunc} onMouseOver={swapBtnhandler} onMouseLeave={recoverBtn}>
+                {swapButton ? <ButtonArrow link={''} /> : <ButtonFIlled text='Next' link={''} />}
             </div>
         </>
     )

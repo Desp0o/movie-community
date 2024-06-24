@@ -187,6 +187,7 @@ const Quiz = () => {
 
                     <div className={showMeQuiz ? "quiz_game_component active" : "quiz_game_component"}>
                         <QuizGameComp 
+                            isAnswered={isAnswered}
                             questionIndex={quizData.questionIndex}
                             quizLength={quizData.quizLength}
                             name={questions?.name}
@@ -196,6 +197,7 @@ const Quiz = () => {
                             funcName={handleAnswer} 
                             img={questions?.img} 
                             sendAnswerFunc={sendAnswer}
+                            
                             />
                     </div>
 
