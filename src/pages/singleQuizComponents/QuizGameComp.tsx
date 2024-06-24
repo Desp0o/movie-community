@@ -4,6 +4,7 @@ import { smallQuizNeon } from '../../assets/newSvg/smallQuizNeon'
 import ButtonFIlled from '../../components/buttonFIlled/ButtonFilled'
 import { Link } from 'react-router-dom';
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
+import { quizAnswersDots } from '../../assets/newSvg/quizAnswersDots';
 
 interface QuizGameCompProps {
     img: string | undefined;
@@ -54,7 +55,10 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ questionIndex, quizLength, 
 
             <div className='quiz_game_component_answers' ref={answerDivRef}>
                 {answers.map((item, index) => (
-                    <p ref={questionRef} key={index} className='quiz_single_answer' onClick={funcName}>{item}</p>
+                    <div ref={questionRef} key={index} className='quiz_single_answer' onClick={funcName}>
+                        <p>{item}</p>
+                        <span>{item.length > 45 ? quizAnswersDots : null}</span>
+                    </div>
                 ))}
             </div>
 
