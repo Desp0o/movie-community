@@ -24,6 +24,7 @@ import Quizzes from "./pages/Quizzes"
 import Quiz from "./pages/Quiz"
 import Navbar from "./components/navbar/navbar"
 import Quiz_ from "./pages/Quiz_"
+import PageNotFound from "./pages/404"
 
 function App() {
   const token = localStorage.getItem('token')
@@ -116,6 +117,8 @@ function App() {
               </Route>
               <Route path="/pages/Quizzes" element={<Quizzes />} />
               <Route path="/pages/Quiz/:id" element={<Quiz />} />
+              <Route path="*" element={<PageNotFound />} />
+
             </Routes>
       </div>
   )
