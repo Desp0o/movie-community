@@ -25,5 +25,12 @@
         "editQuestion":"",
         "saveBtn":"",
         "deleteBtn":""
+    },
+    "quizGame":{
+        "Correct_Answers":"სწორი პასუხი:",
+        "Points_earned":"ქულები:",
+        "Congratulations":"გილოცავ!",
+        "You_did_well":"კარგი შედეგია!",
+        "Better_luck_next_time":"წარმატებები შემდეგში"
     }
 }

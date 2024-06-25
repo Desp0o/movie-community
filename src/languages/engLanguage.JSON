@@ -25,5 +25,12 @@
         "editQuestion":"Edit question",
         "saveBtn":"Save and close",
         "deleteBtn":"Delete and start over"
+    },
+    "quizGame":{
+        "Correct_Answers":"Correct Answers:",
+        "Points_earned":"Points earned:",
+        "Congratulations":"Congratulations!",
+        "You_did_well":"You did well!",
+        "Better_luck_next_time":"Better luck next time!"
     }
 }
