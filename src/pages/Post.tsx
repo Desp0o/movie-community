@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Author from "../components/singlePostComp/Author";
 import PostImage from "../components/singlePostComp/postImage";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import EditPannel from "../components/singlePostComp/EditPannel";
 import PostVideo from "../components/singlePostComp/postVideo";
@@ -16,6 +16,7 @@ import PageLayout from "../components/pageLayout/PageLayout";
 import "./post.css"
 import LikeCommentShare from "../components/singlePostComp/LikeCommentShare";
 import BookmarkPost from "../components/singlePostComp/BookmarkPost";
+import CommentsSection from "../components/singlePostComp/CommentsSection";
 
 
 const Post = () => {
@@ -27,13 +28,7 @@ const Post = () => {
   // const [commData, setComData] = useState([])
   // const [pollAnswers, setPollAnswer] = useState([])
   const { user } = useUserHook()
-  const [commentValue, setCommentValue] = useState<{
-    img: File | undefined;
-    text: string;
-  }>({
-    img: undefined,
-    text: "",
-  });  const [isFaded, setFaded] = useState(true)
+
   // const openFullScreen = () => {
   //   setFullScreenImage(true);
   //   document.body.style.overflow = "hidden";
@@ -46,15 +41,9 @@ const Post = () => {
 
 
   //checking comment value legth for button behavior
-  useEffect(()=>{
-    if(commentValue.text.length > 0){
-      setFaded(false)
-    }else{
-      setFaded(true)
-    }
-  },[commentValue])
+ 
 
-  
+
 
   const [path, setPath] = useState(import.meta.env.VITE_SINGLE_GUEST_POST)
   useEffect(() => {
@@ -81,32 +70,14 @@ const Post = () => {
   }
   );
 
-  const sendComment = async () => {
-    const token = localStorage.getItem('token')
-
-    if(!isFaded){
-      try {
-        const res = await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${id}`, commentValue, {
-          headers:{
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data, application/json, text/plain, */*"
-          }
-        } )
-        console.log(res.data);
-        refetch()
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
-
+  
   if (isError) {
     console.error(error)
   }
 
 
   if (data) {
-    console.log(data.post);
+    console.log(data.comments);
 
   }
 
@@ -146,24 +117,10 @@ const Post = () => {
             />
           </div>
 
-          <div className="comments_section">
-          
-            <div className="write_comment">
-              <Author avatar={user.avatar} />
-              <input 
-                value={commentValue.text} 
-                placeholder="Write comment..."
-                className="write_comment_input" 
-                alt="comment input" 
-                onChange={(e)=>setCommentValue({...commentValue, text: e.target.value})}
-              />
-
-              <span onClick={sendComment}><CommentBtn faded={isFaded} /></span>
-            </div>
-          </div>
+          <CommentsSection commentsData={data.comments} id={data?.post?.id} refetch={refetch} />
         </div>
 
-        
+
       </div>
     </PageLayout>
   );
@@ -172,13 +129,3 @@ const Post = () => {
 export default Post;
 
 
-interface CommentBtnProps {
-  faded: boolean;
-}
-const CommentBtn:React.FC<CommentBtnProps> = ({faded}) =>{
-  return(
-    <div className={faded ? "comment_btn" : "comment_btn active"}>
-      <p>Add comment</p>
-  </div>
-  )
-}

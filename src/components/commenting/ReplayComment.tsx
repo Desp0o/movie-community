@@ -1,58 +1,77 @@
 import axios from 'axios';
-import React, { SetStateAction, useState } from 'react'
-import { Dispatch } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useUserHook } from '../../hooks/useUserHook';
+import "../../pages/post.css"
 
 interface ReplayCommentProps {
-    commentID: number;
-    feedID: number;
-    setter: Dispatch<SetStateAction<number | null>>;
-    refetchCallback: ()=>void
+  id: number;
+  feedID: number;
+  refetchCallback: () => void
 }
 
-const ReplayComment: React.FC<ReplayCommentProps> = ({commentID, feedID, setter, refetchCallback}) => {
-    const { user } = useUserHook();
-    const [replayValue, setReplayValue] = useState('')
+const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallback }) => {
+  const { user } = useUserHook();
+  const [replayValue, setReplayValue] = useState('')
+  const [isFaded, setFaded] = useState(true)
 
-  const sendReplay = async (id: number) => {
+  useEffect(() => {
+    if (replayValue.length > 0) {
+      setFaded(false)
+    } else {
+      setFaded(true)
+    }
+  }, [replayValue])
+
+  const sendReplay = async () => {
     const token = localStorage.getItem('token')
 
     try {
-        await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`,{
-            text: replayValue,
-            img: null,
-            comment_id: id
-        },{
-            headers:{
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-        setter(null)
+      await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`, {
+        text: replayValue,
+        img: null,
+        comment_id: id
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setReplayValue('')
+      setFaded(true)
     } catch (error) {
-        console.error(error)
-    }finally{
-        refetchCallback()
+      console.error(error)
+    } finally {
+      refetchCallback()
     }
   }
 
   return (
-    <div className="comment_container">
-      {user.avatar && <img src={user?.avatar} alt="user avatar" className="comment_user_avatar"/>}
+    <div className="single_Replay">
       <textarea
-        className="comment_textarea"
+        className="replay_textarea"
         value={replayValue}
         onChange={(e) => setReplayValue(e.target.value)}
         placeholder="Add comment..."
-        style={{width:"250px"}}
+        style={{ width: "250px" }}
       />
 
       {/* <input multiple type="file" onChange={handleFileChange} /> */}
-      <div className="comment_ntm" onClick={()=>sendReplay(commentID)}>
-        <p>Post</p>
-      </div>
+      <span onClick={sendReplay}> <ReplayBtn faded={isFaded} /></span>
+
     </div>
   )
 }
 
 export default ReplayComment
+
+
+
+interface ReplayBtnProps {
+  faded: boolean;
+}
+export const ReplayBtn: React.FC<ReplayBtnProps> = ({ faded }) => {
+  return (
+    <div className={faded ? "replay_btn" : "replay_btn active"}>
+      <p>Replay</p>
+    </div>
+  )
+}
