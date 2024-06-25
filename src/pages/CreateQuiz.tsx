@@ -256,8 +256,8 @@ const CreateQuiz = () => {
       });
       console.log(response.data);
 
-      
-      
+
+
 
       navigate('/')
     } catch (error) {
@@ -272,31 +272,31 @@ const CreateQuiz = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-    const handleMouseDown = (e: { preventDefault: () => void; pageX: number; }) => {
-      e.preventDefault();
+  const handleMouseDown = (e: { preventDefault: () => void; pageX: number; }) => {
+    e.preventDefault();
 
-      if(itemsRef.current){
+    if (itemsRef.current) {
 
-        setIsMouseDown(true);
-        setStartX(e.pageX - itemsRef.current.offsetLeft);
-        setScrollLeft(itemsRef.current.scrollLeft);
-      }
+      setIsMouseDown(true);
+      setStartX(e.pageX - itemsRef.current.offsetLeft);
+      setScrollLeft(itemsRef.current.scrollLeft);
+    }
   };
 
   const handleMouseLeaveOrUp = (e: { preventDefault: () => void; }) => {
-      e.preventDefault();
-      setIsMouseDown(false);
+    e.preventDefault();
+    setIsMouseDown(false);
   };
 
   const handleMouseMove = (e: { preventDefault: () => void; pageX: number; }) => {
-      if (!isMouseDown) return;
-      e.preventDefault();
-      if(itemsRef.current){
+    if (!isMouseDown) return;
+    e.preventDefault();
+    if (itemsRef.current) {
 
-        const x = e.pageX - itemsRef.current.offsetLeft / 2;
-        const walk = (x - startX) * 1; // Adjust scroll speed as needed
-        itemsRef.current.scrollLeft = scrollLeft - walk;
-      }
+      const x = e.pageX - itemsRef.current.offsetLeft / 2;
+      const walk = (x - startX) * 1; // Adjust scroll speed as needed
+      itemsRef.current.scrollLeft = scrollLeft - walk;
+    }
   };
 
   return (
@@ -432,39 +432,38 @@ const CreateQuiz = () => {
           <div className='cr_quiz_bottom'>
             <div className={quizData?.questions.length > 0 ? "mapping_quizData" : "mapping_quizData hidden"}>
               <div className='mapping_quizData_inner' ref={itemsRef} onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeaveOrUp}
-            onMouseUp={handleMouseLeaveOrUp}>
-              {quizData?.questions?.map((item, index) => {
-                return (
-                  <QuizCard
-                    key={index}
-                    index={index + 1}
-                    length={quizData?.questions?.length}
-                    title={item.questionText}
-                    image={item.questionImg}
-                    answ1={item.answer1}
-                    answ2={item.answer2}
-                    answ3={item.answer3}
-                    answ4={item.answer4}
-                    editCallBack={() => getQuizForEdit(index)}
-                    deleteCallback={() => removeQuizCard(index)}
-                  />
-                )
-              })}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeaveOrUp}
+                onMouseUp={handleMouseLeaveOrUp}>
+                {quizData?.questions?.length > 0 &&
+                  quizData.questions.slice().reverse().map((item, index) => (
+                    <QuizCard
+                      key={index}
+                      index={quizData.questions.length - index}
+                      length={quizData.questions.length}
+                      title={item.questionText}
+                      image={item.questionImg}
+                      answ1={item.answer1}
+                      answ2={item.answer2}
+                      answ3={item.answer3}
+                      answ4={item.answer4}
+                      editCallBack={() => getQuizForEdit(index)}
+                      deleteCallback={() => removeQuizCard(index)}
+                    />
+                  ))}
 
-            
-              {
-              quizData?.questions.length > 0
-              && <div className='apply_reset_btns'>
-                <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
-                <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
-              </div>
-            }
+
+                {
+                  quizData?.questions.length > 0
+                  && <div className='apply_reset_btns'>
+                    <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
+                    <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
+                  </div>
+                }
               </div>
             </div>
 
-            
+
           </div>
         </div>
       </PageLayout>
@@ -573,20 +572,20 @@ const QuizCard: React.FC<QuizCardProps> = ({
         }
       </div>
 
-    
+
       <div className='cr_quiz_length_answers'>
-      <p className='answers_length'>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
+        <p className='answers_length'>{selectedLanguage.createQuiz_page.questionNum} {index}/{length}</p>
 
         {/* quiz question image */}
         {
-          image 
+          image
             ? <img src={URL.createObjectURL(image)} className='cr_quiz_card_cover' alt='quiz card cover' />
             : noQuizImage
         }
-       
+
       </div>
 
-      <p className='cr_quiz_card_title'>{title.length > 34 ? title.substring(0,34)+'...' : title}</p>
+      <p className='cr_quiz_card_title'>{title.length > 34 ? title.substring(0, 34) + '...' : title}</p>
     </div>
   )
 }
