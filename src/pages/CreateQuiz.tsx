@@ -314,12 +314,12 @@ const CreateQuiz = () => {
             {
               !isTitleCover ?
                 <>
-                  <div>
+                  <div className='cr_quiz_question_titles_container'>
                     <p className='cr_quiz_question_titles'>Quiz Title <span className='important_star'>*</span></p>
                     <input className='cr_quiz_question1' type='text' placeholder='სათაური ჩაწერე აქ' value={quizData.mainTitle} onChange={(e) => setQuizData({ ...quizData, mainTitle: e.target.value })} />
                   </div>
 
-                  <div>
+                  <div className='cr_quiz_question_titles_container'>
                     <p className='cr_quiz_question_titles'>Add Cover image <span style={{ fontSize: "14px", color: "gray" }}>(optional)</span></p>
                     <div {...getRootPropsSecond()} className='dragNdrop'>
                       <input {...getInputPropsSecond()} />
@@ -352,7 +352,7 @@ const CreateQuiz = () => {
           <div className={showQuizTable ? "cr_quiz_table" : "cr_quiz_table displayNone"}>
             {/* question section */}
             <div className='cr_quiz_question'>
-              <p>{selectedLanguage.createQuiz_page.questionNum} {quizData?.questions.length}/{quizData?.questions.length} <span className='important_star'>*</span></p>
+              <p>{selectedLanguage.createQuiz_page.questionNum} {quizData?.questions.length}/{quizData?.questions.length}</p>
 
               <input
                 type='text'
