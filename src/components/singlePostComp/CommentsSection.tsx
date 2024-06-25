@@ -33,14 +33,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         text: "",
     });
     const [isFaded, setFaded] = useState(true)
-    const [visibleReplies, setVisibleReplies] = useState<{ [key: number]: boolean }>({});
+    const [visibleReplyIndex, setVisibleReplyIndex] = useState<number | null>(null);
 
     const toggleReply = (index: number) => {
-        setVisibleReplies(prevState => ({
-            ...prevState,
-            [index]: !prevState[index]
-        }));
+        setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
     };
+
+   
 
     useEffect(() => {
         if (commentValue.text.length > 0) {
@@ -76,7 +75,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                 commentsData && (
                     <div className="comments_array">
                         {commentsData.map((item: commentProps, index: number) => {
-                            const isReplyVisible = visibleReplies[index];
                             return (
                                 <div className="single_comment_parent" key={index}>
                                     <div className="single_comment">
@@ -93,9 +91,9 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     {/* replay container */}
 
-                                    <div className={isReplyVisible ? 'replay_container visible' : 'replay_container '}>
+                                    <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            isReplyVisible && (
+                                            visibleReplyIndex === index && (
                                                 <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} />
                                             )
                                         }

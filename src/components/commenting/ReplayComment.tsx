@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useUserHook } from '../../hooks/useUserHook';
+// import { useUserHook } from '../../hooks/useUserHook';
 import "../../pages/post.css"
 
 interface ReplayCommentProps {
@@ -10,7 +10,7 @@ interface ReplayCommentProps {
 }
 
 const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallback }) => {
-  const { user } = useUserHook();
+  // const { user } = useUserHook();
   const [replayValue, setReplayValue] = useState('')
   const [isFaded, setFaded] = useState(true)
 
