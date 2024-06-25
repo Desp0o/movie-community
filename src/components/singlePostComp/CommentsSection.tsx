@@ -5,6 +5,7 @@ import { useUserHook } from '../../hooks/useUserHook'
 import axios from 'axios'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query'
 import ReplayComment from '../commenting/ReplayComment'
+import Replies from '../commenting/Replies'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -39,7 +40,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
     };
 
-   
+
 
     useEffect(() => {
         if (commentValue.text.length > 0) {
@@ -87,7 +88,14 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                             Reply
                                         </p>
                                         {item.comments.length > 0 && <p className="single_comment_replay">View all replies</p>}
+
                                     </div>
+
+                                    {item.comments.length > 0 &&
+                                        <div className='replayed_comments_section'>
+                                            <Replies replayedComments={item.comments} />
+                                        </div>
+                                    }
 
                                     {/* replay container */}
 

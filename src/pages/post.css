@@ -148,7 +148,7 @@
 }
 
 .replay_container.visible{
-    height: 32px;
+    height: 50px;
 }
 
 
@@ -162,6 +162,7 @@
 }
 
 .single_Replay{
+    padding-top: 4px;
     display: flex;
 width: 465px;
 justify-content: flex-end;
@@ -195,10 +196,46 @@ cursor: pointer;
     display: flex;
 width: 381px;
 height: 32px;
-padding: 12px 8px;
+padding: 8px 8px 12px 8px;
 border-radius: 4px;
 background: rgba(255, 255, 255, 0.10);
 overflow: hidden;
 resize: none;
 color: var(--white);
+outline: none;
+}
+
+.replayed_comments_section{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 4px;
+}
+
+.replayed_comment{
+    display: flex;
+    width: 465px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    width: 100%;
+}
+
+.replayed_comment_text{
+    display: flex;
+width: 426px;
+padding: 12px 8px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #1A453C;
+
+
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%;
+}
+
+.replay_dots{
+    width: 22px;
 }
