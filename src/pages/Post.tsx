@@ -77,7 +77,7 @@ const Post = () => {
 
 
   if (data) {
-    console.log(data.comments);
+    console.log(data);
 
   }
 
@@ -90,7 +90,7 @@ const Post = () => {
     <PageLayout>
       <div className="post_page">
         <div className="post_page_inner">
-          <EditPannel postID={data?.post?.id} type={data?.post?.type} />
+          {data?.post?.user_id === user.userID && <EditPannel postID={data?.post?.id} type={data?.post?.type} />}
 
           <div className="author_title_media">
             <div className="post_page_inner_block1">
