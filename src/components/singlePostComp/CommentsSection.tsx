@@ -6,6 +6,7 @@ import axios from 'axios'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query'
 import ReplayComment from '../commenting/ReplayComment'
 import Replies from '../commenting/Replies'
+import { dotsForComments } from '../../assets/newSvg/dotsForComments'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -21,6 +22,7 @@ interface commentProps {
     created_at: string;
     user: {
         name: string;
+        id: number;
     }
 }
 
@@ -55,25 +57,25 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     useEffect(() => {
         if (writeCommentRef.current) {
             if (commentValue.text !== '') {
-              // Adjust the textarea height based on the scroll height
-              writeCommentRef.current.style.height = "36px"
-              if(writeCommentRef.current.scrollHeight > 36){
-                writeCommentRef.current.style.height = `${writeCommentRef.current.scrollHeight}px`;
-              }
-              
-              // Ensure the textarea height does not exceed 400px
-              if (writeCommentRef.current.scrollHeight > 400) {
-                writeCommentRef.current.style.height = '400px';
-                writeCommentRef.current.style.overflow = 'auto'
-              }else{
-                writeCommentRef.current.style.overflow = 'hidden'
-              }
+                // Adjust the textarea height based on the scroll height
+                writeCommentRef.current.style.height = "36px"
+                if (writeCommentRef.current.scrollHeight > 36) {
+                    writeCommentRef.current.style.height = `${writeCommentRef.current.scrollHeight}px`;
+                }
+
+                // Ensure the textarea height does not exceed 400px
+                if (writeCommentRef.current.scrollHeight > 400) {
+                    writeCommentRef.current.style.height = '400px';
+                    writeCommentRef.current.style.overflow = 'auto'
+                } else {
+                    writeCommentRef.current.style.overflow = 'hidden'
+                }
             }
-      
-            if(commentValue.text === ''){
-              writeCommentRef.current.style.height = "36px"
+
+            if (commentValue.text === '') {
+                writeCommentRef.current.style.height = "36px"
             }
-          }
+        }
     }, [commentValue.text])
 
     const sendComment = async () => {
@@ -105,9 +107,19 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                             return (
                                 <div className="single_comment_parent" key={index}>
                                     <div className="single_comment">
-                                        <p className="single_comment_userName">{item.user.name}</p>
-                                        <p className="single_comment_text">{item.text}</p>
+                                        <div className='single_comment_inner'>
+                                            <p className="single_comment_userName">{item.user.name}</p>
+                                            <p className="single_comment_text">{item.text}</p>
+                                        </div>
+
+                                        {
+                                            item.user.id === user.userID && <span className='dots_for_comments_settings'>
+                                            {dotsForComments}
+                                        </span>
+                                        }
+                                        
                                     </div>
+
                                     <div className="single_comment_date_replay">
                                         <DateFormater date={item.created_at} />
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>

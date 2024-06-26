@@ -5,7 +5,7 @@ const userSlicer = createSlice({
     initialState:{
         user: {
             name: '' || localStorage.getItem('userName'),
-            userID: null || localStorage.getItem('userID'),
+            userID: null || Number(localStorage.getItem('userID')),
             avatar: '' ||localStorage.getItem('avatar'),
             score: null || localStorage.getItem('score'),
             bells: null || localStorage.getItem('bells'),

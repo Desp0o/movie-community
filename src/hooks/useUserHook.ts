@@ -6,7 +6,7 @@ interface RootState {
         score: string | number;
         name: string;
         avatar: string;
-        userID: string;
+        userID: number;
         bells: number;
     }
   };

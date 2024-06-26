@@ -109,7 +109,19 @@
     gap: 16px;
 }
 
+
 .single_comment {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.dots_for_comments_settings{
+    cursor: pointer;
+    height: 100%;
+}
+
+.single_comment_inner{
     border-radius: 8px;
     border: 0.775px solid var(--Secondary-400);
 
