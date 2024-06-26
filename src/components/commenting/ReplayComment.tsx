@@ -62,6 +62,10 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
           textareaRef.current.style.overflow = 'hidden'
         }
       }
+
+      if(replayValue === ''){
+        textareaRef.current.style.height = "36px"
+      }
     }
   }, [replayValue]);
 
