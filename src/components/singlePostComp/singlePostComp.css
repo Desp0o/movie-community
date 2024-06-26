@@ -235,3 +235,40 @@
   position: relative;
   top: -100px;
 }
+
+.SettingForComment{
+  display: flex;
+height: 23px;
+padding: 12px 8px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+
+border-radius: 4px;
+border: 1px solid #1A453C;
+}
+
+.dot_normal_pos{
+  transform: rotate(0deg);
+  transition: all .2s ease;
+  justify-content: unset;
+  margin-right: 0px;
+  height: fit-content;
+}
+
+.dot_90_pos{
+  transform: rotate(90deg);
+  transition: all .2s ease;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.SettingForComment_edit{
+  font-size: 12px;
+}
+
+.SettingForComment_delete{
+  font-size: 12px;
+  color: red;
+  font-weight: 600;
+}

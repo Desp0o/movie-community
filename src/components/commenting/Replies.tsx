@@ -1,36 +1,62 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { dotsForComments } from '../../assets/newSvg/dotsForComments';
 import { useUserHook } from '../../hooks/useUserHook';
+import SettingForComment from './SettingForComment';
 
 interface RepliesProps {
-    replayedComments: []
-}
-
-interface itemProps {
-    text: string;
-    user_id: number;
+  replayedComments: { text: string; user_id: number }[];
 }
 
 const Replies: React.FC<RepliesProps> = ({ replayedComments }) => {
-    const { user } = useUserHook()
-    return (
-        replayedComments?.map((item: itemProps, index) => {
-            return (
-                <div className='replayed_comment_parent' key={index}>
+  const { user } = useUserHook();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const commentPanelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-                    <div className='replayed_comment'>
-                        <p className='replayed_comment_text'>{item.text}</p>
-                    </div>
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (
+        activeIndex !== null &&
+        commentPanelRefs.current[activeIndex] &&
+        event.target instanceof Node &&
+        !commentPanelRefs.current[activeIndex]!.contains(event.target)
+      ) {
+        setActiveIndex(null);
+      }
+    };
 
-                    
-                        <span className='dots_for_comments_settings space'>
-                            {item.user_id === user.userID  && dotsForComments}
-                        </span>
-                    
-                </div> 
-            )
-        })
-    )
-}
+    document.addEventListener('click', handleClick);
 
-export default Replies
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [activeIndex]);
+
+  const showSettings = (index: number) => {
+    if (index === activeIndex) {
+      setActiveIndex(null);
+    } else {
+      setActiveIndex(index);
+    }
+  };
+
+  return (
+    <>
+      {replayedComments.map((item, index) => (
+        <div className="replayed_comment_parent" key={index}>
+          <div className="replayed_comment">
+            <p className="replayed_comment_text">{item.text}</p>
+          </div>
+
+          <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
+            <div>{index === activeIndex && <SettingForComment />}</div>
+            <div onClick={() => showSettings(index)} className={index === activeIndex ? 'dot_90_pos' : 'dot_normal_pos'}>
+              {item.user_id === user.userID && dotsForComments}
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default Replies;

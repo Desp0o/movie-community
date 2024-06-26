@@ -116,9 +116,17 @@
     gap: 32px;
 }
 
+.comment_panel_and_dots{
+    display: flex;
+}
+
 .dots_for_comments_settings{
+    display: flex;
+    gap: 7px;
+    position: relative;
     cursor: pointer;
-    height: 100%;
+    width: 23px;
+    background-color: teal;
 }
 
 .single_comment_inner{
@@ -251,7 +259,10 @@ text-align: left;
 }
 
 .space{
-    width: 23px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 23px;
 }
 
 .replayed_comment_text{
