@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // import { useUserHook } from '../../hooks/useUserHook';
 import "../../pages/post.css"
 
@@ -11,6 +11,7 @@ interface ReplayCommentProps {
 
 const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallback }) => {
   // const { user } = useUserHook();
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [replayValue, setReplayValue] = useState('')
   const [isFaded, setFaded] = useState(true)
 
@@ -44,9 +45,30 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
     }
   }
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      if (replayValue !== '') {
+        // Adjust the textarea height based on the scroll height
+        textareaRef.current.style.height = "36px"
+        if(textareaRef.current.scrollHeight > 36){
+          textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
+        
+        // Ensure the textarea height does not exceed 200px
+        if (textareaRef.current.scrollHeight > 200) {
+          textareaRef.current.style.height = '200px';
+          textareaRef.current.style.overflow = 'auto'
+        }else{
+          textareaRef.current.style.overflow = 'hidden'
+        }
+      }
+    }
+  }, [replayValue]);
+
   return (
     <div className="single_Replay">
       <textarea
+        ref={textareaRef}
         className="replay_textarea"
         value={replayValue}
         onChange={(e) => setReplayValue(e.target.value)}

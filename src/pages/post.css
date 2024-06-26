@@ -137,18 +137,18 @@
 }
 
 .replay_container{
-    transform-origin: top;
     width: 100%;
-    height: 0px;
+    max-height: 0px;
     overflow: hidden;
     display: flex;
     justify-content: flex-end;
-    transition: height 0.2s linear;
+    transition: all 0.2s ease;
     overflow: hidden;
 }
 
 .replay_container.visible{
-    height: 50px;
+    max-height: 220px;
+    transition: all 0.5s ease;
 }
 
 
@@ -194,15 +194,23 @@ cursor: pointer;
 
 .replay_textarea{
     display: flex;
-width: 381px;
-height: 32px;
-padding: 8px 8px 12px 8px;
+width: 381px !important;
+height: 36px;
+line-height: 18px;
+padding: 8px 12px 8px 12px;
 border-radius: 4px;
 background: rgba(255, 255, 255, 0.10);
-overflow: hidden;
 resize: none;
 color: var(--white);
 outline: none;
+overflow: hidden;
+margin-top: 10px;
+margin-bottom: 10px;
+text-align: left;
+}
+
+.replay_textarea::-webkit-scrollbar {
+    width: 5px;  
 }
 
 .replayed_comments_section{

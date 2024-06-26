@@ -166,15 +166,10 @@ const AddPostPopUp = () => {
     if (postValue.text !== '') {
       // ტექსტარეას სიმაღლის ცლილებაზე გაიზარდოს ტექსტარეაც
       if(textareaRef.current){
-        textareaRef.current.style.height = "120px"
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        textareaRef.current.style.minHeight = `${textareaRef.current.scrollHeight}px`;
       }
     }
 
-    // თუ ტექსტარეა ცარიელია მაშინ დაუბრუნდეს საწყის ზომას 
-    if(textareaRef.current && postValue.text === ''){
-      textareaRef.current.style.height = "120px"
-    }
     
   }, [postValue.text]);
 

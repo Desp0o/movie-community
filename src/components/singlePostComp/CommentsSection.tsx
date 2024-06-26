@@ -101,9 +101,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            visibleReplyIndex === index && (
                                                 <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} />
-                                            )
+                                            
                                         }
 
 
