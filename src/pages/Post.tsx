@@ -110,7 +110,7 @@ const Post = () => {
 
             <LikeCommentShare
               postID={data.post.id}
-              commentLength={data.post.comments}
+              commentLength={data.comments.length}
               refetchCallBack={refetch}
               guls={data.post.guls}
               authGul={data.post.myGul}

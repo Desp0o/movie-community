@@ -7,6 +7,7 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-
 import ReplayComment from '../commenting/ReplayComment'
 import Replies from '../commenting/Replies'
 import { dotsForComments } from '../../assets/newSvg/dotsForComments'
+import SettingForComment from '../commenting/SettingForComment'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -114,6 +115,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                         {
                                             item.user.id === user.userID && <span className='dots_for_comments_settings'>
+                                                <SettingForComment commentID={item.id} refetchCallbac={refetch} />
                                             {dotsForComments}
                                         </span>
                                         }
@@ -131,7 +133,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     {item.comments.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments} />
+                                            <Replies replayedComments={item.comments} refetchCallBack={refetch}/>
                                         </div>
                                     }
 

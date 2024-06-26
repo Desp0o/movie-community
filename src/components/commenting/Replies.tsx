@@ -2,12 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { dotsForComments } from '../../assets/newSvg/dotsForComments';
 import { useUserHook } from '../../hooks/useUserHook';
 import SettingForComment from './SettingForComment';
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 
 interface RepliesProps {
-  replayedComments: { text: string; user_id: number }[];
+  replayedComments: {
+    id: number; 
+    text: string; 
+    user_id: number }[];
+    refetchCallBack: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }
 
-const Replies: React.FC<RepliesProps> = ({ replayedComments }) => {
+
+const Replies: React.FC<RepliesProps> = ({ replayedComments, refetchCallBack }) => {
   const { user } = useUserHook();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const commentPanelRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -47,8 +53,9 @@ const Replies: React.FC<RepliesProps> = ({ replayedComments }) => {
             <p className="replayed_comment_text">{item.text}</p>
           </div>
 
+            {/* adding ref with index to each elment */}
           <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
-            <div>{index === activeIndex && <SettingForComment />}</div>
+            <div>{index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} />}</div>
             <div onClick={() => showSettings(index)} className={index === activeIndex ? 'dot_90_pos' : 'dot_normal_pos'}>
               {item.user_id === user.userID && dotsForComments}
             </div>

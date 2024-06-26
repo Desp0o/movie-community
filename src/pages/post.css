@@ -118,6 +118,8 @@
 
 .comment_panel_and_dots{
     display: flex;
+
+    cursor: pointer;
 }
 
 .dots_for_comments_settings{
@@ -126,7 +128,6 @@
     position: relative;
     cursor: pointer;
     width: 23px;
-    background-color: teal;
 }
 
 .single_comment_inner{
