@@ -59,14 +59,22 @@
 .write_comment_input {
     display: flex;
     width: 395px;
-    height: 32px;
-    padding: 12px 8px;
+    height: 36px;
+    padding: 8px 12px;
     align-items: center;
     gap: 10px;
 
     border-radius: 4px;
+    border: none;
+    outline: none;
     background-color: rgba(255, 255, 255, 0.10);
     color: var(--white);
+    overflow: hidden;
+    resize: none;
+}
+
+.write_comment_input::-webkit-scrollbar{
+    width: 6px;
 }
 
 .write_comment_input::placeholder {
@@ -203,6 +211,7 @@ background: rgba(255, 255, 255, 0.10);
 resize: none;
 color: var(--white);
 outline: none;
+border: none;
 overflow: hidden;
 margin-top: 10px;
 margin-bottom: 10px;

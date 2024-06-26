@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DateFormater from '../dateFormater/DateFormater'
 import Author from './Author'
 import { useUserHook } from '../../hooks/useUserHook'
@@ -26,6 +26,7 @@ interface commentProps {
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
     const { user } = useUserHook()
+    const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const [commentValue, setCommentValue] = useState<{
         img: File | undefined;
         text: string;
@@ -41,7 +42,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     };
 
 
-
+    //fade or not button
     useEffect(() => {
         if (commentValue.text.length > 0) {
             setFaded(false)
@@ -49,6 +50,31 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
             setFaded(true)
         }
     }, [commentValue])
+
+    //increase comment input height
+    useEffect(() => {
+        if (writeCommentRef.current) {
+            if (commentValue.text !== '') {
+              // Adjust the textarea height based on the scroll height
+              writeCommentRef.current.style.height = "36px"
+              if(writeCommentRef.current.scrollHeight > 36){
+                writeCommentRef.current.style.height = `${writeCommentRef.current.scrollHeight}px`;
+              }
+              
+              // Ensure the textarea height does not exceed 400px
+              if (writeCommentRef.current.scrollHeight > 400) {
+                writeCommentRef.current.style.height = '400px';
+                writeCommentRef.current.style.overflow = 'auto'
+              }else{
+                writeCommentRef.current.style.overflow = 'hidden'
+              }
+            }
+      
+            if(commentValue.text === ''){
+              writeCommentRef.current.style.height = "36px"
+            }
+          }
+    }, [commentValue.text])
 
     const sendComment = async () => {
         const token = localStorage.getItem('token')
@@ -101,8 +127,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                                <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} />
-                                            
+                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} />
                                         }
 
 
@@ -116,11 +141,11 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
             <div className="write_comment">
                 <Author avatar={user.avatar} />
-                <input
+                <textarea
+                    ref={writeCommentRef}
                     value={commentValue.text}
                     placeholder="Write comment..."
                     className="write_comment_input"
-                    alt="comment input"
                     onChange={(e) => setCommentValue({ ...commentValue, text: e.target.value })}
                 />
 
