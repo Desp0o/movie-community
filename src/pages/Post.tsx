@@ -17,6 +17,7 @@ import "./post.css"
 import LikeCommentShare from "../components/singlePostComp/LikeCommentShare";
 import BookmarkPost from "../components/singlePostComp/BookmarkPost";
 import CommentsSection from "../components/singlePostComp/CommentsSection";
+import Footer from "../components/footer/Footer";
 
 
 const Post = () => {
@@ -87,6 +88,7 @@ const Post = () => {
 
 
   return (
+    <>
     <PageLayout>
       <div className="post_page">
         <div className="post_page_inner">
@@ -123,6 +125,8 @@ const Post = () => {
 
       </div>
     </PageLayout>
+      <Footer />
+      </>
   );
 };
 

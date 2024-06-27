@@ -6,10 +6,11 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-
 
 interface RepliesProps {
   replayedComments: {
-    id: number; 
-    text: string; 
-    user_id: number }[];
-    refetchCallBack: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
+    id: number;
+    text: string;
+    user_id: number
+  }[];
+  refetchCallBack: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }
 
 
@@ -49,11 +50,19 @@ const Replies: React.FC<RepliesProps> = ({ replayedComments, refetchCallBack }) 
     <>
       {replayedComments.map((item, index) => (
         <div className="replayed_comment_parent" key={index}>
-          <div className="replayed_comment">
-            <p className="replayed_comment_text">{item.text}</p>
+
+          {/* რეფლაი კომენტარის ტექსტი და replay ღილაკი */}
+          <div>
+            <div className="replayed_comment">
+              <p className="replayed_comment_text">{item.text}</p>
+            </div>
+            
+            <p className='single_comment_replay'>
+              Replay
+            </p>
           </div>
 
-            {/* adding ref with index to each elment */}
+          {/* adding ref with index to each elment */}
           <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
             <div>{index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} />}</div>
             <div onClick={() => showSettings(index)} className={index === activeIndex ? 'dot_90_pos' : 'dot_normal_pos'}>

@@ -42,6 +42,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
+        console.log(user);
+        
     };
 
 
@@ -84,13 +86,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
         if (!isFaded) {
             try {
-                const res = await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${id}`, commentValue, {
+                await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${id}`, commentValue, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "multipart/form-data, application/json, text/plain, */*"
                     }
                 })
-                console.log(res.data);
+                setCommentValue({...commentValue, text: ''})
                 refetch()
             } catch (error) {
                 console.log(error)
@@ -141,7 +143,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} />
+                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name} />
                                         }
 
 

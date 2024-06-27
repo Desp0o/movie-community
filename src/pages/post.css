@@ -1,5 +1,7 @@
 .post_page {
     padding-top: 124px;
+    padding-bottom: 124px;
+    min-height: 100vh;
 }
 
 
@@ -221,6 +223,22 @@ cursor: pointer;
     background: var(--Primary-600, #210F60);
 }
 
+.mentioned_user{
+    color: var(--Secondary-400);
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 18px */
+}
+
+.text_after_mentioned_user{
+    color: var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 150%; /* 21px */
+}
+
 .replay_textarea{
     display: flex;
 width: 100%;
@@ -237,7 +255,12 @@ overflow: hidden;
 margin-top: 10px;
 margin-bottom: 10px;
 text-align: left;
+
+
+word-break: break-all;
 }
+
+
 
 .replay_textarea::-webkit-scrollbar {
     width: 5px;  
@@ -273,7 +296,7 @@ padding: 12px 8px;
 flex-shrink: 0;
 border-radius: 8px;
 border: 1px solid #1A453C;
-
+word-break: break-all;
 
 font-size: 12px;
 font-style: normal;
