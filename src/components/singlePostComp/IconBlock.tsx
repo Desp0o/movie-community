@@ -4,13 +4,14 @@ interface IconBlockProps {
     icon: ReactElement;
     quantity?: number;
     width?: number;
+    displayNone?: boolean;
 }
 
-const IconBlock: React.FC<IconBlockProps> = ({icon, quantity, width}) => {
+const IconBlock: React.FC<IconBlockProps> = ({icon, quantity, width, displayNone}) => {
   return (
     <div className='IconBlock' style={{minWidth:`${width}`}}>
         {icon}
-        {quantity ? <p className='iconBlock_number'>{quantity}</p> : null}
+     <p className='iconBlock_number' style={displayNone ? {display:"none"} : {display: "unset"}}>{quantity ? quantity : 0}</p>
     </div>
   )
 }

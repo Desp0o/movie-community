@@ -43,7 +43,7 @@ const BookmarkPost:React.FC<BookmarkPostProps> = ({mySave, postID}) => {
 
   return (
     <span onClick={saveInBookMark}>
-    <IconBlock icon={saveIcon} />
+    <IconBlock icon={saveIcon} displayNone={true}/>
   </span>
   )
 }

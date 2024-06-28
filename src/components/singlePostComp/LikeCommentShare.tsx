@@ -68,7 +68,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({ authGul = 0, guls =
         </Link>
       </div>
       <div className="like_post_icon">
-        <IconBlock icon={shareIcon} />
+        <IconBlock icon={shareIcon} displayNone={true}/>
       </div>
     </div>
   );

@@ -32,8 +32,15 @@
   align-items: center;
   gap: 4px;
   border-radius: 6px;
-  background: var(--Primary-600);
+  background: unset;
   cursor: pointer;
+
+  transition: all .3s ease;
+}
+
+.IconBlock:hover{
+  background: var(--Primary-600);
+  transition: all .3s ease;
 }
 
 .author_pannel_container {
