@@ -9,7 +9,7 @@ interface ReplayCommentProps {
   mentionedUser: string;
 }
 
-const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallback, mentionedUser }) => {
+const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser }) => {
   const textareaRef = useRef<HTMLDivElement>(null);
   const [replayValue, setReplayValue] = useState('');
   const [isFaded, setFaded] = useState(true);
@@ -24,10 +24,11 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
 
   const sendReplay = async () => {
     const token = localStorage.getItem('token');
+console.log(feedID);
 
     if (replayValue !== '') {
       try {
-        await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`, {
+        const res = await axios.post(`${import.meta.env.VITE_ADD_COMMENT}${feedID}`, {
           text: replayValue,
           img: null,
           comment_id: id
@@ -38,6 +39,8 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
         });
         setReplayValue('');
         setFaded(true);
+        console.log(res.data);
+        
       } catch (error) {
         console.error(error);
       } finally {

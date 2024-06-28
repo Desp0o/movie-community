@@ -133,7 +133,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     {item.comments.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments} refetchCallBack={refetch}/>
+                                            <Replies replayedComments={item.comments} refetchCallBack={refetch} mainCommentID={item.id}/>
                                         </div>
                                     }
 

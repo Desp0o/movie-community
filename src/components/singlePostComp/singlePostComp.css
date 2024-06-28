@@ -272,3 +272,10 @@ border: 1px solid #1A453C;
   color: red;
   font-weight: 600;
 }
+
+.replay_for_replie{
+  width: 100%;
+  display: flex;
+justify-content: flex-end;
+margin-top: -10px;
+}
