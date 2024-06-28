@@ -30,6 +30,8 @@ interface commentProps {
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
     const { user } = useUserHook()
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
+    const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
+    const [settingActiveIndex, setSettingActiveIndex] = useState<number | null>(null)
     const [commentValue, setCommentValue] = useState<{
         img: File | undefined;
         text: string;
@@ -43,6 +45,33 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
     };
+
+    const showSettings = (index: number) => {
+        if (index === settingActiveIndex) {
+            setSettingActiveIndex(null);
+        } else {
+            setSettingActiveIndex(index);
+        }
+    };
+
+    useEffect(() => {
+        const handleClick = (event: MouseEvent) => {
+            if (
+                settingActiveIndex !== null &&
+                commentPanelRefs.current[settingActiveIndex] &&
+                event.target instanceof Node &&
+                !commentPanelRefs.current[settingActiveIndex]!.contains(event.target)
+            ) {
+                setSettingActiveIndex(null);
+            }
+        };
+
+        document.addEventListener('click', handleClick);
+
+        return () => {
+            document.removeEventListener('click', handleClick);
+        };
+    }, [settingActiveIndex]);
 
 
     //fade or not button
@@ -90,14 +119,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                         "Content-Type": "multipart/form-data, application/json, text/plain, */*"
                     }
                 })
-                setCommentValue({...commentValue, text: ''})
+                setCommentValue({ ...commentValue, text: '' })
                 refetch()
             } catch (error) {
                 console.log(error)
             }
         }
     }
-
 
     return (
         <div className="comments_section">
@@ -114,12 +142,17 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         </div>
 
                                         {
-                                            item.user.id === user.userID && <span className='dots_for_comments_settings'>
-                                                <SettingForComment commentID={item.id} refetchCallbac={refetch} />
-                                            {dotsForComments}
-                                        </span>
+                                            item.user.id === user.userID && <span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
+                                                {dotsForComments}
+                                            </span>
+
                                         }
-                                        
+
+                                        <div className="comment_panel_and_dots">
+                                            <div>
+                                                {index === settingActiveIndex && <SettingForComment commentID={item.id} refetchCallbac={refetch} />}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="single_comment_date_replay">
@@ -133,7 +166,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     {item.comments.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments} refetchCallBack={refetch} mainCommentID={item.id}/>
+                                            <Replies replayedComments={item.comments} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
 
@@ -141,7 +174,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name}/>
+                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name} />
                                         }
 
 
@@ -171,7 +204,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 }
 
 export default CommentsSection
-
 
 interface CommentBtnProps {
     faded: boolean;

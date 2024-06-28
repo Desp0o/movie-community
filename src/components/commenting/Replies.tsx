@@ -53,7 +53,6 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   const showReplay = (index: number) => {
     setReplIndex((prevIndex) => (prevIndex === index ? null : index));
     console.log(mainCommentID);
-    
   }
 
   return (
@@ -66,6 +65,16 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
             <div>
               <div className="replayed_comment">
                 <p className="replayed_comment_text">{item.text}</p>
+                {/* adding ref with index to each elment */}
+
+                <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
+                  <div>
+                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} />}
+                  </div>
+                  <div onClick={() => showSettings(index)} className='dot_normal_pos'>
+                    {item.user_id === user.userID && dotsForComments}
+                  </div>
+                </div>
               </div>
 
               <p className='single_comment_replay' onClick={() => showReplay(index)}>
@@ -73,14 +82,9 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
               </p>
             </div>
 
-            {/* adding ref with index to each elment */}
-            <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
-              <div>{index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} />}</div>
-              <div onClick={() => showSettings(index)} className={index === activeIndex ? 'dot_90_pos' : 'dot_normal_pos'}>
-                {item.user_id === user.userID && dotsForComments}
-              </div>
-            </div>
+
           </div>
+
           <div className={replIndex === index ? 'replay_container visible' : 'replay_container '}>
             <div className='replay_for_replie'>
               {
