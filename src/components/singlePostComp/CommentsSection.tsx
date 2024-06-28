@@ -42,8 +42,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
-        console.log(user);
-        
     };
 
 
@@ -143,7 +141,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name} />
+                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name}/>
                                         }
 
 

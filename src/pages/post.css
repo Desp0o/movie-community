@@ -224,7 +224,7 @@ cursor: pointer;
 }
 
 .mentioned_user{
-    color: var(--Secondary-400);
+    color: var(--Secondary-400) !important;
 font-size: 12px;
 font-style: normal;
 font-weight: 500;
@@ -232,8 +232,9 @@ line-height: 150%; /* 18px */
 }
 
 .text_after_mentioned_user{
+    direction: ltr;
     color: var(--white);
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 300;
     line-height: 150%; /* 21px */
@@ -248,7 +249,6 @@ padding: 8px 12px 8px 12px;
 border-radius: 4px;
 background: rgba(255, 255, 255, 0.10);
 resize: none;
-color: var(--white);
 outline: none;
 border: none;
 overflow: hidden;
@@ -258,6 +258,12 @@ text-align: left;
 
 
 word-break: break-all;
+
+color: var(--white);
+font-size: 12px !important;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 18px */
 }
 
 

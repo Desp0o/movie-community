@@ -58,6 +58,21 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
         } else {
           textareaRef.current.style.overflow = 'hidden';
         }
+
+        // Check if the mention is deleted and reinsert it if necessary
+        const textContent = textareaRef.current.innerText;
+        if (!textContent.includes(`@${mentionedUser}`)) {
+          const pTag = document.createElement('p')
+          pTag.className = 'text_after_mentioned_user'
+
+          const span = document.createElement("span")
+          span.className = 'mentioned_user'
+
+          pTag.appendChild(span)
+          textareaRef.current.appendChild(pTag)
+          span.textContent = `@${mentionedUser}`
+          span.contentEditable = 'false'
+        }
       }
     };
 
@@ -67,13 +82,8 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({ id, feedID, refetchCallba
     return () => {
       div?.removeEventListener('input', handleInput);
     };
-  }, []);
+  }, [mentionedUser]);
 
-
-  useEffect(()=>{
-    console.log(replayValue);
-    
-  },[replayValue])
 
   return (
     <div className="single_Replay">
