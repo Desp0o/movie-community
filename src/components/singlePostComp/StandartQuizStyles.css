@@ -12,6 +12,10 @@
     background: var(--Card-background);
 }
 
+.quiz_link{
+    width: 100%;
+}
+
 .quiz_cover_container{
     height: 265px;
     border-radius: 8px;

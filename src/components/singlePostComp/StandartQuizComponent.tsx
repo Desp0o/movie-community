@@ -9,6 +9,7 @@ import { popcornIcon } from "../../assets/newSvg/popcornIcon"
 import { glassIcon } from "../../assets/newSvg/glassIcon"
 import ButtonFIlled from "../buttonFIlled/ButtonFilled"
 import { ButtonArrow } from "../buttonFIlled/ButtonArrow"
+import { Link } from "react-router-dom"
 
 interface StandartQuizComponentProps {
   postUserId: number;
@@ -47,6 +48,7 @@ const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({avatar, po
     <div className='StandartQuizComponent'>
       {isUserLogged ? <EditPannel postID={postID} type={4} /> : <></>}
 
+      <Link to={'/pages/Quiz/'+quiz_id} className="quiz_link">
       <div className="quiz_cover_container">
         {
           image
@@ -57,8 +59,8 @@ const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({avatar, po
             : <img src={quizDefaultCover} alt="quiz cover" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 
         }
-
       </div>
+      </Link>
 
       <div className="quiz_details">
         <Author name={authorName} date={date} avatar={avatar}/>
