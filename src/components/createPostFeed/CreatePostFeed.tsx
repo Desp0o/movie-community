@@ -3,8 +3,7 @@ import { useUserHook } from "../../hooks/useUserHook"
 import "./CreatePostFeed.css"
 import PostBottomButtons from "./addPostComps/PostBottomButtons"
 import { setAddPostModal } from "../../Redux/postModal";
-import noAvatar from "../../assets/noAvatar.jpeg"
-
+import { noAvatar } from "../../assets/newSvg/noAvatar";
 
 const CreatePostFeed = () => {
     const { user } = useUserHook();
@@ -18,11 +17,12 @@ const CreatePostFeed = () => {
     return (
         <div className="CreatePostFeed">
             <div className="user_avatar_input">
+                {user.avatar ?
                 <img
-                    src={user.avatar ? user.avatar : noAvatar}
+                    src={ user.avatar }
                     alt="user avatar"
                     className="user_avatar_feed"
-                />
+                /> : noAvatar}
 
                 <input
                     type="text"

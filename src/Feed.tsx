@@ -2,7 +2,6 @@ import SinglePostComp from "./components/singlePostComp/SinglePostComp";
 import { useEffect } from "react";
 import { FeedFunctions } from "./components/feedFuncs/FeedFucntions";
 import "./Feed.css";
-import noAvatar from "./assets/noAvatar.jpeg"
 import CreatePostFeed from "./components/createPostFeed/CreatePostFeed";
 import Spinner from "./components/spinner/Spinner";
 import { useRefetchHook } from "./hooks/useFeedRefetch";
@@ -97,7 +96,7 @@ const Feed = () => {
                   refetch={refetch}
                   key={post?.id}
                   authorName={post?.user.name}
-                  authorAvatar={post?.user.avatar ? post?.user.avatar : noAvatar}
+                  authorAvatar={post?.user.avatar}
                   postTitle={post?.text}
                   postID={post?.id}
                   image={post?.img}
