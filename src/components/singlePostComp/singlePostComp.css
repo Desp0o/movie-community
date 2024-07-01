@@ -612,3 +612,9 @@ padding-right: 20px;
   position: absolute;
   right: 25px;
 }
+
+.pltc{
+  text-align: center;
+  color: var(--Secondary-400);
+  cursor: pointer;
+}

@@ -9,6 +9,7 @@ import Replies from '../commenting/Replies'
 import { dotsForComments } from '../../assets/newSvg/dotsForComments'
 import SettingForComment from '../commenting/SettingForComment'
 import { editComment } from '../commenting/EDITcomment'
+import { useLoginModal } from '../../hooks/useLoginModal'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -38,6 +39,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         comID: 0
     })
     const { user } = useUserHook()
+    const { handleVisibility } = useLoginModal();
     const singleCommentTextRef = useRef<HTMLParagraphElement>(null);
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -154,6 +156,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         }
     }
 
+
+    // get comment textcontent for edit
     const getCommentForEdit = (id: number) => {
         if(singleCommentTextRef.current){
             const textContent = singleCommentTextRef.current.textContent ?? '';
@@ -164,6 +168,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         console.log(isReadyEdit.comID);
     }
 
+    // change buttons for comment edit or new commnet
     useEffect(()=>{
        if(!isReadyEdit.isReady){
         setCommentValue({...commentValue, text: ""})
@@ -229,8 +234,10 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                     </div>
                 )
             }
-
-            <div className="write_comment">
+            
+            {user.name && localStorage.getItem("token") 
+                ?
+                <div className="write_comment">
                 <Author avatar={user.avatar} />
                 <textarea
                     ref={writeCommentRef}
@@ -246,6 +253,9 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                          </span>
             }
             </div>
+            : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
+            }
+            
 
         </div>
     )
