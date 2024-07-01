@@ -1,5 +1,4 @@
 import axios from "axios";
-import "./postPollStyles.css"
 import React, { useEffect, useState } from "react";
 import {
   QueryObserverResult,
@@ -58,9 +57,9 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setActiveIndex(data)
-  },[data])
+  }, [data])
 
 
   const setActivePollItem = (index: number) => {
@@ -72,10 +71,10 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
   };
 
   const pollHanlderFuncs = (id: number, index: number) => {
-    if(user.name && user.userID){
+    if (user.name && user.userID) {
       sendPollAnswer(id)
       setActivePollItem(index)
-    }else{
+    } else {
       dispatch(setModalVisible(true))
     }
   }
@@ -83,32 +82,30 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
   return (
     <>
       <div className="poll_container">
-      {pollAnswers?.map((poll: PollProps, index: number) => {
-        return (
-          <div
-            key={index}
-            onClick={() => pollHanlderFuncs(poll.id, index)}
-            className="poll_item"
-          >
-            <span className="poll_item_bg vote_txt"
-              style={{
-                width: poll.sum !== 0 ? `${Math.round((100 / answersSum) * poll.sum)}%` : '68px',
-                backgroundColor:
-                  poll.id === activeIndex || activeIndex === index
-                    ? "var(--Secondary-400)"
-                    : "var(--Primary-600)",
-              }}
-            ><p className="poll_item_text">
-            {/* {answersSum > 0 ? Math.round((100 / answersSum) * poll.sum) : 0}% */}
-            {poll.sum ===0 ? 'vote' : poll.sum} {poll.sum !== 0 ? 'votes' : null}
-          </p></span>
-            <p className="poll_item_text"> {poll.title} </p>
-            
-            
-
-          </div>
-        );
-      })}
+        {pollAnswers?.map((poll: PollProps, index: number) => {
+          return (
+            <div
+              key={index}
+              onClick={() => pollHanlderFuncs(poll.id, index)}
+              className="poll_item"
+            >
+              <span className="poll_item_bg vote_txt"
+                style={{
+                  width: poll.sum !== 0 ? `${Math.round((100 / answersSum) * poll.sum)}%` : '68px',
+                  backgroundColor:
+                    poll.id === activeIndex || activeIndex === index
+                      ? "var(--Secondary-400)"
+                      : "var(--Primary-600)",
+                }}
+              >
+                <p className="poll_item_text votes_count_txt">
+                  {poll.sum === 0 ? 'vote' : poll.sum}  {poll.sum !== 0 ? 'votes' : null}
+                </p>
+              </span>
+              <p className="poll_item_text poll_item_name"> {poll.title} </p>
+            </div>
+          );
+        })}
       </div>
 
     </>

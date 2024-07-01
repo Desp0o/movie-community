@@ -164,17 +164,19 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         </div>
 
                                         {
-                                            item.user.id === user.userID && <span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
+                                            item.user.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
                                                 {dotsForComments}
                                             </span>
-
+                                            {index === settingActiveIndex && <div className="comment_panel_and_dots">
+                                            <div>
+                                                 <SettingForComment commentID={item.id} refetchCallbac={refetch} />
+                                            </div>
+                                        </div>}
+                                        </>
                                         }
 
-                                        <div className="comment_panel_and_dots">
-                                            <div>
-                                                {index === settingActiveIndex && <SettingForComment commentID={item.id} refetchCallbac={refetch} />}
-                                            </div>
-                                        </div>
+                                        
+                                        
                                     </div>
 
                                     <div className="single_comment_date_replay">
