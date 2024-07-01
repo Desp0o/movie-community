@@ -30,6 +30,7 @@ interface commentProps {
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
     const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
     const [displayedComments, setDisplayedComments] = useState(10) //how many comments show 
+    const [fullLengtComments, setFullLengthComments] = useState(0)
     const [repliesLength, setRepliesLength] = useState(5) //how many replies show
     const { user } = useUserHook()
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
@@ -48,10 +49,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     // comments load
     useEffect(()=>{
         setFetchedCommentsData(commentsData.slice(0, displayedComments))
+        setFullLengthComments(commentsData.length)
     },[displayedComments, commentsData])
 
     const loadMoreComments = () => {
         setDisplayedComments(prev => prev + 10)
+        console.log(displayedComments);
+        console.log(fullLengtComments);
     }
 
     const showMoreReplies = () => {
@@ -146,7 +150,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     return (
         <div className="comments_section">
-            {commentsData.length > 10 && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
+            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
             {
                 fetchedCommentsData && (
                     <div className="comments_array">
