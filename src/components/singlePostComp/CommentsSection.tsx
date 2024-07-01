@@ -28,8 +28,9 @@ interface commentProps {
 }
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
-    const [fetchedCommentsData, setFetchedCommentsData] = useState([])
-    const [displayedComments, setDisplayedComments] = useState(10)
+    const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
+    const [displayedComments, setDisplayedComments] = useState(10) //how many comments show 
+    const [repliesLength, setRepliesLength] = useState(5) //how many replies show
     const { user } = useUserHook()
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -44,13 +45,19 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const [isFaded, setFaded] = useState(true)
     const [visibleReplyIndex, setVisibleReplyIndex] = useState<number | null>(null);
 
+    // comments load
     useEffect(()=>{
         setFetchedCommentsData(commentsData.slice(0, displayedComments))
-    },[displayedComments])
+    },[displayedComments, commentsData])
 
     const loadMoreComments = () => {
         setDisplayedComments(prev => prev + 10)
     }
+
+    const showMoreReplies = () => {
+        setRepliesLength(prev => prev + 5)
+    }
+    ////////////////
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -139,7 +146,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     return (
         <div className="comments_section">
-            <p className='vmc' onClick={loadMoreComments}>View more commnets</p>
+            {commentsData.length > 10 && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
             {
                 fetchedCommentsData && (
                     <div className="comments_array">
@@ -171,13 +178,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {item.comments.length > 0 && <p className="single_comment_replay">View all replies</p>}
+                                        {item.comments.length > 5 && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
                                     {item.comments.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments} refetchCallBack={refetch} mainCommentID={item.id} />
+                                            <Replies replayedComments={item.comments.slice(0,repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
 
