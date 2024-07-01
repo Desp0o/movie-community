@@ -34,7 +34,8 @@ interface SinglePostProps {
   data?: number;
   mySave: number;
   quiz_id: number;
-  pollAnswers:[]
+  pollAnswers:[];
+  commentsData?: [];
   myAnswer: number | null
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
@@ -59,7 +60,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
   refetch,
   pollAnswers,
   mySave,
-  quiz_id
+  quiz_id,
 }) => {
   const [isUserLogged, setUserLoged] = useState(false)
   const {user} = useUserHook()

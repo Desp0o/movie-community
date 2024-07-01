@@ -25,6 +25,7 @@ interface dataProps {
   myAnswer: number | null,
   mySave: number;
   quiz_id: number;
+  commentsData:[];
   comments: {
     length: number;
   };

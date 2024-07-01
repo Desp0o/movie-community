@@ -186,17 +186,17 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                 <div className="single_comment_parent" key={index}>
                                     <div className="single_comment">
                                         <div className='single_comment_inner'>
-                                            <p className="single_comment_userName">{item.user.name}</p>
-                                            <p className="single_comment_text" ref={singleCommentTextRef}>{item.text}</p>
+                                            <p className="single_comment_userName">{item?.user?.name}</p>
+                                            <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
                                         </div>
 
                                         {
-                                            item.user.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
+                                            item?.user?.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
                                                 {dotsForComments}
                                             </span>
                                                 {index === settingActiveIndex && <div className="comment_panel_and_dots">
                                                     <div>
-                                                        <SettingForComment commentID={item.id} refetchCallbac={refetch} editCom={getCommentForEdit}/>
+                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit}/>
                                                     </div>
                                                 </div>}
                                             </>
@@ -209,11 +209,11 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item.comments.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
-                                    {item.comments.length > 0 &&
+                                    {item?.comments?.length > 0 &&
                                         <div className='replayed_comments_section'>
                                             <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
@@ -223,7 +223,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetch} mentionedUser={item.user.name} />
+                                            <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
                                         }
 
 

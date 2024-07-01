@@ -633,4 +633,7 @@ padding-right: 20px;
   .poll_item{
     width: 100%;
   }
+  .replayed_comment_text{
+    width: 100%;
+  }
 }
