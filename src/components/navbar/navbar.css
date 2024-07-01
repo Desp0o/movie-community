@@ -32,7 +32,6 @@
 }
 
 .burger_menu {
-  display: none;
   cursor: pointer;
 }
 
@@ -221,4 +220,10 @@ line-height: 150%; /* 21px */
 .toggler_thub.active {
   left: calc(98% - 30px);
   transition: all 0.4s ease;
+}
+
+@media (max-width:768px) {
+  .nav_search{
+    display: none;
+  }
 }

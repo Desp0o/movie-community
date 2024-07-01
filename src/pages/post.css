@@ -1,7 +1,12 @@
 .post_page {
+    width: 100%;
     padding-top: 124px;
     padding-bottom: 124px;
     min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 
@@ -16,6 +21,7 @@
     border-radius: 8px;
     border: 1px solid var(--stroke);
     background: var(--Card-background);
+    margin: 0 auto;
 }
 
 .author_title_media {
@@ -140,4 +146,21 @@ cursor: pointer;
     position: absolute;
     top: 20px;
     right: 20px;
+}
+
+@media (max-width:768px) {
+    .post_page_inner{
+        width: 90%;
+    }
+
+    .media_cont{
+        width: 100%;
+    }
+
+    .write_comment_input{
+        width: 100%;
+    }
+    .single_Replay{
+        width: 100%;
+    }
 }

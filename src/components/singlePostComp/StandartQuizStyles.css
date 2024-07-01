@@ -76,6 +76,7 @@ background: var(--Primary-600);
 .quiz_btn_link{
     height: 44px;
     position: relative;
+    z-index: 3;
     margin: 0 auto;
     width: 140px;
 }
@@ -113,4 +114,10 @@ background: var(--Primary-600);
 
 .q_b_2.active{
     opacity: 1;
+}
+
+@media (max-width:768px) {
+    .StandartQuizComponent{
+        width: 90%;
+    }
 }

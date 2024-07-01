@@ -51,6 +51,18 @@ const cardArray = [
     {
         author: "vajika",
         title: "card 3"
+    },
+    {
+        author: "despo",
+        title: "card 1"
+    },
+    {
+        author: "koka",
+        title: "card 2"
+    },
+    {
+        author: "vajika",
+        title: "card 3"
     }
 ];
 

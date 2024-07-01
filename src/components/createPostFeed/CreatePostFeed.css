@@ -1,15 +1,18 @@
 .CreatePostFeed {
   display: flex;
   width: 600px;
+  max-width: 90%;
   height: 124px;
   padding: 16px 0px 14px 0px;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin: 0 auto;
 
   border-radius: 6px;
   border: 1px solid #1A453C;
   background: var(--Card-background, #0E052D);
+  overflow: hidden;
 }
 
 .user_avatar_input {
@@ -483,33 +486,27 @@ height: 28px;
   right: 16px;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 768px) {
   .CreatePostFeed {
-    width: 375px;
+    width: 90%;
     margin: 0 auto;
   }
 
   .user_avatar_input {
-    width: 343px;
+    width: 100%;
     max-width: inherit;
   }
   .feed_input {
-    width: 299px;
+    width: 100%;
     max-width: inherit;
   }
   .choose_post_style {
-    width: 341px;
+    width: 100%;
     max-width: inherit;
     gap: 0;
     justify-content: space-between;
   }
   .btn_post_style_padding_left {
     padding-left: 0px;
-  }
-}
-
-@media (max-width: 375px) {
-  .CreatePostFeed {
-    border-radius: 0;
   }
 }

@@ -117,7 +117,7 @@ const Feed = () => {
               ))}
             </div>
           ))}
-          {!hasNextPage && !isLoading && (<p style={{ fontWeight: "900", color: "#BC53D9" }}>no more posts</p>)}
+          {!hasNextPage && !isLoading && (<p style={{ fontWeight: "900", color: "#BC53D9", textAlign:"center" }}>no more posts</p>)}
         </div>
       </PageLayout>
       {!hasNextPage && !isLoading && <Footer />}

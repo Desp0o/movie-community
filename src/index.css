@@ -92,7 +92,6 @@ button{
 }
 
 body {
-  display: block;
   width: 100%;
   overflow-x: hidden;
   background-color: unset;

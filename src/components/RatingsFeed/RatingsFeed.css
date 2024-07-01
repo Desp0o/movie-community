@@ -10,11 +10,12 @@
     overflow: hidden;
 }
 
-.RatingsFeed_title{
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: 150%; /* 27px */
+.RatingsFeed_title {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    /* 27px */
 }
 
 .UserRatingItem {
@@ -37,70 +38,73 @@ line-height: 150%; /* 27px */
     background-color: var(--Card-background);
 }
 
-.user_ratings_block{
+.user_ratings_block {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.rating_circle{
+.rating_circle {
     display: flex;
     width: 37px;
     height: 24px;
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
 }
 
-.rating_circle p{
+.rating_circle p {
     color: #FDC201;
-text-align: center;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 18px */
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    /* 18px */
 }
 
-.userName_userPos{
+.userName_userPos {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.user_rating{
+.user_rating {
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-.user_avatar_ratings{
+.user_avatar_ratings {
     width: 24px;
-height: 24px;
-border-radius: 24px;
+    height: 24px;
+    border-radius: 24px;
 }
 
-.user_rating p{
+.user_rating p {
     color: var(--white);
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: 150%; /* 18px */
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    /* 18px */
 }
 
-.ratings_points{
+.ratings_points {
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-.ratings_points p{
-color: var(--Secondary-400);
-font-size: 14px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 21px */
+.ratings_points p {
+    color: var(--Secondary-400);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    /* 21px */
 }
 
-.view_more_ratings{
+.view_more_ratings {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -109,20 +113,27 @@ line-height: 150%; /* 21px */
     cursor: pointer;
 }
 
-.view_more_dot_rating{
+.view_more_dot_rating {
     width: 3.1px;
-height: 3.487px;
-transform: rotate(42.024deg);
-border-radius: 0.775px;
-background: var(--Secondary-400);
-margin-top: 7px;
+    height: 3.487px;
+    transform: rotate(42.024deg);
+    border-radius: 0.775px;
+    background: var(--Secondary-400);
+    margin-top: 7px;
 
 }
 
-.view_more_dot_rating p{
+.view_more_dot_rating p {
     color: var(--white);
     font-size: 10px;
     font-style: normal;
     font-weight: 500;
-    line-height: 150%; /* 15px */
+    line-height: 150%;
+    /* 15px */
+}
+
+@media (max-width:768px) {
+    .RatingsFeed{
+        display: none;
+    }
 }
