@@ -498,19 +498,18 @@ line-height: 150%; /* 18px */
   min-width: 23px;
 }
 
-.replayed_comment_text{
-  display: flex;
-width: 426px;
-padding: 12px 8px;
-flex-shrink: 0;
-border-radius: 8px;
-border: 1px solid #1A453C;
-word-break: break-all;
-
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: 150%;
+.replayed_comment_text {
+  display: block; /* Change from flex to block for proper wrapping */
+  width: 426px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  border: 1px solid #1A453C;
+  white-space: pre-wrap; /* Preserve white spaces and allow text wrapping */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  word-break: break-word; /* Allow breaking words if they are too long */
 }
 
 .replay_dots{
