@@ -89,6 +89,10 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
     return <p className="replayed_comment_text">{highlightMentions(text)}</p>;
   };
 
+  const editReplay = () => {
+
+  }
+
   return (
     <>
       {replayedComments.map((item, index) => (
@@ -101,7 +105,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
                 {/* adding ref with index to each element */}
                 <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
                   <div>
-                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} />}
+                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} editCom={editReplay}/>}
                   </div>
                   <div onClick={() => showSettings(index)} className='dot_normal_pos'>
                     {item.user_id === user.userID && dotsForComments}
