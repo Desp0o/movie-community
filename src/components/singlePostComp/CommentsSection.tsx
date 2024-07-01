@@ -28,6 +28,8 @@ interface commentProps {
 }
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
+    const [fetchedCommentsData, setFetchedCommentsData] = useState([])
+    const [displayedComments, setDisplayedComments] = useState(10)
     const { user } = useUserHook()
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -41,6 +43,14 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     });
     const [isFaded, setFaded] = useState(true)
     const [visibleReplyIndex, setVisibleReplyIndex] = useState<number | null>(null);
+
+    useEffect(()=>{
+        setFetchedCommentsData(commentsData.slice(0, displayedComments))
+    },[displayedComments])
+
+    const loadMoreComments = () => {
+        setDisplayedComments(prev => prev + 10)
+    }
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -129,10 +139,11 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     return (
         <div className="comments_section">
+            <p className='vmc' onClick={loadMoreComments}>View more commnets</p>
             {
-                commentsData && (
+                fetchedCommentsData && (
                     <div className="comments_array">
-                        {commentsData.map((item: commentProps, index: number) => {
+                        {fetchedCommentsData.map((item: commentProps, index: number) => {
                             return (
                                 <div className="single_comment_parent" key={index}>
                                     <div className="single_comment">

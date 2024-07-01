@@ -11,7 +11,6 @@ const CreatePostFeed = () => {
     
     const openDefaultPostModal = () => {
         dispatch(setAddPostModal({defaultPost: true, pollPost: false, quizPost: false, showPostButtons: true}))
-
       }    
 
     return (

@@ -460,6 +460,13 @@ line-height: 150%; /* 18px */
   width: 5px;  
 }
 
+.comments_section{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
 .replayed_comments_section{
   display: flex;
   flex-direction: column;
