@@ -18,6 +18,7 @@ import LikeCommentShare from "../components/singlePostComp/LikeCommentShare";
 import BookmarkPost from "../components/singlePostComp/BookmarkPost";
 import CommentsSection from "../components/singlePostComp/CommentsSection";
 import Footer from "../components/footer/Footer";
+import Poll from "../components/singlePostComp/Poll";
 
 
 const Post = () => {
@@ -108,6 +109,10 @@ const Post = () => {
                 {data.post.type === 1 && <PostImage image={data.post.img} type={data.post.type} />}
                 {data.post.type === 0 && <PostVideo image={data.post.img} />}
               </div>
+            }
+
+            {
+              data?.post?.type === 3 && <Poll pollAnswers={data?.polls} refetch={refetch} data={data?.post?.myPoll} />
             }
 
             <LikeCommentShare

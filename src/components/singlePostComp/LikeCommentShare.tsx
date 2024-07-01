@@ -7,6 +7,7 @@ import IconBlock from './IconBlock';
 import { Link } from 'react-router-dom';
 import { commentsIcon, commentsIconFilled } from '../../assets/newSvg/commentsIcon';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import { useLoginModal } from '../../hooks/useLoginModal';
 
 interface LikeCommentShareProps {
   authGul?: number;
@@ -21,7 +22,7 @@ interface LikeCommentShareProps {
 const LikeCommentShare: React.FC<LikeCommentShareProps> = ({ authGul = 0, guls = 0, postID, commentLength, refetchCallBack }) => {
   const { Guling } = GulingFuction();
   const { user } = useUserHook();
-
+  const { handleVisibility } = useLoginModal()
   const [commentIcon, setCommentIcon] = useState(commentLength !== 0 ? commentsIconFilled : commentsIcon);
   const [heartIcon, setHeartIcon] = useState(authGul === 1 ? likeIconFilled : likeIcon);
   const [isHeartClicked, setHeartClicked] = useState(authGul === 1);
@@ -39,6 +40,8 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({ authGul = 0, guls =
         setHeartIcon(likeIconFilled);
         setLikeCount((prev) => prev + 1);
       }
+    }else{
+      handleVisibility()
     }
   };
 
