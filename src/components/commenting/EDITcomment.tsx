@@ -1,9 +1,8 @@
 import axios from "axios";
-import { SetStateAction } from "react";
 
 const token = localStorage.getItem("token");
 
-export const editComment = async (callback:()=>void, comID: number, commentValue: unknown, setter: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; }, editTextArea:boolean) => {
+export const editComment = async (refetchCallback:()=>void, comID: number, commentValue: unknown, setter: void) => {
     try {
       await axios.post(
         `${import.meta.env.VITE_EDIT_COMMENT}${comID}`,
@@ -14,8 +13,8 @@ export const editComment = async (callback:()=>void, comID: number, commentValue
           },
         }
       );
-      callback()
-      setter(!editTextArea);
+      setter
+      refetchCallback()
     } catch (error: unknown) {
       console.error(error);
     }
