@@ -182,7 +182,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {item.comments.length > 5 && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item.comments.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
