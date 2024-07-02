@@ -31,6 +31,12 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   const [replIndex, setReplIndex] = useState<number | null>(null);
   const commentPanelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [makeActive, setMakeActive] = useState(false)
+  const [reversedComments, setReversedComments] = useState<RepliesProps['replayedComments']>([]);
+
+  useEffect(() => {
+    // Create a copy of the array and reverse it
+    setReversedComments(replayedComments.reverse());
+  }, [replayedComments]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -100,7 +106,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
 
   return (
     <>
-      {replayedComments.map((item, index) => (
+      {reversedComments.reverse().map((item, index) => (
         <div key={index}>
           <div className="replayed_comment_parent">
             {/* რეფლაი კომენტარის ტექსტი და replay ღილაკი */}

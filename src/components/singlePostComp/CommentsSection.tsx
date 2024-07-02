@@ -34,7 +34,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const [lastTwoComment, setLastTwoComment] = useState([])
     const [displayedComments, setDisplayedComments] = useState(2) //how many comments show 
     const [fullLengtComments, setFullLengthComments] = useState(0)
-    const [repliesLength, setRepliesLength] = useState(1) //how many replies show
+    const [repliesLength, setRepliesLength] = useState(-1) //how many replies show
     const [isReadyEdit, setIsReadyEdit] = useState({
         isReady: false,
         comID: 0
@@ -71,7 +71,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     }
 
     const showMoreReplies = () => {
-        setRepliesLength(prev => prev + 5)
+        setRepliesLength(prev => prev - 5)
     }
     ////////////////
 
@@ -217,13 +217,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item?.comments?.length > 1 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item?.comments?.length > 1 && item.comments.length > (repliesLength * -1)) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
                                     {item?.comments?.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
+                                            <Replies replayedComments={item.comments.slice(repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
 
