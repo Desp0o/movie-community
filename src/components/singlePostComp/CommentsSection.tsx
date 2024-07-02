@@ -31,10 +31,9 @@ interface commentProps {
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
     const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
-    const [lastTwoComment, setLastTwoComment] = useState([])
-    const [displayedComments, setDisplayedComments] = useState(2) //how many comments show 
+    const [displayedComments, setDisplayedComments] = useState(5) //how many comments show 
     const [fullLengtComments, setFullLengthComments] = useState(0)
-    const [repliesLength, setRepliesLength] = useState(-1) //how many replies show
+    const [repliesLength, setRepliesLength] = useState(2) //how many replies show
     const [isReadyEdit, setIsReadyEdit] = useState({
         isReady: false,
         comID: 0
@@ -57,21 +56,19 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     // comments load
     useEffect(() => {
-        setFetchedCommentsData(commentsData.slice(0, displayedComments))
-        if (commentsData.length > 2) {
-            const newData = commentsData.slice(0, -3)
-            setFetchedCommentsData(newData.slice(0, displayedComments))
-        }
-
+        const reversed = [...commentsData].reverse();
+        setFetchedCommentsData(reversed.slice(0, displayedComments))
         setFullLengthComments(commentsData.length)
     }, [displayedComments, commentsData])
 
     const loadMoreComments = () => {
-        setDisplayedComments(prev => prev + 5)
+        setDisplayedComments(prev => prev + 10)
+        console.log(displayedComments);
+        console.log(fullLengtComments);
     }
 
     const showMoreReplies = () => {
-        setRepliesLength(prev => prev - 5)
+        setRepliesLength(prev => prev + 5)
     }
     ////////////////
 
@@ -169,8 +166,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         }
 
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
+        console.log(isReadyEdit.comID);
     }
-
 
     // change buttons for comment edit or new commnet
     useEffect(() => {
@@ -179,13 +176,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         }
     }, [isReadyEdit.isReady])
 
-    useEffect(() => {
-        setLastTwoComment(commentsData.slice(-3))
-    }, [commentsData])
-
     return (
         <div className="comments_section">
-
             {
                 fetchedCommentsData && (
                     <div className="comments_array">
@@ -217,13 +209,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item?.comments?.length > 1 && item.comments.length > (repliesLength * -1)) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
                                     {item?.comments?.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments.slice(repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
+                                            <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
 
@@ -242,63 +234,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                     </div>
                 )
             }
+            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
 
-            {/* //last comments are shown */}
-            {/* andded random number to index to avoid multiple settings panel */}
-            {
-                commentsData.length > 2 && lastTwoComment.map((item: commentProps, index) => {
-                    return (
-                        <div className="single_comment_parent" key={index + 198}>
-                            <div className="single_comment">
-                                <div className='single_comment_inner'>
-                                    <p className="single_comment_userName">{item?.user?.name}</p>
-                                    <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
-                                </div>
-
-                                {
-                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index + 198] = el)} className='dot_normal_pos' onClick={() => showSettings(index + 198)}>
-                                        {dotsForComments}
-                                    </span>
-                                        {index + 198 === settingActiveIndex && <div className="comment_panel_and_dots">
-                                            <div>
-                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
-                                            </div>
-                                        </div>}
-                                    </>
-                                }
-                            </div>
-
-                            {/* repplays */}
-                            <div className="single_comment_date_replay">
-                                <DateFormater date={item.created_at} />
-                                <p className="single_comment_replay" onClick={() => toggleReply(index)}>
-                                    Reply
-                                </p>
-                                {(item?.comments?.length > 1 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
-
-                            </div>
-
-                            {item?.comments?.length > 0 &&
-                                <div className='replayed_comments_section'>
-                                    <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
-                                </div>
-                            }
-
-                            {/* replay container */}
-
-                            <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
-                                {
-                                    <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
-                                }
-
-
-                            </div>
-                        </div>
-                    )
-                })
-            }
-
-            {(commentsData.length > 5 && displayedComments < fullLengtComments - 3) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
             {user.name && localStorage.getItem("token")
                 ?
                 <div className="write_comment">

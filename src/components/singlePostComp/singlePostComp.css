@@ -381,6 +381,15 @@ margin-top: -10px;
   /* 18px */
 }
 
+.view_all_replies{
+  cursor: pointer;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 150%;
+padding-left: 86px;
+  display: flex;
+}
+
 .single_Replay{
   padding-top: 4px;
   display: flex;
