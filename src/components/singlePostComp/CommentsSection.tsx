@@ -176,7 +176,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     useEffect(() => {
         setLastTwoComment(commentsData.slice(-3))
-    }, [])
+    }, [commentsData])
 
     return (
         <div className="comments_section">
