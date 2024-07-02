@@ -58,11 +58,16 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     // comments load
     useEffect(() => {
         setFetchedCommentsData(commentsData.slice(0, displayedComments))
-        setFullLengthComments(commentsData.length - 3)
+        if(commentsData.length > 2){
+            const newData = commentsData.slice(0, -3)
+            setFetchedCommentsData(newData.slice(0, displayedComments))
+        }
+
+        setFullLengthComments(commentsData.length)
     }, [displayedComments, commentsData])
 
     const loadMoreComments = () => {
-        setDisplayedComments(prev => prev + 10)
+        setDisplayedComments(prev => prev + 5)
     }
 
     const showMoreReplies = () => {
@@ -238,7 +243,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                 )
             }
             {
-                lastTwoComment.map((item: commentProps, index) => {
+                commentsData.length > 2 && lastTwoComment.map((item: commentProps, index) => {
                     return (
                         <div className="single_comment_parent" key={index}>
                             <div className="single_comment">
@@ -266,7 +271,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                 <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                     Reply
                                 </p>
-                                {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                {(item?.comments?.length > 1 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                             </div>
 
@@ -290,7 +295,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                 })
             }
 
-            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
+            {(commentsData.length > 5 && displayedComments < fullLengtComments - 3) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
             {user.name && localStorage.getItem("token")
                 ?
                 <div className="write_comment">
