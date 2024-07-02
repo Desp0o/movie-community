@@ -31,9 +31,10 @@ interface commentProps {
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
     const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
-    const [displayedComments, setDisplayedComments] = useState(10) //how many comments show 
+    const [lastTwoComment, setLastTwoComment] = useState([])
+    const [displayedComments, setDisplayedComments] = useState(2) //how many comments show 
     const [fullLengtComments, setFullLengthComments] = useState(0)
-    const [repliesLength, setRepliesLength] = useState(5) //how many replies show
+    const [repliesLength, setRepliesLength] = useState(1) //how many replies show
     const [isReadyEdit, setIsReadyEdit] = useState({
         isReady: false,
         comID: 0
@@ -57,13 +58,11 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     // comments load
     useEffect(() => {
         setFetchedCommentsData(commentsData.slice(0, displayedComments))
-        setFullLengthComments(commentsData.length)
+        setFullLengthComments(commentsData.length - 3)
     }, [displayedComments, commentsData])
 
     const loadMoreComments = () => {
         setDisplayedComments(prev => prev + 10)
-        console.log(displayedComments);
-        console.log(fullLengtComments);
     }
 
     const showMoreReplies = () => {
@@ -159,25 +158,29 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     // get comment textcontent for edit
     const getCommentForEdit = (id: number) => {
-        if(singleCommentTextRef.current){
+        if (singleCommentTextRef.current) {
             const textContent = singleCommentTextRef.current.textContent ?? '';
             setCommentValue({ ...commentValue, text: textContent });
         }
 
-        setIsReadyEdit({...isReadyEdit, isReady: true, comID: id})
+        setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
         console.log(isReadyEdit.comID);
     }
 
     // change buttons for comment edit or new commnet
-    useEffect(()=>{
-       if(!isReadyEdit.isReady){
-        setCommentValue({...commentValue, text: ""})
-       }
-    },[isReadyEdit.isReady])
+    useEffect(() => {
+        if (!isReadyEdit.isReady) {
+            setCommentValue({ ...commentValue, text: "" })
+        }
+    }, [isReadyEdit.isReady])
+
+    useEffect(() => {
+        setLastTwoComment(commentsData.slice(-3))
+    }, [])
 
     return (
         <div className="comments_section">
-            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
+
             {
                 fetchedCommentsData && (
                     <div className="comments_array">
@@ -196,7 +199,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                             </span>
                                                 {index === settingActiveIndex && <div className="comment_panel_and_dots">
                                                     <div>
-                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit}/>
+                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
                                                     </div>
                                                 </div>}
                                             </>
@@ -234,28 +237,81 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                     </div>
                 )
             }
-            
-            {user.name && localStorage.getItem("token") 
+            {
+                lastTwoComment.map((item: commentProps, index) => {
+                    return (
+                        <div className="single_comment_parent" key={index}>
+                            <div className="single_comment">
+                                <div className='single_comment_inner'>
+                                    <p className="single_comment_userName">{item?.user?.name}</p>
+                                    <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
+                                </div>
+
+                                {
+                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
+                                        {dotsForComments}
+                                    </span>
+                                        {index === settingActiveIndex && <div className="comment_panel_and_dots">
+                                            <div>
+                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
+                                            </div>
+                                        </div>}
+                                    </>
+                                }
+                            </div>
+
+                            {/* repplays */}
+                            <div className="single_comment_date_replay">
+                                <DateFormater date={item.created_at} />
+                                <p className="single_comment_replay" onClick={() => toggleReply(index)}>
+                                    Reply
+                                </p>
+                                {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+
+                            </div>
+
+                            {item?.comments?.length > 0 &&
+                                <div className='replayed_comments_section'>
+                                    <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
+                                </div>
+                            }
+
+                            {/* replay container */}
+
+                            <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
+                                {
+                                    <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
+                                }
+
+
+                            </div>
+                        </div>
+                    )
+                })
+            }
+
+            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
+            {user.name && localStorage.getItem("token")
                 ?
                 <div className="write_comment">
-                <Author avatar={user.avatar} />
-                <textarea
-                    ref={writeCommentRef}
-                    value={commentValue.text}
-                    placeholder="Write comment..."
-                    className="write_comment_input"
-                    onChange={(e) => setCommentValue({ ...commentValue, text: e.target.value })}
-                />
-                {!isReadyEdit.isReady && <span onClick={sendComment}><CommentBtn text='Add Comment' faded={isFaded} /></span>} 
-                {isReadyEdit.isReady &&  <span
-                                             onClick={()=> editComment(refetch, isReadyEdit.comID, commentValue, setIsReadyEdit({...isReadyEdit, isReady: false}))}>
-                                            <CommentBtn text='Edit Comment' faded={isFaded} />
-                                         </span>
+                    <Author avatar={user.avatar} />
+                    <textarea
+                        ref={writeCommentRef}
+                        value={commentValue.text}
+                        placeholder="Write comment..."
+                        className="write_comment_input"
+                        onChange={(e) => setCommentValue({ ...commentValue, text: e.target.value })}
+                    />
+                    {!isReadyEdit.isReady && <span onClick={sendComment}><CommentBtn text='Add Comment' faded={isFaded} /></span>}
+                    {isReadyEdit.isReady && <span
+                        onClick={() => editComment(refetch, isReadyEdit.comID, commentValue, setIsReadyEdit({ ...isReadyEdit, isReady: false }))}>
+                        <CommentBtn text='Edit Comment' faded={isFaded} />
+                    </span>
+                    }
+                </div>
+                : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
             }
-            </div>
-            : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
-            }
-            
+
 
         </div>
     )

@@ -7,9 +7,10 @@ interface ReplayCommentProps {
   feedID: number;
   refetchCallback: () => void;
   mentionedUser: string;
+  setter?:()=>void
 }
 
-const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser }) => {
+const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser, setter }) => {
   const textareaRef = useRef<HTMLDivElement>(null);
   const [replayValue, setReplayValue] = useState('');
   const [isFaded, setFaded] = useState(true);
@@ -24,7 +25,6 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
 
   const sendReplay = async () => {
     const token = localStorage.getItem('token');
-console.log(feedID);
 
     if (replayValue !== '') {
       try {
@@ -40,7 +40,9 @@ console.log(feedID);
         setReplayValue('');
         setFaded(true);
         console.log(res.data);
-        
+        if(setter){
+          setter()
+        }
       } catch (error) {
         console.error(error);
       } finally {

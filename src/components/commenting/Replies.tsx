@@ -12,6 +12,9 @@ interface RepliesProps {
     text: string;
     user_id: number;
     feed_id: number;
+    user:{
+      name:string;
+    }
   }[];
   mainCommentID: number;
   refetchCallBack: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>;
@@ -19,6 +22,7 @@ interface RepliesProps {
 
 interface CommentProp {
   text: string;
+ 
 }
 
 const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refetchCallBack }) => {
@@ -26,6 +30,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [replIndex, setReplIndex] = useState<number | null>(null);
   const commentPanelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [makeActive, setMakeActive] = useState(false)
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -56,7 +61,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
 
   const showReplay = (index: number) => {
     setReplIndex((prevIndex) => (prevIndex === index ? null : index));
-    console.log(mainCommentID);
+    setMakeActive(true)
   };
 
   const highlightMentions = (text: string) => {
@@ -100,6 +105,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
           <div className="replayed_comment_parent">
             {/* რეფლაი კომენტარის ტექსტი და replay ღილაკი */}
             <div>
+            <p className='replayed_comment_user_name'>{item.user.name}</p>
               <div className="replayed_comment">
                <Comment text={item.text} />
                 {/* adding ref with index to each element */}
@@ -117,10 +123,10 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
               </p>
             </div>
           </div>
-          <div className={replIndex === index ? 'replay_container visible' : 'replay_container'}>
+          <div className={(replIndex === index && makeActive) ? 'replay_container visible' : 'replay_container'}>
             <div className='replay_for_replie'>
               {
-                <ReplayComment id={item.id} feedID={item.feed_id} refetchCallback={refetchCallBack} mentionedUser={item.text} />
+                <ReplayComment setter={()=>setMakeActive(false)}id={mainCommentID} feedID={item.feed_id} refetchCallback={refetchCallBack} mentionedUser={item.user.name} />
               }
             </div>
           </div>
