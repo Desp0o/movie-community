@@ -159,18 +159,15 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
 
     // get comment textcontent for edit
-    const getCommentForEdit = (id: number, text:string) => {
-        if (singleCommentTextRef.current) {
-            const textContent = singleCommentTextRef.current.textContent ?? '';
-            setCommentValue({ ...commentValue, text: textContent });
-        }
+    const getCommentForEdit = (id: number, text: string) => {
+
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
+        setCommentValue({ ...commentValue, text: text })
 
         if (writeCommentRef.current) {
             writeCommentRef.current.scrollIntoView({ behavior: 'smooth' });
         }
 
-        setCommentValue({...commentValue, text:text})
     }
 
     // change buttons for comment edit or new commnet
@@ -200,7 +197,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                             </span>
                                                 {index === settingActiveIndex && <div className="comment_panel_and_dots">
                                                     <div>
-                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={()=>getCommentForEdit(item.id, item.text)} />
+                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={() => getCommentForEdit(item.id, item.text)} />
                                                     </div>
                                                 </div>}
                                             </>
