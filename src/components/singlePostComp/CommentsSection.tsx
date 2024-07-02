@@ -42,10 +42,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const { user } = useUserHook()
     const { handleVisibility } = useLoginModal();
     const singleCommentTextRef = useRef<HTMLParagraphElement>(null);
-    const lastTwoCommentRef = useRef<HTMLParagraphElement>(null);
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
-    const commentPaneLastTwoComlRefs = useRef<(HTMLSpanElement | null)[]>([]);
     const [settingActiveIndex, setSettingActiveIndex] = useState<number | null>(null)
     const [commentValue, setCommentValue] = useState<{
         img: File | undefined;
@@ -60,7 +58,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     // comments load
     useEffect(() => {
         setFetchedCommentsData(commentsData.slice(0, displayedComments))
-        if(commentsData.length > 2){
+        if (commentsData.length > 2) {
             const newData = commentsData.slice(0, -3)
             setFetchedCommentsData(newData.slice(0, displayedComments))
         }
@@ -173,14 +171,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
     }
 
-    const getLastCommentForEdit = (id: number) => {
-        if (lastTwoCommentRef.current) {
-            const textContent = lastTwoCommentRef.current.textContent ?? '';
-            setCommentValue({ ...commentValue, text: textContent });
-        }
-
-        setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
-    }
 
     // change buttons for comment edit or new commnet
     useEffect(() => {
@@ -254,23 +244,24 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
             }
 
             {/* //last comments are shown */}
+            {/* andded random number to index to avoid multiple settings panel */}
             {
                 commentsData.length > 2 && lastTwoComment.map((item: commentProps, index) => {
                     return (
-                        <div className="single_comment_parent" key={index+198}>
+                        <div className="single_comment_parent" key={index + 198}>
                             <div className="single_comment">
                                 <div className='single_comment_inner'>
                                     <p className="single_comment_userName">{item?.user?.name}</p>
-                                    <p className="single_comment_text" ref={lastTwoCommentRef}>{item?.text}</p>
+                                    <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
                                 </div>
 
                                 {
-                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPaneLastTwoComlRefs.current[index+198] = el)} className='dot_normal_pos' onClick={() => showSettings(index+198)}>
+                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index + 198] = el)} className='dot_normal_pos' onClick={() => showSettings(index + 198)}>
                                         {dotsForComments}
                                     </span>
-                                        {index+198 === settingActiveIndex && <div className="comment_panel_and_dots">
+                                        {index + 198 === settingActiveIndex && <div className="comment_panel_and_dots">
                                             <div>
-                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getLastCommentForEdit} />
+                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
                                             </div>
                                         </div>}
                                     </>
