@@ -42,8 +42,10 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const { user } = useUserHook()
     const { handleVisibility } = useLoginModal();
     const singleCommentTextRef = useRef<HTMLParagraphElement>(null);
+    const lastTwoCommentRef = useRef<HTMLParagraphElement>(null);
     const writeCommentRef = useRef<HTMLTextAreaElement>(null)
     const commentPanelRefs = useRef<(HTMLSpanElement | null)[]>([]);
+    const commentPaneLastTwoComlRefs = useRef<(HTMLSpanElement | null)[]>([]);
     const [settingActiveIndex, setSettingActiveIndex] = useState<number | null>(null)
     const [commentValue, setCommentValue] = useState<{
         img: File | undefined;
@@ -169,7 +171,15 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         }
 
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
-        console.log(isReadyEdit.comID);
+    }
+
+    const getLastCommentForEdit = (id: number) => {
+        if (lastTwoCommentRef.current) {
+            const textContent = lastTwoCommentRef.current.textContent ?? '';
+            setCommentValue({ ...commentValue, text: textContent });
+        }
+
+        setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
     }
 
     // change buttons for comment edit or new commnet
@@ -217,7 +227,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item?.comments?.length > 1 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
@@ -242,23 +252,25 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                     </div>
                 )
             }
+
+            {/* //last comments are shown */}
             {
                 commentsData.length > 2 && lastTwoComment.map((item: commentProps, index) => {
                     return (
-                        <div className="single_comment_parent" key={index}>
+                        <div className="single_comment_parent" key={index+198}>
                             <div className="single_comment">
                                 <div className='single_comment_inner'>
                                     <p className="single_comment_userName">{item?.user?.name}</p>
-                                    <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
+                                    <p className="single_comment_text" ref={lastTwoCommentRef}>{item?.text}</p>
                                 </div>
 
                                 {
-                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPanelRefs.current[index] = el)} className='dot_normal_pos' onClick={() => showSettings(index)}>
+                                    item?.user?.id === user.userID && <><span ref={(el) => (commentPaneLastTwoComlRefs.current[index+198] = el)} className='dot_normal_pos' onClick={() => showSettings(index+198)}>
                                         {dotsForComments}
                                     </span>
-                                        {index === settingActiveIndex && <div className="comment_panel_and_dots">
+                                        {index+198 === settingActiveIndex && <div className="comment_panel_and_dots">
                                             <div>
-                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
+                                                <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getLastCommentForEdit} />
                                             </div>
                                         </div>}
                                     </>
