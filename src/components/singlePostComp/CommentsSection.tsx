@@ -159,14 +159,18 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
 
     // get comment textcontent for edit
-    const getCommentForEdit = (id: number) => {
+    const getCommentForEdit = (id: number, text:string) => {
         if (singleCommentTextRef.current) {
             const textContent = singleCommentTextRef.current.textContent ?? '';
             setCommentValue({ ...commentValue, text: textContent });
         }
-
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
-        console.log(isReadyEdit.comID);
+
+        if (writeCommentRef.current) {
+            writeCommentRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        setCommentValue({...commentValue, text:text})
     }
 
     // change buttons for comment edit or new commnet
@@ -187,7 +191,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                     <div className="single_comment">
                                         <div className='single_comment_inner'>
                                             <p className="single_comment_userName">{item?.user?.name}</p>
-                                            <p className="single_comment_text" ref={singleCommentTextRef}>{item?.text}</p>
+                                            <p className="single_comment_text" ref={(singleCommentTextRef)}>{item?.text}</p>
                                         </div>
 
                                         {
@@ -196,7 +200,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                             </span>
                                                 {index === settingActiveIndex && <div className="comment_panel_and_dots">
                                                     <div>
-                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={getCommentForEdit} />
+                                                        <SettingForComment commentID={item?.id} refetchCallbac={refetch} editCom={()=>getCommentForEdit(item.id, item.text)} />
                                                     </div>
                                                 </div>}
                                             </>
