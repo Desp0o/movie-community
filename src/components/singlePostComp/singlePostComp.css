@@ -38,6 +38,12 @@
   transition: all .3s ease;
 }
 
+.IconBlock span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .IconBlock:hover{
   background: var(--Primary-600);
   transition: all .3s ease;
@@ -724,4 +730,10 @@ cursor: pointer;
 .single_Replay{
     width: 100%;
 }
+}
+
+.rrg{
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }

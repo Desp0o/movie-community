@@ -10,6 +10,7 @@ import { dotsForComments } from '../../assets/newSvg/dotsForComments'
 import SettingForComment from '../commenting/SettingForComment'
 import { editComment } from '../commenting/EDITcomment'
 import { useLoginModal } from '../../hooks/useLoginModal'
+import CommentLikeSection from '../commenting/CommentLikeSection'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -22,6 +23,8 @@ interface commentProps {
     id: number;
     comments: [];
     text: string;
+    myCommGul:number;
+    guls:number;
     created_at: string;
     user: {
         name: string;
@@ -70,7 +73,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
     const showMoreReplies = () => {
         setRepliesLength(prev => prev + 5)
     }
-    ////////////////
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -204,9 +206,16 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         }
                                     </div>
 
-                                    {/* repplays */}
+                                    {/* replies */}
                                     <div className="single_comment_date_replay">
                                         <DateFormater date={item.created_at} />
+                                        <CommentLikeSection 
+                                            
+                                            myCommGul={item.myCommGul} 
+                                             
+                                            guls={item.guls} 
+                                            commentId={item.id}
+                                        />
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
@@ -220,14 +229,12 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         </div>
                                     }
 
-                                    {/* replay container */}
+                                    {/* reply container */}
 
                                     <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
                                         {
                                             <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
                                         }
-
-
                                     </div>
                                 </div>
                             );
@@ -257,8 +264,6 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                 </div>
                 : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
             }
-
-
         </div>
     )
 }
@@ -276,3 +281,5 @@ export const CommentBtn: React.FC<CommentBtnProps> = ({ faded, text }) => {
         </div>
     )
 }
+
+

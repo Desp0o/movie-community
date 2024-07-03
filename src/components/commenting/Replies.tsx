@@ -5,6 +5,7 @@ import SettingForComment from './SettingForComment';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import ReplayComment from './ReplayComment';
 import { JSX } from 'react/jsx-runtime';
+import CommentLikeSection from './CommentLikeSection';
 
 interface RepliesProps {
   replayedComments: {
@@ -12,6 +13,7 @@ interface RepliesProps {
     text: string;
     user_id: number;
     feed_id: number;
+    guls: number;
     user:{
       name:string;
     }
@@ -29,6 +31,7 @@ interface fetchedDataProps{
   id: number;
   feed_id:number;
   user_id: number;
+  guls:number;
   user:{
     name:string;
   }
@@ -132,9 +135,12 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
                   </div>
                 </div>
               </div>
+              <div className='rrg'>
+              <CommentLikeSection myCommGul={0} guls={item.guls} commentId={item.id} />
               <p className='single_comment_replay' onClick={() => showReplay(index)}>
                 Replay
               </p>
+              </div>
             </div>
           </div>
           <div className={replIndex === index ? 'replay_container visible' : 'replay_container'}>
