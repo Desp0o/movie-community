@@ -4,7 +4,6 @@ import { useUserHook } from '../../hooks/useUserHook';
 import SettingForComment from './SettingForComment';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import ReplayComment from './ReplayComment';
-import { JSX } from 'react/jsx-runtime';
 import CommentLikeSection from './CommentLikeSection';
 import DateFormater from '../dateFormater/DateFormater';
 import { useDispatch, useSelector } from 'react-redux';
@@ -99,42 +98,63 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
     }
   };
 
-  const showReplay = (index: number) => {
-    setReplIndex((prevIndex) => (prevIndex === index ? null : index));
-    dispatch(setSecondaryReplayInput());
-  };
-
   useEffect(() => {
     if (!secondaryReplayRedux) {
       setReplIndex(null);
     }
   }, [secondaryReplayRedux]);
 
-  const highlightMentions = (text: string = '') => {
-    const mentionRegex = /@[\w]+(?:\s[\w]+)*/g;
-    const parts = text.split(mentionRegex);
-    const matches = text.match(mentionRegex);
-    const combined: (string | JSX.Element)[] = [];
-    parts.forEach((part, index) => {
-      combined.push(part);
-      if (matches && matches[index]) {
+  const highlightMentions = (text = '') => {
+    const mentionRegex = /@[\w]+\s[\w]+/g; // Matches @ followed by words with spaces
+    const combined = [];
+
+    let match;
+    let lastIndex = 0;
+
+    // Use regex to find all mentions in the text
+    while ((match = mentionRegex.exec(text)) !== null) {
+        const { 0: mention, index: matchIndex } = match;
+
+        // Add text before the mention
+        if (matchIndex > lastIndex) {
+            combined.push(text.slice(lastIndex, matchIndex));
+        }
+
+        // Add the mention with styling
         combined.push(
-          <span key={index} style={{ color: '#309782', fontWeight: "500", wordWrap: "break-word" }}>
-            {matches[index]}
-          </span>
+            <span key={matchIndex} style={{ color: '#309782', fontWeight: '500', wordWrap: 'break-word' }}>
+                {mention}
+            </span>
         );
-      }
-    });
+
+        // Update the last index
+        lastIndex = mentionRegex.lastIndex;
+    }
+
+    // Add the remaining text after the last mention
+    if (lastIndex < text.length) {
+        combined.push(text.slice(lastIndex));
+    }
+
     return combined;
-  };
+};
+
+
 
   const Comment: React.FC<CommentProp> = ({ text = '' }) => {
     return <p className="replayed_comment_text">{highlightMentions(text)}</p>;
   };
 
+  const showReplay = (index: number) => {
+    setReplIndex((prevIndex) => (prevIndex === index ? null : index));
+    dispatch(setSecondaryReplayInput());
+    setIsReadyEdit({...isReadyEdit,isReady:false})
+  };
+
   const editReplay = (id: number, index: number) => {
     setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id });
     setReplIndex(index);
+    dispatch(setSecondaryReplayInput())
   };
 
   return (
@@ -188,11 +208,13 @@ interface EditReplayProps {
 
 const EditReplay: React.FC<EditReplayProps> = ({ commentID, text, refetchCallback }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [textValue, setTextValue] = useState('');
-
-  useEffect(() => {
-    setTextValue(text || ''); // Ensure text is a string
-  }, [text]);
+  const [commentValue, setCommentValue] = useState<{
+    img: File | undefined;
+    text: string;
+}>({
+    img: undefined,
+    text: text,
+});
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -206,11 +228,11 @@ const EditReplay: React.FC<EditReplayProps> = ({ commentID, text, refetchCallbac
         textareaRef.current.style.overflow = 'hidden';
       }
     }
-  }, [textValue]);
+    console.log(commentValue);
+    
+  }, [commentValue]);
 
-  const handleEditComment = () => {
-    editComment(refetchCallback, commentID, textValue);
-  };
+
 
   return (
     <div className="single_Replay">
@@ -219,10 +241,10 @@ const EditReplay: React.FC<EditReplayProps> = ({ commentID, text, refetchCallbac
         className="replay_textarea"
         ref={textareaRef}
         placeholder=''
-        onChange={(e) => setTextValue(e.target.value)}
-        value={textValue}
+        onChange={(e) => setCommentValue({...commentValue, text: e.target.value})}
+        value={commentValue.text}
       />
-      <div className="replay_btn active" onClick={handleEditComment}>
+      <div className="replay_btn active" onClick={()=> editComment(refetchCallback, commentID, commentValue, setCommentValue({...commentValue, text: ""}))}>
         <p>Edit</p>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import "../../pages/post.css";
+import { useDispatch } from 'react-redux';
+import { setSecondaryReplayFalse } from '../../Redux/commentsSlicer';
 
 interface ReplayCommentProps {
   id: number;
@@ -11,7 +13,7 @@ interface ReplayCommentProps {
 }
 
 const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser, setter }) => {
-
+  const dispatch = useDispatch()
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [replayValue, setReplayValue] = useState(`@${mentionedUser} `);
   const [isFaded, setFaded] = useState(true);
@@ -38,9 +40,10 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
             Authorization: `Bearer ${token}`
           }
         });
-        setReplayValue(`@${mentionedUser}`);
+        setReplayValue(`@${mentionedUser} `);
         setFaded(true);
         console.log(res.data);
+        dispatch(setSecondaryReplayFalse());
         if(setter){
           setter()
         }

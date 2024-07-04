@@ -183,9 +183,14 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id })
         setCommentValue({ ...commentValue, text: text })
 
-        if (writeCommentRef.current) {
-            writeCommentRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+        // if (writeCommentRef.current) {
+        //     writeCommentRef.current.scrollIntoView({ behavior: 'smooth' });
+        // }
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // This makes the scroll smooth
+        });
 
     }
 
@@ -198,6 +203,26 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     return (
         <div className="comments_section">
+            {user.name && localStorage.getItem("token")
+                ?
+                <div className="write_comment">
+                    <Author avatar={user.avatar} />
+                    <textarea
+                        ref={writeCommentRef}
+                        value={commentValue.text}
+                        placeholder="Write comment..."
+                        className="write_comment_input"
+                        onChange={(e) => setCommentValue({ ...commentValue, text: e.target.value })}
+                    />
+                    {!isReadyEdit.isReady && <span onClick={sendComment}><CommentBtn text='Add Comment' faded={isFaded} /></span>}
+                    {isReadyEdit.isReady && <span
+                        onClick={() => editComment(refetch, isReadyEdit.comID, commentValue, setIsReadyEdit({ ...isReadyEdit, isReady: false }))}>
+                        <CommentBtn text='Edit Comment' faded={isFaded} />
+                    </span>
+                    }
+                </div>
+                : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
+            }
             {
                 fetchedCommentsData && (
                     <div className="comments_array">
@@ -259,28 +284,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                     </div>
                 )
             }
-            {(commentsData.length > 10 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
-
-            {user.name && localStorage.getItem("token")
-                ?
-                <div className="write_comment">
-                    <Author avatar={user.avatar} />
-                    <textarea
-                        ref={writeCommentRef}
-                        value={commentValue.text}
-                        placeholder="Write comment..."
-                        className="write_comment_input"
-                        onChange={(e) => setCommentValue({ ...commentValue, text: e.target.value })}
-                    />
-                    {!isReadyEdit.isReady && <span onClick={sendComment}><CommentBtn text='Add Comment' faded={isFaded} /></span>}
-                    {isReadyEdit.isReady && <span
-                        onClick={() => editComment(refetch, isReadyEdit.comID, commentValue, setIsReadyEdit({ ...isReadyEdit, isReady: false }))}>
-                        <CommentBtn text='Edit Comment' faded={isFaded} />
-                    </span>
-                    }
-                </div>
-                : <p className='pltc' onClick={handleVisibility}>Please log in to comment.</p>
-            }
+            {(commentsData.length > 5 && displayedComments < fullLengtComments) && <p className='vmc' onClick={loadMoreComments}>View more commnets</p>}
         </div>
     )
 }
