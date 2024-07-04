@@ -11,6 +11,8 @@ import SettingForComment from '../commenting/SettingForComment'
 import { editComment } from '../commenting/EDITcomment'
 import { useLoginModal } from '../../hooks/useLoginModal'
 import CommentLikeSection from '../commenting/CommentLikeSection'
+import { setMainReplayInput } from '../../Redux/commentsSlicer'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface CommentsSectionProps {
     commentsData: [];
@@ -32,7 +34,15 @@ interface commentProps {
     }
 }
 
+interface RootState{
+    comRepStroe:{
+        mainReplay: boolean
+    }
+}
+
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
+    const mainReplayRedux = useSelector((state: RootState)=>state.comRepStroe.mainReplay)
+    const dispatch = useDispatch()
     const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
     const [displayedComments, setDisplayedComments] = useState(5) //how many comments show 
     const [fullLengtComments, setFullLengthComments] = useState(0)
@@ -76,7 +86,14 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
     const toggleReply = (index: number) => {
         setVisibleReplyIndex((prevIndex) => (prevIndex === index ? null : index));
+        dispatch(setMainReplayInput())
     };
+
+    useEffect(()=>{
+        if(!mainReplayRedux){
+            setVisibleReplyIndex(null)
+        }
+    },[mainReplayRedux])
 
     const showSettings = (index: number) => {
         if (index === settingActiveIndex) {
@@ -231,7 +248,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     {/* reply container */}
 
-                                    <div className={visibleReplyIndex === index ? 'replay_container visible' : 'replay_container '}>
+                                    <div className={visibleReplyIndex === index && mainReplayRedux ? 'replay_container visible' : 'replay_container '}>
                                         {
                                             <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
                                         }

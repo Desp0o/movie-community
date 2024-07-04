@@ -8,14 +8,18 @@ const commentSlicer = createSlice({
     },
     reducers:{
         setSecondaryReplayInput(state){
-            state.secondaryReplay = true
             state.mainReplay = false
-
+            state.secondaryReplay = true
+            console.log(state.secondaryReplay + " this is secondaryReplay replay");
+            console.log(state.mainReplay + " this is main replay");
+            console.log("------");
         },
         setMainReplayInput(state){
             state.mainReplay = true
             state.secondaryReplay = false
-
+            console.log(state.mainReplay + " this is main replay");
+            console.log(state.secondaryReplay + " this is secondaryReplay replay");
+            console.log("------");
         }
     }
 })

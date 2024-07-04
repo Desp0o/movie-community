@@ -7,6 +7,8 @@ import ReplayComment from './ReplayComment';
 import { JSX } from 'react/jsx-runtime';
 import CommentLikeSection from './CommentLikeSection';
 import DateFormater from '../dateFormater/DateFormater';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSecondaryReplayInput } from '../../Redux/commentsSlicer';
 
 interface RepliesProps {
   replayedComments: {
@@ -40,7 +42,15 @@ interface fetchedDataProps{
   }
 }
 
+interface RootState{
+  comRepStroe:{
+    secondaryReplay: boolean
+  }
+}
+
 const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refetchCallBack }) => {
+  const dispatch = useDispatch()
+  const secondaryReplayRedux = useSelector((state:RootState) => state.comRepStroe.secondaryReplay)
   const { user } = useUserHook();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [replIndex, setReplIndex] = useState<number | null>(null);
@@ -81,8 +91,14 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
 
   const showReplay = (index: number) => {
     setReplIndex((prevIndex) => (prevIndex === index ? null : index));
-  
+    dispatch(setSecondaryReplayInput())
   };
+
+  useEffect(()=>{
+    if(!secondaryReplayRedux){
+      setReplIndex(null)
+    }
+  },[secondaryReplayRedux])
 
   const highlightMentions = (text: string) => {
     // Regular expression to match @username (handles multiple words in a username)
@@ -147,7 +163,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
               </div>
             </div>
           </div>
-          <div className={replIndex === index ? 'replay_container visible' : 'replay_container'}>
+          <div className={(replIndex === index && secondaryReplayRedux) ? 'replay_container visible' : 'replay_container'}>
             <div className='replay_for_replie'>
               {
                 <ReplayComment id={mainCommentID} feedID={item.feed_id} refetchCallback={refetchCallBack} mentionedUser={item.user.name} />
