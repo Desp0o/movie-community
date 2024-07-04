@@ -11,8 +11,8 @@ interface ReplayCommentProps {
 }
 
 const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser, setter }) => {
-  const textareaRef = useRef<HTMLDivElement>(null);
-  const [replayValue, setReplayValue] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [replayValue, setReplayValue] = useState(`@${mentionedUser} `);
   const [isFaded, setFaded] = useState(true);
 
   useEffect(() => {
@@ -51,49 +51,73 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
     }
   };
 
-  useEffect(() => {
-    const handleInput = () => {
-      if (textareaRef.current) {
-        textareaRef.current.style.height = "36px";
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+  // useEffect(() => {
+  //   const handleInput = () => {
+  //     if (textareaRef.current) {
+  //       textareaRef.current.style.height = "36px";
+  //       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
 
-        if (textareaRef.current.scrollHeight > 200) {
-          textareaRef.current.style.height = '200px';
-          textareaRef.current.style.overflow = 'auto';
-        } else {
-          textareaRef.current.style.overflow = 'hidden';
-        }
+  //       if (textareaRef.current.scrollHeight > 200) {
+  //         textareaRef.current.style.height = '200px';
+  //         textareaRef.current.style.overflow = 'auto';
+  //       } else {
+  //         textareaRef.current.style.overflow = 'hidden';
+  //       }
 
-        // Check if the mention is deleted and reinsert it if necessary
-        const textContent = textareaRef.current.innerText;
-        if (!textContent.includes(`@${mentionedUser}`)) {
-          const pTag = document.createElement('p')
-          pTag.className = 'text_after_mentioned_user'
+  //       // Check if the mention is deleted and reinsert it if necessary
+  //       const textContent = textareaRef.current.innerText;
+  //       if (!textContent.includes(`@${mentionedUser}`)) {
+  //         const pTag = document.createElement('p')
+  //         pTag.className = 'text_after_mentioned_user'
 
-          const span = document.createElement("span")
-          span.className = 'mentioned_user'
+  //         const span = document.createElement("span")
+  //         span.className = 'mentioned_user'
 
-          pTag.appendChild(span)
-          textareaRef.current.appendChild(pTag)
-          span.textContent = `@${mentionedUser}`
-          span.contentEditable = 'false'
-        }
-      }
-    };
+  //         pTag.appendChild(span)
+  //         textareaRef.current.appendChild(pTag)
+  //         span.textContent = `@${mentionedUser}`
+  //         span.contentEditable = 'false'
+  //       }
+  //     }
+  //   };
 
-    const div = textareaRef.current;
-    div?.addEventListener('input', handleInput);
+  //   const div = textareaRef.current;
+  //   div?.addEventListener('input', handleInput);
     
-    return () => {
-      div?.removeEventListener('input', handleInput);
-    };
-  }, [mentionedUser]);
+  //   return () => {
+  //     div?.removeEventListener('input', handleInput);
+  //   };
+  // }, [mentionedUser]);
 
+  // const handleKeyDown = (e: { key: string; preventDefault: () => void; }) => {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault();
+  //   }
+  // };
+
+  useEffect(()=>{
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "36px";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+
+      if (textareaRef.current.scrollHeight > 200) {
+        textareaRef.current.style.height = '200px';
+        textareaRef.current.style.overflow = 'auto';
+      } else {
+        textareaRef.current.style.overflow = 'hidden';
+      }
+    }
+  },[textareaRef.current, replayValue])
 
   return (
     <div className="single_Replay">
-      <div
+      {/* <div
+      aria-label='asd'
+        role="textbox"
         contentEditable
+        onKeyDown={handleKeyDown}
+
+        tabIndex={0}
         ref={textareaRef}
         className="replay_textarea" 
         onInput={(e) => setReplayValue(e.currentTarget.innerText)}
@@ -102,7 +126,14 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
         <p dir='ltr' className='text_after_mentioned_user'>
         <span contentEditable={false} className='mentioned_user'>@{mentionedUser}&nbsp;&nbsp;</span>
         </p>
-      </div>
+      </div> */}
+      <textarea 
+        dir='ltr'
+        className="replay_textarea" 
+        ref={textareaRef}
+        onChange={(e) => setReplayValue(e.target.value)}
+        value={replayValue}
+      />
       <span onClick={sendReplay}><ReplayBtn faded={isFaded} /></span>
     </div>
   );

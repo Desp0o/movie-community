@@ -64,12 +64,6 @@ const Post = () => {
     console.error(error)
   }
 
-
-  if (data) {
-    console.log(data);
-
-  }
-
   if (isLoading) {
     return <Spinner />
   }
