@@ -7,10 +7,11 @@ interface ReplayCommentProps {
   feedID: number;
   refetchCallback: () => void;
   mentionedUser: string;
-  setter?:()=>void
+  setter?:()=>void;
 }
 
 const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser, setter }) => {
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [replayValue, setReplayValue] = useState(`@${mentionedUser} `);
   const [isFaded, setFaded] = useState(true);
@@ -37,7 +38,7 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
             Authorization: `Bearer ${token}`
           }
         });
-        setReplayValue('');
+        setReplayValue(`@${mentionedUser}`);
         setFaded(true);
         console.log(res.data);
         if(setter){
@@ -50,6 +51,7 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
       }
     }
   };
+
 
   // useEffect(() => {
   //   const handleInput = () => {
@@ -131,6 +133,7 @@ const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallbac
         dir='ltr'
         className="replay_textarea" 
         ref={textareaRef}
+        placeholder={`Reply to ${mentionedUser}`}
         onChange={(e) => setReplayValue(e.target.value)}
         value={replayValue}
       />

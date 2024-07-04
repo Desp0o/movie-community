@@ -72,6 +72,10 @@ const Post = () => {
     setFullScreen(!isFullScreen)
   }
 
+  if(data){
+    console.log(data);
+  }
+
 
   return (
     <>

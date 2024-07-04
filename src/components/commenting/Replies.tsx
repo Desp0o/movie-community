@@ -9,17 +9,18 @@ import CommentLikeSection from './CommentLikeSection';
 import DateFormater from '../dateFormater/DateFormater';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSecondaryReplayInput } from '../../Redux/commentsSlicer';
+import { editComment } from './EDITcomment';
 
 interface RepliesProps {
   replayedComments: {
-    created_at:string;
+    created_at: string;
     id: number;
     text: string;
     user_id: number;
     feed_id: number;
     guls: number;
-    user:{
-      name:string;
+    user: {
+      name: string;
     }
   }[];
   mainCommentID: number;
@@ -27,40 +28,49 @@ interface RepliesProps {
 }
 
 interface CommentProp {
-  text: string;
+  text?: string;
 }
 
-interface fetchedDataProps{
+interface fetchedDataProps {
   created_at: string;
   text: string;
   id: number;
-  feed_id:number;
+  feed_id: number;
   user_id: number;
-  guls:number;
-  user:{
-    name:string;
+  guls: number;
+  user: {
+    name: string;
   }
 }
 
-interface RootState{
-  comRepStroe:{
+interface RootState {
+  comRepStroe: {
     secondaryReplay: boolean
   }
 }
 
 const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refetchCallBack }) => {
-  const dispatch = useDispatch()
-  const secondaryReplayRedux = useSelector((state:RootState) => state.comRepStroe.secondaryReplay)
+  const dispatch = useDispatch();
+  const secondaryReplayRedux = useSelector((state: RootState) => state.comRepStroe.secondaryReplay);
   const { user } = useUserHook();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [replIndex, setReplIndex] = useState<number | null>(null);
   const commentPanelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [fetchedRepliesData, setFetchedRepliesData] = useState<fetchedDataProps[]>([])
+  const [fetchedRepliesData, setFetchedRepliesData] = useState<fetchedDataProps[]>([]);
+  const [isReadyEdit, setIsReadyEdit] = useState({
+    isReady: false,
+    comID: 0
+  });
 
   useEffect(() => {
-    const reversed = [...replayedComments].reverse();
-    setFetchedRepliesData(reversed)
-}, [replayedComments])
+    if (replayedComments && Array.isArray(replayedComments)) {
+      const reversed = replayedComments.map(comment => ({
+        ...comment,
+        text: comment.text || '', // Ensure text is a string
+      })).reverse();
+      setFetchedRepliesData(reversed);
+    }
+  }, [replayedComments]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -91,63 +101,54 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
 
   const showReplay = (index: number) => {
     setReplIndex((prevIndex) => (prevIndex === index ? null : index));
-    dispatch(setSecondaryReplayInput())
+    dispatch(setSecondaryReplayInput());
   };
 
-  useEffect(()=>{
-    if(!secondaryReplayRedux){
-      setReplIndex(null)
+  useEffect(() => {
+    if (!secondaryReplayRedux) {
+      setReplIndex(null);
     }
-  },[secondaryReplayRedux])
+  }, [secondaryReplayRedux]);
 
-  const highlightMentions = (text: string) => {
-    // Regular expression to match @username (handles multiple words in a username)
+  const highlightMentions = (text: string = '') => {
     const mentionRegex = /@[\w]+(?:\s[\w]+)*/g;
-  
-    // Split the text by the mentions
     const parts = text.split(mentionRegex);
-  
-    // Find all matches in the text
     const matches = text.match(mentionRegex);
-  
-    // Combine parts and matches
     const combined: (string | JSX.Element)[] = [];
     parts.forEach((part, index) => {
       combined.push(part);
       if (matches && matches[index]) {
         combined.push(
-          <span key={index} style={{ color: '#309782', fontWeight:"500", wordWrap:"break-word"}}>
+          <span key={index} style={{ color: '#309782', fontWeight: "500", wordWrap: "break-word" }}>
             {matches[index]}
           </span>
         );
       }
     });
-  
     return combined;
   };
-  // return text with mentioned user if there are any
-  const Comment:React.FC<CommentProp> = ({ text }) => {
+
+  const Comment: React.FC<CommentProp> = ({ text = '' }) => {
     return <p className="replayed_comment_text">{highlightMentions(text)}</p>;
   };
 
-  const editReplay = () => {
-
-  }
+  const editReplay = (id: number, index: number) => {
+    setIsReadyEdit({ ...isReadyEdit, isReady: true, comID: id });
+    setReplIndex(index);
+  };
 
   return (
     <>
       {fetchedRepliesData.map((item, index) => (
         <div key={index}>
           <div className="replayed_comment_parent">
-            {/* რეფლაი კომენტარის ტექსტი და replay ღილაკი */}
             <div>
-            <p className='replayed_comment_user_name'>{item.user.name}</p>
+              <p className='replayed_comment_user_name'>{item.user.name}</p>
               <div className="replayed_comment">
-               <Comment text={item.text} />
-                {/* adding ref with index to each element */}
+                <Comment text={item.text} />
                 <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
                   <div>
-                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} editCom={editReplay}/>}
+                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} editCom={() => editReplay(item.id, index)} />}
                   </div>
                   <div onClick={() => showSettings(index)} className='dot_normal_pos'>
                     {item.user_id === user.userID && dotsForComments}
@@ -155,19 +156,20 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
                 </div>
               </div>
               <div className='rrg'>
-              <DateFormater date={item.created_at} />
-              <CommentLikeSection myCommGul={0} guls={item.guls} commentId={item.id} />
-              <p className='single_comment_replay' onClick={() => showReplay(index)}>
-                Replay
-              </p>
+                <DateFormater date={item.created_at} />
+                <CommentLikeSection myCommGul={0} guls={item.guls} commentId={item.id} />
+                <p className='single_comment_replay' onClick={() => showReplay(index)}>
+                  Replay
+                </p>
               </div>
             </div>
           </div>
           <div className={(replIndex === index && secondaryReplayRedux) ? 'replay_container visible' : 'replay_container'}>
             <div className='replay_for_replie'>
-              {
-                <ReplayComment id={mainCommentID} feedID={item.feed_id} refetchCallback={refetchCallBack} mentionedUser={item.user.name} />
-              }
+              <>
+                {!isReadyEdit.isReady && <ReplayComment id={mainCommentID} feedID={item.feed_id} refetchCallback={refetchCallBack} mentionedUser={item.user.name} />}
+                {isReadyEdit.isReady && <EditReplay commentID={item.id} text={item.text} refetchCallback={refetchCallBack} />}
+              </>
             </div>
           </div>
         </div>
@@ -177,3 +179,52 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
 };
 
 export default Replies;
+
+interface EditReplayProps {
+  commentID: number;
+  text: string;
+  refetchCallback: () => void;
+}
+
+const EditReplay: React.FC<EditReplayProps> = ({ commentID, text, refetchCallback }) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [textValue, setTextValue] = useState('');
+
+  useEffect(() => {
+    setTextValue(text || ''); // Ensure text is a string
+  }, [text]);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "36px";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+
+      if (textareaRef.current.scrollHeight > 200) {
+        textareaRef.current.style.height = '200px';
+        textareaRef.current.style.overflow = 'auto';
+      } else {
+        textareaRef.current.style.overflow = 'hidden';
+      }
+    }
+  }, [textValue]);
+
+  const handleEditComment = () => {
+    editComment(refetchCallback, commentID, textValue);
+  };
+
+  return (
+    <div className="single_Replay">
+      <textarea
+        dir='ltr'
+        className="replay_textarea"
+        ref={textareaRef}
+        placeholder=''
+        onChange={(e) => setTextValue(e.target.value)}
+        value={textValue}
+      />
+      <div className="replay_btn active" onClick={handleEditComment}>
+        <p>Edit</p>
+      </div>
+    </div>
+  );
+};

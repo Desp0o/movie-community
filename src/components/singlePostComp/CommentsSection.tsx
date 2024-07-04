@@ -236,7 +236,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item?.comments?.length > 5 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                        {(item?.comments?.length > 2 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
 
                                     </div>
 
@@ -250,7 +250,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
 
                                     <div className={visibleReplyIndex === index && mainReplayRedux ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
+                                            <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name}/>
                                         }
                                     </div>
                                 </div>
