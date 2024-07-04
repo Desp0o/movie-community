@@ -7,6 +7,7 @@ import postModalSclier from "./postModal"
 import feedPathRedux from "./pagePath";
 import feedRefetchSlicer from "./feedRefetchSlicer";
 import languageSlicer from "./languageSlicer";
+import commentsSlicer from "./commentsSlicer";
 
 const store = configureStore({
     reducer:{
@@ -17,7 +18,8 @@ const store = configureStore({
         addPostModalStore: postModalSclier,
         feedStore: feedPathRedux,
         feedRefetchStore:feedRefetchSlicer,
-        languageStore: languageSlicer
+        languageStore: languageSlicer,
+        comRepStroe: commentsSlicer
     }
 })
 
