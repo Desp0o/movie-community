@@ -6,9 +6,11 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-
 import ReplayComment from './ReplayComment';
 import { JSX } from 'react/jsx-runtime';
 import CommentLikeSection from './CommentLikeSection';
+import DateFormater from '../dateFormater/DateFormater';
 
 interface RepliesProps {
   replayedComments: {
+    created_at:string;
     id: number;
     text: string;
     user_id: number;
@@ -27,6 +29,7 @@ interface CommentProp {
 }
 
 interface fetchedDataProps{
+  created_at: string;
   text: string;
   id: number;
   feed_id:number;
@@ -136,6 +139,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
                 </div>
               </div>
               <div className='rrg'>
+              <DateFormater date={item.created_at} />
               <CommentLikeSection myCommGul={0} guls={item.guls} commentId={item.id} />
               <p className='single_comment_replay' onClick={() => showReplay(index)}>
                 Replay
