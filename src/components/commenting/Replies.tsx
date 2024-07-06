@@ -146,7 +146,11 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   };
 
   const showReplay = (index: number) => {
-    setReplIndex((prevIndex) => (prevIndex === index ? null : index));
+    if(isReadyEdit.isReady){
+      setReplIndex((prevIndex) => (prevIndex === index ? index : index));
+    }else{
+      setReplIndex((prevIndex) => (prevIndex === index ? null : index));
+    }
     dispatch(setSecondaryReplayInput());
     setIsReadyEdit({...isReadyEdit,isReady:false})
   };
