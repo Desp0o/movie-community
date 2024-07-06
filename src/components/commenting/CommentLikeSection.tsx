@@ -4,12 +4,12 @@ import { likeIconComment, likeIconFilledComment } from '../../assets/newSvg/like
 import { likeComment } from './LikeComment';
 
 interface CommentLikeSectionProps {
-    myCommGul: number;
+    myRepGul: number;
     guls: number;
     commentId: number;
 }
 
-const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({ myCommGul, guls, commentId }) => {
+const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({ myRepGul, guls, commentId }) => {
     const [comCommentsQuant, setComCommentsQuant] = useState<{ [key: number]: number }>({});
     const [likedComments, setLikedComments] = useState<{ [key: number]: boolean }>({});
     const [icon, setIcon] = useState(likeIconComment);
@@ -33,7 +33,7 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({ myCommGul, guls
 
     // თუ ჩატვირთვისას უდრის ერთს უნდა გავააქტიუროთ აიქონი და ტრიგერი
     useEffect(() => {
-        if (myCommGul === 1) {
+        if (myRepGul === 1) {
             setIcon(likeIconFilledComment);
             setLikedComments((prevLikedComments) => ({
                 ...prevLikedComments,

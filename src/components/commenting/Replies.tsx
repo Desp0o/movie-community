@@ -13,6 +13,7 @@ import { editComment } from './EDITcomment';
 interface RepliesProps {
   replayedComments: {
     created_at: string;
+    myRepGul: number;
     id: number;
     text: string;
     user_id: number;
@@ -33,6 +34,7 @@ interface CommentProp {
 interface fetchedDataProps {
   created_at: string;
   text: string;
+  myRepGul: number;
   id: number;
   feed_id: number;
   user_id: number;
@@ -181,7 +183,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
               </div>
               <div className='rrg'>
                 <DateFormater date={item.created_at} />
-                <CommentLikeSection myCommGul={0} guls={item.guls} commentId={item.id} />
+                <CommentLikeSection myRepGul={item.myRepGul} guls={item.guls} commentId={item.id} />
                 <p className='single_comment_replay' onClick={() => showReplay(index)}>
                   Replay
                 </p>

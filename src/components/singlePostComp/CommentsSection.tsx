@@ -25,8 +25,8 @@ interface commentProps {
     id: number;
     comments: [];
     text: string;
-    myCommGul:number;
-    guls:number;
+    myCommGul: number;
+    guls: number;
     created_at: string;
     user: {
         name: string;
@@ -34,14 +34,14 @@ interface commentProps {
     }
 }
 
-interface RootState{
-    comRepStroe:{
+interface RootState {
+    comRepStroe: {
         mainReplay: boolean
     }
 }
 
 const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, refetch }) => {
-    const mainReplayRedux = useSelector((state: RootState)=>state.comRepStroe.mainReplay)
+    const mainReplayRedux = useSelector((state: RootState) => state.comRepStroe.mainReplay)
     const dispatch = useDispatch()
     const [fetchedCommentsData, setFetchedCommentsData] = useState([]) //fetched comments
     const [displayedComments, setDisplayedComments] = useState(5) //how many comments show 
@@ -89,11 +89,11 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         dispatch(setMainReplayInput())
     };
 
-    useEffect(()=>{
-        if(!mainReplayRedux){
+    useEffect(() => {
+        if (!mainReplayRedux) {
             setVisibleReplyIndex(null)
         }
-    },[mainReplayRedux])
+    }, [mainReplayRedux])
 
     const showSettings = (index: number) => {
         if (index === settingActiveIndex) {
@@ -251,31 +251,31 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                     {/* replies */}
                                     <div className="single_comment_date_replay">
                                         <DateFormater date={item.created_at} />
-                                        <CommentLikeSection 
-                                            
-                                            myCommGul={item.myCommGul} 
-                                             
-                                            guls={item.guls} 
+                                        <CommentLikeSection
+
+myRepGul={item.myCommGul}
+
+                                            guls={item.guls}
                                             commentId={item.id}
                                         />
                                         <p className="single_comment_replay" onClick={() => toggleReply(index)}>
                                             Reply
                                         </p>
-                                        {(item?.comments?.length > 2 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+
 
                                     </div>
 
                                     {item?.comments?.length > 0 &&
                                         <div className='replayed_comments_section'>
-                                            <Replies replayedComments={item.comments.slice(0, repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
+                                            <Replies replayedComments={item.comments.slice(-repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
-
+                                    {(item?.comments?.length > 2 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
                                     {/* reply container */}
 
                                     <div className={visibleReplyIndex === index && mainReplayRedux ? 'replay_container visible' : 'replay_container '}>
                                         {
-                                            <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name}/>
+                                            <ReplayComment id={item?.id} feedID={item?.feed_id} refetchCallback={refetch} mentionedUser={item?.user?.name} />
                                         }
                                     </div>
                                 </div>

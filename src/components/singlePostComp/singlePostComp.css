@@ -379,10 +379,10 @@ margin-top: -10px;
 
 
 .single_comment_replay {
+  padding-left: 85px;
   cursor: pointer;
   font-size: 12px;
   font-style: normal;
-  font-weight: 300;
   line-height: 150%;
   /* 18px */
 }
