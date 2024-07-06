@@ -166,9 +166,9 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   return (
     <>
       {fetchedRepliesData.map((item, index) => (
-        <div key={index}>
+        <div key={index} className='csmp'>
           <div className="replayed_comment_parent">
-            <div>
+            <div className='replayed_comment_inner_parent'>
               <p className='replayed_comment_user_name'>{item.user.name}</p>
               <div className="replayed_comment">
                 <Comment text={item.text} />

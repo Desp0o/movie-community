@@ -379,7 +379,6 @@ margin-top: -10px;
 
 
 .single_comment_replay {
-  padding-left: 85px;
   cursor: pointer;
   font-size: 12px;
   font-style: normal;
@@ -392,8 +391,9 @@ margin-top: -10px;
   font-size: 12px;
   font-style: normal;
   line-height: 150%;
-padding-left: 86px;
   display: flex;
+  max-width: 465px;
+  margin: 5px 0 0 auto;
 }
 
 .single_Replay{
@@ -486,6 +486,12 @@ font-weight: 500;
   gap: 5px;
 }
 
+.replayed_comment_inner_parent{
+  width: 100%;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
 
 .replayed_comments_section{
   display: flex;
@@ -732,10 +738,38 @@ cursor: pointer;
 .single_Replay{
     width: 100%;
 }
+.replayed_comment_parent{
+  width: 100%;
+}
+}
+
+@media (max-width:500px) {
+  .replayed_comment_inner_parent{
+    min-width: 300px;
+  }
+  .view_all_replies{
+    max-width: 300px;
+  }
+}
+
+@media (max-width:375px) {
+  .replayed_comment_inner_parent{
+    min-width: 250px;
+  }
+  .view_all_replies{
+    max-width: 250px;
+  }
 }
 
 .rrg{
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.csmp{
+  width: 100%;
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end !important;
 }

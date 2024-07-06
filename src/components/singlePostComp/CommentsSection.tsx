@@ -253,7 +253,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
                                         <DateFormater date={item.created_at} />
                                         <CommentLikeSection
 
-myRepGul={item.myCommGul}
+                                            myRepGul={item.myCommGul}
 
                                             guls={item.guls}
                                             commentId={item.id}
@@ -270,7 +270,7 @@ myRepGul={item.myCommGul}
                                             <Replies replayedComments={item.comments.slice(-repliesLength)} refetchCallBack={refetch} mainCommentID={item.id} />
                                         </div>
                                     }
-                                    {(item?.comments?.length > 2 && item.comments.length > repliesLength) && <p className="single_comment_replay" onClick={showMoreReplies}>View all replies</p>}
+                                    {(item?.comments?.length > 2 && item.comments.length > repliesLength) && <p className="single_comment_replay view_all_replies" onClick={showMoreReplies}>View all replies</p>}
                                     {/* reply container */}
 
                                     <div className={visibleReplyIndex === index && mainReplayRedux ? 'replay_container visible' : 'replay_container '}>
