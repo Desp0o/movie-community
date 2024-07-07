@@ -299,6 +299,12 @@ const CreateQuiz = () => {
     }
   };
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  useEffect(()=>{
+    setScreenWidth(window.innerWidth)
+  },[window.innerWidth])
+
   return (
     <>
       <PageLayout>
@@ -455,7 +461,7 @@ const CreateQuiz = () => {
 
                 {
                   quizData?.questions.length > 0
-                  && <div className='apply_reset_btns'>
+                  && <div className='apply_reset_btns' style={{ transform: `translateX(calc(${screenWidth / 2}px - 80px))` }}>
                     <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
                     <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
                   </div>

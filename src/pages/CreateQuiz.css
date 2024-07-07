@@ -389,7 +389,6 @@ transition: all 0.3s ease;
 
     position: absolute;
     right: 50%;
-    transform: translateX(calc(1440px / 2 - 80px));
     top: -22px;
 }
 
@@ -502,4 +501,33 @@ cursor: pointer;
     width: 100%;
     background-color: #00D18F;
     transition: all 0.2s ease;
+}
+
+@media (max-width:768px) {
+    .create_quiz{
+        width: 100%;
+        padding-bottom: 240px;
+    }
+    .title_and_cover_image_cr_quiz{
+        width: 90%;
+    }
+    .dragNdrop{
+        width: 100%;
+    }
+    .cr_quiz_table{
+        width: 90%;
+    }
+    .mapping_quizData_inner{
+        padding: 40px 40px 10px 40px;
+    }
+    .apply_reset_btns {
+        display: flex;
+        justify-content: flex-end;
+        gap: 32px;
+    
+        position: absolute;
+        right: 50%;
+        transform: translateX(calc(768px / 2 - 80px));
+        top: -22px;
+    }
 }
