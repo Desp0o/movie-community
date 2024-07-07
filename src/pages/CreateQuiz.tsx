@@ -188,6 +188,7 @@ const CreateQuiz = () => {
     setQuizData({ ...quizData, mainImg: undefined, mainTitle: "" })
     setTitleCover(false)
     setShowQuizTable(false)
+    startOver()
   }
 
   const removeQuizCard = (index: number) => {
@@ -300,9 +301,13 @@ const CreateQuiz = () => {
   };
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
+  const [pRigth, setPRight] = useState(80)
   useEffect(()=>{
     setScreenWidth(window.innerWidth)
+
+    if(window.innerWidth < 768){
+      setPRight(10)
+    }
   },[window.innerWidth])
 
   return (
@@ -461,7 +466,7 @@ const CreateQuiz = () => {
 
                 {
                   quizData?.questions.length > 0
-                  && <div className='apply_reset_btns' style={{ transform: `translateX(calc(${screenWidth / 2}px - 80px))` }}>
+                  && <div className='apply_reset_btns' style={{ transform: `translateX(calc(${screenWidth / 2}px - ${pRigth}px))` }}>
                     <span onClick={handleSubmit}><ButtonFIlled text={selectedLanguage.createQuiz_page.saveBtn} link={''} /></span>
                     <span onClick={startOver}><ButtonOutlined text={selectedLanguage.createQuiz_page.deleteBtn} link={''} /></span>
                   </div>
