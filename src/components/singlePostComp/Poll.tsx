@@ -91,7 +91,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
             >
               <span className="poll_item_bg vote_txt"
                 style={{
-                  width: poll.sum !== 0 ? `${Math.round((100 / answersSum) * poll.sum)}%` : '68px',
+                  width: poll.sum !== 0 ? `calc(${Math.round((100 / answersSum) * poll.sum)}% - 10px)` : '68px',
                   backgroundColor:
                     poll.id === activeIndex || activeIndex === index
                       ? "var(--Secondary-400)"
