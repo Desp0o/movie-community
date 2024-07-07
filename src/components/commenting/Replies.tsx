@@ -107,39 +107,40 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
   }, [secondaryReplayRedux]);
 
   const highlightMentions = (text = '') => {
-    const mentionRegex = /@[\w]+\s[\w]+/g; // Matches @ followed by words with spaces
+    const mentionRegex = /@\w+(\s\w+)?/g; // Matches @ followed by words, allowing for one space in between for names like "John Black"
     const combined = [];
-
+  
     let match;
     let lastIndex = 0;
-
+  
     // Use regex to find all mentions in the text
     while ((match = mentionRegex.exec(text)) !== null) {
-        const { 0: mention, index: matchIndex } = match;
-
-        // Add text before the mention
-        if (matchIndex > lastIndex) {
-            combined.push(text.slice(lastIndex, matchIndex));
-        }
-
-        // Add the mention with styling
-        combined.push(
-            <span key={matchIndex} style={{ color: '#309782', fontWeight: '500', wordWrap: 'break-word' }}>
-                {mention}
-            </span>
-        );
-
-        // Update the last index
-        lastIndex = mentionRegex.lastIndex;
+      const { 0: mention, index: matchIndex } = match;
+  
+      // Add text before the mention
+      if (matchIndex > lastIndex) {
+        combined.push(text.slice(lastIndex, matchIndex));
+      }
+  
+      // Add the mention with styling
+      combined.push(
+        <span key={matchIndex} style={{ color: '#309782', fontWeight: '500', wordWrap: 'break-word' }}>
+          {mention.trim()} {/* Use trim to remove any leading/trailing whitespace */}
+        </span>
+      );
+  
+      // Update the last index
+      lastIndex = mentionRegex.lastIndex;
     }
-
+  
     // Add the remaining text after the last mention
     if (lastIndex < text.length) {
-        combined.push(text.slice(lastIndex));
+      combined.push(text.slice(lastIndex));
     }
-
+  
     return combined;
-};
+  };
+  
 
 
 

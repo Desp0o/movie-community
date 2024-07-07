@@ -15,7 +15,7 @@ interface ReplayCommentProps {
 const ReplayComment: React.FC<ReplayCommentProps> = ({id, feedID, refetchCallback, mentionedUser, setter }) => {
   const dispatch = useDispatch()
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [replayValue, setReplayValue] = useState(`@${mentionedUser} `);
+  const [replayValue, setReplayValue] = useState(`@${mentionedUser}  `);
   const [isFaded, setFaded] = useState(true);
 
   useEffect(() => {
