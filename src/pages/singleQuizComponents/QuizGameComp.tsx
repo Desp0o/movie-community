@@ -73,7 +73,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
             </div>
 
             {/* title and image */}
-            <div className={img === undefined && name !=="" ? "quiz_game_component_middle" : "quiz_game_component_middle hidden"}>
+            <div className="quiz_game_component_middle">
                 <p className='quiz_inner_name'>{name}</p>
                 {img && (
                     <div className='single_quiz_question_image' onClick={openImage}>
