@@ -422,12 +422,16 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        min-height: fit-content;
+        height: fit-content;
         padding: 8px 16px;
         gap: 8px;
     
         font-size: 14px;
         transition: all 0.3s ease;
-        
+    }
+    .quiz_p_parent{
+        height: fit-content;
+        overflow: auto;
+        text-align: center;
     }
 }

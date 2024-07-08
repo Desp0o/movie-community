@@ -22,7 +22,6 @@ interface QuizGameCompProps {
 
 const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, quizLength, name, img, answerDivRef, questionRef, funcName, answers, sendAnswerFunc }) => {
     const [isFullScreen, setFullScreen] = useState(false)
-
     const [isHover, setIsHover] = useState<number | null>(null)
     const [swapButton, setSwapButtons] = useState(false)
 
@@ -42,7 +41,7 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
 
     const swapBtnhandler = () => {
         if (window.matchMedia('(hover: hover)').matches) {
-            if(isAnswered){
+            if (isAnswered) {
                 setSwapButtons(true)
             }
         }
@@ -55,12 +54,17 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
     return (
         <>
             <ScrollToTop />
-            {
-                isFullScreen
-                && <div className='fullScreenImage'>
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' onClick={() => setFullScreen(false)} style={{ cursor: "pointer" }} />
+            {isFullScreen && (
+                <div className='fullScreenImage'>
+                    <img
+                        src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`}
+                        alt='single quiz question image'
+                        className='single_quiz_question_image_contain'
+                        onClick={() => setFullScreen(false)}
+                        style={{ cursor: "pointer" }}
+                    />
                 </div>
-            }
+            )}
             {/* quiz icon, back button, number */}
             <div className='quiz_game_component_top'>
                 <Link to='/'>{quizBackButton}</Link>
@@ -70,24 +74,47 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
 
             {/* title and image */}
             <div className='quiz_game_component_middle'>
-            <p className='quiz_inner_name'>{name}</p>
-                {img ? <div className='single_quiz_question_image' onClick={openImage}>
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_cover' />
-                    <img src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`} alt='single quiz question image' className='single_quiz_question_image_contain' />
-                </div>
-                    : null}
+                <p className='quiz_inner_name'>{name}</p>
+                {img && (
+                    <div className='single_quiz_question_image' onClick={openImage}>
+                        <img
+                            src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`}
+                            alt='single quiz question image'
+                            className='single_quiz_question_image_cover'
+                        />
+                        <img
+                            src={`${import.meta.env.VITE_EASY_QUIZ_Q_IMG}${img}.webp`}
+                            alt='single quiz question image'
+                            className='single_quiz_question_image_contain'
+                        />
+                    </div>
+                )}
             </div>
-
 
             <div className='quiz_game_component_answers' ref={answerDivRef}>
                 {answers.map((item, index) => (
                     <div ref={questionRef} key={index} className='quiz_single_answer' onClick={funcName}>
                         <div className='quiz_p_parent'>
-                        <p className='quiz_single_answer_paragraph'>{item.length > 43 ? item.substring(0, 43) : item}</p>
-
-                            </div>
-                        <span className='quizAnswersDots' onMouseLeave={mouseOut} onMouseOver={() => mouseIn(index)}>{item.length > 43 ? quizAnswersDots : null}</span>
-                        <p className={isHover === index ? "hover_text active" : "hover_text"} onMouseLeave={mouseOut} onMouseOver={() => mouseIn(index)}>{item}</p>
+                            <p className='quiz_single_answer_paragraph'>
+                                {window.innerWidth > 768 ? (item.length > 43 ? item.substring(0, 43) : item) : item}
+                            </p>
+                        </div>
+                        {window.innerWidth > 768 && (
+                            <span
+                                className='quizAnswersDots'
+                                onMouseLeave={mouseOut}
+                                onMouseOver={() => mouseIn(index)}
+                            >
+                                {item.length > 43 ? quizAnswersDots : null}
+                            </span>
+                        )}
+                        <p
+                            className={isHover === index ? "hover_text active" : "hover_text"}
+                            onMouseLeave={mouseOut}
+                            onMouseOver={() => mouseIn(index)}
+                        >
+                            {item}
+                        </p>
                     </div>
                 ))}
             </div>
