@@ -16,6 +16,7 @@ import quicDefaultCover from "../assets/quizDefaultCover.webp"
 import { smallXicon } from '../assets/newSvg/smallXicon';
 import Author from '../components/singlePostComp/Author';
 import { noQuizImage } from '../assets/newSvg/noQuizImage';
+import { toast } from 'react-toastify';
 
 interface QuestionProps {
   questionText: string;
@@ -116,31 +117,37 @@ const CreateQuiz = () => {
 
   //add more question
   const addQuestion = () => {
-    if (
-      singleQuiz.answer1 !== '' &&
-      singleQuiz.answer2 !== '' &&
-      singleQuiz.answer3 !== '' &&
-      singleQuiz.answer4 !== ''
-    ) {
-      setQuizData({
-        ...quizData,
-        questions: [
-          ...quizData.questions,
-          {
-            questionText: singleQuiz.questionText,
-            answer1: singleQuiz.answer1,
-            answer2: singleQuiz.answer2,
-            answer3: singleQuiz.answer3,
-            answer4: singleQuiz.answer4,
-            questionImg: singleQuiz.questionImg,
-            check: singleQuiz.questionImg ? 1 : 0
-          }
-        ]
-      });
-
-      setSingleQuiz({
-        ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: '', check: 0
-      })
+    if(singleQuiz.questionImg === undefined && singleQuiz.questionText === ''){
+      toast.error("Please add title or image", { autoClose: 3000, theme: "colored" })
+    }else{
+      if (
+        singleQuiz.answer1 !== '' &&
+        singleQuiz.answer2 !== '' &&
+        singleQuiz.answer3 !== '' &&
+        singleQuiz.answer4 !== ''
+      ) {
+        setQuizData({
+          ...quizData,
+          questions: [
+            ...quizData.questions,
+            {
+              questionText: singleQuiz.questionText,
+              answer1: singleQuiz.answer1,
+              answer2: singleQuiz.answer2,
+              answer3: singleQuiz.answer3,
+              answer4: singleQuiz.answer4,
+              questionImg: singleQuiz.questionImg,
+              check: singleQuiz.questionImg ? 1 : 0
+            }
+          ]
+        });
+  
+        setSingleQuiz({
+          ...singleQuiz, questionText: '', questionImg: undefined, answer1: '', answer2: '', answer3: '', answer4: '', check: 0
+        })
+      }else{
+        toast.error("Please fill all answers", { autoClose: 3000, theme: "colored" })
+      }
     }
 
   };
