@@ -175,7 +175,7 @@ const Replies: React.FC<RepliesProps> = ({ mainCommentID, replayedComments, refe
                 <Comment text={item.text} />
                 <div ref={(el) => (commentPanelRefs.current[index] = el)} className="comment_panel_and_dots">
                   <div>
-                    {index === activeIndex && <SettingForComment commentID={item.id} refetchCallbac={refetchCallBack} editCom={() => editReplay(item.id, index)} />}
+                    {index === activeIndex && <SettingForComment closeSetting={()=>setActiveIndex(null)} commentID={item.id} refetchCallbac={refetchCallBack} editCom={() => editReplay(item.id, index)} />}
                   </div>
                   <div onClick={() => showSettings(index)} className='dot_normal_pos'>
                     {item.user_id === user.userID && dotsForComments}
