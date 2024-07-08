@@ -128,6 +128,10 @@
     gap: 24px;
 }
 
+.quiz_game_component_middle.hidden{
+    display: none;
+}
+
 .quiz_inner_name{
     color: var(--white);
     text-align: center;
