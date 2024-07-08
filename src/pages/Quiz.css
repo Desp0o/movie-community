@@ -480,6 +480,9 @@
 }
 
 @media (max-width:500px) {
+    .single_quiz{
+        padding-top: 0px;
+    }
     .quiz_game_component_middle{
         height: 200px;
         gap: 5px;

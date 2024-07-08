@@ -28,7 +28,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
 }
 
 .burger_menu {
@@ -223,6 +222,10 @@ line-height: 150%; /* 21px */
 }
 
 @media (max-width:768px) {
+  .navbar{
+    padding: 0 10px 0 15px;
+
+  }
   .nav_search{
     display: none;
   }
