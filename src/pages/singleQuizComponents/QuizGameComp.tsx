@@ -27,7 +27,9 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
     const [swapButton, setSwapButtons] = useState(false)
 
     const mouseIn = (index: number) => {
-        setIsHover(index)
+        if (window.matchMedia('(hover: hover)').matches) {
+            setIsHover(index);
+        }
     }
 
     const mouseOut = () => {
@@ -39,8 +41,10 @@ const QuizGameComp: React.FC<QuizGameCompProps> = ({ isAnswered, questionIndex, 
     }
 
     const swapBtnhandler = () => {
-        if(isAnswered){
-            setSwapButtons(true)
+        if (window.matchMedia('(hover: hover)').matches) {
+            if(isAnswered){
+                setSwapButtons(true)
+            }
         }
     }
 
