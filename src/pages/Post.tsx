@@ -72,9 +72,9 @@ const Post = () => {
     setFullScreen(!isFullScreen)
   }
 
-  if(data){
-    console.log(data);
-  }
+  // if(data){
+  //   console.log(data);
+  // }
 
 
   return (
@@ -113,6 +113,7 @@ const Post = () => {
                 refetchCallBack={refetch}
                 guls={data.post.guls}
                 authGul={data.post.myGul}
+                allLikes={data?.guls}
               />
             </div>
 

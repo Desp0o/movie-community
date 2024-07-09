@@ -725,6 +725,24 @@ cursor: pointer;
   padding-top: 20px;
 }
 
+.all_likes_users{
+  font-size: 12px;
+  color:var(--Secondary-400);
+  cursor: pointer;
+}
+
+.SeeAllLikePanel{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 20;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 380px;
+  border-radius: 12px;
+  background-color: var(--Primary-600);
+}
+
 @media (max-width:768px) {
   .single_post_comp{
     width: 90%;

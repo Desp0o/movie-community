@@ -111,11 +111,12 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
 
               
               <LikeCommentShare 
-                authGul={authGul} 
-                guls={guls} 
-                postID={postID} 
-                commentLength={commentLength} 
-                refetchCallBack={refetch} />
+                authGul={authGul}
+                guls={guls}
+                postID={postID}
+                commentLength={commentLength}
+                refetchCallBack={refetch} 
+              />
             </div>
           :
           //ქვიზის პოსტი

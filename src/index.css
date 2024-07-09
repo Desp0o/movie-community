@@ -71,6 +71,15 @@
   --Linear-stroke:linear-gradient(90deg, hsla(167, 45%, 19%, 1) 0%, hsla(168, 52%, 39%, 1) 100%);
 }
 
+.overlay{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 19;
+}
+
 .backdropFilter{
   position: fixed;
   z-index: 998;
