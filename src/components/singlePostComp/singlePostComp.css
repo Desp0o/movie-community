@@ -731,6 +731,14 @@ cursor: pointer;
   cursor: pointer;
 }
 
+.likes_panel_close_icon{
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
 .SeeAllLikePanel{
   position: absolute;
   left: 50%;
@@ -741,6 +749,18 @@ cursor: pointer;
   height: 380px;
   border-radius: 12px;
   background-color: var(--Primary-600);
+
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.likes_panel_users_parent{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width:768px) {

@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { commentsIcon, commentsIconFilled } from '../../assets/newSvg/commentsIcon';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import { useLoginModal } from '../../hooks/useLoginModal';
+import Author from './Author';
+import { closeSquareIcon } from '../../assets/newSvg/closeSquareIcon';
 
 interface LikeCommentShareProps {
   authGul?: number;
@@ -17,7 +19,7 @@ interface LikeCommentShareProps {
   refetchCallBack: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
   ) => Promise<QueryObserverResult<unknown, unknown>>;
-  allLikes?: { user: { name: string } }[];
+  allLikes?: { user: { name: string; avatar: string } }[];
 }
 
 const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
@@ -36,13 +38,13 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   const [isHeartClicked, setHeartClicked] = useState(authGul === 1);
   const [likeCount, setLikeCount] = useState(guls);
   const [allUserLikes, setAllUserLikes] = useState(allLikes);
-  const [isActive, setActive] = useState(false)
+  const [isActive, setActive] = useState(false);
 
   useEffect(() => {
     setAllUserLikes(allLikes);
   }, [allLikes]);
 
-  const likingPost = () => {
+  const likingPost = (): void => {
     if (user.userID && user.name) {
       Guling(postID);
       setHeartClicked(!isHeartClicked);
@@ -75,15 +77,16 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   }, [guls, refetchCallBack]);
 
   const openPopUpOverlay = () => {
-    setActive(true)
-  }
+    setActive(true);
+  };
+  
   const closePopUpOverlay = () => {
-    setActive(false)
-  }
+    setActive(false);
+  };
 
   return (
     <div>
-      {isActive ? <SeeAllLikePanel closeOverlay={closePopUpOverlay} /> : null}
+      {isActive ? <SeeAllLikePanel closeOverlay={closePopUpOverlay} likedUsers={allUserLikes} /> : null}
       {allUserLikes.length > 0 && (
         <p className='all_likes_users' onClick={openPopUpOverlay}>{allUserLikes[0].user.name} and {likeCount - 1} others</p>
       )}
@@ -106,17 +109,26 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
 
 export default LikeCommentShare;
 
-
 interface SeeAllLikePanelProps {
-  closeOverlay: () => void
+  closeOverlay: () => void;
+  likedUsers: { user: { avatar: string; name: string } }[];
 }
 
-export const SeeAllLikePanel: React.FC<SeeAllLikePanelProps> = ({ closeOverlay }) => {
+const SeeAllLikePanel: React.FC<SeeAllLikePanelProps> = ({ closeOverlay, likedUsers }) => {
   return (
     <>
       <div className='overlay' onClick={closeOverlay}></div>
       <div className='SeeAllLikePanel'>
-
+        <span className='likes_panel_close_icon' onClick={closeOverlay}>{closeSquareIcon}</span>
+        <div className='likes_panel_users_parent'>
+        {
+          likedUsers.map((item, index) => (
+            <Link to='' key={index}>
+              <Author key={index} avatar={item.user.avatar} name={item.user.name} />
+            </Link>
+          ))
+        }
+        </div>
       </div>
     </>
   )
