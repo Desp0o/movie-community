@@ -42,7 +42,8 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
 
   useEffect(() => {
     setAllUserLikes(allLikes);
-  }, [allLikes]);
+    refetchCallBack()
+  }, [allLikes, isActive]);
 
   const likingPost = (): void => {
     if (user.userID && user.name) {
@@ -115,6 +116,10 @@ interface SeeAllLikePanelProps {
 }
 
 const SeeAllLikePanel: React.FC<SeeAllLikePanelProps> = ({ closeOverlay, likedUsers }) => {
+  const [fetchedLikedUsers, setFetchedLikedUser] = useState(likedUsers)
+  useEffect(()=>{
+    setFetchedLikedUser(likedUsers)
+  },[likedUsers])
   return (
     <>
       <div className='overlay' onClick={closeOverlay}></div>
@@ -122,7 +127,7 @@ const SeeAllLikePanel: React.FC<SeeAllLikePanelProps> = ({ closeOverlay, likedUs
         <span className='likes_panel_close_icon' onClick={closeOverlay}>{closeSquareIcon}</span>
         <div className='likes_panel_users_parent'>
         {
-          likedUsers.map((item, index) => (
+          fetchedLikedUsers.map((item, index) => (
             <Link to='' key={index}>
               <Author key={index} avatar={item.user.avatar} name={item.user.name} />
             </Link>
