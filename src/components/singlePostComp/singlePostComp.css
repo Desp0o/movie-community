@@ -740,7 +740,7 @@ cursor: pointer;
 }
 
 .SeeAllLikePanel{
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   z-index: 20;
@@ -814,6 +814,27 @@ cursor: pointer;
     width: 100%;
     max-width: 300px;
   }
+  .SeeAllLikePanel{
+    position: fixed;
+    left: 50%;
+    top: unset;
+    bottom: 0;
+    z-index: 20;
+    transform: translate(-50%,0%);
+    width: 100%;
+    height: 380px;
+    border-radius: 12px;
+    background-color: var(--Primary-600);
+  
+    padding: 12px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  
+    overflow-y: auto;
+  }
+  
 }
 
 @media (max-width:400px) {
