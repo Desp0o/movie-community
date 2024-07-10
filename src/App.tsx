@@ -108,15 +108,15 @@ function App() {
             <Routes>
               <Route path="/" element={<Outlet />} />
               <Route index element={<Feed />} />
-              <Route path="/pages/privacy" element={<Privacy />} />
-              <Route path="/pages/Post/:id" element={<Post />} />
-              <Route path="/pages/Quiz_" element={<Quiz_ />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/Post/:id" element={<Post />} />
+              <Route path="/Quiz_" element={<Quiz_ />} />
               <Route element={<RequireAuth />}>
-                <Route path="/pages/Profile" element={<Profile />} />
-                <Route path="/pages/CreateQuiz" element={<CreateQuiz />} />
+                <Route path="/Profile" element={<Profile />} />
+                <Route path="/CreateQuiz" element={<CreateQuiz />} />
               </Route>
-              <Route path="/pages/Quizzes" element={<Quizzes />} />
-              <Route path="/pages/Quiz/:id" element={<Quiz />} />
+              <Route path="/Quizzes" element={<Quizzes />} />
+              <Route path="/Quiz/:id" element={<Quiz />} />
               <Route path="*" element={<PageNotFound />} />
 
             </Routes>

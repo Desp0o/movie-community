@@ -48,7 +48,7 @@ const QuizFinalScoreBoard: React.FC<QuizFinalScoreBoardProps> = ({ title, questi
 
             <div className='quiz_final_buttons'>
                 <ButtonOutlined text={'Back to home'} link={'/'} wProp="215px" />
-                <ButtonFIlled text={'Check out other quizzes'} link={'/pages/Quizzes'} wProp="215px" />
+                <ButtonFIlled text={'Check out other quizzes'} link={'/Quizzes'} wProp="215px" />
             </div>
         </>
     );

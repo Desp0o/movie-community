@@ -93,15 +93,15 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
                 </div>
                 
                 {/* title */}
-              <Link to={`/pages/Post/${postID}`} className="post_title">
+              <Link to={`/Post/${postID}`} className="post_title">
                 <PostTitle title={postTitle} postStatus={postStatus} image={image}/>
               </Link>
             
             {/* picture or image */}
               {type !== 0
-                ? (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostImage type={type} image={image} /></Link> : <></>)
+                ? (image ? <Link to={`/Post/${postID}`} className="post_media_conatiner"><PostImage type={type} image={image} /></Link> : <></>)
                 : type === 0 ?
-                (image ? <Link to={`/pages/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
+                (image ? <Link to={`/Post/${postID}`} className="post_media_conatiner"><PostVideo image={image} /> </Link>: <></>)
                 : <></>
               }
               

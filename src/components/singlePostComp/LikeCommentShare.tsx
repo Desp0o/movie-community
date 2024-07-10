@@ -96,7 +96,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
           <span onClick={likingPost}>
             <IconBlock icon={heartIcon} quantity={likeCount} width={48} />
           </span>
-          <Link to={`/pages/Post/${postID}`}>
+          <Link to={`/Post/${postID}`}>
             <IconBlock icon={commentIcon} quantity={commentLength} width={48} />
           </Link>
         </div>

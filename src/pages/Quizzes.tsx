@@ -37,7 +37,7 @@ const QuizComponent = () => {
       {data?.pages?.map((page, index) => (
         <div className='quizz_list' key={index}>
           {page?.data?.map((quiz: quizProps) => (
-            <Link to={`/pages/Quiz/${quiz.id}`} key={quiz.id}>{quiz.name}</Link>
+            <Link to={`/Quiz/${quiz.id}`} key={quiz.id}>{quiz.name}</Link>
           ))}
         </div>
       ))}

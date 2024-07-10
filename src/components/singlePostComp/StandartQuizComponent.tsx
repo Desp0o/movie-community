@@ -52,7 +52,7 @@ const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({ avatar, p
     <div className='StandartQuizComponent'>
       {isUserLogged ? <EditPannel postID={postID} type={4} /> : <></>}
 
-      <Link to={'/pages/Quiz/' + quiz_id} className="quiz_link">
+      <Link to={'/Quiz/' + quiz_id} className="quiz_link">
         <div className="quiz_cover_container">
           {
             image
@@ -72,8 +72,8 @@ const StandartQuizComponent: React.FC<StandartQuizComponentProps> = ({ avatar, p
       </div>
 
       <div className="quiz_btn_link" onMouseOver={btnHoverHandler} onMouseLeave={returnBtn}>
-        <span className={!isHovered ? "q_b_2 active" : "q_b_2"}><ButtonFIlled text={"Get started!"} link={'/pages/Quiz/' + quiz_id} /></span>
-        <span className={isHovered ? "q_b_1" : "q_b_1 inactive"}><ButtonArrow link={'/pages/Quiz/' + quiz_id} /></span>
+        <span className={!isHovered ? "q_b_2 active" : "q_b_2"}><ButtonFIlled text={"Get started!"} link={'/Quiz/' + quiz_id} /></span>
+        <span className={isHovered ? "q_b_1" : "q_b_1 inactive"}><ButtonArrow link={'/Quiz/' + quiz_id} /></span>
       </div>
 
       <span className="quiz_popcorn_icon">{popcornIcon}</span>

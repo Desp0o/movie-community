@@ -24,7 +24,7 @@ const Quiz_ = () => {
 
   useEffect(()=>{
     if(user.userID){
-      setPath("/pages/CreateQuiz")
+      setPath("/CreateQuiz")
     }else{
       setPath('')
     }
