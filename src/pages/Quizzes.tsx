@@ -1,12 +1,18 @@
 import axios from 'axios';
 import { useInfiniteQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import StandartQuizComponent from '../components/singlePostComp/StandartQuizComponent';
+import Footer from '../components/footer/Footer';
 
 interface quizProps {
+  id: number;
+  name: string;
+  user: {
     id: number;
-    name: string
+    name: string;
+  };
+  created_at: string;
+  img: string;
 }
-
 
 const fetchQuizzes = async ({ pageParam = 1 }) => {
   const res = await axios.get(`${import.meta.env.VITE_FETCH_QUIZZES}${pageParam}`);
@@ -16,12 +22,15 @@ const fetchQuizzes = async ({ pageParam = 1 }) => {
 const QuizComponent = () => {
   const {
     data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading
   } = useInfiniteQuery(
     ['quizzes'],
     fetchQuizzes,
     {
       getNextPageParam: (lastPage, pages) => {
-        // Assuming the API returns an indicator if there are more pages
         if (lastPage.hasNextPage) {
           return pages.length + 1;
         } else {
@@ -31,29 +40,33 @@ const QuizComponent = () => {
     }
   );
 
+  console.log(data);
 
   return (
-    <div style={{paddingTop:"100px"}}>
-      {data?.pages?.map((page, index) => (
-        <div className='quizz_list' key={index}>
-          {page?.data?.map((quiz: quizProps) => (
-            <Link to={`/Quiz/${quiz.id}`} key={quiz.id}>{quiz.name}</Link>
-          ))}
-        </div>
-      ))}
-      <div>
-        {/* <button
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
+    <>
+      <div className='quizz_list'>
+        {data?.pages?.map((page) => page?.data?.map((quiz: quizProps) => (
+          <StandartQuizComponent
+            key={quiz.id}
+            postUserId={quiz.user.id}
+            postID={quiz.id}
+            authorName={quiz.user.name}
+            date={quiz.created_at}
+            postTitle={quiz.name}
+            quiz_id={quiz.id}
+            avatar={quiz.img} />
+        ))
+        )}
+        <div>
           {isFetchingNextPage
             ? 'Loading more...'
             : hasNextPage
-            ? 'Load More'
-            : 'Nothing more to load'}
-        </button> */}
+              ? <button onClick={() => fetchNextPage()}>Load More</button>
+              : 'Nothing more to load'}
+        </div>
       </div>
-    </div>
+      {!hasNextPage && !isLoading && <Footer />}
+    </>
   );
 };
 

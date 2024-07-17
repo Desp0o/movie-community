@@ -3,6 +3,12 @@
 .quizz_list {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    padding-top: 124px;
+    padding-bottom: 64px;
 }
 
 .no-cursor {
