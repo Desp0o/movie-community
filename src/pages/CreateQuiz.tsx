@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 
 interface QuestionProps {
   questionText: string;
+  //eslint-disable-next-line
   questionImg: any;
   answer1: string;
   answer2: string;
@@ -68,6 +69,7 @@ const CreateQuiz = () => {
   }
 
   // drag n drop func
+  //eslint-disable-next-line
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
     const file = acceptedFiles[0]
@@ -77,6 +79,7 @@ const CreateQuiz = () => {
   }, [singleQuiz])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
+  //eslint-disable-next-line
   const onDropSecond = useCallback((acceptedFile: any) => {
     const file = acceptedFile[0];
     setQuizData({ ...quizData, mainImg: file });
@@ -315,7 +318,7 @@ const CreateQuiz = () => {
     if(window.innerWidth < 768){
       setPRight(10)
     }
-  },[window.innerWidth])
+  },[])
 
   return (
     <>
@@ -521,6 +524,7 @@ interface QuizCardProps {
   index: number;
   length: number;
   title: string;
+  //eslint-disable-next-line
   image: any;
   answ1: string;
   answ2: string;
@@ -610,6 +614,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
 
 //quiz mainCard
 interface QuizMainCardProps {
+  //eslint-disable-next-line
   img: any;
   title: string;
   clearTitleAndCover: () => void
@@ -633,6 +638,7 @@ const QuizMainCard: React.FC<QuizMainCardProps> = ({ img, title, clearTitleAndCo
 
 //uploaded image or cover
 interface droppedImageProps {
+  //eslint-disable-next-line
   img: any;
 }
 const DroppedImage: React.FC<droppedImageProps> = ({ img }) => {

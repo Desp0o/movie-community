@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 interface CommentsSectionProps {
     commentsData: [];
     id: number;
+    //eslint-disable-next-line
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }
 
@@ -199,6 +200,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ commentsData, id, ref
         if (!isReadyEdit.isReady) {
             setCommentValue({ ...commentValue, text: "" })
         }
+        //eslint-disable-next-line
     }, [isReadyEdit.isReady])
 
     return (

@@ -107,6 +107,7 @@ const Quiz = () => {
     // get quiz onload
     useEffect(() => {
         getSingleQuiz();
+        //eslint-disable-next-line
     }, []);
 
     //თუ კითხვის ინდექსი უნდრის სიგრძეს მაშინ

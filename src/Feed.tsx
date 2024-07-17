@@ -55,6 +55,7 @@ const Feed = () => {
 
   useEffect(() => {
     refetch();
+    //eslint-disable-next-line
   }, [useFeedRefetch]);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const Feed = () => {
         {isLoading && <Spinner />}
         <div className="feed_page">
           <CreatePostFeed />
-          {data?.pages?.map((page: any, pageIndex: number) => (
+          {data?.pages?.map((page, pageIndex: number) => (
             <div className="feed" key={pageIndex}>
               {page?.data?.posts?.data?.map((post: dataProps) => (
 

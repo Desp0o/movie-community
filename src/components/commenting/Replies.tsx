@@ -24,6 +24,7 @@ interface RepliesProps {
     }
   }[];
   mainCommentID: number;
+  //eslint-disable-next-line
   refetchCallBack: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>;
 }
 

@@ -81,7 +81,7 @@ const AddPostPopUp = () => {
       dispatch(setAddPostModal({ showPostButtons: true, defaultPost: true }));
     }
     //გახდება ფოლსი ახლიდან დაკლიკება რო შევძლოთ ინფუთზე
-  }, [addPostModalStates.openImageUpload]);
+  }, [addPostModalStates.openImageUpload, dispatch]);
 
   //სურათის ასატვირთი ფუნქცია
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

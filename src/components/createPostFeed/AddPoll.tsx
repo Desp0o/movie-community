@@ -47,6 +47,7 @@ const AddPoll = () => {
     setPollOptions([...pollOptions, ""]);
   };
 
+  //eslint-disable-next-line
   const updateOption = (index:number, value: any) => {
     const newOptions = [...pollOptions];
     newOptions[index] = value;

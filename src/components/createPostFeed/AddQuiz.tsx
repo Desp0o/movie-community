@@ -23,7 +23,7 @@ interface fetchedDataBaseProps {
 
 
 const AddQuiz = () => {
-  const { requestMovieDB } =movieDataBase()
+  const { requestMovieDB } = movieDataBase()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const areaContainerRef = useRef<HTMLDivElement>(null)
   const { addPostModalStates } = usePostAddModalHook();

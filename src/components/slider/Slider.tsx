@@ -68,6 +68,7 @@ const cardArray = [
 
 const Slider = () => {
     const [activeIndex, setActiveIndex] = useState(3);
+    //eslint-disable-next-line
     const swiperRef = useRef<any>(null);
 
     const goToSlide = (index: number) => {
