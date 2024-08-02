@@ -8,6 +8,7 @@ interface RootState {
         avatar: string;
         userID: number;
         bells: number;
+        isAuthenticated: boolean;
     }
   };
 }

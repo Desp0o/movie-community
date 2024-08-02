@@ -62,6 +62,7 @@ function App() {
           localStorage.setItem('avatar', response.data.avatar)
           localStorage.setItem("score", response.data?.point);
           localStorage.setItem("bells", response.data?.bells);
+          localStorage.setItem("isAuthenticated", "true");
           
           dispatch(
             setUser({
@@ -69,7 +70,8 @@ function App() {
               userID: response?.data?.id, 
               avatar: response?.data?.avatar,
               score: response?.data?.point,
-              bells: response?.data?.bells
+              bells: response?.data?.bells,
+              isAuthenticated: true
             })
           )
           
@@ -80,7 +82,10 @@ function App() {
         localStorage.removeItem('userID')
         localStorage.removeItem('bells')
         localStorage.removeItem('score')
+        localStorage.removeItem('isAuthenticated')
       }
+
+      setUser({isAuthenticated: true})
     }
     if(token){
       checkMe()

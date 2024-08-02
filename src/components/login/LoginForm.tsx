@@ -53,6 +53,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
       localStorage.setItem("score", response.data?.user?.point);
       localStorage.setItem("bells", response.data?.user?.bells);
       localStorage.setItem("avatar", response.data?.user?.avatar)
+      localStorage.setItem("isAuthenticated", 'true')
 
       dispatch(setModalVisible(false));
       dispatch(
@@ -62,6 +63,7 @@ const LoginForm:React.FC<LoginProps> = ({funcName}) => {
           userID: response?.data?.user?.id,
           bells: response?.data?.user?.bells,
           score: response?.data?.user?.score,
+          isAuthenticated: true
         })
       );
 

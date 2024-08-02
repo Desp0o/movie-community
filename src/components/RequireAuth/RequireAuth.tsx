@@ -5,7 +5,7 @@ const RequireAuth = () => {
   const location = useLocation();
   const { user } = useUserHook()
 
-  return user.name
+  return user.isAuthenticated
     ? <Outlet />
     : <Navigate to="/" state={{ from: location }} replace />
 };

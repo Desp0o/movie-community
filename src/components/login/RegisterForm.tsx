@@ -68,6 +68,7 @@ const RegisterForm = () => {
           localStorage.setItem("userName", res.data?.user?.name);
           localStorage.setItem("score", res.data?.user?.point);
           localStorage.setItem("bells", res.data?.user?.bells);
+          localStorage.setItem("isAuthenticated", "true");
 
           dispatch(setModalVisible(false));
           dispatch(
@@ -77,6 +78,7 @@ const RegisterForm = () => {
               userID: res?.data?.user?.id,
               bells: res?.data?.user?.bells,
               score: res?.data?.user?.score,
+              isAuthenticated: true
             })
           );
         }
