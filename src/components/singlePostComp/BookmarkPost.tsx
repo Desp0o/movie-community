@@ -19,7 +19,7 @@ const BookmarkPost:React.FC<BookmarkPostProps> = ({mySave, postID}) => {
     const [bookmarkActive, setBookmarkActive] = useState(mySave === 1 ? true : false)
 
     const saveInBookMark =() => {
-        if(user.userID && user.name){
+        if(user.isAuthenticated){
          mutate(postID)
          setBookmarkActive(!bookmarkActive)
      

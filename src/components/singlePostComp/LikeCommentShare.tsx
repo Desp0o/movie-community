@@ -51,7 +51,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   }, [allLikes, isActive]);
 
   const likingPost = (): void => {
-    if (user.userID && user.name) {
+    if (user.isAuthenticated) {
       Guling(postID);
       setLikeComShareStats(prevValue => ({ ...prevValue, isHeartClicked: !prevValue }));
 

@@ -71,7 +71,7 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
   };
 
   const pollHanlderFuncs = (id: number, index: number) => {
-    if (user.name && user.userID) {
+    if (user.isAuthenticated) {
       sendPollAnswer(id)
       setActivePollItem(index)
     } else {

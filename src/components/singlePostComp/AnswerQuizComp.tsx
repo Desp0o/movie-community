@@ -63,7 +63,7 @@ const AnswerQuizComp: React.FC<AnswerQuizCompProps> = ({ id }) => {
   const sendAnswer = async () => {
     const token = localStorage.getItem('token')
 
-    if(user.name && user.userID){
+    if(user.isAuthenticated){
       try {
         await axios.post(`${import.meta.env.VITE_SEND_ANSWER}${id}`, { answer: answerValue }, {
          headers: {

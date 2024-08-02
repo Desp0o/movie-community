@@ -21,7 +21,7 @@ export const FeedFunctions = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if(user.userID && user.name){
+        if(user.isAuthenticated){
             dispatch(setFeedPath(import.meta.env.VITE_AUTH_FEED))
         }else{
             dispatch(setFeedPath(import.meta.env.VITE_GUEST_FEED))
