@@ -46,9 +46,9 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   )
 
   useEffect(() => {
-    setLikeComShareStats(prevValue => ({ 
-      ...prevValue, 
-      allUserLikes: allLikes 
+    setLikeComShareStats(prevValue => ({
+      ...prevValue,
+      allUserLikes: allLikes
     }));
     refetchCallBack()
   }, [allLikes, isActive]);
@@ -56,23 +56,23 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   const likingPost = (): void => {
     if (user.isAuthenticated) {
       Guling(postID);
-      setLikeComShareStats(prevValue => ({ 
-        ...prevValue, 
-        isHeartClicked: !prevValue 
+      setLikeComShareStats(prevValue => ({
+        ...prevValue,
+        isHeartClicked: !prevValue
       }));
 
       if (likeComShareStats.isHeartClicked) {
         setLikeComShareStats(
-          prevValue => ({ 
-            ...prevValue, 
-            heartIcon: likeIcon, 
-            ikeCount: prevValue.likeCount - 1 
+          prevValue => ({
+            ...prevValue,
+            heartIcon: likeIcon,
+            ikeCount: prevValue.likeCount - 1
           }));
       } else {
-        setLikeComShareStats(prevValue => ({ 
-          ...prevValue, 
-          heartIcon: likeIconFilled, 
-          likeCount: prevValue.likeCount + 1 
+        setLikeComShareStats(prevValue => ({
+          ...prevValue,
+          heartIcon: likeIconFilled,
+          likeCount: prevValue.likeCount + 1
         }));
       }
     } else {
@@ -81,18 +81,18 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   };
 
   useEffect(() => {
-    setLikeComShareStats(prevValue => ({ 
-      ...prevValue, 
-      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon 
+    setLikeComShareStats(prevValue => ({
+      ...prevValue,
+      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon
     }));
     refetchCallBack();
   }, [commentLength, refetchCallBack]);
 
   useEffect(() => {
-    setLikeComShareStats(prevValue => ({ 
-      ...prevValue, 
-      heartIcon: authGul === 1 ? likeIconFilled : likeIcon, 
-      isHeartClicked: authGul === 1 ? true : false 
+    setLikeComShareStats(prevValue => ({
+      ...prevValue,
+      heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
+      isHeartClicked: authGul === 1 ? true : false
     }));
   }, [authGul]);
 

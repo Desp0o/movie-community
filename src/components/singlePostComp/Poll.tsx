@@ -15,27 +15,38 @@ interface PollProps {
   sum: number;
 }
 
-interface PollPropsMain {
-  pollAnswers: PollProps[];
-  refetch: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<unknown, unknown>>;
-  data: number;
+interface PollState {
+  answersSum: number;
+  activePollId: number | null;
+  activeIndex: number | null;
+  prevActiveAnswerIndex: number | null;
+  prevActiveAnswerID: number | null;
+  pollAnswersArray: PollProps[];
 }
 
-const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
+interface PollPropsMain {
+  pollAnswers: PollProps[];
+  myPoll: number;
+}
+
+const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll }) => {
   const { user } = useUserHook()
   const dispatch = useDispatch()
-  const [answersSum, setAnswersSum] = useState(0);
-  const [activeIndex, setActiveIndex] = useState<number | null>(data);
 
-
+  const [pollStates, setPollStates] = useState<PollState>({
+    answersSum: 0,
+    activePollId: myPoll,
+    activeIndex: null,
+    prevActiveAnswerIndex: null,
+    prevActiveAnswerID: myPoll,
+    pollAnswersArray: pollAnswers
+  })
 
   useEffect(() => {
     // Calculate the total sum of poll answers
-    const totalSum = pollAnswers.reduce((acc, poll) => acc + poll.sum, 0);
-    setAnswersSum(totalSum);
-  }, [pollAnswers]);
+    const totalSum = pollStates.pollAnswersArray.reduce((acc, poll) => acc + poll.sum, 0);
+    setPollStates((prev) => ({ ...prev, answersSum: totalSum }));
+  }, [pollStates.pollAnswersArray]);
 
 
   const sendPollAnswer = async (id: number) => {
@@ -51,49 +62,65 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, data, refetch }) => {
         }
       );
 
-      refetch();
     } catch (error) {
       console.error(error);
     }
   };
 
+
   useEffect(() => {
-    setActiveIndex(data)
-  }, [data])
+    const index = pollStates.pollAnswersArray.findIndex(element => element.id === pollStates.prevActiveAnswerID);
+    setPollStates((prev) => ({ ...prev, prevActiveAnswerIndex: index }))
 
+    console.log(pollStates.prevActiveAnswerIndex + " წინა");
 
-  const setActivePollItem = (index: number) => {
-    if (index === activeIndex) {
-      setActiveIndex(null); // Unset if the same item is clicked again
+  }, [pollStates.prevActiveAnswerID])
+
+  const pollHandlerFuncs = (id: number, index: number) => {
+    if (user.isAuthenticated) {
+      sendPollAnswer(id);
+
+      // Copy array to avoid direct mutation
+      const updatedAnswers = [...pollStates.pollAnswersArray];
+
+      if (index === pollStates.activeIndex || id === pollStates.activePollId) {
+        updatedAnswers[index].sum -= 1;
+        setPollStates((prev) => ({ ...prev, activePollId: null, activeIndex: null, prevActiveAnswerIndex: null }))
+
+      } else {
+        updatedAnswers[index].sum += 1;
+        if (pollStates.prevActiveAnswerIndex !== null && pollStates.prevActiveAnswerID !== null) {
+          updatedAnswers[pollStates.prevActiveAnswerIndex].sum -= 1;
+        }
+        setPollStates((prev) => ({
+          ...prev,
+          activePollId: updatedAnswers[index].id,
+          activeIndex: index,
+          prevActiveAnswerID: id
+        }))
+      }
+
+      setPollStates((prev) => ({ ...prev, pollAnswersArray: updatedAnswers }));
     } else {
-      setActiveIndex(index); // Set the clicked item as active
+      dispatch(setModalVisible(true));
     }
   };
-
-  const pollHanlderFuncs = (id: number, index: number) => {
-    if (user.isAuthenticated) {
-      sendPollAnswer(id)
-      setActivePollItem(index)
-    } else {
-      dispatch(setModalVisible(true))
-    }
-  }
 
   return (
     <>
       <div className="poll_container">
-        {pollAnswers?.map((poll: PollProps, index: number) => {
+        {pollStates.pollAnswersArray?.map((poll: PollProps, index: number) => {
           return (
             <div
               key={index}
-              onClick={() => pollHanlderFuncs(poll.id, index)}
+              onClick={() => pollHandlerFuncs(poll.id, index)}
               className="poll_item"
             >
               <span className="poll_item_bg vote_txt"
                 style={{
-                  width: poll.sum !== 0 ? `calc(${Math.round((100 / answersSum) * poll.sum)}% - 10px)` : '68px',
+                  width: poll.sum !== 0 ? `calc(${Math.round((100 / pollStates.answersSum) * poll.sum)}% - 10px)` : '68px',
                   backgroundColor:
-                    poll.id === activeIndex || activeIndex === index
+                    poll.id === pollStates.activePollId || index === pollStates.activeIndex
                       ? "var(--Secondary-400)"
                       : "var(--Primary-600)",
                 }}
