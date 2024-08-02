@@ -46,24 +46,33 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   )
 
   useEffect(() => {
-    setLikeComShareStats(prevValue => ({ ...prevValue, allUserLikes: allLikes }));
+    setLikeComShareStats(prevValue => ({ 
+      ...prevValue, 
+      allUserLikes: allLikes 
+    }));
     refetchCallBack()
   }, [allLikes, isActive]);
 
   const likingPost = (): void => {
     if (user.isAuthenticated) {
       Guling(postID);
-      setLikeComShareStats(prevValue => ({ ...prevValue, isHeartClicked: !prevValue }));
-
+      setLikeComShareStats(prevValue => ({ 
+        ...prevValue, 
+        isHeartClicked: !prevValue 
+      }));
 
       if (likeComShareStats.isHeartClicked) {
         setLikeComShareStats(
           prevValue => ({ 
-            ...prevValue, heartIcon: likeIcon, ikeCount: prevValue.likeCount - 1 
+            ...prevValue, 
+            heartIcon: likeIcon, 
+            ikeCount: prevValue.likeCount - 1 
           }));
       } else {
         setLikeComShareStats(prevValue => ({ 
-          ...prevValue, heartIcon: likeIconFilled, likeCount: prevValue.likeCount + 1 
+          ...prevValue, 
+          heartIcon: likeIconFilled, 
+          likeCount: prevValue.likeCount + 1 
         }));
       }
     } else {
@@ -73,14 +82,17 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
 
   useEffect(() => {
     setLikeComShareStats(prevValue => ({ 
-      ...prevValue, commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon 
+      ...prevValue, 
+      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon 
     }));
     refetchCallBack();
   }, [commentLength, refetchCallBack]);
 
   useEffect(() => {
     setLikeComShareStats(prevValue => ({ 
-      ...prevValue, heartIcon: authGul === 1 ? likeIconFilled : likeIcon, isHeartClicked: authGul === 1 ? true : false 
+      ...prevValue, 
+      heartIcon: authGul === 1 ? likeIconFilled : likeIcon, 
+      isHeartClicked: authGul === 1 ? true : false 
     }));
   }, [authGul]);
 
@@ -101,7 +113,11 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
     <div>
       {isActive ? <SeeAllLikePanel closeOverlay={closePopUpOverlay} likedUsers={likeComShareStats.allUserLikes} /> : null}
       {likeComShareStats.allUserLikes.length > 0 && (
-        <p className='all_likes_users' onClick={openPopUpOverlay}>{likeComShareStats.allUserLikes[0].user.name} and {likeComShareStats.likeCount - 1} others</p>
+        //adjust like nums to display
+        <p className='all_likes_users' onClick={openPopUpOverlay}>
+          {likeComShareStats.allUserLikes[0].user.name}
+          {likeComShareStats.allUserLikes.length > 1 ? ` and ${likeComShareStats.likeCount - 1} others ` : null} liked
+        </p>
       )}
       <div className="post_bottom_icons">
         <div className="post_commens_share_icons">
