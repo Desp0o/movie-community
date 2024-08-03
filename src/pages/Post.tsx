@@ -104,7 +104,7 @@ const Post = () => {
               }
 
               {
-                data?.post?.type === 3 && <Poll pollAnswers={data?.polls} myPoll={data?.post?.myPoll} />
+                data?.post?.type === 3 && <Poll pollAnswers={data?.polls} myPoll={data?.post?.myPoll} refetchCallback={refetch}/>
               }
 
               <LikeCommentShare

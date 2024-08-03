@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useUserHook } from "../../hooks/useUserHook";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 
 interface PollProps {
   id: number;
@@ -22,9 +23,12 @@ interface PollState {
 interface PollPropsMain {
   pollAnswers: PollProps[];
   myPoll: number;
+  refetchCallback: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<unknown, unknown>>;
 }
 
-const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll }) => {
+const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll, refetchCallback }) => {
   const { user } = useUserHook()
   const dispatch = useDispatch()
 
@@ -43,8 +47,18 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll }) => {
     setPollStates((prev) => ({ ...prev, answersSum: totalSum }));
   }, [pollStates.pollAnswersArray]);
 
+  useEffect(()=>{
+    setPollStates((prev) => ({ 
+      ...prev, 
+      pollAnswersArray: pollAnswers,
+      prevActiveAnswerID: myPoll,
+      activePollId: myPoll,
+    }));
+  },[pollAnswers])
+
 
   const sendPollAnswer = async (id: number) => {
+    refetchCallback
     const token = localStorage.getItem("token");
 
     try {

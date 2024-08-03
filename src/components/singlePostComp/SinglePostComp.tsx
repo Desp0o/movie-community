@@ -105,7 +105,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
                 : <></>
               }
               
-              {type === 3 && <Poll pollAnswers={pollAnswers} myPoll={myPoll} />  }
+              {type === 3 && <Poll pollAnswers={pollAnswers} myPoll={myPoll} refetchCallback={refetch}/>  }
 
               {!myAnswer && myAnswer !== null && type === 4 ? <AnswerQuizComp id={postID} /> : <></> }
 

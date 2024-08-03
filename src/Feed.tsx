@@ -89,6 +89,7 @@ const Feed = () => {
         <ShortCuts />
         {isLoading && <Spinner />}
         <div className="feed_page">
+        <button onClick={()=>refetch()}>refetcg</button>
           <CreatePostFeed />
           {data?.pages?.map((page, pageIndex: number) => (
             <div className="feed" key={pageIndex}>
