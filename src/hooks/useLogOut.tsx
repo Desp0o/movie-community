@@ -11,7 +11,14 @@ export const useLogOut = () => {
       const auth = getAuth(app);
       signOut(auth);
     try {
-      dispatch(setUser({name: '', avatar: '', userID: '', score: 0, bells: 0, isAuthenticated: false}))
+      dispatch(setUser({
+        name: '', 
+        avatar: '', 
+        userID: null, 
+        score: 0, 
+        bells: 0, 
+        isAuthenticated: false
+      }))
       localStorage?.removeItem('token')
       localStorage?.removeItem('avatar')
       localStorage?.removeItem('userName')

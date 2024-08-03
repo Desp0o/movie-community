@@ -40,13 +40,15 @@ export const useGoogleLogIn = () => {
           localStorage.setItem('userID', res.data?.user_id)
           localStorage.setItem("score", res.data?.user?.point);
           localStorage.setItem("bells", res.data?.user?.bells);
+          localStorage.setItem("isAuthenticated", 'true')
 
           dispatch(setUser({
             name: signIn.user.displayName, 
             avatar: signIn.user.photoURL, 
             userID: res.data.user_id, 
             points: res.data.point,
-            bells: res.data.bells
+            bells: res.data.bells,
+            isAuthenticated: true
           }))
           return signIn;
         } catch (error) {
