@@ -122,3 +122,35 @@
     text-shadow: 0 0 1px #00D18F, 0 0 3px #00D18F, 0 0 3px #00D18F;
 
 }
+
+@media (max-width:1400px) {
+    .guess_info_cards{
+        display: none;
+    }
+}
+
+@media (max-width:500px) {
+   .Quiz_inner{
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+    padding-left: 0;
+    padding-bottom: 80px;
+   }
+
+   .quiz_add_rules_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 120px;
+   }
+
+   .quiz_add_rules_title p{
+    display: none;
+   }
+
+   .quiz_add_rules{
+    width: 90%;
+   }
+}

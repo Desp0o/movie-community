@@ -56,7 +56,7 @@ const Quiz_ = () => {
               {/* buttons */}
               <div className="Quiz_btns">
                 <span onClick={handler}><ButtonFilled text={"Get started!"} link={path} /></span>
-                <ButtonOutlined text={"Check out Quizzes"} link={""} />
+                <ButtonOutlined text={"Check out Quizzes"} link={"/Quizzes"} />
               </div>
             </div>
 

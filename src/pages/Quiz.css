@@ -498,3 +498,9 @@
         margin-top: 8px;
     }
 }
+
+@media (max-width:320px) {
+    .Quiz_btns{
+        gap: 10px;
+    }
+}

@@ -58,3 +58,11 @@ gap: 10px;
 border-radius: 6px;
 background: var(--Secondary-400);
 }
+
+
+@media (max-width:320px) {
+    .ButtonFIlled,
+    .ButtonOutlined{
+        width: 130px;
+    }
+}
