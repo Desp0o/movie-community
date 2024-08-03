@@ -55,19 +55,21 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
 
   const likingPost = (): void => {
     if (user.isAuthenticated) {
-      Guling(postID);
+      Guling(postID); // like functuon for backend
+
+      //დაკლიკებაზე ლაიქის true/false
       setLikeComShareStats(prevValue => ({
         ...prevValue,
-        isHeartClicked: !prevValue
-      }));
+        isHeartClicked: !prevValue.isHeartClicked
+      }));      
 
+      //თუ დადებითია გული ჩაქრეს და დააკლდეს თუ უარყოფითია პირიქთ
       if (likeComShareStats.isHeartClicked) {
-        setLikeComShareStats(
-          prevValue => ({
+          setLikeComShareStats(prevValue => ({
             ...prevValue,
             heartIcon: likeIcon,
-            ikeCount: prevValue.likeCount - 1
-          }));
+            likeCount: prevValue.likeCount - 1
+        }));
       } else {
         setLikeComShareStats(prevValue => ({
           ...prevValue,
@@ -76,6 +78,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
         }));
       }
     } else {
+      // თუ იუზერი არაა ავტორიზბეული გამოჩნდეს ლოგინის მოდალი
       handleVisibility();
     }
   };
@@ -88,6 +91,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
     refetchCallBack();
   }, [commentLength, refetchCallBack]);
 
+  //if autghul is 1 make active like icons
   useEffect(() => {
     setLikeComShareStats(prevValue => ({
       ...prevValue,
@@ -96,15 +100,19 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
     }));
   }, [authGul]);
 
+  //refetching guls for likecount
   useEffect(() => {
     setLikeComShareStats(prevValue => ({ ...prevValue, likeCount: guls }));
     refetchCallBack();
   }, [guls, refetchCallBack]);
 
+
+  //popup open
   const openPopUpOverlay = () => {
     setActive(true);
   };
 
+  //popup close
   const closePopUpOverlay = () => {
     setActive(false);
   };
@@ -145,9 +153,11 @@ interface SeeAllLikePanelProps {
 
 const SeeAllLikePanel: React.FC<SeeAllLikePanelProps> = ({ closeOverlay, likedUsers }) => {
   const [fetchedLikedUsers, setFetchedLikedUser] = useState(likedUsers)
+
   useEffect(() => {
     setFetchedLikedUser(likedUsers)
   }, [likedUsers])
+
   return (
     <>
       <div className='overlay' onClick={closeOverlay}></div>
