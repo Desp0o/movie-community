@@ -115,6 +115,7 @@ const SinglePostComp: React.FC<SinglePostProps> = ({
                 guls={guls}
                 postID={postID}
                 commentLength={commentLength}
+                allLikes={[]}
                 refetchCallBack={refetch} 
               />
             </div>

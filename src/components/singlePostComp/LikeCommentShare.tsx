@@ -40,7 +40,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
       commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon,
       isHeartClicked: authGul === 1 ? true : false,
       heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
-      allUserLikes: allLikes,
+      allUserLikes: allLikes || [],
       likeCount: guls
     }
   )
@@ -50,7 +50,9 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
       ...prevValue,
       allUserLikes: allLikes
     }));
-    refetchCallBack()
+    if(allLikes.length > 0){
+      refetchCallBack()
+    }
   }, [allLikes, isActive]);
 
   const likingPost = (): void => {

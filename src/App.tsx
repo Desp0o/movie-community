@@ -30,12 +30,8 @@ function App() {
   const token = localStorage.getItem('token')
   const { handleLogout } = useLogOut()
   const {isSpinner} = useSpinnerHook()
-  // const {user} = useUserHook()
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    Boolean(localStorage.getItem('darkMode'))    
-  },[])
 
   const googleUserCeck = () => {
     const auth = getAuth(app);
@@ -43,9 +39,7 @@ function App() {
 
     return () => unsubscribe();
   }
-
-  
-          
+     
   useEffect(()=>{
     const checkMe = async () => {
       const token = localStorage.getItem('token')

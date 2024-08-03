@@ -77,7 +77,7 @@ const Quiz_ = () => {
           </div>
         </div>
       </PageLayout>
-      <Footer />
+      {/* <Footer /> */}
     </>
 
 
