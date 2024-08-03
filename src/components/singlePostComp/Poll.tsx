@@ -1,10 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from "react-query";
 import { useDispatch } from "react-redux";
 import { useUserHook } from "../../hooks/useUserHook";
 import { setModalVisible } from "../../Redux/loginModalSlicer";
@@ -69,24 +64,38 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll }) => {
 
 
   useEffect(() => {
+    //ვეძებთ აიდის მეშვებოით აქტიურ ინდექს არაიში
     const index = pollStates.pollAnswersArray.findIndex(element => element.id === pollStates.prevActiveAnswerID);
-    setPollStates((prev) => ({ ...prev, prevActiveAnswerIndex: index }))
 
-    console.log(pollStates.prevActiveAnswerIndex + " წინა");
+    //თუ ინდექსი არ მოიძებნდა და აიდი არ გვაქვს აქტიური რო არ დაისეტოს
+    if (index >= 0) {
+      setPollStates((prev) => ({ ...prev, prevActiveAnswerIndex: index, activeIndex: index }))
+    }
 
   }, [pollStates.prevActiveAnswerID])
 
+
+
   const pollHandlerFuncs = (id: number, index: number) => {
+
+    //if user is auth can vote
     if (user.isAuthenticated) {
       sendPollAnswer(id);
 
-      // Copy array to avoid direct mutation
+      //copied array
       const updatedAnswers = [...pollStates.pollAnswersArray];
 
-      if (index === pollStates.activeIndex || id === pollStates.activePollId) {
-        updatedAnswers[index].sum -= 1;
-        setPollStates((prev) => ({ ...prev, activePollId: null, activeIndex: null, prevActiveAnswerIndex: null }))
+      // თუ წინა ინდექი უდრის ნალს დაისეტოს ინდეხი, თუ არადა ნალი
+      if (pollStates.prevActiveAnswerIndex === null) {
+        setPollStates((prev) => ({ ...prev, prevActiveAnswerIndex: index }))
+      } else {
+        setPollStates((prev) => ({ ...prev, prevActiveAnswerIndex: null }))
+      }
 
+      //თუ აქტირუია პოლის პასუხი
+      if (index === pollStates.activeIndex || id === pollStates.activePollId) {
+        setPollStates((prev) => ({ ...prev, activePollId: null, activeIndex: null, prevActiveAnswerID: id }))
+        updatedAnswers[index].sum -= 1;
       } else {
         updatedAnswers[index].sum += 1;
         if (pollStates.prevActiveAnswerIndex !== null && pollStates.prevActiveAnswerID !== null) {
@@ -100,8 +109,10 @@ const Poll: React.FC<PollPropsMain> = ({ pollAnswers, myPoll }) => {
         }))
       }
 
+      // განვაახლოთ სტეიტები პასუხები
       setPollStates((prev) => ({ ...prev, pollAnswersArray: updatedAnswers }));
     } else {
+      //else show login modal
       dispatch(setModalVisible(true));
     }
   };
