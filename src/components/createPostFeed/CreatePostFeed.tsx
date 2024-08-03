@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useUserHook } from "../../hooks/useUserHook"
 import "./CreatePostFeed.css"
-import PostBottomButtons from "./addPostComps/PostBottomButtons"
 import { setAddPostModal } from "../../Redux/postModal";
 import { noAvatar } from "../../assets/newSvg/noAvatar";
 
@@ -32,7 +31,6 @@ const CreatePostFeed = () => {
                 />
             </div>
 
-            <span className="btn_post_style_padding_left"><PostBottomButtons /></span>
         </div>
     );  
 };

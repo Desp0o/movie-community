@@ -1,12 +1,7 @@
 .CreatePostFeed {
   display: flex;
   width: 600px;
-  max-width: 90%;
-  height: 124px;
-  padding: 16px 0px 14px 0px;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  padding: 24px;
   margin: 0 auto;
 
   border-radius: 6px;
@@ -17,12 +12,9 @@
 
 .user_avatar_input {
   display: flex;
-  width: 602px;
+  width: 100%;
   align-items: center;
-  gap: 12px;
-
-  padding-bottom: 14px;
-  border-bottom: 1px solid #e5e8ee;
+  gap: 16px;
 }
 
 .user_avatar_feed {
@@ -38,18 +30,22 @@
 }
 
 .feed_input {
-  width: 558px;
-  height: 44px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccd0d6;
+  width: 100%;
+  height: 32px;
+  padding: 12px 8px 12px 8px;
+  border-radius: 4px;
 
-  color: var(--dark-grey);
+  background-color: #261E42;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
   cursor: pointer;
+}
+
+.feed_input::placeholder{
+  color: var(--Type-inactive);
 }
 
 .choose_post_style {
@@ -106,10 +102,11 @@ add post
 }
 
 .AddPostPopUp {
-  width: 528px;
+  width: 100%;
   max-height: 600px;
   border-radius: 8px;
-  background-color: var(--white);
+  background-color: var(--Card-background);
+  border: 1px solid var(--Secondary-600);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -169,7 +166,7 @@ add post
   border: none;
   background-color: inherit;
   padding-top: 2px;
-  color: black;
+  color: #fff;
 }
 
 .popup_textarea::placeholder {
@@ -289,6 +286,8 @@ add post
 font-style: normal;
 font-weight: 400;
 line-height: 24px;
+background-color: transparent;
+color: #fff;
 }
 
 .Correct_answer {
@@ -498,7 +497,7 @@ height: 28px;
   }
   .feed_input {
     width: 100%;
-    max-width: inherit;
+    flex-grow: 1;
   }
   .choose_post_style {
     width: 100%;
@@ -508,5 +507,12 @@ height: 28px;
   }
   .btn_post_style_padding_left {
     padding-left: 0px;
+  }
+}
+
+
+@media (max-width:600px) {
+  .AddPostPopUp_parent{
+    width: 90%;
   }
 }

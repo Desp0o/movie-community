@@ -1,6 +1,5 @@
 import PostStyle from "./PostStyle";
 import { addMediaIocn } from "../../../assets/svg/addMediaIcon";
-import { quizFeedIocn } from "../../../assets/svg/quizFeedIcon";
 import { pollIcon } from "../../../assets/svg/poolIcon";
 import { useDispatch } from "react-redux";
 import { setAddPostModal } from "../../../Redux/postModal";
@@ -28,17 +27,9 @@ const PostBottomButtons = () => {
     dispatch(setAddPostModal({defaultPost: false, pollPost: true, quizPost: false, openImageUpload:false, showPostButtons: true}))
   }
 
-
-  const openQuizPost = () => {
-    document.body.style.overflow='hidden'
-    dispatch(setAddPostModal({defaultPost: false, pollPost: false, quizPost: true, openImageUpload:false, showPostButtons: true}))
-  }
-
-
   return (
     <div className="choose_post_style">
       <PostStyle styleName={"Photo/video"} styleIocn={addMediaIocn} funcName={openDefaultPostModal}/>
-      <PostStyle styleName={"Quiz"} styleIocn={quizFeedIocn} funcName={openQuizPost}/>
       <PostStyle styleName={"Poll"} styleIocn={pollIcon} funcName={openPollPost}/>
     </div>
   );
