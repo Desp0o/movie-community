@@ -63,6 +63,7 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
 
       setLikeComShareStats(prevValue => {
         const newLikeStatus = !prevValue.isHeartClicked;
+          //იუზერს ვსვათ ფრჩილებში დამეპვაში პრობლემების ასარიდებლად
         const updatedLikes = newLikeStatus ? [...prevValue.allUserLikes, { user }] : prevValue.allUserLikes.filter(like => like.user.name !== user.name);
 
         return {

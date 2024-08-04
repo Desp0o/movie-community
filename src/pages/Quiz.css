@@ -213,7 +213,7 @@
     gap: 8px;
 
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.1s linear;
     
 }
 
@@ -433,7 +433,7 @@
         gap: 8px;
     
         font-size: 14px;
-        transition: all 0.3s ease;
+        transition: all 0.1s linear;
     }
     .quiz_p_parent{
         height: fit-content;
@@ -476,7 +476,7 @@
         gap: 8px;
     
         font-size: 14px;
-        transition: all 0.3s ease;
+        transition: all 0.1s linear;
     }
     .quiz_p_parent{
         height: fit-content;
