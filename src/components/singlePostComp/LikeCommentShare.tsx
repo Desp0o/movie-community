@@ -35,97 +35,59 @@ const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
   const { handleVisibility } = useLoginModal();
 
   const [isActive, setActive] = useState(false);
-  const [likeComShareStats, setLikeComShareStats] = useState(
-    {
-      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon,
-      isHeartClicked: authGul === 1 ? true : false,
-      heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
-      allUserLikes: allLikes || [],
-      likeCount: guls
-    }
-  )
+  const [likeComShareStats, setLikeComShareStats] = useState({
+    commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon,
+    isHeartClicked: authGul === 1,
+    heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
+    allUserLikes: allLikes,
+    likeCount: guls
+  });
 
   useEffect(() => {
     setLikeComShareStats(prevValue => ({
       ...prevValue,
-      allUserLikes: allLikes
+      allUserLikes: allLikes,
+      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon,
+      heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
+      isHeartClicked: authGul === 1,
+      likeCount: guls
     }));
-    if(allLikes.length > 0){
-      refetchCallBack()
+    if (allLikes.length > 0) {
+      refetchCallBack();
     }
-  }, [allLikes, isActive]);
+  }, [allLikes, commentLength, authGul, guls, refetchCallBack]);
 
   const likingPost = (): void => {
     if (user.isAuthenticated) {
-      Guling(postID); // like functuon for backend
+      Guling(postID);
 
-      //დაკლიკებაზე ლაიქის true/false
-      setLikeComShareStats(prevValue => ({
-        ...prevValue,
-        isHeartClicked: !prevValue.isHeartClicked
-      }));      
+      setLikeComShareStats(prevValue => {
+        const newLikeStatus = !prevValue.isHeartClicked;
+        const updatedLikes = newLikeStatus ? [...prevValue.allUserLikes, { user }] : prevValue.allUserLikes.filter(like => like.user.name !== user.name);
 
-      //თუ დადებითია გული ჩაქრეს და დააკლდეს თუ უარყოფითია პირიქთ
-      if (likeComShareStats.isHeartClicked) {
-          setLikeComShareStats(prevValue => ({
-            ...prevValue,
-            heartIcon: likeIcon,
-            likeCount: prevValue.likeCount - 1
-        }));
-      } else {
-        setLikeComShareStats(prevValue => ({
+        return {
           ...prevValue,
-          heartIcon: likeIconFilled,
-          likeCount: prevValue.likeCount + 1
-        }));
-      }
+          isHeartClicked: newLikeStatus,
+          heartIcon: newLikeStatus ? likeIconFilled : likeIcon,
+          likeCount: newLikeStatus ? prevValue.likeCount + 1 : prevValue.likeCount - 1,
+          allUserLikes: updatedLikes
+        };
+      });
     } else {
-      // თუ იუზერი არაა ავტორიზბეული გამოჩნდეს ლოგინის მოდალი
       handleVisibility();
     }
   };
 
-  useEffect(() => {
-    setLikeComShareStats(prevValue => ({
-      ...prevValue,
-      commentIcon: commentLength !== 0 ? commentsIconFilled : commentsIcon
-    }));
-    refetchCallBack();
-  }, [commentLength, refetchCallBack]);
-
-  //if autghul is 1 make active like icons
-  useEffect(() => {
-    setLikeComShareStats(prevValue => ({
-      ...prevValue,
-      heartIcon: authGul === 1 ? likeIconFilled : likeIcon,
-      isHeartClicked: authGul === 1 ? true : false
-    }));
-  }, [authGul]);
-
-  //refetching guls for likecount
-  useEffect(() => {
-    setLikeComShareStats(prevValue => ({ ...prevValue, likeCount: guls }));
-    refetchCallBack();
-  }, [guls, refetchCallBack]);
-
-
-  //popup open
-  const openPopUpOverlay = () => {
-    setActive(true);
-  };
-
-  //popup close
-  const closePopUpOverlay = () => {
-    setActive(false);
-  };
+  const openPopUpOverlay = () => setActive(true);
+  const closePopUpOverlay = () => setActive(false);
 
   return (
     <div>
-      {isActive ? <SeeAllLikePanel closeOverlay={closePopUpOverlay} likedUsers={likeComShareStats.allUserLikes} /> : null}
+      {isActive && <SeeAllLikePanel closeOverlay={closePopUpOverlay} likedUsers={likeComShareStats.allUserLikes} />}
       {likeComShareStats.allUserLikes.length > 0 && (
-        //adjust like nums to display
         <p className='all_likes_users' onClick={openPopUpOverlay}>
-          {likeComShareStats.allUserLikes[0].user.name}
+          {/* თუ მე დავალაიქე ჩემი სახელი უნდა გამოჩნდეს, თუ არა სხვა პირველის */}
+          {likeComShareStats.isHeartClicked ? "You" : likeComShareStats.allUserLikes[0].user.name} 
           {likeComShareStats.allUserLikes.length > 1 ? ` and ${likeComShareStats.likeCount - 1} others ` : null} liked
         </p>
       )}

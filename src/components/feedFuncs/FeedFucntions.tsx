@@ -41,6 +41,7 @@ export const FeedFunctions = () => {
         isFetching,
         hasNextPage,
         isFetchingNextPage,
+        isRefetching,
         refetch,
         isFetched,
     } = useInfiniteQuery(
@@ -73,5 +74,5 @@ export const FeedFunctions = () => {
     );
 
 
-    return { data,isFetched, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching };
+    return { data,isFetched, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage, refetch, isFetching, isRefetching };
 };
